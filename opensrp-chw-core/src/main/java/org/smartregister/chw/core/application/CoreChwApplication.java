@@ -18,6 +18,7 @@ import org.smartregister.chw.core.repository.MonthlyTalliesRepository;
 import org.smartregister.chw.core.repository.PncRegisterRepository;
 import org.smartregister.chw.core.repository.ScheduleRepository;
 import org.smartregister.chw.core.repository.StockUsageReportRepository;
+import org.smartregister.chw.core.repository.VmmcRegisterRepository;
 import org.smartregister.chw.core.sync.CoreClientProcessor;
 import org.smartregister.chw.core.utils.ApplicationUtils;
 import org.smartregister.chw.core.utils.CoreConstants;
@@ -59,6 +60,7 @@ public abstract class CoreChwApplication extends DrishtiApplication implements C
     private static PlanDefinitionRepository planDefinitionRepository;
     private static ScheduleRepository scheduleRepository;
     private static MalariaRegisterRepository malariaRegisterRepository;
+    private static VmmcRegisterRepository vmmcRegisterRepository;
     private static StockUsageReportRepository stockUsageReportRepository;
     public JsonSpecHelper jsonSpecHelper;
     protected ClientProcessorForJava clientProcessorForJava;
@@ -105,6 +107,14 @@ public abstract class CoreChwApplication extends DrishtiApplication implements C
         }
 
         return malariaRegisterRepository;
+    }
+
+    public static VmmcRegisterRepository vmmcRegisterRepository() {
+        if (vmmcRegisterRepository == null) {
+            vmmcRegisterRepository = new VmmcRegisterRepository();
+        }
+
+        return vmmcRegisterRepository;
     }
 
     /**

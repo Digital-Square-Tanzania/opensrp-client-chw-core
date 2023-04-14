@@ -59,6 +59,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startVmmcRegister() {
+        //TODO implement start vmmc register for HF
+    }
+
+    @Override
     protected void startHivRegister() {
         //TODO implement start hiv register for HF
     }

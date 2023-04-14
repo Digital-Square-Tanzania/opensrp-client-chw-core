@@ -156,6 +156,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_malaria_registration) {
             startMalariaRegister();
             return true;
+        }
+        else if (i == R.id.action_vmmc_registration) {
+            startVmmcRegister();
+            return true;
         } else if (i == R.id.action_malaria_followup_visit) {
             startMalariaFollowUpVisit();
             return true;
@@ -219,6 +223,9 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startFpChangeMethod();
 
     protected abstract void startMalariaRegister();
+
+    protected abstract void startVmmcRegister();
+
 
     protected abstract void startHivRegister();
 

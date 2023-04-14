@@ -451,4 +451,9 @@
     <string name="routine_tb_visit"> · Visite de routine en tuberculose</string>
     <string name="menu_ltfu">LTFU</string>
     <string name="telephone">"Tel: "</string>
+
+
+    <!--    VMMC-->
+    <string name="vmmc_registration">VMMC Registration</string>
+    <string name="vmmc_confirmation">Vmmc Confirmation</string>
 </resources>

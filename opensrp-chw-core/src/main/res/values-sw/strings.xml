@@ -791,5 +791,12 @@
     <string name="kvp_prep_registration">Usajili wa makundi maalumu (KVP/PrEP)</string>
     <string name="kvp_registration">Uchunguzi wa Makundi maalum(KVP)</string>
     <string name="telephone">"Simu: "</string>
+
+<!--    VMMC-->
+    <string name="vmmc_registration">Usajili wa VMMC</string>
+    <string name="vmmc_confirmation">Uhakiki wa VMMC</string>
+
+
+
 </resources>
 

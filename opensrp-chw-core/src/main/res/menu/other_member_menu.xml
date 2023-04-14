@@ -81,6 +81,11 @@
         android:title="@string/malaria_diagnosis"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_vmmc_registration"
+        android:enabled="true"
+        android:title="@string/vmmc_registration"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_pregnancy_confirmation"
         android:enabled="true"
         android:visible="false"

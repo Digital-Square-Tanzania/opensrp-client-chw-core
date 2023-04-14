@@ -104,6 +104,8 @@ public class CoreConstants {
         public static final String FAMILY_MEMBER_REGISTER = "family_member_register";
         public static final String ANC_REGISTER = "anc_register";
         public static final String MALARIA_REGISTER = "anc_malaria_confirmation";
+        public static final String VMMC_REGISTER = "anc_vmmc_confirmation";
+
     }
 
     public static final class EventType {
@@ -230,6 +232,7 @@ public class CoreConstants {
         private static final String ANC_REGISTRATION = "anc_member_registration";
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
         private static final String MALARIA_CONFIRMATION = "malaria_confirmation";
+        private static final String VMMC_CONFIRMATION = "vmmc_confirmation";
         private static final String MALARIA_FOLLOW_UP_VISIT_FORM = "malaria_follow_up_visit";
         private static final String WASH_CHECK = "wash_check";
         private static final String FAMILY_KIT = "family_kit";
@@ -423,6 +426,10 @@ public class CoreConstants {
 
         public static String getMalariaConfirmation() {
             return Utils.getLocalForm(MALARIA_CONFIRMATION, locale, assetManager);
+        }
+
+        public static String getVmmcConfirmation() {
+            return Utils.getLocalForm(VMMC_CONFIRMATION, locale, assetManager);
         }
 
         public static String getFpRegistrationForm(String gender) {
@@ -843,6 +850,7 @@ public class CoreConstants {
         public static final String ANC_MEMBER_LOG = "ec_anc_log";
         public static final String FP_MEMBER = "ec_family_planning";
         public static final String MALARIA_CONFIRMATION = "ec_malaria_confirmation";
+        public static final String VMMC_CONFIRMATION = "ec_vmmc_confirmation";
         public static final String ANC_PREGNANCY_OUTCOME = "ec_pregnancy_outcome";
         public static final String TASK = "task";
         public static final String WASH_CHECK_LOG = "ec_wash_check_log";
@@ -930,6 +938,7 @@ public class CoreConstants {
         public static final String STOCK_USAGE_REPORT = "StockUsageItemModel usage report";
         public static final String UPDATES = "Updates";
         public static final String PMTCT = "PMTCT";
+        public static final String VMMC = "VMMC";
         public static final String PMTCT_FOLLOWUP = "PMTCT Followup";
         public static final String MOTHER_CHAMPION = "Mother Champion";
         public static final String CBHS_CLIENTS = "CBHS Clients";
@@ -1185,6 +1194,7 @@ public class CoreConstants {
         public static final String HIV_INDEX_REGISTER_ACTIVITY = "HIV_INDEX_REGISTER_ACTIVITY";
         public static final String TB_REGISTER_ACTIVITY = "TB_REGISTER_ACTIVITY";
         public static final String PMTCT_REGISTER_ACTIVITY = "PMTCT_REGISTER_ACTIVITY";
+        public static final String VMMC_REGISTER_ACTIVITY = "VMMC_REGISTER_ACTIVITY";
         public static final String PMTCT_FOLLOWUP_REGISTER_ACTIVITY = "PMTCT_FOLLOWUP_REGISTER_ACTIVITY";
         public static final String HEI = "HEI_REGISTER_ACTIVITY";
         public static final String MOTHER_CHAMPION_ACTIVITY = "MOTHER_CHAMPION_ACTIVITY";
