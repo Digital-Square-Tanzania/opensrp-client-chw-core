@@ -18,19 +18,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONObject;
 import org.smartregister.chw.core.R;
-import org.smartregister.chw.core.contract.CoreMalariaProfileContract;
+import org.smartregister.chw.core.contract.CoreVmmcProfileContract;
 import org.smartregister.chw.core.contract.FamilyOtherMemberProfileExtendedContract;
 import org.smartregister.chw.core.contract.FamilyProfileExtendedContract;
 import org.smartregister.chw.core.dao.AncDao;
 import org.smartregister.chw.core.dao.ChildDao;
 import org.smartregister.chw.core.dao.PNCDao;
-import org.smartregister.chw.core.interactor.CoreMalariaProfileInteractor;
+import org.smartregister.chw.core.interactor.CoreVmmcProfileInteractor;
 import org.smartregister.chw.core.presenter.CoreFamilyOtherMemberActivityPresenter;
-import org.smartregister.chw.core.presenter.CoreMalariaMemberProfilePresenter;
+import org.smartregister.chw.core.presenter.CoreVmmcMemberProfilePresenter;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.CoreReferralUtils;
-import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
+import org.smartregister.chw.vmmc.activity.BaseVmmcProfileActivity;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
@@ -42,8 +42,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public abstract class CoreVmmcProfileActivity extends BaseMalariaProfileActivity implements
-        FamilyOtherMemberProfileExtendedContract.View, CoreMalariaProfileContract.View, FamilyProfileExtendedContract.PresenterCallBack {
+public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity implements
+        FamilyOtherMemberProfileExtendedContract.View, CoreVmmcProfileContract.View, FamilyProfileExtendedContract.PresenterCallBack {
 
     protected RecyclerView notificationAndReferralRecyclerView;
     protected RelativeLayout notificationAndReferralLayout;
@@ -93,7 +93,7 @@ public abstract class CoreVmmcProfileActivity extends BaseMalariaProfileActivity
     @Override
     protected void initializePresenter() {
         showProgressBar(true);
-        profilePresenter = new CoreMalariaMemberProfilePresenter(this, new CoreMalariaProfileInteractor(), memberObject);
+        profilePresenter = new CoreVmmcMemberProfilePresenter(this, new CoreVmmcProfileInteractor(), memberObject);
         fetchProfileData();
         profilePresenter.refreshProfileBottom();
     }
@@ -111,15 +111,14 @@ public abstract class CoreVmmcProfileActivity extends BaseMalariaProfileActivity
         } else if (itemId == R.id.action_remove_member) {
             removeMember();
             return true;
-        } else if (itemId == R.id.action_malaria_followup) {
-            getPresenter().startHfMalariaFollowupForm();
         }
+
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.malaria_profile_menu, menu);
+        getMenuInflater().inflate(R.menu.vmmc_profile_menu, menu);
         return true;
     }
 
@@ -145,8 +144,8 @@ public abstract class CoreVmmcProfileActivity extends BaseMalariaProfileActivity
                     String encounterType = form.getString(JsonFormUtils.ENCOUNTER_TYPE);
                     if (encounterType.equals(Utils.metadata().familyMemberRegister.updateEventType)) {
                         presenter().updateFamilyMember(this, jsonString, false);
-                    } else if (encounterType.equals(CoreConstants.EventType.MALARIA_REFERRAL)) {
-                        CoreReferralUtils.createReferralEvent(Utils.getAllSharedPreferences(), jsonString, CoreConstants.TABLE_NAME.MALARIA_REFERRAL, memberObject.getBaseEntityId());
+                    } else if (encounterType.equals(CoreConstants.EventType.VMMC_CONFIRMATION)) {
+                        CoreReferralUtils.createReferralEvent(Utils.getAllSharedPreferences(), jsonString, CoreConstants.TABLE_NAME.VMMC_CONFIRMATION, memberObject.getBaseEntityId());
                         showToast(this.getString(R.string.referral_submitted));
                     }
                 } catch (Exception e) {
@@ -171,8 +170,8 @@ public abstract class CoreVmmcProfileActivity extends BaseMalariaProfileActivity
     @Override
     public abstract CoreFamilyOtherMemberActivityPresenter presenter();
 
-    public CoreMalariaProfileContract.Presenter getPresenter() {
-        return (CoreMalariaProfileContract.Presenter) profilePresenter;
+    public CoreVmmcProfileContract.Presenter getPresenter() {
+        return (CoreVmmcProfileContract.Presenter) profilePresenter;
     }
 
     public void setOnMemberTypeLoadedListener(OnMemberTypeLoadedListener onMemberTypeLoadedListener) {
@@ -181,19 +180,19 @@ public abstract class CoreVmmcProfileActivity extends BaseMalariaProfileActivity
 
     @Override
     public void setProfileName(@NonNull String s) {
-        TextView textView = findViewById(org.smartregister.malaria.R.id.textview_name);
+        TextView textView = findViewById(org.smartregister.vmmc.R.id.textview_name);
         textView.setText(s);
     }
 
     @Override
     public void setProfileDetailOne(@NonNull String s) {
-        TextView textView = findViewById(org.smartregister.malaria.R.id.textview_gender);
+        TextView textView = findViewById(org.smartregister.vmmc.R.id.textview_gender);
         textView.setText(s);
     }
 
     @Override
     public void setProfileDetailTwo(@NonNull String s) {
-        TextView textView = findViewById(org.smartregister.malaria.R.id.textview_address);
+        TextView textView = findViewById(org.smartregister.vmmc.R.id.textview_address);
         textView.setText(s);
     }
 

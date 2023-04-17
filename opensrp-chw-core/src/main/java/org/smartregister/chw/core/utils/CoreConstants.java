@@ -127,6 +127,7 @@ public class CoreConstants {
         public static final String ANC_REFERRAL = "ANC Referral";
         public static final String PNC_REFERRAL = "PNC Referral";
         public static final String MALARIA_REFERRAL = "Malaria Referral";
+        public static final String VMMC_CONFIRMATION = "Vmmc Confirmation";
         public static final String FAMILY_PLANNING_REFERRAL = "Family Planning Referral";
         public static final String CHILD_VACCINE_CARD_RECEIVED = "Child vaccine card received";
         public static final String VACCINE_CARD_RECEIVED = "Vaccine Card Received";
