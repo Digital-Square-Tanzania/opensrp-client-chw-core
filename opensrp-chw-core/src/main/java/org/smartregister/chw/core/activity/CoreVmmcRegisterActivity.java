@@ -7,7 +7,6 @@ import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.FormUtils;
-import org.smartregister.chw.malaria.activity.BaseMalariaRegisterActivity;
 import org.smartregister.chw.vmmc.activity.BaseVmmcRegisterActivity;
 import org.smartregister.family.util.JsonFormUtils;
 
