@@ -9,7 +9,6 @@ import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.FormUtils;
 import org.smartregister.chw.vmmc.activity.BaseVmmcRegisterActivity;
 import org.smartregister.family.util.JsonFormUtils;
-
 import java.util.Collections;
 import java.util.List;
 

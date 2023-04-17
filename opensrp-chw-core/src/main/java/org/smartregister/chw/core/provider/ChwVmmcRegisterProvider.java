@@ -24,5 +24,4 @@ public class ChwVmmcRegisterProvider extends VmmcRegisterProvider {
         viewHolder.dueButton.setVisibility(View.GONE);
         viewHolder.dueButton.setOnClickListener(null);
     }
-
 }
