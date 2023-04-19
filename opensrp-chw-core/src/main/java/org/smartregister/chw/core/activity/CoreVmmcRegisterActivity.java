@@ -28,10 +28,10 @@ public abstract class CoreVmmcRegisterActivity extends BaseVmmcRegisterActivity 
         startActivityForResult(FormUtils.getStartFormActivity(jsonForm, this.getString(R.string.vmmc_confirmation), this), JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
-    @Override
-    public List<String> getViewIdentifiers() {
-        return Collections.singletonList(CoreConstants.CONFIGURATION.VMMC_REGISTER);
-    }
+//    @Override
+//    public List<String> getViewIdentifiers() {
+//        return Collections.singletonList(CoreConstants.CONFIGURATION.VMMC_REGISTER);
+//    }
 
     @Override
     protected void onResumption() {

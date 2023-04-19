@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,8 +33,11 @@ import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.CoreReferralUtils;
 import org.smartregister.chw.vmmc.activity.BaseVmmcProfileActivity;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.domain.AlertStatus;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
+
+import java.util.Date;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -282,5 +286,26 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
             e.onNext(memberType);
             e.onComplete();
         });
+    }
+
+
+
+
+
+
+    @Override
+    public void refreshMedicalHistory(boolean hasHistory) {
+        rlLastVisit.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void refreshFamilyStatus(AlertStatus status) {
+        super.refreshFamilyStatus(status);
+        rlFamilyServicesDue.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void refreshUpComingServicesStatus(String service, AlertStatus status, Date date) {
+        rlUpcomingServices.setVisibility(View.GONE);
     }
 }
