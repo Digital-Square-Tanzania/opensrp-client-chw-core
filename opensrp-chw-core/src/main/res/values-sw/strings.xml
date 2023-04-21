@@ -795,6 +795,8 @@
 <!--    VMMC-->
     <string name="vmmc_registration">Usajili wa VMMC</string>
     <string name="vmmc_confirmation">Uhakiki wa VMMC</string>
+    <string name="menu_vmmc">VMMC</string>
+
 
 
 

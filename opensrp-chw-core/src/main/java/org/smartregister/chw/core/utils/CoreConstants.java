@@ -1254,6 +1254,8 @@ public class CoreConstants {
         public static final String AGYW = "AGYW";
         public static final String KVP = "KVP";
         public static final String KVP_PrEP = "KVP/PrEP";
+        public static final String VMMC = "VMMC";
+
     }
 
     public static final class KeyIndicatorsUtil {
