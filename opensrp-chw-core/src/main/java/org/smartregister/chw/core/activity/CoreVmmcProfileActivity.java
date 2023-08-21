@@ -288,11 +288,6 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
         });
     }
 
-
-
-
-
-
     @Override
     public void refreshMedicalHistory(boolean hasHistory) {
         rlLastVisit.setVisibility(View.GONE);

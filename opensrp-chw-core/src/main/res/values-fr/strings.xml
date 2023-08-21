@@ -454,7 +454,7 @@
 
 
     <!--    VMMC-->
-    <string name="vmmc_registration">VMMC Registration</string>
+    <string name="vmmc_registration">VMMC Enrollment</string>
     <string name="vmmc_confirmation">Vmmc Confirmation</string>
     <string name="menu_vmmc">VMMC</string>
 

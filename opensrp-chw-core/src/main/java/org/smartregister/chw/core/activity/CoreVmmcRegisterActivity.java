@@ -25,7 +25,7 @@ public abstract class CoreVmmcRegisterActivity extends BaseVmmcRegisterActivity 
 
     @Override
     public void startFormActivity(JSONObject jsonForm) {
-        startActivityForResult(FormUtils.getStartFormActivity(jsonForm, this.getString(R.string.vmmc_confirmation), this), JsonFormUtils.REQUEST_CODE_GET_JSON);
+        startActivityForResult(FormUtils.getStartFormActivity(jsonForm, this.getString(R.string.vmmc_registration), this), JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
 //    @Override
