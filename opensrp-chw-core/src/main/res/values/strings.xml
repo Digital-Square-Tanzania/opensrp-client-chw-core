@@ -811,7 +811,7 @@
     <string name="ld_registration">L&amp;D Registration</string>
     <string name="hivst_registration">HIVST Registration</string>
     <string name="agyw_screening">AGYW Screening</string>
-    <string name="kvp_prep_registration">KVP/PrEP Registration</string>
+    <string name="kvp_prep_registration">KVP Registration</string>
     <string name="prep_registration">PrEP Registration</string>
     <string name="kvp_registration">KVP Screening</string>
     <string name="telephone">"Tel: "</string>

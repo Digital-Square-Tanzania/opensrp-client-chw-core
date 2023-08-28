@@ -143,7 +143,7 @@ public class DailyTalliesRepository extends BaseRepository {
 
             cursor = getReadableDatabase().query(TABLE_NAME, TABLE_COLUMNS,
                     getDayBetweenDatesSelection(startDate.getTime(), endDate.getTime()),
-                    null, null, null, null, null);
+                    null, null, null, COLUMN_DAY+ " asc", null);
             if (cursor != null && cursor.getCount() > 0) {
                 for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                     DailyTally curTally = extractDailyTally(indicatorMap, cursor);

@@ -442,7 +442,8 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     }
 
     private void clientProcessHfInAppReportingEvent(Event event) {
-        if (processHfReportEvents()) clientProcessInAppReportingEvent(event);
+        if (processHfReportEvents())
+            clientProcessInAppReportingEvent(event);
     }
 
     private void clientProcessStockEvent(Event event) {

@@ -36,7 +36,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-ld")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-ld")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -47,19 +47,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-native-form")
-            credentials {
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-
-        }
-
-        maven {
-
-            name = "GitHubPackages"
-
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-core")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-native-form")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -71,7 +59,19 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-referral")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-core")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+
+        }
+
+        maven {
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-referral")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -82,7 +82,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-hivst")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-hivst")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -93,7 +93,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-cdp")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-cdp")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -104,7 +104,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-kvp")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-kvp")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -115,7 +115,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-agyw")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-agyw")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -126,7 +126,18 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-hiv")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-hiv")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-pmtct")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -229,7 +240,7 @@ publishing {
              ** Replace GITHUB_USERID with your/organisation Github userID
              ** and REPOSITORY with the repository name on GitHub
              */
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-core")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-core")
             credentials {
                 /** Create github.properties in root project folder file with
                  ** gpr.usr=GITHUB_USER_ID & gpr.key=PERSONAL_ACCESS_TOKEN
@@ -303,7 +314,7 @@ dependencies {
         exclude group: 'xpp3', module: 'xpp3'
     }
 
-    api('org.smartregister:opensrp-client-native-form:3.1.4-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-native-form:3.1.6-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
@@ -317,7 +328,7 @@ dependencies {
 
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-    api('org.smartregister:opensrp-client-core:1.16.1-NACP-SNAPSHOT') {
+    api('org.smartregister:opensrp-client-core:1.16.3-NACP-SNAPSHOT') {
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -465,7 +476,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-pmtct:1.1.0.14-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-pmtct:1.1.0.16-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -483,8 +494,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-
-    api('org.smartregister:opensrp-chw-kvp:1.0.9-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-kvp:1.0.10-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -502,7 +512,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-hivst:1.0.4-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-hivst:1.0.5-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'

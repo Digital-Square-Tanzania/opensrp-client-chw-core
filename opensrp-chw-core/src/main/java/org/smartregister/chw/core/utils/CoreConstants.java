@@ -268,8 +268,6 @@ public class CoreConstants {
         private static final String MALE_FAMILY_PLANNING_CHANGE_METHOD_FORM = "male_family_planning_change_method";
         private static final String PNC_DANGER_SIGNS_OUTCOME_FORM = "pnc_danger_signs_outcome";
         private static final String MALARIA_FOLLOW_UP_HF_FORM = "malaria_follow_up_hf";
-        private static final String FEMALE_HIV_FOLLOWUP_VISIT_FOR_CLIENTS_WITH_CTC_NUMBERS = "female_hiv_followup_visit_for_clients_with_ctc_numbers";
-        private static final String MALE_HIV_FOLLOWUP_VISIT_FOR_CLIENTS_WITH_CTC_NUMBERS = "male_hiv_followup_visit_for_clients_with_ctc_numbers";
         private static final String HIV_INDEX_CONTACT_FOLLOWUP_VISIT = "hiv_index_contact_followup";
         private static final String HIV_INDEX_CONTACT_FOLLOWUP_VISIT_FOR_NEGATIVE_CLIENTS = "hiv_index_contact_followup_for_negative_clients";
         private static final String HIV_INDEX_CONTACT_FOLLOWUP_VISIT_FOR_POSITIVE_CLIENTS = "hiv_index_contact_followup_for_positive_clients";
@@ -514,14 +512,6 @@ public class CoreConstants {
 
         public static String getTbRegistration() {
             return TB_REGISTRATION;
-        }
-
-        public static String getMaleHivFollowupVisitForClientsWithCtcNumbers() {
-            return MALE_HIV_FOLLOWUP_VISIT_FOR_CLIENTS_WITH_CTC_NUMBERS;
-        }
-
-        public static String getFemaleHivFollowupVisitForClientsWithCtcNumbers() {
-            return FEMALE_HIV_FOLLOWUP_VISIT_FOR_CLIENTS_WITH_CTC_NUMBERS;
         }
 
         public static String getHivIndexContactFollowupVisit() {
@@ -1225,7 +1215,7 @@ public class CoreConstants {
         public static final String PNC_DANGER_SIGNS = "PNC Danger Signs";
         public static final String FP_SIDE_EFFECTS = "FP Initiation";
         public static final String SUSPECTED_MALARIA = "Suspected Malaria";
-        public static final String SUSPECTED_HIV = "Suspected HIV";
+        public static final String CONVENTIONAL_HIV_TEST = "Conventional HIV Test";
         public static final String SICK_HIV = "HIV Treatment and Care";
         public static final String SUSPECTED_TB = "Suspected TB";
         public static final String PMTCT = "PMTCT Referral";

@@ -67,7 +67,7 @@ public class FormUtils {
         form.setActionBarBackground(R.color.family_actionbar);
         form.setWizard(false);
         form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
-        form.setSaveLabel(context.getResources().getString(R.string.submit));
+        form.setSaveLabel(context.getResources().getString(R.string.save));
 
         if (isMultiPartForm(jsonForm)) {
             form.setWizard(true);

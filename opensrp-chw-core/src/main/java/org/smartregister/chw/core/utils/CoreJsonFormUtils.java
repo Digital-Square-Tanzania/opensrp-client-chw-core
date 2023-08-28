@@ -464,9 +464,13 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
                 jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), DBConstants.KEY.GPS, false));
                 break;
             case ChwDBConstants.SYNC_LOCATION_ID:
-                LocationRepository locationRepository = new LocationRepository();
-                Location location = locationRepository.getLocationById(Utils.getValue(client.getColumnmaps(), "sync_location_id", false));
-                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, location.getProperties().getName());
+                try {
+                    LocationRepository locationRepository = new LocationRepository();
+                    Location location = locationRepository.getLocationById(Utils.getValue(client.getColumnmaps(), "sync_location_id", false));
+                    jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, location.getProperties().getName());
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
                 break;
             case ChwDBConstants.EVENT_DATE:
                 jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), ChwDBConstants.EVENT_DATE, false));

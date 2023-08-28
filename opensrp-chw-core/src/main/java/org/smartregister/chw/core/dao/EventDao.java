@@ -94,4 +94,18 @@ public class EventDao extends AbstractDao {
         String sql2 = "delete from visits where form_submission_id = '" + submissionId + "'";
         updateDB(sql2);
     }
+
+    public static List<Event> getEventByFormSubmissionId(String formSubmissionId) {
+        String sql = "select json from event where formSubmissionId = '" + formSubmissionId + "' COLLATE NOCASE  COLLATE NOCASE order by updatedAt desc ";
+
+        DataMap<Event> dataMap = c -> {
+            try {
+                return getEcSyncHelper().convert(new JSONObject(getCursorValue(c, "json")), Event.class);
+            } catch (JSONException e) {
+                Timber.e(e);
+            }
+            return null;
+        };
+        return AbstractDao.readData(sql, dataMap);
+    }
 }

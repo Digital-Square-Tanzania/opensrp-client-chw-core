@@ -30,20 +30,20 @@ import timber.log.Timber;
 public class MonthlyTalliesRepository extends BaseRepository {
     public static final SimpleDateFormat DF_YYYYMM = new SimpleDateFormat("yyyy-MM", Locale.ENGLISH);
     private static final String TAG = MonthlyTalliesRepository.class.getCanonicalName();
-    private static final String TABLE_NAME = "monthly_tallies";
-    private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_SUBMISSION_ID = "submission_id";
-    private static final String COLUMN_PROVIDER_ID = "provider_id";
-    private static final String COLUMN_INDICATOR_CODE = "indicator_code";
-    private static final String COLUMN_VALUE = "value";
-    private static final String COLUMN_MONTH = "month";
+    protected static final String TABLE_NAME = "monthly_tallies";
+    protected static final String COLUMN_ID = "_id";
+    protected static final String COLUMN_SUBMISSION_ID = "submission_id";
+    protected static final String COLUMN_PROVIDER_ID = "provider_id";
+    protected static final String COLUMN_INDICATOR_CODE = "indicator_code";
+    protected static final String COLUMN_VALUE = "value";
+    protected static final String COLUMN_MONTH = "month";
     public static final String INDEX_UNIQUE = "CREATE UNIQUE INDEX " + TABLE_NAME + "_" + COLUMN_INDICATOR_CODE + "_" + COLUMN_MONTH + "_index" +
             " ON " + TABLE_NAME + "(" + COLUMN_INDICATOR_CODE + "," + COLUMN_MONTH + ");";
-    private static final String COLUMN_EDITED = "edited";
-    private static final String COLUMN_DATE_SENT = "date_sent";
-    private static final String COLUMN_UPDATED_AT = "updated_at";
-    private static final String COLUMN_CREATED_AT = "created_at";
-    private static final String[] TABLE_COLUMNS = {
+    protected static final String COLUMN_EDITED = "edited";
+    protected static final String COLUMN_DATE_SENT = "date_sent";
+    protected static final String COLUMN_UPDATED_AT = "updated_at";
+    protected static final String COLUMN_CREATED_AT = "created_at";
+    protected static final String[] TABLE_COLUMNS = {
             COLUMN_ID, COLUMN_SUBMISSION_ID, COLUMN_INDICATOR_CODE, COLUMN_PROVIDER_ID,
             COLUMN_VALUE, COLUMN_MONTH, COLUMN_EDITED, COLUMN_DATE_SENT, COLUMN_CREATED_AT, COLUMN_UPDATED_AT};
     private static final String CREATE_TABLE_QUERY = "CREATE TABLE " + TABLE_NAME + "(" +
@@ -210,21 +210,34 @@ public class MonthlyTalliesRepository extends BaseRepository {
         return monthlyTallies;
     }
 
-    private MonthlyTally addUpDailyTallies(List<DailyTally> dailyTallies) {
+    protected MonthlyTally addUpDailyTallies(List<DailyTally> dailyTallies) {
         String userName = CoreChwApplication.getInstance().getContext().allSharedPreferences().fetchRegisteredANM();
         MonthlyTally monthlyTally = null;
         double value = 0d;
-        for (int i = 0; i < dailyTallies.size(); i++) {
-            if (i == 0) {
-                monthlyTally = new MonthlyTally();
-                monthlyTally.setIndicator(dailyTallies.get(i).getIndicator());
-            }
-            try {
-                value = value + Double.valueOf(dailyTallies.get(i).getValue());
-            } catch (Exception e) {
-                Timber.e(e);
-            }
+// ORIGINAL IMPLEMENTATION OF OBTAINING Monthly Tallies By summing all daily tallies in the Month
+//        for (int i = 0; i < dailyTallies.size(); i++) {
+//            if (i == 0) {
+//                monthlyTally = new MonthlyTally();
+//                monthlyTally.setIndicator(dailyTallies.get(i).getIndicator());
+//            }
+//            try {
+//                value = value + Double.valueOf(dailyTallies.get(i).getValue());
+//            } catch (Exception e) {
+//                Timber.e(e);
+//            }
+//        }
+
+//====================THIS CHANGE OBTAINS THE LAST CUMMULATIVE TALLY OF THE MONTH as THE Monthly TALLY
+//TODO Refactor this implementation for obtaining the last dally tally as monthlyTally
+        monthlyTally = new MonthlyTally();
+        monthlyTally.setIndicator(dailyTallies.get(dailyTallies.size() - 1).getIndicator());
+
+        try {
+            value = value + Double.valueOf(dailyTallies.get(dailyTallies.size() - 1).getValue());
+        } catch (Exception e) {
+            Timber.e(e);
         }
+//====================== END OF CHANGE =================================
 
         if (monthlyTally != null) {
             monthlyTally.setUpdatedAt(Calendar.getInstance().getTime());
@@ -352,7 +365,7 @@ public class MonthlyTalliesRepository extends BaseRepository {
         return false;
     }
 
-    private List<MonthlyTally> readAllDataElements(Cursor cursor) {
+    protected List<MonthlyTally> readAllDataElements(Cursor cursor) {
         List<MonthlyTally> tallies = new ArrayList<>();
         HashMap<String, Hia2Indicator> indicatorMap = CoreChwApplication.getInstance()
                 .hIA2IndicatorsRepository().findAll();

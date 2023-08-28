@@ -48,8 +48,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity implements FamilyOtherMemberProfileExtendedContract.View, CoreHivstProfileContract.View, FamilyProfileExtendedContract.PresenterCallBack{
-
+public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity implements FamilyOtherMemberProfileExtendedContract.View, CoreHivstProfileContract.View, FamilyProfileExtendedContract.PresenterCallBack {
+    protected static final String OPEN_ISSUE_SELF_TESTING_KITS_FORM = "OPEN_ISSUE_SELF_TESTING_KITS_FORM";
     private CoreHivstProfileActivity.OnMemberTypeLoadedListener onMemberTypeLoadedListener;
     protected RecyclerView notificationAndReferralRecyclerView;
     protected RelativeLayout notificationAndReferralLayout;
@@ -89,6 +89,11 @@ public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity 
         super.onCreate(savedInstanceState);
         initializeNotificationReferralRecyclerView();
         updateToolbarTitle(this, R.id.toolbar_title, memberObject.getFamilyName());
+
+        boolean openIssueKitsForm = getIntent().getBooleanExtra(OPEN_ISSUE_SELF_TESTING_KITS_FORM, false);
+        if (openIssueKitsForm) {
+            startIssueSelfTestingKitsForm(memberObject.getBaseEntityId());
+        }
     }
 
     @Override
@@ -127,10 +132,10 @@ public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity 
             if (preFilledForm != null)
                 UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
-        }else if (itemId == R.id.action_remove_member) {
+        } else if (itemId == R.id.action_remove_member) {
             removeMember();
             return true;
-        } else if (itemId == R.id.action_cbhs_registration || itemId == R.id.action_hiv_registration){
+        } else if (itemId == R.id.action_cbhs_registration || itemId == R.id.action_hiv_registration) {
             startHivServicesRegistration();
             return true;
         }
@@ -145,8 +150,7 @@ public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity 
         menu.findItem(R.id.action_location_info).setVisible(UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId()));
         return true;
     }
-    
-    
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

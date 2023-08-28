@@ -28,21 +28,28 @@ public class ChwTaskRepository extends TaskRepository {
 
     public List<Task> getTasksWithoutClientsAndEvents() {
         List<Task> tasks = new ArrayList<>();
-        try (Cursor cursor = getReadableDatabase().rawQuery(String.format(
+        String query = String.format(
                 "SELECT * FROM %s " +
                         " WHERE %s NOT IN " +
                         " (SELECT %s FROM %s " +
                         " INNER JOIN %s ON %s.%s = %s.%s " +
-                        " INNER JOIN %s ON %s.%s = %s.%s " +
-                        " WHERE %s =? OR %s IS NULL) AND %s IS NOT NULL "
-                , "task", "_id", "_id", "task", "ec_family_member", "ec_family_member", "base_entity_id",
+                        " INNER JOIN %s ON %s.%s = %s.%s) " +
+                        " AND %s IS NOT NULL",
+                "task", "_id", "_id", "task", "ec_family_member", "ec_family_member", "base_entity_id",
                 "task", "for", EventClientRepository.Table.event.name(), EventClientRepository.Table.event.name(), Event.form_submission_id_key,
-                "task", "reason_reference", "sync_status", "server_version","reason_reference"), new String[]{BaseRepository.TYPE_Created})) {
-            while (cursor.moveToNext()) {
-                tasks.add(readCursor(cursor));
+                "task", "reason_reference","reason_reference");
+
+        Cursor cursor = getReadableDatabase().rawQuery(query, null);
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    tasks.add(readCursor(cursor));
+                } while (cursor.moveToNext());
             }
-        } catch (Exception e) {
-            Timber.e(e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
         return tasks;
     }

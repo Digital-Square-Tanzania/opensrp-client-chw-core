@@ -54,6 +54,10 @@ public class Hia2Indicator implements Serializable {
         return category;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public JSONObject getJsonObject() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("indicatorCode", indicatorCode);
