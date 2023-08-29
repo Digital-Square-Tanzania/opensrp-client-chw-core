@@ -9,13 +9,5 @@ import java.util.List;
 
 public class CoreVmmcProfileInteractor extends BaseVmmcProfileInteractor implements CoreVmmcProfileContract.Interactor {
 
-    private Alert getLatestAlert(String baseEntityID) {
-        List<Alert> alerts = AlertDao.getActiveAlertsForVaccines(baseEntityID);
-
-        if (alerts.size() > 0)
-            return alerts.get(0);
-
-        return null;
-    }
 
 }

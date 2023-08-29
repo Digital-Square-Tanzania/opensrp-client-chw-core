@@ -246,6 +246,7 @@ public class CoreConstants {
         private static final String PNC_UNIFIED_REFERRAL_FORM = "referrals/pnc_referral_form";
         private static final String HIV_REFERRAL_FORM = "referrals/hiv_referral_form";
         private static final String HTS_REFERRAL_FORM = "referrals/hts_referral_form";
+        private static final String VMMC_REFERRAL= "referrals/vmmc_referral_form";
         private static final String TB_REFERRAL_FORM = "referrals/tb_referral_form";
         private static final String GBV_REFERRAL_FORM = "referrals/gbv_referral_form";
         private static final String MALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/male_kvp_referral_form";
@@ -473,6 +474,11 @@ public class CoreConstants {
         public static String getHtsReferralForm() {
             return HTS_REFERRAL_FORM;
         }
+
+        public static String getVmmcReferralForm() {
+            return VMMC_REFERRAL;
+        }
+
 
         public static String getTbReferralForm() {
             return TB_REFERRAL_FORM;
@@ -1226,6 +1232,8 @@ public class CoreConstants {
         public static final String LTFU_FEEDBACK = "LTFU Community Followup Feedback";
         public static final String KVP_FRIENDLY_SERVICES = "Huduma rafiki kwa makundi maalum";
         public static final String STI_REFERRAL = "STI Services";
+        public static final String VMMC = "VMMC";
+
     }
 
     public static final class REGISTER_TYPE {

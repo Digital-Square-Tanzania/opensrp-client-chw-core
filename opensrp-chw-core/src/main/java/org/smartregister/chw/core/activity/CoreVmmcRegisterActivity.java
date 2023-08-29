@@ -9,8 +9,6 @@ import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.FormUtils;
 import org.smartregister.chw.vmmc.activity.BaseVmmcRegisterActivity;
 import org.smartregister.family.util.JsonFormUtils;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Billy on 20/10/2021.
@@ -27,11 +25,6 @@ public abstract class CoreVmmcRegisterActivity extends BaseVmmcRegisterActivity 
     public void startFormActivity(JSONObject jsonForm) {
         startActivityForResult(FormUtils.getStartFormActivity(jsonForm, this.getString(R.string.vmmc_registration), this), JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
-
-//    @Override
-//    public List<String> getViewIdentifiers() {
-//        return Collections.singletonList(CoreConstants.CONFIGURATION.VMMC_REGISTER);
-//    }
 
     @Override
     protected void onResumption() {
