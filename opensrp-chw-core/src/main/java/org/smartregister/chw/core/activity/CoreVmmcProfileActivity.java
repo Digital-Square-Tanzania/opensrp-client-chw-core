@@ -51,6 +51,7 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
 
     protected RecyclerView notificationAndReferralRecyclerView;
     protected RelativeLayout notificationAndReferralLayout;
+
     private OnMemberTypeLoadedListener onMemberTypeLoadedListener;
 
     public interface OnMemberTypeLoadedListener {
@@ -60,6 +61,7 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
     public static class MemberType {
 
         private final org.smartregister.chw.anc.domain.MemberObject memberObject;
+
         private final String memberType;
 
         private MemberType(org.smartregister.chw.anc.domain.MemberObject memberObject, String memberType) {

@@ -35,7 +35,9 @@ import timber.log.Timber;
 public abstract class CoreVmmcRegisterFragment extends BaseVmmcRegisterFragment {
 
     private static final String DUE_FILTER_TAG = "PRESSED";
+
     private View view;
+
     private View dueOnlyLayout;
     private boolean dueFilterActive = false;
 

@@ -12,13 +12,6 @@ public class CoreVmmcRegisterFragmentPresenter extends BaseVmmcRegisterFragmentP
         super(view, model, viewConfigurationIdentifier);
     }
 
-//    @Override
-//    public String getMainCondition() {
-//        return " ec_family_member.date_removed is null AND ec_vmmc_confirmation.vmmc  = 1 " +
-//                "AND datetime('NOW') <= datetime(ec_vmmc_confirmation.last_interacted_with/1000, 'unixepoch', 'localtime','+15 days') AND ec_vmmc_confirmation.is_closed = 0";
-//
-//    }
-
     @Override
     public void processViewConfigurations() {
         super.processViewConfigurations();

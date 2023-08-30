@@ -19,11 +19,17 @@ import timber.log.Timber;
 public class VmmcRegisterRepository extends BaseRepository {
 
     public static final String TABLE_NAME = "ec_family_member";
+
     public static final String FIRST_NAME = "first_name";
+
     public static final String MIDDLE_NAME = "middle_name";
+
     public static final String LAST_NAME = "last_name";
+
     public static final String PHONE_NUMBER = "phone_number";
+
     public static final String BASE_ENTITY_ID = "base_entity_id";
+
     public static final String[] TABLE_COLUMNS = {FIRST_NAME, MIDDLE_NAME, LAST_NAME, PHONE_NUMBER};
 
     public HashMap<String, String> getFamilyNameAndPhone(String baseEntityID) {

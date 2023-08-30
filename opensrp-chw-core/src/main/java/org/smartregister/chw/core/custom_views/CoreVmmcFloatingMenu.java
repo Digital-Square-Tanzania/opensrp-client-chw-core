@@ -32,9 +32,6 @@ public abstract class CoreVmmcFloatingMenu extends BaseVmmcFloatingMenu {
     private MemberObject MEMBER_OBJECT;
 
 
-//    public CoreVmmcFloatingMenu(Context context, MemberObject memberObject) {
-//        super(context, memberObject);
-//    }
     public CoreVmmcFloatingMenu(Context context, MemberObject MEMBER_OBJECT) {
         super(context, MEMBER_OBJECT);
         this.MEMBER_OBJECT = MEMBER_OBJECT;
