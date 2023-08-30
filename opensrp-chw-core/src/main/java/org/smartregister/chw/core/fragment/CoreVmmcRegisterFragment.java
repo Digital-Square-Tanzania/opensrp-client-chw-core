@@ -39,6 +39,7 @@ public abstract class CoreVmmcRegisterFragment extends BaseVmmcRegisterFragment 
     private View view;
 
     private View dueOnlyLayout;
+
     private boolean dueFilterActive = false;
 
     @Override

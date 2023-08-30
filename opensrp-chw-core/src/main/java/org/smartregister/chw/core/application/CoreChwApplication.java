@@ -60,7 +60,9 @@ public abstract class CoreChwApplication extends DrishtiApplication implements C
     private static PlanDefinitionRepository planDefinitionRepository;
     private static ScheduleRepository scheduleRepository;
     private static MalariaRegisterRepository malariaRegisterRepository;
+
     private static VmmcRegisterRepository vmmcRegisterRepository;
+
     private static StockUsageReportRepository stockUsageReportRepository;
     public JsonSpecHelper jsonSpecHelper;
     protected ClientProcessorForJava clientProcessorForJava;

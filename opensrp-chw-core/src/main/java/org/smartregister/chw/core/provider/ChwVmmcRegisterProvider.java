@@ -9,12 +9,10 @@ import java.util.Set;
 
 public class ChwVmmcRegisterProvider extends VmmcRegisterProvider {
 
-    private Context context;
 
     public ChwVmmcRegisterProvider(Context context, View.OnClickListener paginationClickListener,
                                    View.OnClickListener onClickListener, Set visibleColumns) {
         super(context, paginationClickListener, onClickListener, visibleColumns);
-        this.context = context;
     }
 
     @Override

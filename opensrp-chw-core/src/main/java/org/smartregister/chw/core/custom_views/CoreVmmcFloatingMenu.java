@@ -19,16 +19,27 @@ import org.smartregister.chw.vmmc.fragment.BaseVmmcCallDialogFragment;
 
 public abstract class CoreVmmcFloatingMenu extends BaseVmmcFloatingMenu {
     public FloatingActionButton fab;
+
     protected View referLayout;
+
     private Animation fabOpen;
+
     private Animation fabClose;
+
     private Animation rotateForward;
+
     private Animation rotateBack;
+
     private View callLayout;
+
     private RelativeLayout activityMain;
+
     private boolean isFabMenuOpen = false;
+
     private LinearLayout menuBar;
+
     private OnClickFloatingMenu onClickFloatingMenu;
+
     private MemberObject MEMBER_OBJECT;
 
 

@@ -50,6 +50,7 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
         FamilyOtherMemberProfileExtendedContract.View, CoreVmmcProfileContract.View, FamilyProfileExtendedContract.PresenterCallBack {
 
     protected RecyclerView notificationAndReferralRecyclerView;
+
     protected RelativeLayout notificationAndReferralLayout;
 
     private OnMemberTypeLoadedListener onMemberTypeLoadedListener;
