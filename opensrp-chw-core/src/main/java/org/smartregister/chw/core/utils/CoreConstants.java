@@ -127,7 +127,7 @@ public class CoreConstants {
         public static final String ANC_REFERRAL = "ANC Referral";
         public static final String PNC_REFERRAL = "PNC Referral";
         public static final String MALARIA_REFERRAL = "Malaria Referral";
-        public static final String VMMC_CONFIRMATION = "Vmmc Confirmation";
+        public static final String VMMC_ENROLLMENT = "Vmmc Enrollment";
         public static final String FAMILY_PLANNING_REFERRAL = "Family Planning Referral";
         public static final String CHILD_VACCINE_CARD_RECEIVED = "Child vaccine card received";
         public static final String VACCINE_CARD_RECEIVED = "Vaccine Card Received";
@@ -233,7 +233,7 @@ public class CoreConstants {
         private static final String ANC_REGISTRATION = "anc_member_registration";
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
         private static final String MALARIA_CONFIRMATION = "malaria_confirmation";
-        private static final String VMMC_CONFIRMATION = "vmmc_confirmation";
+        private static final String VMMC_ENROLLMENT = "vmmc_enrollment";
         private static final String MALARIA_FOLLOW_UP_VISIT_FORM = "malaria_follow_up_visit";
         private static final String WASH_CHECK = "wash_check";
         private static final String FAMILY_KIT = "family_kit";
@@ -428,8 +428,8 @@ public class CoreConstants {
             return Utils.getLocalForm(MALARIA_CONFIRMATION, locale, assetManager);
         }
 
-        public static String getVmmcConfirmation() {
-            return Utils.getLocalForm(VMMC_CONFIRMATION, locale, assetManager);
+        public static String getVmmcEnrollment() {
+            return Utils.getLocalForm(VMMC_ENROLLMENT, locale, assetManager);
         }
 
         public static String getFpRegistrationForm(String gender) {
@@ -847,7 +847,7 @@ public class CoreConstants {
         public static final String ANC_MEMBER_LOG = "ec_anc_log";
         public static final String FP_MEMBER = "ec_family_planning";
         public static final String MALARIA_CONFIRMATION = "ec_malaria_confirmation";
-        public static final String VMMC_CONFIRMATION = "ec_vmmc_confirmation";
+        public static final String VMMC_ENROLLMENT = "ec_vmmc_enrollment";
         public static final String ANC_PREGNANCY_OUTCOME = "ec_pregnancy_outcome";
         public static final String TASK = "task";
         public static final String WASH_CHECK_LOG = "ec_wash_check_log";

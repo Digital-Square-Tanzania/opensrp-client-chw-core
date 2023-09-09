@@ -151,8 +151,8 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
                     String encounterType = form.getString(JsonFormUtils.ENCOUNTER_TYPE);
                     if (encounterType.equals(Utils.metadata().familyMemberRegister.updateEventType)) {
                         presenter().updateFamilyMember(this, jsonString, false);
-                    } else if (encounterType.equals(CoreConstants.EventType.VMMC_CONFIRMATION)) {
-                        CoreReferralUtils.createReferralEvent(Utils.getAllSharedPreferences(), jsonString, CoreConstants.TABLE_NAME.VMMC_CONFIRMATION, memberObject.getBaseEntityId());
+                    } else if (encounterType.equals(CoreConstants.EventType.VMMC_ENROLLMENT)) {
+                        CoreReferralUtils.createReferralEvent(Utils.getAllSharedPreferences(), jsonString, CoreConstants.TABLE_NAME.VMMC_ENROLLMENT, memberObject.getBaseEntityId());
                         showToast(this.getString(R.string.referral_submitted));
                     }
                 } catch (Exception e) {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.loader.content.CursorLoader;
 import androidx.loader.content.Loader;
@@ -242,6 +243,7 @@ public abstract class CoreVmmcRegisterFragment extends BaseVmmcRegisterFragment 
         }
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
         if (id == LOADER_ID) {

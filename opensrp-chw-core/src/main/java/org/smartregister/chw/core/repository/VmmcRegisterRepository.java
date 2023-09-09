@@ -74,7 +74,7 @@ public class VmmcRegisterRepository extends BaseRepository {
             if (database == null) {
                 return 0;
             }
-            String tableName = CoreConstants.TABLE_NAME.VMMC_CONFIRMATION;
+            String tableName = CoreConstants.TABLE_NAME.VMMC_ENROLLMENT;
 
             String query = "select * from " + tableName + " inner join " +
                     CoreConstants.TABLE_NAME.FAMILY_MEMBER + " on " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID +
@@ -104,13 +104,13 @@ public class VmmcRegisterRepository extends BaseRepository {
 
         ArrayList<String> tablesOfInterestList = new ArrayList<>();
         tablesOfInterestList.add(CoreConstants.TABLE_NAME.FAMILY);
-        tablesOfInterestList.add(CoreConstants.TABLE_NAME.VMMC_CONFIRMATION);
+        tablesOfInterestList.add(CoreConstants.TABLE_NAME.VMMC_ENROLLMENT);
 
         // NOTE: Doing this so that we avoid possible bugs when passing/determining the indices for respective tables to be used in the building the query
         String[] tablesOfInterest = new String[tablesOfInterestList.size()];
         tablesOfInterest = tablesOfInterestList.toArray(tablesOfInterest);
 
-        String query = CoreReferralUtils.mainAncDetailsSelect(tablesOfInterest, tablesOfInterestList.indexOf(CoreConstants.TABLE_NAME.FAMILY), tablesOfInterestList.indexOf(CoreConstants.TABLE_NAME.VMMC_CONFIRMATION), baseEntityId);
+        String query = CoreReferralUtils.mainAncDetailsSelect(tablesOfInterest, tablesOfInterestList.indexOf(CoreConstants.TABLE_NAME.FAMILY), tablesOfInterestList.indexOf(CoreConstants.TABLE_NAME.VMMC_ENROLLMENT), baseEntityId);
         Timber.d("Vmmc Member CommonPersonObject Query %s", query);
 
         try {
@@ -119,7 +119,7 @@ public class VmmcRegisterRepository extends BaseRepository {
             }
             cursor = database.rawQuery(query, null);
             if (cursor != null && cursor.moveToFirst()) {
-                personObject = Utils.context().commonrepository(CoreConstants.TABLE_NAME.VMMC_CONFIRMATION).readAllcommonforCursorAdapter(cursor);
+                personObject = Utils.context().commonrepository(CoreConstants.TABLE_NAME.VMMC_ENROLLMENT).readAllcommonforCursorAdapter(cursor);
             }
         } catch (Exception ex) {
             Timber.e(ex);

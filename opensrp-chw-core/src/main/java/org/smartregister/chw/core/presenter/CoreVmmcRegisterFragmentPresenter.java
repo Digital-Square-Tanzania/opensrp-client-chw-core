@@ -22,6 +22,6 @@ public class CoreVmmcRegisterFragmentPresenter extends BaseVmmcRegisterFragmentP
 
     @Override
     public String getMainTable() {
-        return CoreConstants.TABLE_NAME.VMMC_CONFIRMATION;
+        return CoreConstants.TABLE_NAME.VMMC_ENROLLMENT;
     }
 }
