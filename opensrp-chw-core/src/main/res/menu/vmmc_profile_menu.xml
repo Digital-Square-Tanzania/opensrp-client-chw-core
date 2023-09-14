@@ -8,10 +8,4 @@
         android:title="@string/registration_info"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_remove_member"
-        android:enabled="true"
-        android:title="@string/remove_this_person"
-        app:showAsAction="never" />
-
 </menu>
