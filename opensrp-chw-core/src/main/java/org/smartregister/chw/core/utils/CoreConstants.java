@@ -234,6 +234,7 @@ public class CoreConstants {
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
         private static final String MALARIA_CONFIRMATION = "malaria_confirmation";
         private static final String VMMC_ENROLLMENT = "vmmc_enrollment";
+        private static final String ICCM_ENROLLMENT = "iccm_enrollment";
         private static final String MALARIA_FOLLOW_UP_VISIT_FORM = "malaria_follow_up_visit";
         private static final String WASH_CHECK = "wash_check";
         private static final String FAMILY_KIT = "family_kit";
@@ -426,6 +427,9 @@ public class CoreConstants {
 
         public static String getMalariaConfirmation() {
             return Utils.getLocalForm(MALARIA_CONFIRMATION, locale, assetManager);
+        }
+        public static String getIccmEnrollment() {
+            return Utils.getLocalForm(ICCM_ENROLLMENT, locale, assetManager);
         }
 
         public static String getVmmcEnrollment() {
@@ -848,6 +852,7 @@ public class CoreConstants {
         public static final String FP_MEMBER = "ec_family_planning";
         public static final String MALARIA_CONFIRMATION = "ec_malaria_confirmation";
         public static final String VMMC_ENROLLMENT = "ec_vmmc_enrollment";
+        public static final String ICCM_ENROLLMENT = "ec_iccm_enrollment";
         public static final String ANC_PREGNANCY_OUTCOME = "ec_pregnancy_outcome";
         public static final String TASK = "task";
         public static final String WASH_CHECK_LOG = "ec_wash_check_log";
@@ -931,6 +936,8 @@ public class CoreConstants {
         public static final String PNC = "PNC";
         public static final String FAMILY_PLANNING = "Family Planning";
         public static final String MALARIA = "Malaria";
+
+        public static final String ICCM = "iCCM";
         public static final String REFERRALS = "Referrals";
         public static final String STOCK_USAGE_REPORT = "StockUsageItemModel usage report";
         public static final String UPDATES = "Updates";
@@ -1183,6 +1190,7 @@ public class CoreConstants {
         public static final String PNC_REGISTER_ACTIVITY = "PNC_REGISTER_ACTIVITY";
         public static final String REFERRALS_REGISTER_ACTIVITY = "REFERRALS_REGISTER_ACTIVITY";
         public static final String MALARIA_REGISTER_ACTIVITY = "MALARIA_REGISTER_ACTIVITY";
+        public static final String ICCM_REGISTER_ACTIVITY = "ICCM_REGISTER_ACTIVITY";
         public static final String FP_REGISTER_ACTIVITY = "FP_REGISTER_ACTIVITY";
         public static final String ALL_CLIENTS_REGISTERED_ACTIVITY = "ALL_CLIENTS";
         public static final String UPDATES_REGISTER_ACTIVITY = "UPDATES_REGISTER_ACTIVITY";
@@ -1234,6 +1242,7 @@ public class CoreConstants {
         public static final String STI_REFERRAL = "STI Services";
         public static final String VMMC = "VMMC";
 
+        public static final String ICCM_REFERRAL = "ICCM Services";
     }
 
     public static final class REGISTER_TYPE {
@@ -1241,6 +1250,7 @@ public class CoreConstants {
         public static final String ANC = "ANC";
         public static final String PNC = "PNC";
         public static final String MALARIA = "Malaria";
+        public static final String ICCM = "iCCM";
         public static final String FAMILY_PLANNING = "Family Planning";
         public static final String TB = "TB";
         public static final String HIV = "HIV";

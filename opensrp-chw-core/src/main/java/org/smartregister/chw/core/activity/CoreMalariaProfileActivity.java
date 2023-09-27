@@ -1,5 +1,8 @@
 package org.smartregister.chw.core.activity;
 
+import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
+import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -27,6 +30,7 @@ import org.smartregister.chw.core.presenter.CoreMalariaMemberProfilePresenter;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.CoreReferralUtils;
+import org.smartregister.chw.core.utils.UpdateDetailsUtil;
 import org.smartregister.chw.malaria.activity.BaseMalariaProfileActivity;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.util.JsonFormUtils;
@@ -38,9 +42,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-
-import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
-import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 
 public abstract class CoreMalariaProfileActivity extends BaseMalariaProfileActivity implements
         FamilyOtherMemberProfileExtendedContract.View, CoreMalariaProfileContract.View, FamilyProfileExtendedContract.PresenterCallBack {
@@ -105,8 +106,13 @@ public abstract class CoreMalariaProfileActivity extends BaseMalariaProfileActiv
             onBackPressed();
             return true;
         } else if (itemId == R.id.action_registration) {
-            startFormForEdit(R.string.registration_info,
-                    CoreConstants.JSON_FORM.FAMILY_MEMBER_REGISTER);
+            if (UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId())) {
+                startFormForEdit(R.string.registration_info,
+                        CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+            } else {
+                startFormForEdit(R.string.edit_member_form_title,
+                        CoreConstants.JSON_FORM.getFamilyMemberRegister());
+            }
             return true;
         } else if (itemId == R.id.action_remove_member) {
             removeMember();

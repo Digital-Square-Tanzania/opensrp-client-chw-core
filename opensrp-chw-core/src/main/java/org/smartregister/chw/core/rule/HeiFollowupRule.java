@@ -22,6 +22,9 @@ public class HeiFollowupRule implements ICommonRule {
     protected DateTime overDueDate;
 
     public HeiFollowupRule(Date startDate, @Nullable Date latestFollowupDate, String baseEntityId) {
+        if(startDate == null)
+            startDate = new Date();
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         this.startDate = new DateTime(sdf.format(startDate));
         this.latestFollowupDate = latestFollowupDate != null ? new DateTime(sdf.format(latestFollowupDate)) : null;

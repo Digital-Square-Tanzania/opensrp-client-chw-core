@@ -9,6 +9,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_edit_hei_number"
+        android:enabled="true"
+        android:title="@string/edit_hei_number"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_issue_pmtct_followup_referral"
         android:enabled="true"
         android:title="@string/issue_pmtct_community_followup_referral"

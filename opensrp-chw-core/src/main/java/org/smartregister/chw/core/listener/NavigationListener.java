@@ -57,6 +57,14 @@ public class NavigationListener implements View.OnClickListener {
                         startRegisterActivity(malaria);
                     }
                     break;
+                case CoreConstants.DrawerMenu.ICCM:
+                    Class iccm = getActivity(CoreConstants.REGISTERED_ACTIVITIES.ICCM_REGISTER_ACTIVITY);
+                    if (iccm == null) {
+                        Toast.makeText(activity.getApplicationContext(), CoreConstants.DrawerMenu.ICCM, Toast.LENGTH_SHORT).show();
+                    } else {
+                        startRegisterActivity(iccm);
+                    }
+                    break;
                 case CoreConstants.DrawerMenu.REFERRALS:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.REFERRALS_REGISTER_ACTIVITY));
                     break;

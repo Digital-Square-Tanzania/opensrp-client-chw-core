@@ -779,6 +779,7 @@
 
     <string name="anc_partner_followup_referral">Rufaa ya mwenza</string>
     <string name="issue_pmtct_community_followup_referral">Issue PMTCT Community Followup Referral</string>
+    <string name="edit_hei_number">Badili namba ya HEI</string>
     <string name="pnc_registration">Usajili wa PNC</string>
 
     <!--L&D Titles -->
@@ -800,5 +801,7 @@
 
 
 
+
+    <string name="iccm_enrollment">Huduma za ICCM</string>
 </resources>
 

@@ -798,6 +798,7 @@
     <string name="return_to_anc_profile">Return to %s\'s Profile</string>
 
     <string name="issue_pmtct_community_followup_referral">Issue PMTCT Community Followup Referral</string>
+    <string name="edit_hei_number">Edit HEI Number</string>
     <string name="register">Register</string>
     <string name="test_partner">Test Partner</string>
     <string name="partner_testing">Partner Testing</string>
@@ -816,6 +817,8 @@
     <string name="kvp_registration">KVP Screening</string>
     <string name="telephone">"Tel: "</string>
 
+
+    <string name="iccm_enrollment">ICCM Services</string>
 <!--    VMMC-->
     <string name="vmmc_registration">VMMC Enrollment</string>
     <string name="vmmc_confirmation">Vmmc Confirmation</string>

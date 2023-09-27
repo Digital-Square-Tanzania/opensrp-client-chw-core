@@ -3,7 +3,8 @@ package org.smartregister.chw.core.provider;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
-import org.smartregister.provider.VmmcRegisterProvider;
+
+import org.smartregister.chw.vmmc.provider.VmmcRegisterProvider;
 import org.smartregister.view.contract.SmartRegisterClient;
 import java.util.Set;
 

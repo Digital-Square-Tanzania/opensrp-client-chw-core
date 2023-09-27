@@ -187,19 +187,19 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
 
     @Override
     public void setProfileName(@NonNull String s) {
-        TextView textView = findViewById(org.smartregister.vmmc.R.id.textview_name);
+        TextView textView = findViewById(org.smartregister.chw.vmmc.R.id.textview_name);
         textView.setText(s);
     }
 
     @Override
     public void setProfileDetailOne(@NonNull String s) {
-        TextView textView = findViewById(org.smartregister.vmmc.R.id.textview_gender);
+        TextView textView = findViewById(org.smartregister.chw.vmmc.R.id.textview_gender);
         textView.setText(s);
     }
 
     @Override
     public void setProfileDetailTwo(@NonNull String s) {
-        TextView textView = findViewById(org.smartregister.vmmc.R.id.textview_address);
+        TextView textView = findViewById(org.smartregister.chw.vmmc.R.id.textview_address);
         textView.setText(s);
     }
 
