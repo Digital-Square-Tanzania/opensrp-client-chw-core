@@ -47,15 +47,22 @@ import io.ona.kujaku.views.KujakuMapView;
 import timber.log.Timber;
 
 public class CoreAncMemberMapActivity extends AppCompatActivity {
-
     public static final String RECYCLER_VIEW_POSITION_PROPERTY = "recycler-view-position";
+
     private static int BOUNDING_BOX_PADDING = 100;
+
     protected AppBarLayout appBarLayout;
+
     private KujakuMapView kujakuMapView;
+
     private GeoJsonSource communityTransportersSource;
+
     private String ancWomanName;
+
     private String ancWomanPhoneNumber;
+
     private String ancWomanFamilyHeadName;
+
     private String ancWomanFamilyHeadPhoneNumber;
 
     @Override

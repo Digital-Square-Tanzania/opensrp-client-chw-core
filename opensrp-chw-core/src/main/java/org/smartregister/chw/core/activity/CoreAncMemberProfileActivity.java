@@ -55,11 +55,14 @@ import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient
 import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 
 public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileActivity implements AncMemberProfileContract.View {
-
     protected RecyclerView notificationAndReferralRecyclerView;
+
     protected RelativeLayout notificationAndReferralLayout;
+
     protected boolean hasDueServices = false;
+
     DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy");
+
     private LocalDate ancCreatedDate;
 
     @Override
@@ -262,11 +265,8 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
                     int offset = cal.getTimeZone().getOffset(cal.getTimeInMillis());
                     Long longDate = lastVisit.getDate().getTime();
                     Date date = new Date(longDate - (long) offset);
-                    String monthString = (String) DateFormat.format("MMMM", date);
                     layoutRecordView.setVisibility(View.GONE);
                     tvEdit.setVisibility(View.VISIBLE);
-                    //textViewNotVisitMonth.setText(getContext().getString(R.string.anc_visit_done, monthString));
-                   // imageViewCross.setImageResource(R.drawable.activityrow_visited);
                 } else {
                     record_reccuringvisit_done_bar.setVisibility(View.VISIBLE);
                     layoutNotRecordView.setVisibility(View.GONE);
