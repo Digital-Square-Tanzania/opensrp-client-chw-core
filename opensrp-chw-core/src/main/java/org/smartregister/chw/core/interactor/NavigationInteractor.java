@@ -575,6 +575,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.gbv.util.Constants.TABLES.GBV_REGISTER + " p " +
                                 "              where p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlGbv);
+            case org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS:
+                String sqlLab =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS + " p " +
+                                "              where p.patient_id is not null and p.results is not null and p.date_results_provided_to_client is null and p.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlLab);
             default:
                 return NavigationDao.getTableCount(tableName);
         }

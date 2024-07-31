@@ -34,6 +34,8 @@ import org.smartregister.chw.core.utils.StockUsageReportUtils;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
+import org.smartregister.chw.lab.LabLibrary;
+import org.smartregister.chw.lab.dao.LabDao;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.MalariaUtil;
 import org.smartregister.chw.sbc.dao.SbcDao;
@@ -362,6 +364,18 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_CONDOM_DISTRIBUTION_OUTSIDE:
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_CONDOM_DISTRIBUTION_WITHIN:
                 processCDPStockChanges(eventClient.getEvent());
+                processVisitEvent(eventClient);
+                break;
+            case org.smartregister.chw.lab.util.Constants.EVENT_TYPE.LAB_MANIFEST_GENERATION:
+                processCreateManifestEvent(eventClient.getEvent());
+                processVisitEvent(eventClient);
+                break;
+            case org.smartregister.chw.lab.util.Constants.EVENT_TYPE.LAB_MANIFEST_DISPATCH:
+                processDispatchManifestEvent(eventClient.getEvent());
+                processVisitEvent(eventClient);
+                break;
+            case org.smartregister.chw.lab.util.Constants.EVENT_TYPE.LAB_SET_MANIFEST_SETTINGS:
+                processLabSettingsEvent(eventClient.getEvent());
                 processVisitEvent(eventClient);
                 break;
             default:
@@ -747,6 +761,79 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             CdpStockingDao.updateOutletStockCountData(baseEntityId, event.getFormSubmissionId(), maleCondomsOffset, femaleCondomsOffset, stockEventType, restockDate);
             completeProcessing(event);
             CdpLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
+        }
+    }
+
+
+    protected void processCreateManifestEvent(Event event) {
+        List<Obs> visitObs = event.getObs();
+        String batchNumber = "";
+        String manifestType = "";
+        String destinationHub = "";
+        String samplesList = "";
+
+        if (!visitObs.isEmpty()) {
+            for (Obs obs : visitObs) {
+                if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.BATCH_NUMBER.equals(obs.getFieldCode())) {
+                    batchNumber = (String) obs.getValue();
+                } else if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.MANIFEST_TYPE.equals(obs.getFieldCode())) {
+                    manifestType = (String) obs.getValue();
+                } else if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.DESTINATION_HUB_NAME.equals(obs.getFieldCode())) {
+                    destinationHub = (String) obs.getValue();
+                } else if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.SAMPLES_LIST.equals(obs.getFieldCode())) {
+                    samplesList = (String) obs.getValue();
+                }
+            }
+            LabDao.insertManifest(batchNumber, manifestType, destinationHub, samplesList, String.valueOf(event.getVersion()));
+            LabLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
+        }
+    }
+
+
+    protected void processDispatchManifestEvent(Event event) {
+        List<Obs> visitObs = event.getObs();
+        String batchNumber = "";
+        String dispatchDate = "";
+        String dispatchTime = "";
+        String dispatcherName = "";
+
+        if (visitObs.size() > 0) {
+            for (Obs obs : visitObs) {
+                if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.BATCH_NUMBER.equals(obs.getFieldCode())) {
+                    batchNumber = (String) obs.getValue();
+                } else if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.DISPATCH_DATE.equals(obs.getFieldCode())) {
+                    dispatchDate = (String) obs.getValue();
+                } else if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.DISPATCH_TIME.equals(obs.getFieldCode())) {
+                    dispatchTime = (String) obs.getValue();
+                } else if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.DISPATCHER_NAME.equals(obs.getFieldCode())) {
+                    dispatcherName = (String) obs.getValue();
+                }
+            }
+            LabDao.updateManifest(batchNumber, dispatchDate, dispatchTime, dispatcherName);
+            LabLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
+        }
+    }
+
+
+    protected void processLabSettingsEvent(Event event) {
+        List<Obs> visitObs = event.getObs();
+        String destinationHubName = "";
+        String locationId = "";
+
+        if (!visitObs.isEmpty()) {
+            for (Obs obs : visitObs) {
+                if ("name_of_hf".equals(obs.getFieldCode())) {
+                    destinationHubName = (String) obs.getHumanReadableValue();
+                }
+                if ("location_id".equals(obs.getFieldCode())) {
+                    locationId = (String) obs.getValue();
+                }
+            }
+
+            if (locationId != null) {
+                LabDao.saveDestinationHub(destinationHubName, locationId);
+                LabLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
+            }
         }
     }
 
