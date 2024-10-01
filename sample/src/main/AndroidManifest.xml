@@ -15,6 +15,7 @@
 
         <activity
             android:name="org.smartregister.chw.hf.activity.LoginActivity"
+            android:exported="true"
             android:launchMode="singleTask"
             android:roundIcon="@drawable/ic_launcher_round"
             android:screenOrientation="portrait"
@@ -176,6 +177,10 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />

@@ -215,7 +215,7 @@ allprojects {
 
 android {
     useLibrary 'org.apache.http.legacy'
-    compileSdkVersion 29
+    compileSdkVersion 33
     buildToolsVersion androidBuildToolsVersion
 
     defaultPublishConfig !isReleaseBuild() ? "debug" : "release"
@@ -362,7 +362,7 @@ dependencies {
     //implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:5.1.0'
-    implementation('io.ona.kujaku:library:0.9.0') {
+    implementation('io.ona.kujaku:library:0.10.6-2-SNAPSHOT') {
         exclude group: 'com.android.volley', module: 'volley'
         exclude group: 'stax', module: 'stax-api'
     }
