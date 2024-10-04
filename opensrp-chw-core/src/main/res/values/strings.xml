@@ -715,7 +715,7 @@
 
 
     <!--Emergency Transport-->
-    <string name="community_responders">Community responders</string>
+    <string name="community_responders">Emergency Transport</string>
     <string name="add_community_responder">Responders</string>
     <string name="add_responder">Add</string>
     <string name="return_to_profile">Return to %1$s profile</string>
