@@ -9,6 +9,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.smartregister.chw.core.application.CoreChwApplication;
 import org.smartregister.chw.core.contract.RegisterAlert;
 import org.smartregister.chw.core.rule.AncVisitAlertRule;
+import org.smartregister.chw.core.rule.AsrhFollowupRule;
 import org.smartregister.chw.core.rule.FpAlertRule;
 import org.smartregister.chw.core.rule.HeiFollowupRule;
 import org.smartregister.chw.core.rule.HivFollowupRule;
@@ -76,5 +77,11 @@ public class HomeVisitUtil {
         HeiFollowupRule heiFollowupRule = new HeiFollowupRule(heiStartDate,followupDate,baseEntityId);
         CoreChwApplication.getInstance().getRulesEngineHelper().getHeiRule(heiFollowupRule,CoreConstants.RULE_FILE.HEI_FOLLOWUP_VISIT);
         return heiFollowupRule;
+    }
+
+    public static AsrhFollowupRule getAsrhVisitStatus(Date nextAppointmentDate) {
+        AsrhFollowupRule asrhFollowupRule = new AsrhFollowupRule(nextAppointmentDate);
+        CoreChwApplication.getInstance().getRulesEngineHelper().getAsrhRule(asrhFollowupRule, CoreConstants.RULE_FILE.ASRH_FOLLOWUP_VISIT);
+        return asrhFollowupRule;
     }
 }

@@ -531,7 +531,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlPrEP =
                         "SELECT count(*) " +
                                 "   from " + org.smartregister.chw.kvp.util.Constants.TABLES.PrEP_REGISTER + " p " +
-                                "              where p.is_closed is 0 ";
+                                "              where p.is_closed is 0 AND p.agreed_to_use_prep = 'yes' ";
                 return NavigationDao.getQueryCount(sqlPrEP);
             case org.smartregister.chw.cdp.util.Constants.TABLES.CDP_ORDERS:
                 String userLocationTag = getAllSharedPreferences().fetchUserLocationTag();
@@ -575,6 +575,19 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.gbv.util.Constants.TABLES.GBV_REGISTER + " p " +
                                 "              where p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlGbv);
+            case org.smartregister.chw.cecap.util.Constants.TABLES.CECAP_REGISTER:
+                String sqlCecap =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.cecap.util.Constants.TABLES.CECAP_REGISTER + " p " +
+                                "              where p.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlCecap);
+            case org.smartregister.chw.asrh.util.Constants.TABLES.ASRH_REGISTER:
+                String sqlAsrh =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.asrh.util.Constants.TABLES.ASRH_REGISTER + " p " +
+                                "   inner join ec_family_member ef on ef.base_entity_id on p.base_entity_id " +
+                                "   where p.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlAsrh);
             case org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS:
                 String sqlLab =
                         "SELECT count(*) " +
