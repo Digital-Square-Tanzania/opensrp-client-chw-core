@@ -827,6 +827,7 @@
 
     <!--    VMMC-->
     <string name="vmmc_registration">VMMC Enrollment</string>
+    <string name="vmmc_registration_info">VMMC Registration Info</string>
     <string name="vmmc_confirmation">Vmmc Confirmation</string>
     <string name="menu_vmmc">VMMC</string>
     <string name="refer_to_addo">Linkage to Addo</string>
