@@ -114,7 +114,6 @@ public class CoreAsrhProvider extends BaseAsrhRegisterProvider {
         private final CommonPersonObjectClient pc;
         private final Context context;
         private AsrhFollowupRule asrhFollowupRule;
-        private Visit lastVisit;
         private MemberObject memberObject;
 
         private UpdateAsyncTask(Context context, RegisterViewHolder viewHolder, CommonPersonObjectClient pc) {
