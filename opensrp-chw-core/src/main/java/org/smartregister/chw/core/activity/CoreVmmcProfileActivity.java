@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.activity;
 
+import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
+import static org.smartregister.chw.core.utils.UpdateDetailsUtil.getFamilyBaseEntityId;
 import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
 import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 
@@ -31,6 +33,7 @@ import org.smartregister.chw.core.presenter.CoreVmmcMemberProfilePresenter;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.CoreReferralUtils;
+import org.smartregister.chw.core.utils.UpdateDetailsUtil;
 import org.smartregister.chw.vmmc.activity.BaseVmmcProfileActivity;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.AlertStatus;
@@ -115,7 +118,18 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
             startFormForEdit(R.string.registration_info,
                     CoreConstants.JSON_FORM.FAMILY_MEMBER_REGISTER);
             return true;
-        } else if (itemId == R.id.action_remove_member) {
+        }  else if (itemId == R.id.action_vmmc_registration) {
+            startFormForEdit(R.string.vmmc_registration_info, CoreConstants.JSON_FORM.getVmmcEnrollment());
+            return true;
+        }  else if (itemId == R.id.action_location_info) {
+            JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
+                    CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
+                    UpdateDetailsUtil.getFamilyRegistrationDetails(getFamilyBaseEntityId(getCommonPersonObjectClient(memberObject.getBaseEntityId()))), Utils.metadata().familyRegister.updateEventType);
+            if (preFilledForm != null)
+                UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
+            return true;
+        }
+        else if (itemId == R.id.action_remove_member) {
             removeMember();
             return true;
         }
@@ -126,6 +140,7 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.vmmc_profile_menu, menu);
+//        menu.findItem(R.id.action_location_info).setVisible(UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId()));
         return true;
     }
 
@@ -214,7 +229,11 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
                     CoreConstants.JSON_FORM.getFamilyMemberRegister(),
                     this, client,
                     Utils.metadata().familyMemberRegister.updateEventType, memberObject.getLastName(), false);
-        } else if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
+        } else if (formName.equals(CoreConstants.JSON_FORM.getVmmcEnrollment())) {
+            form = CoreJsonFormUtils.getAutoJsonEditAncFormString(
+                    memberObject.getBaseEntityId(), this, formName, CoreConstants.EventType.VMMC_ENROLLMENT, getResources().getString(title_resource));
+        }
+        else if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
             form = CoreJsonFormUtils.getAutoJsonEditAncFormString(
                     memberObject.getBaseEntityId(), this, formName, CoreConstants.EventType.UPDATE_ANC_REGISTRATION, getResources().getString(title_resource));
         }

@@ -14,6 +14,12 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/action_collect_hvl_sample"
+        android:enabled="true"
+        android:title="@string/collect_hvl_sample"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_issue_pmtct_followup_referral"
         android:enabled="true"
         android:title="@string/issue_pmtct_community_followup_referral"

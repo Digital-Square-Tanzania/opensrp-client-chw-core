@@ -21,6 +21,8 @@ import static org.smartregister.chw.core.utils.Utils.redrawWithOption;
 public abstract class CoreAncFloatingMenu extends BaseAncFloatingMenu {
     public FloatingActionButton fab;
     protected View referLayout;
+    protected View linkageLayout;
+
     protected View callLayout;
     protected RelativeLayout activityMain;
     protected boolean isFabMenuOpen = false;
@@ -66,6 +68,10 @@ public abstract class CoreAncFloatingMenu extends BaseAncFloatingMenu {
         referLayout.setOnClickListener(this);
         referLayout.setClickable(false);
 
+        linkageLayout = findViewById(R.id.link_to_addo_layout);
+        linkageLayout.setOnClickListener(this);
+        linkageLayout.setClickable(false);
+
         menuBar.setVisibility(GONE);
 
     }
@@ -90,6 +96,10 @@ public abstract class CoreAncFloatingMenu extends BaseAncFloatingMenu {
 
             referLayout.startAnimation(fabClose);
             referLayout.setClickable(false);
+
+            linkageLayout.startAnimation(fabClose);
+            linkageLayout.setClickable(false);
+
             isFabMenuOpen = false;
         } else {
             activityMain.setBackgroundResource(R.color.grey_tranparent_50);
@@ -101,6 +111,10 @@ public abstract class CoreAncFloatingMenu extends BaseAncFloatingMenu {
 
             referLayout.startAnimation(fabOpen);
             referLayout.setClickable(true);
+
+            linkageLayout.startAnimation(fabOpen);
+            linkageLayout.setClickable(true);
+
             isFabMenuOpen = true;
         }
     }

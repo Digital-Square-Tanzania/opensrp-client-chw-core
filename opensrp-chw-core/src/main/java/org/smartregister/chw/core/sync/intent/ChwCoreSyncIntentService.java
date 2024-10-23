@@ -63,7 +63,6 @@ public abstract class ChwCoreSyncIntentService extends SyncIntentService {
                 fetchMissingEventsFailed(count, tasksWithMissingClientsEvents);
             }
         }
-        complete(FetchStatus.fetched);
 
     }
 

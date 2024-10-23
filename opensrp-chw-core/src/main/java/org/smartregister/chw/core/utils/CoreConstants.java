@@ -12,6 +12,8 @@ public class CoreConstants {
 
     public static final String ENTITY_ID = "entity_id";
     public static final String REFERRAL_PLAN_ID = "5270285b-5a3b-4647-b772-c0b3c52e2b71";
+
+    public static final String ADDO_LINKAGE_PLAN_ID = "6270285b-5a3b-4647-b772-c0b3c52e2b72";
     public static final String DB_DATE_FORMAT = "yyyy-MM-dd";
     public static final String CURRENT_LOCATION_ID = "CURRENT_LOCATION_ID";
     public static final String FORMSUBMISSION_FIELD = "formsubmissionField";
@@ -233,7 +235,7 @@ public class CoreConstants {
         private static final String ANC_REGISTRATION = "anc_member_registration";
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
         private static final String MALARIA_CONFIRMATION = "malaria_confirmation";
-        private static final String VMMC_ENROLLMENT = "vmmc_enrollment";
+        public static final String VMMC_ENROLLMENT = "vmmc_enrollment";
         private static final String ICCM_ENROLLMENT = "iccm_enrollment";
         private static final String MALARIA_FOLLOW_UP_VISIT_FORM = "malaria_follow_up_visit";
         private static final String WASH_CHECK = "wash_check";
@@ -245,6 +247,12 @@ public class CoreConstants {
         private static final String CHILD_UNIFIED_REFERRAL_FORM = "referrals/child_referral_form";
         private static final String ANC_UNIFIED_REFERRAL_FORM = "referrals/anc_referral_form";
         private static final String PNC_UNIFIED_REFERRAL_FORM = "referrals/pnc_referral_form";
+        private static final String CHILD_UNIFIED_LINKAGE_FORM = "linkages/child_linkage_form";
+        private static final String ANC_UNIFIED_LINKAGE_FORM = "linkages/anc_linkage_form";
+        private static final String PNC_UNIFIED_LINKAGE_FORM = "linkages/pnc_linkage_form";
+        private static final String ADOLESCENT_UNIFIED_LINKAGE_FORM = "linkages/adolescent_linkage_form";
+
+        private static final String LINKAGE_FOLLOW_UP_FORM = "linkages/followup_form";
         private static final String HIV_REFERRAL_FORM = "referrals/hiv_referral_form";
         private static final String HTS_REFERRAL_FORM = "referrals/hts_referral_form";
         private static final String VMMC_REFERRAL= "referrals/vmmc_referral_form";
@@ -347,6 +355,30 @@ public class CoreConstants {
 
         public static String getPncUnifiedReferralForm() {
             return PNC_UNIFIED_REFERRAL_FORM;
+        }
+
+        public static String getAncUnifiedLinkageForm() {
+            return ANC_UNIFIED_LINKAGE_FORM;
+        }
+
+        public static String getPncUnifiedLinkageForm() {
+            return PNC_UNIFIED_LINKAGE_FORM;
+        }
+
+        public static String getChildUnifiedLinkageForm() {
+            return CHILD_UNIFIED_LINKAGE_FORM;
+        }
+
+        public static String getAdolescentUnifiedLinkageForm() {
+            return ADOLESCENT_UNIFIED_LINKAGE_FORM;
+        }
+
+        public static String getLinkageFollowUpFormName(){
+            return LINKAGE_FOLLOW_UP_FORM;
+        }
+
+        public static String getLinkageFollowUpForm() {
+            return Utils.getLocalForm(LINKAGE_FOLLOW_UP_FORM, locale, assetManager);
         }
 
         public static String getFamilyPlanningReferralForm(String gender) {
@@ -948,6 +980,7 @@ public class CoreConstants {
         public static final String PNC = "PNC";
         public static final String FAMILY_PLANNING = "Family Planning";
         public static final String MALARIA = "Malaria";
+        public static final String ADDO_LINKAGE = "ADDO Linkage";
 
         public static final String ICCM = "iCCM";
         public static final String REFERRALS = "Referrals";
@@ -978,6 +1011,8 @@ public class CoreConstants {
         public static final String AYSRH = "AYSRH";
 
         public static final String SBC_MONTHLY_SOCIAL_MEDIA_REPORT = "SBC MONTHLY SOCIAL MEDIA REPORT";
+
+        public static final String LAB = "Lab";
     }
 
     public static final class RULE_FILE {
@@ -1245,6 +1280,10 @@ public class CoreConstants {
         public static final String CECAP_REGISTER_ACTIVITY = "CECAP_REGISTER_ACTIVITY";
 
         public static final String ASRH_REGISTER_ACTIVITY = "ASRH_REGISTER_ACTIVITY";
+
+        public static final String LAB_REGISTER_ACTIVITY = "LAB_REGISTER_ACTIVITY";
+
+        public static final String ADDO_LINKAGE_ACTIVITY = "ADDO_LINKAGE_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {
@@ -1282,6 +1321,14 @@ public class CoreConstants {
         public static final String CECAP_REFERRAL = "Reproductive Cancer Services";
 
         public static final String AYSRH_FRIENDLY_SERVICES = "AYSRH Friendly Services";
+
+        public static final class ADDO {
+            public static final String CHILD_MINOR_AILMENTS = "Child Minor Ailments";
+            public static final String ANC_MINOR_AILMENTS = "ANC Minor Ailments";
+            public static final String PNC_MINOR_AILMENTS = "PNC Minor Ailments";
+            public static final String ADOLESCENT_MINOR_AILMENTS = "Adolescent Minor Ailments";
+        }
+
     }
 
     public static final class REGISTER_TYPE {

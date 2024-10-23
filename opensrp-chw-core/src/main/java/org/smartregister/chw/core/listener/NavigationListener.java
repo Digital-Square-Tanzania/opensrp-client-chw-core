@@ -75,6 +75,9 @@ public class NavigationListener implements View.OnClickListener {
                 case CoreConstants.DrawerMenu.CDP_HF:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.CDP_REGISTER_ACTIVITY));
                     break;
+                case CoreConstants.DrawerMenu.LAB:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.LAB_REGISTER_ACTIVITY));
+                    break;
                 case CoreConstants.DrawerMenu.HIV_SELF_TESTING:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.HIV_SELF_TESTING_REGISTER_ACTIVITY));
                     break;
@@ -133,6 +136,9 @@ public class NavigationListener implements View.OnClickListener {
                     break;
                 case CoreConstants.DrawerMenu.SBC_MONTHLY_SOCIAL_MEDIA_REPORT:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.SBC_MONTHLY_SOCIAL_MEDIA_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.ADDO_LINKAGE:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.ADDO_LINKAGE_ACTIVITY));
                     break;
                 case CoreConstants.DrawerMenu.CECAP:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.CECAP_REGISTER_ACTIVITY));

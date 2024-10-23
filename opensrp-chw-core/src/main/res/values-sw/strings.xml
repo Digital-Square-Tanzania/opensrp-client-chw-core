@@ -139,6 +139,7 @@
     <string name="visit_month">%1$s tembeleo limekamilika</string>
     <string name="refer_to_facility">Rufaa kwenda kituo cha kutolea huduma</string>
     <string name="updating">Updating....</string>
+    <string name="link_to_addo">Unganisha kwa DLDM</string>
 
     <string name="growth_and_nutrition">UKUAJI NA LISHE</string>
     <string name="vitamin_given">Ni lini %1$s ilitolewa?</string>
@@ -812,5 +813,7 @@
     <!--   ASRH -->
     <string name="asrh_registration">Usajili wa Huduma za Afya ya Uzazi  kwa Vijana</string>
 
+
+    <string name="refer_to_addo">Unganisha kwenda Duka la Dawa</string>
 </resources>
 

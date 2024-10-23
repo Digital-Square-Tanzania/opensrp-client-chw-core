@@ -1,5 +1,9 @@
 package org.smartregister.chw.core.activity;
 
+import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
+import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
+import static org.smartregister.chw.hiv.util.Constants.ActivityPayload.HIV_MEMBER_OBJECT;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -7,6 +11,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
@@ -44,19 +52,12 @@ import org.smartregister.family.util.Utils;
 
 import java.util.Date;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
-
-import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
-import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
-import static org.smartregister.chw.hiv.util.Constants.ActivityPayload.HIV_MEMBER_OBJECT;
 
 public abstract class CoreHivProfileActivity extends BaseHivProfileActivity implements FamilyProfileExtendedContract.PresenterCallBack, CoreHivProfileContract.View {
     protected RecyclerView notificationAndReferralRecyclerView;
@@ -76,7 +77,8 @@ public abstract class CoreHivProfileActivity extends BaseHivProfileActivity impl
     protected void initializeNotificationReferralRecyclerView() {
         notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
         notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
-        notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (notificationAndReferralRecyclerView != null)
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

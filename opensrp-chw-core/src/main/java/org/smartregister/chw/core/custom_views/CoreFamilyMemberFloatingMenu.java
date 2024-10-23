@@ -22,6 +22,7 @@ public abstract class CoreFamilyMemberFloatingMenu extends LinearLayout implemen
     protected boolean isFabMenuOpen = false;
     protected View callLayout;
     protected View referLayout;
+    protected View addoLayout;
 
     public CoreFamilyMemberFloatingMenu(Context context) {
         super(context);
@@ -55,8 +56,12 @@ public abstract class CoreFamilyMemberFloatingMenu extends LinearLayout implemen
         referLayout = findViewById(R.id.refer_to_facility_layout);
         referLayout.setOnClickListener(this);
 
+        addoLayout = findViewById(R.id.refer_to_addo_layout);
+        addoLayout.setOnClickListener(this);
+
         callLayout.setClickable(false);
         referLayout.setClickable(false);
+        addoLayout.setClickable(false);
 
         menuBar.setVisibility(GONE);
     }
@@ -82,9 +87,11 @@ public abstract class CoreFamilyMemberFloatingMenu extends LinearLayout implemen
 
             callLayout.startAnimation(fabClose);
             referLayout.startAnimation(fabClose);
+            addoLayout.startAnimation(fabClose);
 
             callLayout.setClickable(false);
             referLayout.setClickable(false);
+            addoLayout.setClickable(false);
             isFabMenuOpen = false;
 
         } else {
@@ -95,9 +102,11 @@ public abstract class CoreFamilyMemberFloatingMenu extends LinearLayout implemen
 
             callLayout.startAnimation(fabOpen);
             referLayout.startAnimation(fabOpen);
+            addoLayout.startAnimation(fabOpen);
 
             callLayout.setClickable(true);
             referLayout.setClickable(true);
+            addoLayout.setClickable(true);
 
             isFabMenuOpen = true;
         }

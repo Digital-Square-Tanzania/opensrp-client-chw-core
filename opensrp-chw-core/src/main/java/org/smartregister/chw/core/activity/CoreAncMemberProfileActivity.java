@@ -1,5 +1,10 @@
 package org.smartregister.chw.core.activity;
 
+import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
+import static org.smartregister.chw.core.utils.UpdateDetailsUtil.getFamilyBaseEntityId;
+import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
+import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,12 +53,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
-
-import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
-import static org.smartregister.chw.core.utils.UpdateDetailsUtil.getFamilyBaseEntityId;
-import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
-import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
-
 public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileActivity implements AncMemberProfileContract.View {
 
     protected RecyclerView notificationAndReferralRecyclerView;
@@ -61,6 +60,10 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
     protected boolean hasDueServices = false;
     DateTimeFormatter formatter = DateTimeFormat.forPattern("dd-MM-yyyy");
     private LocalDate ancCreatedDate;
+
+    protected static CommonPersonObjectClient getClientDetailsByBaseEntityID(@NonNull String baseEntityId) {
+        return getCommonPersonObjectClient(baseEntityId);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,26 +86,24 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
                         CoreConstants.JSON_FORM.getFamilyMemberRegister());
             }
             return true;
-        } else if(itemId == R.id.action_location_info){
+        } else if (itemId == R.id.action_location_info) {
             JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
                     CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
                     UpdateDetailsUtil.getFamilyRegistrationDetails(getFamilyBaseEntityId(getCommonPersonObjectClient(memberObject.getBaseEntityId()))), Utils.metadata().familyRegister.updateEventType);
             if (preFilledForm != null)
                 UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
-        }
-        else if (itemId == R.id.action_anc_registration) {
+        } else if (itemId == R.id.action_anc_registration) {
             startFormForEdit(R.string.edit_anc_registration_form_title, CoreConstants.JSON_FORM.getAncRegistration());
             return true;
         } else if (itemId == R.id.anc_danger_signs_outcome) {
             ancMemberProfilePresenter().startAncDangerSignsOutcomeForm(memberObject);
             return true;
-        } else if(itemId == R.id.action_ld_registration) {
+        } else if (itemId == R.id.action_ld_registration) {
             startLDRegistration();
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -145,11 +146,6 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
         return (CoreAncMemberProfilePresenter) presenter;
     }
 
-
-    protected static CommonPersonObjectClient getClientDetailsByBaseEntityID(@NonNull String baseEntityId) {
-        return getCommonPersonObjectClient(baseEntityId);
-    }
-
     @Override
     protected void registerPresenter() {
         presenter = new CoreAncMemberProfilePresenter(this, new CoreAncMemberProfileInteractor(this), memberObject);
@@ -186,7 +182,7 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
     }
 
     private int getMonthsDifference(LocalDate date1, LocalDate date2) {
-        return Months.monthsBetween( date1.withDayOfMonth(1), date2.withDayOfMonth(1)).getMonths();
+        return Months.monthsBetween(date1.withDayOfMonth(1), date2.withDayOfMonth(1)).getMonths();
     }
 
     protected boolean isVisitThisMonth(LocalDate lastVisitDate, LocalDate todayDate) {
@@ -266,7 +262,7 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
                     layoutRecordView.setVisibility(View.GONE);
                     tvEdit.setVisibility(View.VISIBLE);
                     //textViewNotVisitMonth.setText(getContext().getString(R.string.anc_visit_done, monthString));
-                   // imageViewCross.setImageResource(R.drawable.activityrow_visited);
+                    // imageViewCross.setImageResource(R.drawable.activityrow_visited);
                 } else {
                     record_reccuringvisit_done_bar.setVisibility(View.VISIBLE);
                     layoutNotRecordView.setVisibility(View.GONE);
@@ -285,7 +281,8 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
     protected void initializeNotificationReferralRecyclerView() {
         notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
         notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
-        notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (notificationAndReferralRecyclerView != null)
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override

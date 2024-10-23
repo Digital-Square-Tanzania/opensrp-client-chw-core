@@ -588,6 +588,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   inner join ec_family_member ef on ef.base_entity_id on p.base_entity_id " +
                                 "   where p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlAsrh);
+            case org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS:
+                String sqlLab =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS + " p " +
+                                "              where p.patient_id is not null and p.results is not null and p.date_results_provided_to_client is null and p.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlLab);
             default:
                 return NavigationDao.getTableCount(tableName);
         }

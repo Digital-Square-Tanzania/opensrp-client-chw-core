@@ -151,6 +151,7 @@
     <string name="visit_month">%1$s visit done</string>
     <string name="refer_to_facility">Refer to facility</string>
     <string name="updating">Updating....</string>
+    <string name="link_to_addo">Link to ADDO</string>
 
     <string name="growth_and_nutrition">GROWTH AND NUTRITION</string>
     <string name="vitamin_given">When was %1$s given?</string>
@@ -799,6 +800,8 @@
     <string name="return_to_anc_profile">Return to %s\'s Profile</string>
 
     <string name="issue_pmtct_community_followup_referral">Issue PMTCT Community Followup Referral</string>
+    <string name="collect_hvl_sample">Collect HVL Sample</string>
+    <string name="collect_dna_pcr_sample">Collect DNA PCR Sample</string>
     <string name="edit_hei_number">Edit HEI Number</string>
     <string name="register">Register</string>
     <string name="test_partner">Test Partner</string>
@@ -824,8 +827,10 @@
 
     <!--    VMMC-->
     <string name="vmmc_registration">VMMC Enrollment</string>
+    <string name="vmmc_registration_info">VMMC Registration Info</string>
     <string name="vmmc_confirmation">Vmmc Confirmation</string>
     <string name="menu_vmmc">VMMC</string>
+    <string name="refer_to_addo">Linkage to Addo</string>
 
 
     <!--    GBV/VAC-->

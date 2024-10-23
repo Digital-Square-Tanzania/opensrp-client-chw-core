@@ -1,5 +1,9 @@
 package org.smartregister.chw.core.activity;
 
+import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
+import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
+import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONObject;
 import org.smartregister.chw.core.R;
@@ -32,10 +40,6 @@ import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -43,44 +47,22 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
-import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
-import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
-
 public abstract class CorePmtctProfileActivity extends BasePmtctProfileActivity implements
         FamilyOtherMemberProfileExtendedContract.View, CorePmtctProfileContract.View, FamilyProfileExtendedContract.PresenterCallBack {
 
-    private OnMemberTypeLoadedListener onMemberTypeLoadedListener;
     protected RecyclerView notificationAndReferralRecyclerView;
     protected RelativeLayout notificationAndReferralLayout;
+    private OnMemberTypeLoadedListener onMemberTypeLoadedListener;
 
-    public interface OnMemberTypeLoadedListener {
-        void onMemberTypeLoaded(CorePmtctProfileActivity.MemberType memberType);
+    protected static CommonPersonObjectClient getClientDetailsByBaseEntityID(@NonNull String baseEntityId) {
+        return getCommonPersonObjectClient(baseEntityId);
     }
 
     protected void initializeNotificationReferralRecyclerView() {
         notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
         notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
-        notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
-
-    public static class MemberType {
-
-        private final org.smartregister.chw.anc.domain.MemberObject memberObject;
-        private final String memberType;
-
-        private MemberType(org.smartregister.chw.anc.domain.MemberObject memberObject, String memberType) {
-            this.memberObject = memberObject;
-            this.memberType = memberType;
-        }
-
-        public org.smartregister.chw.anc.domain.MemberObject getMemberObject() {
-            return memberObject;
-        }
-
-        public String getMemberType() {
-            return memberType;
-        }
+        if (notificationAndReferralRecyclerView != null)
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @SuppressLint("LogNotTimber")
@@ -95,7 +77,6 @@ public abstract class CorePmtctProfileActivity extends BasePmtctProfileActivity 
     protected void setupViews() {
         super.setupViews();
     }
-
 
     @Override
     protected void initializePresenter() {
@@ -127,7 +108,7 @@ public abstract class CorePmtctProfileActivity extends BasePmtctProfileActivity 
             if (preFilledForm != null)
                 UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
-        }else if (itemId == R.id.action_remove_member) {
+        } else if (itemId == R.id.action_remove_member) {
             removeMember();
             return true;
         }
@@ -154,10 +135,6 @@ public abstract class CorePmtctProfileActivity extends BasePmtctProfileActivity 
             startActivity(intent);
             finish();
         }
-    }
-
-    protected static CommonPersonObjectClient getClientDetailsByBaseEntityID(@NonNull String baseEntityId) {
-        return getCommonPersonObjectClient(baseEntityId);
     }
 
     protected abstract Class<? extends CoreFamilyProfileActivity> getFamilyProfileActivityClass();
@@ -298,5 +275,28 @@ public abstract class CorePmtctProfileActivity extends BasePmtctProfileActivity 
             e.onNext(memberType);
             e.onComplete();
         });
+    }
+
+    public interface OnMemberTypeLoadedListener {
+        void onMemberTypeLoaded(CorePmtctProfileActivity.MemberType memberType);
+    }
+
+    public static class MemberType {
+
+        private final org.smartregister.chw.anc.domain.MemberObject memberObject;
+        private final String memberType;
+
+        private MemberType(org.smartregister.chw.anc.domain.MemberObject memberObject, String memberType) {
+            this.memberObject = memberObject;
+            this.memberType = memberType;
+        }
+
+        public org.smartregister.chw.anc.domain.MemberObject getMemberObject() {
+            return memberObject;
+        }
+
+        public String getMemberType() {
+            return memberType;
+        }
     }
 }

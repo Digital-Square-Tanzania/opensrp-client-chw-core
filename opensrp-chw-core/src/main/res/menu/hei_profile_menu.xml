@@ -23,6 +23,13 @@
         android:visible="false"/>
 
     <item
+        android:id="@+id/action_collect_dna_pcr_sample"
+        android:enabled="true"
+        android:title="@string/collect_dna_pcr_sample"
+        app:showAsAction="never"
+        android:visible="false"/>
+
+    <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
         android:title="@string/remove_this_person"
