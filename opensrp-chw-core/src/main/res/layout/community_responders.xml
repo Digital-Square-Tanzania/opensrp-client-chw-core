@@ -62,6 +62,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ListView
+        android:layout_marginTop="@dimen/tool_bar_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lv_responder"

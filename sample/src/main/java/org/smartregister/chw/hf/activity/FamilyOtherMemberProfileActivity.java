@@ -53,6 +53,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startFpEcpScreening() {
+        //TODO implement start anc register for HF
+    }
+
+    @Override
     protected void startMalariaRegister() {
         //TODO implement start malaria register for HF
     }
@@ -125,6 +130,26 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     @Override
     protected void startAgywScreening() {
         //TODO implement startAgywScreening
+    }
+
+    @Override
+    protected void startSbcRegistration() {
+        //TODO implement start anc register for HF
+    }
+
+    @Override
+    protected void startGbvRegistration() {
+        //TODO implement start anc register for HF
+    }
+
+    @Override
+    protected void startCancerPreventiveServicesRegistration() {
+        //TODO implement start anc register for HF
+    }
+
+    @Override
+    protected void startAsrhRegistration() {
+        //TODO implement start anc register for HF
     }
 
     @Override

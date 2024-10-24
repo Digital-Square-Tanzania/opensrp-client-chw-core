@@ -13,17 +13,26 @@ import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
 import org.json.JSONObject;
+import org.smartregister.chw.cecap.interactor.BaseCecapProfileInteractor;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.dataloader.CoreFamilyMemberDataLoader;
 import org.smartregister.chw.core.form_data.NativeFormsDataBinder;
+import org.smartregister.chw.core.model.CoreAllClientsMemberModel;
+import org.smartregister.chw.core.presenter.CoreCecapProfilePresenter;
+import org.smartregister.chw.core.presenter.CoreKvpProfilePresenter;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.UpdateDetailsUtil;
 import org.smartregister.chw.hiv.domain.HivMemberObject;
 import org.smartregister.chw.kvp.activity.BaseKvpProfileActivity;
 import org.smartregister.chw.kvp.domain.MemberObject;
+import org.smartregister.chw.kvp.interactor.BaseKvpProfileInteractor;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.AlertStatus;
+import org.smartregister.family.contract.FamilyProfileContract;
+import org.smartregister.family.domain.FamilyEventClient;
+import org.smartregister.family.interactor.FamilyProfileInteractor;
+import org.smartregister.family.model.BaseFamilyProfileModel;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
@@ -60,6 +69,14 @@ public abstract class CoreKvpProfileActivity extends BaseKvpProfileActivity {
         menu.findItem(R.id.action_location_info).setVisible(UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId()));
         return true;
     }
+
+    @Override
+    protected void initializePresenter() {
+        super.initializePresenter();
+        profilePresenter = new CoreKvpProfilePresenter(this, new BaseKvpProfileInteractor(), memberObject);
+        profilePresenter.refreshProfileBottom();
+    }
+
 
 
     @Override
@@ -143,5 +160,29 @@ public abstract class CoreKvpProfileActivity extends BaseKvpProfileActivity {
     }
 
     public abstract void startHivstRegistration();
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == JsonFormUtils.REQUEST_CODE_GET_JSON && resultCode == RESULT_OK) {
+                try {
+                    String jsonString = data.getStringExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON);
+                    JSONObject form = new JSONObject(jsonString);
+                    if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(Utils.metadata().familyMemberRegister.updateEventType)) {
+                        FamilyEventClient familyEventClient =
+                                new BaseFamilyProfileModel(memberObject.getFamilyName()).processUpdateMemberRegistration(jsonString, memberObject.getBaseEntityId());
+                        new FamilyProfileInteractor().saveRegistration(familyEventClient, jsonString, true, (FamilyProfileContract.InteractorCallBack) profilePresenter);
+                    }
+                    if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(Utils.metadata().familyRegister.updateEventType)) {
+                        FamilyEventClient familyEventClient = new CoreAllClientsMemberModel().processJsonForm(jsonString, memberObject.getFamilyBaseEntityId());
+                        familyEventClient.getEvent().setEntityType(CoreConstants.TABLE_NAME.INDEPENDENT_CLIENT);
+                        new FamilyProfileInteractor().saveRegistration(familyEventClient, jsonString, true, (FamilyProfileContract.InteractorCallBack) profilePresenter);
+                    }
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
+            }
+        }
+    }
 
 }

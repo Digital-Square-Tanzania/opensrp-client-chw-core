@@ -306,6 +306,10 @@ public class CoreConstants {
         private static final String PMTCT_REFERRAL_FORM = "referrals/pmtct_referral_form";
         public static final String PARTNER_TESTING = "anc_partner_testing";
 
+        private static final String FEMALE_AYSRH_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/female_aysrh_referral_form";
+
+        private static final String MALE_AYSRH_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/male_aysrh_referral_form";
+
         public static AssetManager assetManager;
         public static Locale locale;
 
@@ -634,6 +638,14 @@ public class CoreConstants {
 
         public static String getSTIServicesReferralForm() {
             return STI_REFERRAL_FORM;
+        }
+
+        public static String getMaleAysrhFriendlyServicesReferralForm(){
+            return MALE_AYSRH_FRIENDLY_SERVICES_REFERRAL_FORM;
+        }
+
+        public static String getFemaleAysrhFriendlyServicesReferralForm(){
+            return FEMALE_AYSRH_FRIENDLY_SERVICES_REFERRAL_FORM;
         }
 
         public static class CHILD_HOME_VISIT {
@@ -994,6 +1006,10 @@ public class CoreConstants {
 
         public static final String GBV = "GBV";
 
+        public static final String CECAP = "CECAP";
+
+        public static final String AYSRH = "AYSRH";
+
         public static final String SBC_MONTHLY_SOCIAL_MEDIA_REPORT = "SBC MONTHLY SOCIAL MEDIA REPORT";
 
         public static final String LAB = "Lab";
@@ -1016,6 +1032,7 @@ public class CoreConstants {
         public static final String HIV_FOLLOW_UP_VISIT = "hiv-followup-rules.yml";
         public static final String PMTCT_FOLLOW_UP_VISIT = "pmtct-followup-rules.yml";
         public static final String HEI_FOLLOWUP_VISIT = "hei-followup-rules.yml";
+        public static final String ASRH_FOLLOWUP_VISIT = "asrh-followup-rules.yml";
     }
 
     public static class PROFILE_CHANGE_ACTION {
@@ -1260,8 +1277,12 @@ public class CoreConstants {
 
         public static final String GBV_REGISTER_ACTIVITY = "GBV_REGISTER_ACTIVITY";
 
+        public static final String CECAP_REGISTER_ACTIVITY = "CECAP_REGISTER_ACTIVITY";
+
+        public static final String ASRH_REGISTER_ACTIVITY = "ASRH_REGISTER_ACTIVITY";
+
         public static final String LAB_REGISTER_ACTIVITY = "LAB_REGISTER_ACTIVITY";
-      
+
         public static final String ADDO_LINKAGE_ACTIVITY = "ADDO_LINKAGE_ACTIVITY";
     }
 
@@ -1290,10 +1311,16 @@ public class CoreConstants {
         public static final String LTFU = "LTFU";
         public static final String LTFU_FEEDBACK = "LTFU Community Followup Feedback";
         public static final String KVP_FRIENDLY_SERVICES = "Huduma rafiki kwa makundi maalum";
+
         public static final String STI_REFERRAL = "STI Services";
+
         public static final String VMMC = "VMMC";
 
         public static final String ICCM_REFERRAL = "ICCM Services";
+
+        public static final String CECAP_REFERRAL = "Reproductive Cancer Services";
+
+        public static final String AYSRH_FRIENDLY_SERVICES = "AYSRH Friendly Services";
 
         public static final class ADDO {
             public static final String CHILD_MINOR_AILMENTS = "Child Minor Ailments";
@@ -1327,6 +1354,10 @@ public class CoreConstants {
         public static final String VMMC = "VMMC";
 
         public static final String GBV = "GBV/VAC";
+
+        public static final String CECAP = "Reproductive Cancers";
+
+        public static final String AYSRH = "AYSRH";
 
     }
 
