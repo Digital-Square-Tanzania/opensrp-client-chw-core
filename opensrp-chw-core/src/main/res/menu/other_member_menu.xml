@@ -170,6 +170,20 @@
         android:visible="false"
         android:title="@string/gbv_registration"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_cancer_preventive_services_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/reproductive_cancer_preventive_services_registration"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_asrh_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/asrh_registration"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_remove_member"
         android:enabled="true"

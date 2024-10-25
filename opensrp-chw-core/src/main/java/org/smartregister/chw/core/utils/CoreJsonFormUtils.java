@@ -1,6 +1,7 @@
 package org.smartregister.chw.core.utils;
 
 import static org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_OUTLET_REGISTRATION;
+import static org.smartregister.chw.vmmc.util.Constants.EVENT_TYPE.VMMC_ENROLLMENT;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,6 +27,7 @@ import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.application.CoreChwApplication;
 import org.smartregister.chw.core.dataloader.CoreFamilyMemberDataLoader;
 import org.smartregister.chw.core.domain.FamilyMember;
+import org.smartregister.chw.core.domain.ParentClient;
 import org.smartregister.chw.core.form_data.NativeFormsDataBinder;
 import org.smartregister.clientandeventmodel.Address;
 import org.smartregister.clientandeventmodel.Client;
@@ -338,6 +340,28 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
                 } /* else {
                     //TODO how to add other kind of relationships
                   } */
+            }
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+    }
+
+    public static void addRelationship(Context context, ParentClient parent, Client child) {
+        try {
+            String relationships = AssetHandler.readFileFromAssetsFolder(FormUtils.ecClientRelationships, context);
+            JSONArray jsonArray = null;
+
+            jsonArray = new JSONArray(relationships);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject rObject = jsonArray.getJSONObject(i);
+                String relationType = rObject.getString("client_relationship");
+
+                if (relationType.equals(org.smartregister.chw.anc.util.Constants.RELATIONSHIP.FAMILY)){
+                    child.addRelationship(relationType, parent.getBaseEntityId());
+                } else if (relationType.equals(org.smartregister.chw.anc.util.Constants.RELATIONSHIP.MOTHER)) {
+                    child.addRelationship(relationType, parent.getMotherBaseEntityId());
+                }
             }
         } catch (Exception e) {
             Timber.e(e);
@@ -898,7 +922,10 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
                 event = getEditAncPartnerTesting(baseEntityID);
             } else if (formName.equalsIgnoreCase(org.smartregister.chw.cdp.util.Constants.FORMS.EDIT_CDP_OUTLET)) {
                 event = getEditOutletRegistration(baseEntityID);
-            } else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_PREGNANCY_CONFIRMATION) || formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_TRANSFER_IN_REGISTRATION)) {
+            } else if (formName.equalsIgnoreCase(org.smartregister.chw.vmmc.util.Constants.FORMS.VMMC_REGISTRATION)) {
+                event = getEditVmmcRegistration(baseEntityID);
+            }
+            else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_PREGNANCY_CONFIRMATION) || formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_TRANSFER_IN_REGISTRATION)) {
                 event = getEditEvent(baseEntityID, eventType);
             } else {
                 event = getEditAncLatestProperties(baseEntityID);
@@ -974,6 +1001,25 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
 
         String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s') order by updatedAt desc limit 1;",
                 baseEntityID, CDP_OUTLET_REGISTRATION);
+
+        try (Cursor cursor = CoreChwApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                ecEvent = AssetHandler.jsonStringToJava(cursor.getString(0), Event.class);
+                cursor.moveToNext();
+            }
+        } catch (Exception e) {
+            Timber.e(e, e.toString());
+        }
+        return ecEvent;
+    }
+
+    private static Event getEditVmmcRegistration(String baseEntityID) {
+        Event ecEvent = null;
+
+        String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s') order by updatedAt desc limit 1;",
+                baseEntityID, VMMC_ENROLLMENT);
 
         try (Cursor cursor = CoreChwApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
             cursor.moveToFirst();

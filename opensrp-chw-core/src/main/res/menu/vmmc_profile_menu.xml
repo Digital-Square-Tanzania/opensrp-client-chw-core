@@ -9,5 +9,18 @@
         app:showAsAction="never"
         android:visible="false"
         />
+    <item
+        android:id="@+id/action_vmmc_registration"
+        android:enabled="true"
+        android:title="@string/vmmc_registration_info"
+        app:showAsAction="never"
+        android:visible="false"
+        />
+    <item android:id="@+id/action_location_info"
+        android:enabled="true"
+        android:title="@string/location_info"
+        app:showAsAction="never"
+        android:visible="false"
+        />
 
 </menu>
