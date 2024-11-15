@@ -78,6 +78,8 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         tableMap.put(CoreConstants.DrawerMenu.SBC, org.smartregister.chw.sbc.util.Constants.TABLES.SBC_REGISTER);
         tableMap.put(CoreConstants.DrawerMenu.SBC_MONTHLY_SOCIAL_MEDIA_REPORT, org.smartregister.chw.sbc.util.Constants.TABLES.SBC_MONTHLY_SOCIAL_MEDIA_REPORT);
         tableMap.put(CoreConstants.DrawerMenu.GBV, org.smartregister.chw.gbv.util.Constants.TABLES.GBV_REGISTER);
+        tableMap.put(CoreConstants.DrawerMenu.AYSRH, org.smartregister.chw.asrh.util.Constants.TABLES.ASRH_REGISTER);
+        tableMap.put(CoreConstants.DrawerMenu.CECAP, org.smartregister.chw.cecap.util.Constants.TABLES.CECAP_REGISTER);
         tableMap.put(CoreConstants.DrawerMenu.LAB, org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS);
     }
 

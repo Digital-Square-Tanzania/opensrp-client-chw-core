@@ -97,7 +97,7 @@ public class CoreCommunityRespondersRegisterActivity extends MultiLanguageActivi
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.menu_add_responder) {
             CommunityResponderRepository repo = CoreChwApplication.getInstance().communityResponderRepository();
-            if (repo.getRespondersCount() > 7) {
+            if (repo.getRespondersCount() > 100) {
                 Toast.makeText(this, getString(R.string.add_responder_max_message), Toast.LENGTH_LONG).show();
             } else {
                 JSONObject form = FormUtils.getFormUtils().getFormJson(CoreConstants.JSON_FORM.COMMUNITY_RESPONDER_REGISTRATION_FORM);

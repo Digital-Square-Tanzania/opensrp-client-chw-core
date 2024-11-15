@@ -1,5 +1,6 @@
 package org.smartregister.chw.core.sync;
 
+import static org.smartregister.chw.cecap.util.Constants.EVENT_TYPE.CECAP_HEALTH_EDUCATION_MOBILIZATION;
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_HEALTH_EDUCATION_MOBILIZATION;
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_MONTHLY_SOCIAL_MEDIA_REPORT;
 
@@ -14,6 +15,7 @@ import org.smartregister.chw.anc.util.NCUtils;
 import org.smartregister.chw.cdp.CdpLibrary;
 import org.smartregister.chw.cdp.dao.CdpOrderDao;
 import org.smartregister.chw.cdp.dao.CdpStockingDao;
+import org.smartregister.chw.cecap.dao.CecapDao;
 import org.smartregister.chw.core.application.CoreChwApplication;
 import org.smartregister.chw.core.dao.AncDao;
 import org.smartregister.chw.core.dao.ChildDao;
@@ -330,6 +332,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case SBC_HEALTH_EDUCATION_MOBILIZATION:
                 processSBCMobilizationEvent(eventClient.getEvent());
                 break;
+            case CECAP_HEALTH_EDUCATION_MOBILIZATION:
+                processCecapMobilizationEvent(eventClient.getEvent());
+                break;
             case SBC_MONTHLY_SOCIAL_MEDIA_REPORT:
                 processSBCMonthlySocialMediaReportEvent(eventClient.getEvent());
                 break;
@@ -610,6 +615,29 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
             }
             HivstMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached, maleCondomsIssued, femaleCondomsIssued);
+        }
+    }
+
+    private void processCecapMobilizationEvent(Event event) {
+        List<Obs> mobilizationObs = event.getObs();
+        String mobilizationDate = null;
+        String femaleClientsReached = null;
+        String maleClientsReached = null;
+        String healthEducationProvided = null;
+
+        if (!mobilizationObs.isEmpty()) {
+            for (Obs obs : mobilizationObs) {
+                if (org.smartregister.chw.hivst.util.DBConstants.KEY.MOBILIZATION_DATE.equals(obs.getFormSubmissionField())) {
+                    mobilizationDate = (String) obs.getValue();
+                } else if (org.smartregister.chw.hivst.util.DBConstants.KEY.FEMALE_CLIENTS_REACHED.equals(obs.getFormSubmissionField())) {
+                    femaleClientsReached = (String) obs.getValue();
+                } else if (org.smartregister.chw.hivst.util.DBConstants.KEY.MALE_CLIENTS_REACHED.equals(obs.getFormSubmissionField())) {
+                    maleClientsReached = (String) obs.getValue();
+                } else if ("health_education_provided".equals(obs.getFormSubmissionField())) {
+                    healthEducationProvided = obs.getValues().toString();
+                }
+            }
+            CecapDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached, healthEducationProvided);
         }
     }
 
