@@ -72,4 +72,3 @@ public class CoreCecapMemberProfileActivity extends BaseCecapProfileActivity {
         }
     }
 }
-

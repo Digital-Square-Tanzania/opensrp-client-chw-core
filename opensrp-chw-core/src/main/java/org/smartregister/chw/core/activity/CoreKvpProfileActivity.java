@@ -173,5 +173,7 @@ public abstract class CoreKvpProfileActivity extends BaseKvpProfileActivity {
                 Timber.e(e);
             }
         }
+
     }
+
 }
