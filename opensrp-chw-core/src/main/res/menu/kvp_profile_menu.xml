@@ -81,4 +81,11 @@
         android:title="@string/asrh_registration"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_vmmc_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/vmmc_registration"
+        app:showAsAction="never" />
+
 </menu>
