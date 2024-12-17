@@ -12,6 +12,9 @@ import org.smartregister.family.domain.FamilyEventClient;
 
 import timber.log.Timber;
 
+/**
+ * Created by ilakozejumanne@gmail.com on 17/12/2024.
+ */
 public class CoreHtsProfilePresenter extends BaseHtsProfilePresenter implements FamilyProfileContract.InteractorCallBack {
     public CoreHtsProfilePresenter(HtsProfileContract.View view, HtsProfileContract.Interactor interactor, MemberObject memberObject) {
         super(view, interactor, memberObject);

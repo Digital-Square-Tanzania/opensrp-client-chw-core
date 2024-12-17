@@ -14,6 +14,9 @@ import org.smartregister.chw.hts.activity.BaseHtsRegisterActivity;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.view.fragment.BaseRegisterFragment;
 
+/**
+ * Created by ilakozejumanne@gmail.com on 17/12/2024.
+ */
 public class CoreHtsRegisterActivity extends BaseHtsRegisterActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {

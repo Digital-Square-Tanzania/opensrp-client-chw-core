@@ -34,7 +34,7 @@ import java.util.Date;
 import timber.log.Timber;
 
 /**
- * Created by Billy on 20/09/2022.
+ * Created by ilakozejumanne@gmail.com on 17/12/2024.
  */
 public abstract class CoreHtsProfileActivity extends BaseHtsProfileActivity {
 

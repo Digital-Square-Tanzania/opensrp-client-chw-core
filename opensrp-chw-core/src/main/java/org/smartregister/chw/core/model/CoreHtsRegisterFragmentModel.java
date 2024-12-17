@@ -13,6 +13,9 @@ import org.smartregister.family.util.DBConstants;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Created by ilakozejumanne@gmail.com on 17/12/2024.
+ */
 public class CoreHtsRegisterFragmentModel extends BaseHtsRegisterFragmentModel {
     @NonNull
     @Override

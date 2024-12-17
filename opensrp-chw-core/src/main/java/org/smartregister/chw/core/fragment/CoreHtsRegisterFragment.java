@@ -29,6 +29,9 @@ import java.util.List;
 
 import timber.log.Timber;
 
+/**
+ * Created by ilakozejumanne@gmail.com on 17/12/2024.
+ */
 public class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
 
     private static final String DUE_FILTER_TAG = "PRESSED";
