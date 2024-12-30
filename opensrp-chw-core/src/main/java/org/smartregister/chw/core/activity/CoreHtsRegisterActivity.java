@@ -29,7 +29,7 @@ public class CoreHtsRegisterActivity extends BaseHtsRegisterActivity {
         super.onResumption();
         NavigationMenu menu = NavigationMenu.getInstance(this, null, null);
         if (menu != null) {
-            menu.getNavigationAdapter().setSelectedView(CoreConstants.DrawerMenu.KVP_PrEP);
+            menu.getNavigationAdapter().setSelectedView(CoreConstants.DrawerMenu.HTS);
         }
     }
 
