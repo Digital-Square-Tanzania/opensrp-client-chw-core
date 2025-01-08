@@ -184,6 +184,14 @@
         android:visible="false"
         android:title="@string/asrh_registration"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_hts_screening"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/hts_screening"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
