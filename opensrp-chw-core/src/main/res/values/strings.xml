@@ -843,6 +843,9 @@
     <!--   ASRH -->
     <string name="asrh_registration">AYSRH Enrollment</string>
 
+    <!--   HTS -->
+    <string name="hts_screening">HTS Screening</string>
+
 
 
 </resources>
