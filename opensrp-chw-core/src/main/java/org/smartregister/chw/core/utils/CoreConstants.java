@@ -1287,7 +1287,7 @@ public class CoreConstants {
 
         public static final String ADDO_LINKAGE_ACTIVITY = "ADDO_LINKAGE_ACTIVITY";
 
-        public static final String HTS_REGISTER_ACTIVITY = "HTS_REGISTER_ACTIVITY";
+        public static final String HIV_TESTING_SERVICES_REGISTER_ACTIVITY = "HIV_TESTING_SERVICES_REGISTER_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {

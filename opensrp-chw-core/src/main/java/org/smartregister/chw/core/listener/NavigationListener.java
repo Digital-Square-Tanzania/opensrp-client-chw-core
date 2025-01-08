@@ -147,7 +147,7 @@ public class NavigationListener implements View.OnClickListener {
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.ASRH_REGISTER_ACTIVITY));
                     break;
                 case CoreConstants.DrawerMenu.HTS:
-                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.HTS_REGISTER_ACTIVITY));
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.HIV_TESTING_SERVICES_REGISTER_ACTIVITY));
                     break;
                 default:
                     Utils.showShortToast(activity.getApplicationContext(), "Unspecified navigation action");
