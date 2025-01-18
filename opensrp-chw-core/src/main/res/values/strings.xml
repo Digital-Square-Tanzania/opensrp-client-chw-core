@@ -833,6 +833,11 @@
     <string name="menu_vmmc">VMMC</string>
     <string name="refer_to_addo">Linkage to Addo</string>
 
+    <!--    TB LEPROSY-->
+    <string name="tbleprosy_screening">TB/Leprosy Screening</string>
+    <string name="tbleprosy_screening_info">TB/Leprosy Screening Info</string>
+    <string name="tbleprosy_confirmation">TB/Leprosy Confirmation</string>
+    <string name="menu_tbleprosy">TB/Leprosy</string>
 
     <!--    GBV/VAC-->
     <string name="gbv_registration">GBV/VAC Registration</string>

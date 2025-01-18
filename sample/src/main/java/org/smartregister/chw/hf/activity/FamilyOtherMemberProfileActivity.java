@@ -83,6 +83,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startTbLeprosyScreening() {
+        //TODO implement start tb register for HF
+    }
+
+    @Override
     protected void startFpChangeMethod() {
         //TODO implement start fp change register for HF
     }
