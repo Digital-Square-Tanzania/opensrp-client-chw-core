@@ -16,28 +16,25 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.anc.util.DBConstants;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
-import org.smartregister.chw.core.model.CoreKvpRegisterFragmentModel;
 import org.smartregister.chw.core.model.CoreTbLeprosyRegisterFragmentModel;
-import org.smartregister.chw.core.provider.ChwTbLeprosyRegisterProvider;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.QueryBuilder;
 import org.smartregister.chw.core.utils.Utils;
-import org.smartregister.chw.kvp.presenter.BaseKvpRegisterFragmentPresenter;
+import org.smartregister.chw.tbleprosy.fragment.BaseTbLeprosyContactFragment;
 import org.smartregister.chw.tbleprosy.fragment.BaseTbLeprosyRegisterFragment;
+import org.smartregister.chw.tbleprosy.presenter.BaseTbLeprosyRegisterContactFragmentPresenter;
 import org.smartregister.chw.tbleprosy.presenter.BaseTbLeprosyRegisterFragmentPresenter;
 import org.smartregister.commonregistry.CommonRepository;
-import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import timber.log.Timber;
 
-public abstract class CoreTbLeprosyRegisterFragment extends BaseTbLeprosyRegisterFragment {
+public abstract class CoreTbLeprosyContactRegisterFragment extends BaseTbLeprosyContactFragment {
 
     private static final String DUE_FILTER_TAG = "PRESSED";
 
@@ -60,7 +57,7 @@ protected void initializePresenter() {
     if (getActivity() == null) {
         return;
     }
-    presenter = new BaseTbLeprosyRegisterFragmentPresenter(this, new CoreTbLeprosyRegisterFragmentModel(), null);
+    presenter = new BaseTbLeprosyRegisterContactFragmentPresenter(this, new CoreTbLeprosyRegisterFragmentModel(), null);
 }
 
     @Override

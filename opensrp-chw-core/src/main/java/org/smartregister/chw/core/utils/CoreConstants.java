@@ -236,7 +236,7 @@ public class CoreConstants {
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
         private static final String MALARIA_CONFIRMATION = "malaria_confirmation";
         public static final String VMMC_ENROLLMENT = "vmmc_enrollment";
-        public static final String TBLEPROSY_SCREENING = "tb_leprosy_screening";
+        public static final String TBLEPROSY_SCREENING = "tbleprosy_screening";
         private static final String ICCM_ENROLLMENT = "iccm_enrollment";
         private static final String MALARIA_FOLLOW_UP_VISIT_FORM = "malaria_follow_up_visit";
         private static final String WASH_CHECK = "wash_check";

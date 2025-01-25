@@ -11,7 +11,7 @@ import org.smartregister.chw.tbleprosy.activity.BaseTbLeprosyRegisterActivity;
 import org.smartregister.family.util.JsonFormUtils;
 
 /**
- * Created by Billy on 20/10/2021.
+ * Created by Chriss on 20/01/2025.
  */
 public abstract class CoreTbLeprosyRegisterActivity extends BaseTbLeprosyRegisterActivity {
 

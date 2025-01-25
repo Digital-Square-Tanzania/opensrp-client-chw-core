@@ -3,6 +3,7 @@ package org.smartregister.chw.core.sync;
 import static org.smartregister.chw.cecap.util.Constants.EVENT_TYPE.CECAP_HEALTH_EDUCATION_MOBILIZATION;
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_HEALTH_EDUCATION_MOBILIZATION;
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_MONTHLY_SOCIAL_MEDIA_REPORT;
+import static org.smartregister.chw.tbleprosy.util.Constants.EVENT_TYPE.TB_LEPROSY_MOBILIZATION;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -41,6 +42,7 @@ import org.smartregister.chw.lab.dao.LabDao;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.MalariaUtil;
 import org.smartregister.chw.sbc.dao.SbcDao;
+import org.smartregister.chw.tbleprosy.dao.TbLeprosyMobilizationDao;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -335,6 +337,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case CECAP_HEALTH_EDUCATION_MOBILIZATION:
                 processCecapMobilizationEvent(eventClient.getEvent());
                 break;
+            case TB_LEPROSY_MOBILIZATION:
+                processTbLeprosyMobilizationEvent(eventClient.getEvent());
+                break;
             case SBC_MONTHLY_SOCIAL_MEDIA_REPORT:
                 processSBCMonthlySocialMediaReportEvent(eventClient.getEvent());
                 break;
@@ -615,6 +620,26 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
             }
             HivstMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached, maleCondomsIssued, femaleCondomsIssued);
+        }
+    }
+
+    private void processTbLeprosyMobilizationEvent(Event event) {
+        List<Obs> mobilizationObs = event.getObs();
+        String mobilizationDate = null;
+        String femaleClientsReached = null;
+        String maleClientsReached = null;
+
+        if (!mobilizationObs.isEmpty()) {
+            for (Obs obs : mobilizationObs) {
+                if (org.smartregister.chw.tbleprosy.util.DBConstants.KEY.MOBILIZATION_DATE.equals(obs.getFormSubmissionField())) {
+                    mobilizationDate = (String) obs.getValue();
+                } else if (org.smartregister.chw.tbleprosy.util.DBConstants.KEY.FEMALE_CLIENTS_REACHED.equals(obs.getFormSubmissionField())) {
+                    femaleClientsReached = (String) obs.getValue();
+                } else if (org.smartregister.chw.tbleprosy.util.DBConstants.KEY.MALE_CLIENTS_REACHED.equals(obs.getFormSubmissionField())) {
+                    maleClientsReached = (String) obs.getValue();
+                }
+            }
+            TbLeprosyMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached);
         }
     }
 
