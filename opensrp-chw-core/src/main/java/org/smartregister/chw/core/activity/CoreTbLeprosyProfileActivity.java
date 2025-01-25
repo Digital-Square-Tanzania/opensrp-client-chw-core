@@ -35,7 +35,6 @@ import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.CoreReferralUtils;
 import org.smartregister.chw.core.utils.UpdateDetailsUtil;
 import org.smartregister.chw.tbleprosy.activity.BaseTbLeprosyProfileActivity;
-import org.smartregister.chw.tbleprosy.domain.MemberObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.AlertStatus;
 import org.smartregister.family.util.JsonFormUtils;
@@ -241,13 +240,13 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
 
         try {
             assert form != null;
-            startFormActivity(form, tbMemberObject);
+            startFormActivity(form);
         } catch (Exception e) {
             Timber.e(e);
         }
     }
 
-    public void startFormActivity(JSONObject jsonForm, MemberObject tbMemberObject) {
+    public void startFormActivity(JSONObject jsonForm) {
         Intent intent = org.smartregister.chw.core.utils.Utils.formActivityIntent(this, jsonForm.toString());
         startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
     }

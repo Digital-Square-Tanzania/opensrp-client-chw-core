@@ -30,12 +30,4 @@ public class CoreTbLeprosyMemberProfilePresenter extends BaseTbLeprosyProfilePre
         return null;
     }
 
-    public void startTbLeprosyReferral() {
-        try {
-            getView().startFormActivity((new FormUtils()).getFormJsonFromRepositoryOrAssets(((CoreTbLeprosyProfileActivity) getView()), CoreConstants.JSON_FORM.getTbLeprosyReferralForm()), tbMemberObject);
-        } catch (Exception e) {
-            Timber.e(e);
-        }
-    }
-
 }
