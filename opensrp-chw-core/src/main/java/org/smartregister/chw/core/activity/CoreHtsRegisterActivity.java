@@ -2,6 +2,7 @@ package org.smartregister.chw.core.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 
@@ -35,7 +36,12 @@ public class CoreHtsRegisterActivity extends BaseHtsRegisterActivity {
 
     @Override
     protected BaseRegisterFragment getRegisterFragment() {
-        return new CoreHtsRegisterFragment();
+        return new CoreHtsRegisterFragment() {
+            @Override
+            protected void startSampleRegistration(View view) {
+
+            }
+        };
     }
 
     @Override

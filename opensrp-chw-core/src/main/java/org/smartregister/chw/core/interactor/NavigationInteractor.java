@@ -439,7 +439,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlHts =
                         "SELECT count(*) " +
                                 "   from " + org.smartregister.chw.hts.util.Constants.TABLES.HTS_REGISTER + " p " +
-                                "              where p.is_closed is 0 AND does_the_client_still_want_to_test = 'yes' ";
+                                "              where p.is_closed is 0 AND (eligibility_for_testing ='true' OR does_the_client_still_want_to_test = 'yes') ";
                 return NavigationDao.getQueryCount(sqlHts);
 
             case org.smartregister.chw.hiv.util.Constants.Tables.HIV_INDEX:

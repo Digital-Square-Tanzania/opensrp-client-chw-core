@@ -32,12 +32,9 @@ import timber.log.Timber;
 /**
  * Created by ilakozejumanne@gmail.com on 17/12/2024.
  */
-public class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
-
-    private static final String DUE_FILTER_TAG = "PRESSED";
+public abstract class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
     private View view;
     private View dueOnlyLayout;
-    private boolean dueFilterActive = false;
 
 
     @Override
@@ -83,21 +80,23 @@ public class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
         filterSortLayout.setVisibility(View.GONE);
 
         dueOnlyLayout = view.findViewById(R.id.due_only_layout);
-        dueOnlyLayout.setVisibility(View.GONE);
+        dueOnlyLayout.setVisibility(View.VISIBLE);
         dueOnlyLayout.setOnClickListener(registerActionHandler);
+
+        TextView dueOnlyTextView = view.findViewById(R.id.due_only_text_view);
+        dueOnlyTextView.setText("Sample Registration");
+        dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_white_24, 0);
+        dueOnlyTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startSampleRegistration(view);
+            }
+        });
+
         if (getSearchView() != null) {
             getSearchView().setBackgroundResource(org.smartregister.family.R.color.white);
             getSearchView().setCompoundDrawablesWithIntrinsicBounds(org.smartregister.family.R.drawable.ic_action_search, 0, 0, 0);
             getSearchView().setTextColor(getResources().getColor(R.color.text_black));
-        }
-    }
-
-    @Override
-    protected void onResumption() {
-        if (dueFilterActive && dueOnlyLayout != null) {
-            dueFilter(dueOnlyLayout);
-        } else {
-            super.onResumption();
         }
     }
 
@@ -212,48 +211,8 @@ public class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
     }
 
 
-    private void switchViews(View dueOnlyLayout, boolean isPress) {
-        TextView dueOnlyTextView = dueOnlyLayout.findViewById(R.id.due_only_text_view);
-        if (isPress) {
-            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_on, 0);
-        } else {
-            dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_due_filter_off, 0);
-
-        }
-    }
-
-    protected void toggleFilterSelection(View dueOnlyLayout) {
-        if (dueOnlyLayout != null) {
-            if (dueOnlyLayout.getTag() == null) {
-                dueFilterActive = true;
-                dueFilter(dueOnlyLayout);
-            } else if (dueOnlyLayout.getTag().toString().equals(DUE_FILTER_TAG)) {
-                dueFilterActive = false;
-                normalFilter(dueOnlyLayout);
-            }
-        }
-    }
-
     protected String searchText() {
         return (getSearchView() == null) ? "" : getSearchView().getText().toString();
     }
-
-    protected void dueFilter(View dueOnlyLayout) {
-        filterDue(searchText(), "", presenter().getDueFilterCondition());
-        dueOnlyLayout.setTag(DUE_FILTER_TAG);
-        switchViews(dueOnlyLayout, true);
-    }
-
-    protected void normalFilter(View dueOnlyLayout) {
-        filterDue(searchText(), "", presenter().getMainCondition());
-        dueOnlyLayout.setTag(null);
-        switchViews(dueOnlyLayout, false);
-    }
-
-    protected void filterDue(String filterString, String joinTableString, String mainConditionString) {
-        filters = filterString;
-        joinTable = joinTableString;
-        mainCondition = mainConditionString;
-        filterandSortExecute(countBundle());
-    }
+    protected abstract void startSampleRegistration(View view);
 }
