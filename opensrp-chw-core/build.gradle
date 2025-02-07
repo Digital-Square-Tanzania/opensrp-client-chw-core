@@ -31,6 +31,7 @@ allprojects {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
         mavenLocal()
+        mavenCentral()
 
         maven {
 
@@ -232,6 +233,35 @@ allprojects {
             }
         }
 
+        maven {
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-hts")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
+            url 'https://maven.wafour.com/repository'
+        }
+
+        // Mapbox Maven repository
+        maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                // Do not change the username below.
+                // This should always be `mapbox` (not your username).
+                username = 'mapbox'
+                // Use the secret token you stored in gradle.properties as the password
+                password = project.properties['MAPBOX_DOWNLOADS_TOKEN']
+            }
+        }
     }
 }
 
@@ -260,6 +290,22 @@ android {
             }
         }
         project.archivesBaseName = "opensrp-client-chw-core"
+
+        if (project.rootProject.file("local.properties").exists()) {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file("local.properties").newDataInputStream())
+            if (properties != null &&
+                    properties.containsKey("mapbox.sdk.token")) {
+                buildConfigField "String", "MAPBOX_SDK_ACCESS_TOKEN", properties["mapbox.sdk.token"]
+            } else {
+                println("Mapbox key config variables is not set in your local.properties")
+                buildConfigField "String", "MAPBOX_SDK_ACCESS_TOKEN", "\"sample_key\""
+            }
+
+        } else {
+            println("local.properties does not exist")
+            buildConfigField "String", "MAPBOX_SDK_ACCESS_TOKEN", "\"sample_key\""
+        }
     }
 
     android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
@@ -547,6 +593,9 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
         exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: "org.koin", module: 'koin-android'
+        exclude group: "org.koin", module: 'koin-androidx-scope'
+        exclude group: "org.koin", module: 'koin-androidx-viewmodel'
     }
 
     api('org.smartregister:opensrp-client-chw-tb:1.0.0-SNAPSHOT@aar') {
@@ -556,6 +605,9 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.nerdstone', module: 'neat-form-core'
+        exclude group: "org.koin", module: "koin-android"
+        exclude group: "org.koin", module: "koin-androidx-scope"
+        exclude group: "org.koin", module: "koin-androidx-viewmodel"
     }
 
     api('org.smartregister:opensrp-chw-cdp:1.0.4-SNAPSHOT@aar') {

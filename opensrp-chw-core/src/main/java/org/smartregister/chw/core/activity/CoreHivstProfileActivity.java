@@ -230,6 +230,7 @@ public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity 
             try {
                 if (jsonObject != null) {
                     UpdateDetailsUtil.startUpdateClientDetailsActivity(jsonObject, this);
+                    return;
                 }
             } catch (Exception e) {
                 Timber.e(e);
