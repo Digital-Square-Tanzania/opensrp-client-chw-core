@@ -934,6 +934,7 @@ public class CoreConstants {
         public static final String HEI = "ec_hei";
         public static final String LABOUR_AND_DELIVERY = "ec_ld_confirmation";
         public static final String LTFU_REFERRALS = "ec_ltfu_referrals";
+        public static final String HPS_MEMBERS = "ec_hps_client_register";
     }
 
     public static final class INTENT_KEY {
@@ -1015,6 +1016,7 @@ public class CoreConstants {
         public static final String LAB = "Lab";
 
         public static final String HTS = "HTS";
+        public static final String HPS = "HPS";
     }
 
     public static final class RULE_FILE {
@@ -1288,6 +1290,8 @@ public class CoreConstants {
         public static final String ADDO_LINKAGE_ACTIVITY = "ADDO_LINKAGE_ACTIVITY";
 
         public static final String HIV_TESTING_SERVICES_REGISTER_ACTIVITY = "HIV_TESTING_SERVICES_REGISTER_ACTIVITY";
+
+        public static final String HPS_REGISTER_ACTIVITY = "HPS_REGISTER_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {
@@ -1362,6 +1366,8 @@ public class CoreConstants {
         public static final String CECAP = "Reproductive Cancers";
 
         public static final String AYSRH = "AYSRH";
+
+        public static final String HPS = "HPS";
 
     }
 

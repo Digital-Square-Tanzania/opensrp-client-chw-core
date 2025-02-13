@@ -422,19 +422,6 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "              where m.date_removed is null and p.is_closed = '0')";
                 return NavigationDao.getQueryCount(sqlCbhs);
 
-//            case CoreConstants.TABLE_NAME.HTS_MEMBERS:
-//                String sqlHts =
-//                        "SELECT SUM(c)\n" +
-//                                "FROM (\n" +
-//                                "              select count(*) as c " +
-//                                "              from " + CoreConstants.TABLE_NAME.HTS_MEMBERS + " p " +
-//                                "              inner join ec_family_member m on p.base_entity_id = m.base_entity_id COLLATE NOCASE " +
-//                                "              inner join ec_family f on f.base_entity_id = m.relational_id COLLATE NOCASE " +
-//                                "              where m.date_removed is null and p.is_closed = '0' and p.ctc_number is null and p.chw_referral_service = '" + CoreConstants.TASKS_FOCUS.CONVENTIONAL_HIV_TEST + "' and " +
-//                                "              p.client_hiv_status_after_testing IS NULL " +
-//                                "              and p.base_entity_id NOT IN (SELECT base_entity_id FROM " + org.smartregister.chw.hiv.util.Constants.Tables.HIV_INDEX_HF + " ))";
-//                return NavigationDao.getQueryCount(sqlHts);
-
             case CoreConstants.TABLE_NAME.HTS_MEMBERS:
                 String sqlHts =
                         "SELECT count(*) " +
@@ -592,7 +579,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlAsrh =
                         "SELECT count(*) " +
                                 "   from " + org.smartregister.chw.asrh.util.Constants.TABLES.ASRH_REGISTER + " p " +
-                                "   inner join ec_family_member ef on ef.base_entity_id on p.base_entity_id " +
+                                "   inner join ec_family_member ef on ef.base_entity_id = p.base_entity_id " +
                                 "   where p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlAsrh);
             case org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS:
@@ -601,6 +588,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS + " p " +
                                 "              where p.patient_id is not null and p.results is not null and p.date_results_provided_to_client is null and p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlLab);
+            case CoreConstants.TABLE_NAME.HPS_MEMBERS:
+                String sqlHps =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.hps.util.Constants.TABLES.HPS_CLIENT_REGISTER + " p " +
+                                "              where p.is_closed is 0";
+                return NavigationDao.getQueryCount(sqlHps);
             default:
                 return NavigationDao.getTableCount(tableName);
         }
