@@ -18,7 +18,7 @@ import org.smartregister.chw.core.model.CoreHtsRegisterFragmentModel;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.QueryBuilder;
 import org.smartregister.chw.core.utils.Utils;
-import org.smartregister.chw.hts.fragment.BaseHtsRegisterFragment;
+import org.smartregister.chw.hts.fragment.BaseHtsSampleRegisterFragment;
 import org.smartregister.chw.hts.presenter.BaseHtsRegisterFragmentPresenter;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -32,7 +32,7 @@ import timber.log.Timber;
 /**
  * Created by ilakozejumanne@gmail.com on 17/12/2024.
  */
-public abstract class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
+public abstract class CoreHtsSampleRegisterFragment extends BaseHtsSampleRegisterFragment {
     private View view;
     private View dueOnlyLayout;
 
@@ -80,8 +80,18 @@ public abstract class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
         filterSortLayout.setVisibility(View.GONE);
 
         dueOnlyLayout = view.findViewById(R.id.due_only_layout);
-        dueOnlyLayout.setVisibility(View.GONE);
+        dueOnlyLayout.setVisibility(View.VISIBLE);
         dueOnlyLayout.setOnClickListener(registerActionHandler);
+
+        TextView dueOnlyTextView = view.findViewById(R.id.due_only_text_view);
+        dueOnlyTextView.setText("Sample Registration");
+        dueOnlyTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_add_white_24, 0);
+        dueOnlyTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startSampleRegistration(view);
+            }
+        });
 
         if (getSearchView() != null) {
             getSearchView().setBackgroundResource(org.smartregister.family.R.color.white);
@@ -119,14 +129,6 @@ public abstract class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
 
         String query = "";
         StringBuilder customFilter = new StringBuilder();
-        if (StringUtils.isNotBlank(filters)) {
-            customFilter.append(MessageFormat.format(" and ( {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.FIRST_NAME, filters));
-            customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.LAST_NAME, filters));
-            customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.MIDDLE_NAME, filters));
-            customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ) ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.UNIQUE_ID, filters));
-
-        }
-
         try {
             if (isValidFilterForFts(commonRepository())) {
 
@@ -154,9 +156,7 @@ public abstract class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
         Cursor c = null;
         try {
 
-            String query = "select count(*) from " + presenter().getMainTable() + " inner join " + CoreConstants.TABLE_NAME.FAMILY_MEMBER +
-                    " on " + presenter().getMainTable() + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " +
-                    CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID +
+            String query = "select count(*) from " + presenter().getMainTable() +
                     " where " + presenter().getMainCondition();
 
             if (StringUtils.isNotBlank(filters)) {
@@ -204,5 +204,6 @@ public abstract class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
     protected String searchText() {
         return (getSearchView() == null) ? "" : getSearchView().getText().toString();
     }
+
     protected abstract void startSampleRegistration(View view);
 }
