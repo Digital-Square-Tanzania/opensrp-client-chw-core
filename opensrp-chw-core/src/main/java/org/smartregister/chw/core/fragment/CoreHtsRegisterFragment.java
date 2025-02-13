@@ -34,7 +34,6 @@ import timber.log.Timber;
  */
 public abstract class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
     private View view;
-    private View dueOnlyLayout;
 
 
     @Override
@@ -79,7 +78,7 @@ public abstract class CoreHtsRegisterFragment extends BaseHtsRegisterFragment {
         View filterSortLayout = view.findViewById(R.id.filter_sort_layout);
         filterSortLayout.setVisibility(View.GONE);
 
-        dueOnlyLayout = view.findViewById(R.id.due_only_layout);
+        View dueOnlyLayout = view.findViewById(R.id.due_only_layout);
         dueOnlyLayout.setVisibility(View.GONE);
         dueOnlyLayout.setOnClickListener(registerActionHandler);
 

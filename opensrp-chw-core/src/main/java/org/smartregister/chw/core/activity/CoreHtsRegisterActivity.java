@@ -39,7 +39,7 @@ public class CoreHtsRegisterActivity extends BaseHtsRegisterActivity {
         return new CoreHtsRegisterFragment() {
             @Override
             protected void startSampleRegistration(View view) {
-
+                //To be implemented
             }
         };
     }
