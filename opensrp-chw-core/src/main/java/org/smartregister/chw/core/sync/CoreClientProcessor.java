@@ -36,6 +36,7 @@ import org.smartregister.chw.core.utils.StockUsageReportUtils;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
+import org.smartregister.chw.hts.dao.HtsDao;
 import org.smartregister.chw.lab.LabLibrary;
 import org.smartregister.chw.lab.dao.LabDao;
 import org.smartregister.chw.malaria.util.Constants;
@@ -341,6 +342,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.hivst.util.Constants.EVENT_TYPE.HIVST_MOBILIZATION:
                 processMobilizationEvent(eventClient.getEvent());
                 break;
+            case org.smartregister.chw.hts.util.Constants.EVENT_TYPE.SAMPLE_TESTING:
+                processHtsSamplesEvent(eventClient.getEvent());
+                break;
             case CoreConstants.EventType.ANC_PREGNANCY_CONFIRMATION:
             case CoreConstants.EventType.ANC_REGISTRATION:
             case CoreConstants.EventType.ANC_FOLLOWUP_CLIENT_REGISTRATION:
@@ -615,6 +619,34 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
             }
             HivstMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached, maleCondomsIssued, femaleCondomsIssued);
+        }
+    }
+
+    private void processHtsSamplesEvent(Event event) {
+        List<Obs> htsSamplesObs = event.getObs();
+
+        String sampleType = null;
+        String iqcType = null;
+        String pitcTestingPoint = null;
+        Long lastInteractedWith = null;
+
+        if (!htsSamplesObs.isEmpty()) {
+            for (Obs obs : htsSamplesObs) {
+                if (org.smartregister.chw.hts.util.DBConstants.KEY.SAMPLE_TYPE.equals(obs.getFormSubmissionField())) {
+                    sampleType = (String) obs.getValue();
+                } else if (org.smartregister.chw.hts.util.DBConstants.KEY.IQC_TYPE.equals(obs.getFormSubmissionField())) {
+                    iqcType = (String) obs.getValue();
+                } else if (org.smartregister.chw.hts.util.DBConstants.KEY.PITC_TESTING_POINT.equals(obs.getFormSubmissionField())) {
+                    pitcTestingPoint = (String) obs.getValue();
+                } else if (org.smartregister.chw.hts.util.DBConstants.KEY.LAST_INTERACTED_WITH.equals(obs.getFormSubmissionField())) {
+                    try {
+                        lastInteractedWith = Long.parseLong((String) obs.getValue());
+                    } catch (Exception e) {
+                        Timber.e(e);
+                    }
+                }
+            }
+            HtsDao.saveSampleRegistration(event.getBaseEntityId(), sampleType, iqcType, pitcTestingPoint, lastInteractedWith);
         }
     }
 

@@ -144,12 +144,17 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
 
     @Override
     protected void startCancerPreventiveServicesRegistration() {
-        //TODO implement start anc register for HF
+        //TODO implement start register for HF
     }
 
     @Override
     protected void startAsrhRegistration() {
-        //TODO implement start anc register for HF
+        //TODO implement start register for HF
+    }
+
+    @Override
+    protected void startHtsScreening() {
+        //TODO implement start register for HF
     }
 
     @Override
@@ -210,6 +215,16 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    public void showProgressDialog(int saveMessageStringIdentifier) {
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
+    }
+
+    @Override
     public void updateHasPhone(boolean hasPhone) {
         super.updateHasPhone(hasPhone);
         if (!hasPhone) {
@@ -257,5 +272,10 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
             menu.findItem(R.id.action_pregnancy_confirmation).setVisible(true);
             menu.findItem(R.id.action_fp_initiation).setVisible(true);
         }
+    }
+
+    @Override
+    public String getString(int i) {
+        return "";
     }
 }

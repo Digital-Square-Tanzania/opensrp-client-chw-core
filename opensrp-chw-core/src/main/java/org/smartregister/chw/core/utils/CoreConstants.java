@@ -1013,6 +1013,8 @@ public class CoreConstants {
         public static final String SBC_MONTHLY_SOCIAL_MEDIA_REPORT = "SBC MONTHLY SOCIAL MEDIA REPORT";
 
         public static final String LAB = "Lab";
+
+        public static final String HTS = "HTS";
     }
 
     public static final class RULE_FILE {
@@ -1284,6 +1286,8 @@ public class CoreConstants {
         public static final String LAB_REGISTER_ACTIVITY = "LAB_REGISTER_ACTIVITY";
 
         public static final String ADDO_LINKAGE_ACTIVITY = "ADDO_LINKAGE_ACTIVITY";
+
+        public static final String HIV_TESTING_SERVICES_REGISTER_ACTIVITY = "HIV_TESTING_SERVICES_REGISTER_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {
