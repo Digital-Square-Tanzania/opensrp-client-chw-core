@@ -199,6 +199,7 @@ public abstract class CorePmtctProfileActivity extends BasePmtctProfileActivity 
             try {
                 if (jsonObject != null) {
                     UpdateDetailsUtil.startUpdateClientDetailsActivity(jsonObject, this);
+                    return;
                 }
             } catch (Exception e) {
                 Timber.e(e);

@@ -465,7 +465,7 @@ dependencies {
     implementation 'com.ibm.fhir:fhir-model:4.7.0'
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-    api('org.smartregister:opensrp-client-core:1.16.8-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-core:1.16.9-NACP-SNAPSHOT@aar') {
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -474,7 +474,10 @@ dependencies {
         exclude group: 'com.rengwuxian.materialedittext', module: 'library'
         exclude group: 'com.ibm.fhir', module: 'fhir-model'
         exclude group: 'id.zelory', module: 'compressor'
+        exclude group: 'androidx.work', module: 'work-runtime'
     }
+
+    implementation "androidx.work:work-runtime:2.8.1"
 
     implementation 'com.github.rey5137:material:1.2.5'
     implementation 'androidx.appcompat:appcompat:1.2.0'
