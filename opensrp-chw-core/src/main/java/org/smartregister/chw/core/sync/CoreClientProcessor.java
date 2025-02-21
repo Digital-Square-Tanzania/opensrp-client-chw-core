@@ -36,6 +36,7 @@ import org.smartregister.chw.core.utils.StockUsageReportUtils;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
+import org.smartregister.chw.hps.dao.HpsDao;
 import org.smartregister.chw.hts.dao.HtsDao;
 import org.smartregister.chw.lab.LabLibrary;
 import org.smartregister.chw.lab.dao.LabDao;
@@ -342,6 +343,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.hivst.util.Constants.EVENT_TYPE.HIVST_MOBILIZATION:
                 processMobilizationEvent(eventClient.getEvent());
                 break;
+            case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_MOBILIZATION:
+                processHpsMobilizationEvent(eventClient.getEvent());
+                break;
+            case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_DEATH_REGISTRATION:
+                processHpsDeathRegisterEvent(eventClient.getEvent());
+                break;
             case org.smartregister.chw.hts.util.Constants.EVENT_TYPE.SAMPLE_TESTING:
                 processHtsSamplesEvent(eventClient.getEvent());
                 break;
@@ -604,7 +611,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String femaleCondomsIssued = null;
         String maleCondomsIssued = null;
 
-        if (mobilizationObs.size() > 0) {
+        if (!mobilizationObs.isEmpty()) {
             for (Obs obs : mobilizationObs) {
                 if (org.smartregister.chw.hivst.util.DBConstants.KEY.MOBILIZATION_DATE.equals(obs.getFormSubmissionField())) {
                     mobilizationDate = (String) obs.getValue();
@@ -621,6 +628,132 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             HivstMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached, maleCondomsIssued, femaleCondomsIssued);
         }
     }
+
+    private void processHpsMobilizationEvent(Event event) {
+        List<Obs> mobilizationObs = event.getObs();
+
+        String dateOfGathering = null;
+        String methodOfEducationAndAwarenessUsed = null;
+        String areaWhereMobilizationTookPlace = null;
+        String numberOfFemalesWhoAttended = null;
+        String numberOfMalesWhoAttended = null;
+        String wasEducationProvided = null;
+        String educationProvided = null;
+        String informationEducationAndCommunicationMaterial = null;
+        String brochureMaterials = null;
+        String numberOfBrochuresProvided = null;
+        String posterMaterials = null;
+        String numberOfPostersProvided = null;
+        String leafletMaterials = null;
+        String numberOfLeafletProvided = null;
+        String otherIecMaterials = null;
+        String numberOfOtherIecProvided = null;
+
+        // Assuming event.getVersion() returns a long representing last_interacted_with.
+        long lastInteractedWith = event.getVersion();
+
+        if (mobilizationObs != null && !mobilizationObs.isEmpty()) {
+            for (Obs obs : mobilizationObs) {
+                String field = obs.getFormSubmissionField();
+                if (org.smartregister.chw.hps.util.DBConstants.KEY.DATE_OF_GATHERING.equals(field)) {
+                    dateOfGathering = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.THE_METHOD_OF_EDUCATION_AND_AWARENESS_USED.equals(field)) {
+                    methodOfEducationAndAwarenessUsed = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AREA_WHERE_MOBILIZATION_TAKES_PLACE.equals(field)) {
+                    areaWhereMobilizationTookPlace = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALES_WHO_ATTENDED.equals(field)) {
+                    numberOfFemalesWhoAttended = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALES_WHO_ATTENDED.equals(field)) {
+                    numberOfMalesWhoAttended = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.WAS_EDUCATION_PROVIDED.equals(field)) {
+                    wasEducationProvided = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.EDUCATION_PROVIDED.equals(field)) {
+                    educationProvided =  obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.INFORMATION_EDUCATION_AND_COMMUNICATION_MATERIAL.equals(field)) {
+                    informationEducationAndCommunicationMaterial =  obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.BROCHURE_MATERIALS.equals(field)) {
+                    brochureMaterials = obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_BROCHURES_PROVIDED.equals(field)) {
+                    numberOfBrochuresProvided = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.POSTER_MATERIALS.equals(field)) {
+                    posterMaterials =  obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_POSTERS_PROVIDED.equals(field)) {
+                    numberOfPostersProvided = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.LEAFLET_MATERIALS.equals(field)) {
+                    leafletMaterials = obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LEAFLET_PROVIDED.equals(field)) {
+                    numberOfLeafletProvided = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.OTHER_IEC_MATERIALS.equals(field)) {
+                    otherIecMaterials =  obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_OTHER_IEC_PROVIDED.equals(field)) {
+                    numberOfOtherIecProvided = (String) obs.getValue();
+                }
+            }
+
+            // Call the function to save the mobilization data.
+            HpsDao.saveHpsMobilization(event.getBaseEntityId(),
+                    dateOfGathering,
+                    methodOfEducationAndAwarenessUsed,
+                    areaWhereMobilizationTookPlace,
+                    numberOfFemalesWhoAttended,
+                    numberOfMalesWhoAttended,
+                    wasEducationProvided,
+                    educationProvided,
+                    informationEducationAndCommunicationMaterial,
+                    brochureMaterials,
+                    numberOfBrochuresProvided,
+                    posterMaterials,
+                    numberOfPostersProvided,
+                    leafletMaterials,
+                    numberOfLeafletProvided,
+                    otherIecMaterials,
+                    numberOfOtherIecProvided,
+                    lastInteractedWith);
+        }
+    }
+
+    private void processHpsDeathRegisterEvent(Event event) {
+        List<Obs> deathObs = event.getObs();
+
+        String dod = null;
+        String firstName = null;
+        String middleName = null;
+        String lastName = null;
+        String dob = null;
+        String sex = null;
+        String causeOfDeath = null;
+        String causeOfDeathSpecify = null;
+
+        // Assuming event.getVersion() returns a long representing last_interacted_with.
+        long lastInteractedWith = event.getVersion();
+
+        if (deathObs != null && !deathObs.isEmpty()) {
+            for (Obs obs : deathObs) {
+                String field = obs.getFormSubmissionField();
+                if (DBConstants.KEY.DOD.equals(field)) {
+                    dod = (String) obs.getValue();
+                } else if (DBConstants.KEY.FIRST_NAME.equals(field)) {
+                    firstName = (String) obs.getValue();
+                } else if (DBConstants.KEY.MIDDLE_NAME.equals(field)) {
+                    middleName = (String) obs.getValue();
+                } else if (DBConstants.KEY.LAST_NAME.equals(field)) {
+                    lastName = (String) obs.getValue();
+                } else if (DBConstants.KEY.DOB.equals(field)) {
+                    dob = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.SEX.equals(field)) {
+                    sex = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.CAUSE_OF_DEATH.equals(field)) {
+                    causeOfDeath = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.CAUSE_OF_DEATH_SPECIFY.equals(field)) {
+                    causeOfDeathSpecify = (String) obs.getValue();
+                }
+            }
+            // Use formSubmissionId as the base_entity_id for the death register
+            HpsDao.saveHpsDeathRegister(event.getBaseEntityId(), dod, firstName, middleName, lastName, dob, sex, causeOfDeath, causeOfDeathSpecify, lastInteractedWith);
+        }
+    }
+
+
 
     private void processHtsSamplesEvent(Event event) {
         List<Obs> htsSamplesObs = event.getObs();
