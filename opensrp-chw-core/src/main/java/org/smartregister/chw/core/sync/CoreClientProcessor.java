@@ -657,7 +657,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 String field = obs.getFormSubmissionField();
                 if (org.smartregister.chw.hps.util.DBConstants.KEY.DATE_OF_GATHERING.equals(field)) {
                     dateOfGathering = (String) obs.getValue();
-                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.THE_METHOD_OF_EDUCATION_AND_AWARENESS_USED.equals(field)) {
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.METHOD_OF_EDUCATION_AND_AWARENESS_USED.equals(field)) {
                     methodOfEducationAndAwarenessUsed = (String) obs.getValue();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AREA_WHERE_MOBILIZATION_TAKES_PLACE.equals(field)) {
                     areaWhereMobilizationTookPlace = (String) obs.getValue();
