@@ -175,6 +175,7 @@ public abstract class CoreHivIndexContactProfileActivity extends BaseIndexContac
             try {
                 if (jsonObject != null) {
                     UpdateDetailsUtil.startUpdateClientDetailsActivity(jsonObject, this);
+                    return;
                 }
             } catch (Exception e) {
                 Timber.e(e);
