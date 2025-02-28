@@ -934,6 +934,7 @@ public class CoreConstants {
         public static final String HEI = "ec_hei";
         public static final String LABOUR_AND_DELIVERY = "ec_ld_confirmation";
         public static final String LTFU_REFERRALS = "ec_ltfu_referrals";
+        public static final String ADDO_LINKAGE = "ec_addo_linkage";
         public static final String HPS_MEMBERS = "ec_hps_client_register";
     }
 

@@ -23,11 +23,11 @@
     <string name="action_log_out">Kutoka kwenye mfumo</string>
 
     <!-- Navigation Strings -->
-    <string name="action_start_sync">Sync imeanza</string>
-    <string name="action_sync_failed">Sync imeshindikana</string>
+    <string name="action_start_sync">Uoanishaji wa taarifa umeanza</string>
+    <string name="action_sync_failed">Uoanishaji wa taarifa umeshindikana</string>
     <string name="nav_registers">Moduli</string>
     <string name="nav_logout_as">Toka kwenye mfumo kama</string>
-    <string name="nav_sync">Sync</string>
+    <string name="nav_sync">Oanisha</string>
     <string name="nav_last">Mwisho:</string>
     <string name="nav_last_sync_time">HH:mm a , MMM DD</string>
     <string name="all_registers">Rejesta Zote</string>

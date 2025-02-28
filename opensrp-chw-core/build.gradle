@@ -276,7 +276,7 @@ allprojects {
 
 android {
     useLibrary 'org.apache.http.legacy'
-    compileSdkVersion 29
+    compileSdkVersion 33
     buildToolsVersion androidBuildToolsVersion
 
     defaultPublishConfig !isReleaseBuild() ? "debug" : "release"
@@ -579,7 +579,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'id.zelory', module: 'compressor'
     }
-    api('org.smartregister:opensrp-client-chw-referral:1.3.15-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-referral:1.3.16-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
