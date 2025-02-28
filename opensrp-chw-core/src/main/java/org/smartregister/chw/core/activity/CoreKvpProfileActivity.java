@@ -127,6 +127,7 @@ public abstract class CoreKvpProfileActivity extends BaseKvpProfileActivity {
             try {
                 if (jsonObject != null) {
                     UpdateDetailsUtil.startUpdateClientDetailsActivity(jsonObject, this);
+                    return;
                 }
             } catch (Exception e) {
                 Timber.e(e);
