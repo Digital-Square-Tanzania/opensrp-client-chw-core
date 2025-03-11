@@ -592,7 +592,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlHps =
                         "SELECT count(*) " +
                                 "   from " + org.smartregister.chw.hps.util.Constants.TABLES.HPS_CLIENT_REGISTER + " p " +
-                                "              where p.is_closed is 0";
+                                "              where p.is_closed is 0 AND does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' ";
                 return NavigationDao.getQueryCount(sqlHps);
             default:
                 return NavigationDao.getTableCount(tableName);
