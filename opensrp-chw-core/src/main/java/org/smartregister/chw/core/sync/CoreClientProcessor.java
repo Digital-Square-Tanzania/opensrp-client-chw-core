@@ -762,187 +762,187 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         // Declare variables for all fields defined in HpsAnnualCensusRegisterModel
         String year = null;
         String selectAgeGroup = null;
-        Integer numberOfMaleByAgeGroupUnder1 = null;
-        Integer numberOfFemaleByAgeGroupUnder1 = null;
-        Integer numberOfMaleByAgeGroup1_4 = null;
-        Integer numberOfFemaleByAgeGroup1_4 = null;
-        Integer numberOfMaleByAgeGroup5_14 = null;
-        Integer numberOfFemaleByAgeGroup5_14 = null;
-        Integer numberOfMaleByAgeGroup15_49 = null;
-        Integer numberOfFemaleByAgeGroup15_49 = null;
-        Integer numberOfMaleByAgeGroup50_59 = null;
-        Integer numberOfFemaleByAgeGroup50_59 = null;
-        Integer numberOfMaleByAgeGroup60Plus = null;
-        Integer numberOfFemaleByAgeGroup60Plus = null;
-        Integer numberOfHouseHoldWithRoadAccess = null;
-        Integer numberOfHouseHoldsWithAtLeastOneLandlineOrMobilePhone = null;
-        Integer numberOfHouseHoldWithBasicNutritionSourceVegetable = null;
-        Integer numberOfHouseHoldWithBasicNutritionSourceFruitTrees = null;
-        Integer numberOfHouseHoldWithBasicNutritionSourceDomesticAnimal = null;
+        String numberOfMaleByAgeGroupUnder1 = null;
+        String numberOfFemaleByAgeGroupUnder1 = null;
+        String numberOfMaleByAgeGroup1_4 = null;
+        String numberOfFemaleByAgeGroup1_4 = null;
+        String numberOfMaleByAgeGroup5_14 = null;
+        String numberOfFemaleByAgeGroup5_14 = null;
+        String numberOfMaleByAgeGroup15_49 = null;
+        String numberOfFemaleByAgeGroup15_49 = null;
+        String numberOfMaleByAgeGroup50_59 = null;
+        String numberOfFemaleByAgeGroup50_59 = null;
+        String numberOfMaleByAgeGroup60Plus = null;
+        String numberOfFemaleByAgeGroup60Plus = null;
+        String numberOfHouseHoldWithRoadAccess = null;
+        String numberOfHouseHoldsWithAtLeastOneLandlineOrMobilePhone = null;
+        String numberOfHouseHoldWithBasicNutritionSourceVegetable = null;
+        String numberOfHouseHoldWithBasicNutritionSourceFruitTrees = null;
+        String numberOfHouseHoldWithBasicNutritionSourceDomesticAnimal = null;
         String selectCentersCategory = null;
-        Integer numberOfPreSchoolsGovernment = null;
-        Integer numberOfPrimarySchoolsGovernment = null;
-        Integer numberOfSecondarySchoolsGovernment = null;
-        Integer numberOfUniversitiesGovernment = null;
-        Integer numberOfSpecialNeedsSchoolsGovernment = null;
-        Integer numberOfDispensaryGovernment = null;
-        Integer numberOfHealthCentersGovernment = null;
-        Integer numberOfHospitalGovernment = null;
-        Integer numberOfSpecialClinicsGovernment = null;
-        Integer numberOfLaboratoryGovernment = null;
-        Integer numberOfPharmacyGovernment = null;
-        Integer numberOfADDOGovernment = null;
-        Integer numberOfMaternityHomeGovernment = null;
-        Integer numberOfOrphanCareCentersGovernment = null;
-        Integer numberOfCentersForChildrenWithDisabilitiesGovernment = null;
-        Integer numberOfCbecdcRehabilitationCentreGovernment = null;
-        Integer numberOfDayCareCentersGovernment = null;
-        Integer numberOfElderlyCareCentersGovernment = null;
-        Integer numberOfPreSchoolsFaithBasedOrganisation = null;
-        Integer numberOfPrimarySchoolsFaithBasedOrganisation = null;
-        Integer numberOfSecondarySchoolsFaithBasedOrganisation = null;
-        Integer numberOfUniversitiesFaithBasedOrganisation = null;
-        Integer numberOfSpecialNeedsSchoolsFaithBasedOrganisation = null;
-        Integer numberOfDispensaryFaithBasedOrganisation = null;
-        Integer numberOfHealthCentersFaithBasedOrganisation = null;
-        Integer numberOfHospitalFaithBasedOrganisation = null;
-        Integer numberOfSpecialClinicsFaithBasedOrganisation = null;
-        Integer numberOfLaboratoryFaithBasedOrganisation = null;
-        Integer numberOfPharmacyFaithBasedOrganisation = null;
-        Integer numberOfADDOFaithBasedOrganisation = null;
-        Integer numberOfMaternityHomeFaithBasedOrganisation = null;
-        Integer numberOfOrphanCareCentersFaithBasedOrganisation = null;
-        Integer numberOfCentersForChildrenWithDisabilitiesFaithBasedOrganisation = null;
-        Integer numberOfCbecdcRehabilitationCentreFaithBasedOrganisation = null;
-        Integer numberOfDayCareCentersFaithBasedOrganisation = null;
-        Integer numberOfElderlyCareCentersFaithBasedOrganisation = null;
-        Integer numberOfPreSchoolsPublic = null;
-        Integer numberOfPrimarySchoolsPublic = null;
-        Integer numberOfSecondarySchoolsPublic = null;
-        Integer numberOfUniversitiesPublic = null;
-        Integer numberOfSpecialNeedsSchoolsPublic = null;
-        Integer numberOfDispensaryPublic = null;
-        Integer numberOfHealthCentersPublic = null;
-        Integer numberOfHospitalPublic = null;
-        Integer numberOfSpecialClinicsPublic = null;
-        Integer numberOfLaboratoryPublic = null;
-        Integer numberOfPharmacyPublic = null;
-        Integer numberOfADDOPublic = null;
-        Integer numberOfMaternityHomePublic = null;
-        Integer numberOfOrphanCareCentersPublic = null;
-        Integer numberOfCentersForChildrenWithDisabilitiesPublic = null;
-        Integer numberOfCbecdcRehabilitationCentrePublic = null;
-        Integer numberOfDayCareCentersPublic = null;
-        Integer numberOfElderlyCareCentersPublic = null;
-        Integer numberOfPreSchoolsPrivate = null;
-        Integer numberOfPrimarySchoolsPrivate = null;
-        Integer numberOfSecondarySchoolsPrivate = null;
-        Integer numberOfUniversitiesPrivate = null;
-        Integer numberOfSpecialNeedsSchoolsPrivate = null;
-        Integer numberOfDispensaryPrivate = null;
-        Integer numberOfHealthCentersPrivate = null;
-        Integer numberOfHospitalPrivate = null;
-        Integer numberOfSpecialClinicsPrivate = null;
-        Integer numberOfLaboratoryPrivate = null;
-        Integer numberOfPharmacyPrivate = null;
-        Integer numberOfADDOPrivate = null;
-        Integer numberOfMaternityHomePrivate = null;
-        Integer numberOfOrphanCareCentersPrivate = null;
-        Integer numberOfCentersForChildrenWithDisabilitiesPrivate = null;
-        Integer numberOfCbecdcRehabilitationCentrePrivate = null;
-        Integer numberOfDayCareCentersPrivate = null;
-        Integer numberOfElderlyCareCentersPrivate = null;
-        Integer numberOfFoodShopVisited = null;
-        Integer numberOfRestaurantsVisited = null;
-        Integer numberOfButcheriesVisited = null;
-        Integer numberOfBarAndClubsVisited = null;
-        Integer numberOfGuestHouseVisited = null;
-        Integer numberOfLocaFoodVendorsVisited = null;
-        Integer numberOfMarketsVisited = null;
-        Integer numberOfPublicToiletsVisited = null;
-        Integer numberOfBusStationsVisited = null;
-        Integer numberOfPrimarySchoolsVisited = null;
-        Integer numberOfSecondarySchoolsVisited = null;
-        Integer numberOfHospitalVisited = null;
-        Integer numberOfHealthCentersVisited = null;
-        Integer numberOfDispensariesVisited = null;
-        Integer numberOfOfficesVisited = null;
-        Integer numberOfUniversitiesCollegeVisited = null;
-        Integer numberOfFoodShopThatMetTheStandards = null;
-        Integer numberOfRestaurantsThatMetTheStandards = null;
-        Integer numberOfButcheriesThatMetTheStandards = null;
-        Integer numberOfBarAndClubsThatMetTheStandards = null;
-        Integer numberOfGuestHouseThatMetTheStandards = null;
-        Integer numberOfLocaFoodVendorsThatMetTheStandards = null;
-        Integer numberOfMarketsThatMetTheStandards = null;
-        Integer numberOfPublicToiletsThatMetTheStandards = null;
-        Integer numberOfBusStationsThatMetTheStandards = null;
-        Integer numberOfPrimarySchoolsThatMetTheStandards = null;
-        Integer numberOfSecondarySchoolsThatMetTheStandards = null;
-        Integer numberOfHospitalThatMetTheStandards = null;
-        Integer numberOfHealthCentersThatMetTheStandards = null;
-        Integer numberOfDispensariesThatMetTheStandards = null;
-        Integer numberOfOfficesThatMetTheStandards = null;
-        Integer numberOfUniversitiesCollegeThatMetTheStandards = null;
-        Integer numberOfInspectedAgricultureAreas = null;
-        Integer numberOfInspectedLivestockKeepingAreas = null;
-        Integer numberOfInspectedFishingAreas = null;
-        Integer numberOfInspectedIndustriesAreas = null;
-        Integer numberOfInspectedOfficesAreas = null;
-        Integer numberOfInspectedTransportationAreas = null;
-        Integer numberOfOtherInspectedAreas = null;
-        Integer numberOfAgricultureAreasInspectedWithRiskIndicators = null;
-        Integer numberOfLivestockKeepingAreasInspectedWithRiskIndicators = null;
-        Integer numberOfFishingAreasInspectedWithRiskIndicators = null;
-        Integer numberOfIndustriesAreasInspectedWithRiskIndicators = null;
-        Integer numberOfOfficesAreasInspectedWithRiskIndicators = null;
-        Integer numberOfTransportationAreasInspectedWithRiskIndicators = null;
-        Integer numberOfOtherAreasInspectedWithRiskIndicators = null;
-        Integer numberOfInspectedGrains = null;
-        Integer numberOfInspectedLegumes = null;
-        Integer numberOfInspectedMeat = null;
-        Integer numberOfInspectedFishing = null;
-        Integer numberOfInspectedAlcoholicBeverages = null;
-        Integer numberOfInspectedNonAlcoholicBeverages = null;
-        Integer numberOfGrainsDiscarded = null;
-        Integer numberOfLegumesDiscarded = null;
-        Integer numberOfMeatDiscarded = null;
-        Integer numberOfFishingDiscarded = null;
-        Integer numberOfAlcoholicBeverageDiscarded = null;
-        Integer numberOfNonAlcoholicBeverageDiscarded = null;
-        Integer healthReportsAffectingPeopleInWorkplacesRespiratoryDiseases = null;
-        Integer healthReportsAffectingPeopleInWorkplacesToxicChemicals = null;
-        Integer healthReportsAffectingPeopleInWorkplacesBurns = null;
-        Integer healthReportsAffectingPeopleInWorkplacesHearingLoss = null;
-        Integer healthReportsAffectingPeopleInWorkplacesEyeProblems = null;
-        Integer healthReportsAffectingPeopleInWorkplacesOtherEffects = null;
-        Double amountOfSolidWasteGeneratedAnnuallyTons = null;
-        Double amountOfSolidWasteDisposedAtADesignatedSiteAnnuallyTons = null;
-        Integer numberOfWasteCollectionEquipmentVehicles = null;
-        Integer numberOfWasteCollectionEquipmentTractors = null;
-        Integer numberOfWasteCollectionEquipmentCarts = null;
-        Integer numberOfWasteCollectionEquipmentWheelbarrows = null;
-        Integer numberOfWasteCollectionEquipmentOthers = null;
-        Integer numberOfAreasSprayedWithPesticidesPonds = null;
-        Integer numberOfAreasSprayedWithPesticidesCans = null;
-        Integer numberOfAreasSprayedWithPesticidesDrums = null;
-        Integer numberOfAreasSprayedWithPesticidesBarrels = null;
-        Integer numberOfAreasSprayedWithPesticidesCoconutShells = null;
-        Integer numberOfTimesSprayingWasDonePonds = null;
-        Integer numberOfTimesSprayingWasDoneCans = null;
-        Integer numberOfTimesSprayingWasDoneDrums = null;
-        Integer numberOfTimesSprayingWasDoneBarrels = null;
-        Integer numberOfTimesSprayingWasDoneCoconutShells = null;
+        String numberOfPreSchoolsGovernment = null;
+        String numberOfPrimarySchoolsGovernment = null;
+        String numberOfSecondarySchoolsGovernment = null;
+        String numberOfUniversitiesGovernment = null;
+        String numberOfSpecialNeedsSchoolsGovernment = null;
+        String numberOfDispensaryGovernment = null;
+        String numberOfHealthCentersGovernment = null;
+        String numberOfHospitalGovernment = null;
+        String numberOfSpecialClinicsGovernment = null;
+        String numberOfLaboratoryGovernment = null;
+        String numberOfPharmacyGovernment = null;
+        String numberOfADDOGovernment = null;
+        String numberOfMaternityHomeGovernment = null;
+        String numberOfOrphanCareCentersGovernment = null;
+        String numberOfCentersForChildrenWithDisabilitiesGovernment = null;
+        String numberOfCbecdcRehabilitationCentreGovernment = null;
+        String numberOfDayCareCentersGovernment = null;
+        String numberOfElderlyCareCentersGovernment = null;
+        String numberOfPreSchoolsFaithBasedOrganisation = null;
+        String numberOfPrimarySchoolsFaithBasedOrganisation = null;
+        String numberOfSecondarySchoolsFaithBasedOrganisation = null;
+        String numberOfUniversitiesFaithBasedOrganisation = null;
+        String numberOfSpecialNeedsSchoolsFaithBasedOrganisation = null;
+        String numberOfDispensaryFaithBasedOrganisation = null;
+        String numberOfHealthCentersFaithBasedOrganisation = null;
+        String numberOfHospitalFaithBasedOrganisation = null;
+        String numberOfSpecialClinicsFaithBasedOrganisation = null;
+        String numberOfLaboratoryFaithBasedOrganisation = null;
+        String numberOfPharmacyFaithBasedOrganisation = null;
+        String numberOfADDOFaithBasedOrganisation = null;
+        String numberOfMaternityHomeFaithBasedOrganisation = null;
+        String numberOfOrphanCareCentersFaithBasedOrganisation = null;
+        String numberOfCentersForChildrenWithDisabilitiesFaithBasedOrganisation = null;
+        String numberOfCbecdcRehabilitationCentreFaithBasedOrganisation = null;
+        String numberOfDayCareCentersFaithBasedOrganisation = null;
+        String numberOfElderlyCareCentersFaithBasedOrganisation = null;
+        String numberOfPreSchoolsPublic = null;
+        String numberOfPrimarySchoolsPublic = null;
+        String numberOfSecondarySchoolsPublic = null;
+        String numberOfUniversitiesPublic = null;
+        String numberOfSpecialNeedsSchoolsPublic = null;
+        String numberOfDispensaryPublic = null;
+        String numberOfHealthCentersPublic = null;
+        String numberOfHospitalPublic = null;
+        String numberOfSpecialClinicsPublic = null;
+        String numberOfLaboratoryPublic = null;
+        String numberOfPharmacyPublic = null;
+        String numberOfADDOPublic = null;
+        String numberOfMaternityHomePublic = null;
+        String numberOfOrphanCareCentersPublic = null;
+        String numberOfCentersForChildrenWithDisabilitiesPublic = null;
+        String numberOfCbecdcRehabilitationCentrePublic = null;
+        String numberOfDayCareCentersPublic = null;
+        String numberOfElderlyCareCentersPublic = null;
+        String numberOfPreSchoolsPrivate = null;
+        String numberOfPrimarySchoolsPrivate = null;
+        String numberOfSecondarySchoolsPrivate = null;
+        String numberOfUniversitiesPrivate = null;
+        String numberOfSpecialNeedsSchoolsPrivate = null;
+        String numberOfDispensaryPrivate = null;
+        String numberOfHealthCentersPrivate = null;
+        String numberOfHospitalPrivate = null;
+        String numberOfSpecialClinicsPrivate = null;
+        String numberOfLaboratoryPrivate = null;
+        String numberOfPharmacyPrivate = null;
+        String numberOfADDOPrivate = null;
+        String numberOfMaternityHomePrivate = null;
+        String numberOfOrphanCareCentersPrivate = null;
+        String numberOfCentersForChildrenWithDisabilitiesPrivate = null;
+        String numberOfCbecdcRehabilitationCentrePrivate = null;
+        String numberOfDayCareCentersPrivate = null;
+        String numberOfElderlyCareCentersPrivate = null;
+        String numberOfFoodShopVisited = null;
+        String numberOfRestaurantsVisited = null;
+        String numberOfButcheriesVisited = null;
+        String numberOfBarAndClubsVisited = null;
+        String numberOfGuestHouseVisited = null;
+        String numberOfLocaFoodVendorsVisited = null;
+        String numberOfMarketsVisited = null;
+        String numberOfPublicToiletsVisited = null;
+        String numberOfBusStationsVisited = null;
+        String numberOfPrimarySchoolsVisited = null;
+        String numberOfSecondarySchoolsVisited = null;
+        String numberOfHospitalVisited = null;
+        String numberOfHealthCentersVisited = null;
+        String numberOfDispensariesVisited = null;
+        String numberOfOfficesVisited = null;
+        String numberOfUniversitiesCollegeVisited = null;
+        String numberOfFoodShopThatMetTheStandards = null;
+        String numberOfRestaurantsThatMetTheStandards = null;
+        String numberOfButcheriesThatMetTheStandards = null;
+        String numberOfBarAndClubsThatMetTheStandards = null;
+        String numberOfGuestHouseThatMetTheStandards = null;
+        String numberOfLocaFoodVendorsThatMetTheStandards = null;
+        String numberOfMarketsThatMetTheStandards = null;
+        String numberOfPublicToiletsThatMetTheStandards = null;
+        String numberOfBusStationsThatMetTheStandards = null;
+        String numberOfPrimarySchoolsThatMetTheStandards = null;
+        String numberOfSecondarySchoolsThatMetTheStandards = null;
+        String numberOfHospitalThatMetTheStandards = null;
+        String numberOfHealthCentersThatMetTheStandards = null;
+        String numberOfDispensariesThatMetTheStandards = null;
+        String numberOfOfficesThatMetTheStandards = null;
+        String numberOfUniversitiesCollegeThatMetTheStandards = null;
+        String numberOfInspectedAgricultureAreas = null;
+        String numberOfInspectedLivestockKeepingAreas = null;
+        String numberOfInspectedFishingAreas = null;
+        String numberOfInspectedIndustriesAreas = null;
+        String numberOfInspectedOfficesAreas = null;
+        String numberOfInspectedTransportationAreas = null;
+        String numberOfOtherInspectedAreas = null;
+        String numberOfAgricultureAreasInspectedWithRiskIndicators = null;
+        String numberOfLivestockKeepingAreasInspectedWithRiskIndicators = null;
+        String numberOfFishingAreasInspectedWithRiskIndicators = null;
+        String numberOfIndustriesAreasInspectedWithRiskIndicators = null;
+        String numberOfOfficesAreasInspectedWithRiskIndicators = null;
+        String numberOfTransportationAreasInspectedWithRiskIndicators = null;
+        String numberOfOtherAreasInspectedWithRiskIndicators = null;
+        String numberOfInspectedGrains = null;
+        String numberOfInspectedLegumes = null;
+        String numberOfInspectedMeat = null;
+        String numberOfInspectedFishing = null;
+        String numberOfInspectedAlcoholicBeverages = null;
+        String numberOfInspectedNonAlcoholicBeverages = null;
+        String numberOfGrainsDiscarded = null;
+        String numberOfLegumesDiscarded = null;
+        String numberOfMeatDiscarded = null;
+        String numberOfFishingDiscarded = null;
+        String numberOfAlcoholicBeverageDiscarded = null;
+        String numberOfNonAlcoholicBeverageDiscarded = null;
+        String healthReportsAffectingPeopleInWorkplacesRespiratoryDiseases = null;
+        String healthReportsAffectingPeopleInWorkplacesToxicChemicals = null;
+        String healthReportsAffectingPeopleInWorkplacesBurns = null;
+        String healthReportsAffectingPeopleInWorkplacesHearingLoss = null;
+        String healthReportsAffectingPeopleInWorkplacesEyeProblems = null;
+        String healthReportsAffectingPeopleInWorkplacesOtherEffects = null;
+        String amountOfSolidWasteGeneratedAnnuallyTons = null;
+        String amountOfSolidWasteDisposedAtADesignatedSiteAnnuallyTons = null;
+        String numberOfWasteCollectionEquipmentVehicles = null;
+        String numberOfWasteCollectionEquipmentTractors = null;
+        String numberOfWasteCollectionEquipmentCarts = null;
+        String numberOfWasteCollectionEquipmentWheelbarrows = null;
+        String numberOfWasteCollectionEquipmentOthers = null;
+        String numberOfAreasSprayedWithPesticidesPonds = null;
+        String numberOfAreasSprayedWithPesticidesCans = null;
+        String numberOfAreasSprayedWithPesticidesDrums = null;
+        String numberOfAreasSprayedWithPesticidesBarrels = null;
+        String numberOfAreasSprayedWithPesticidesCoconutShells = null;
+        String numberOfTimesSprayingWasDonePonds = null;
+        String numberOfTimesSprayingWasDoneCans = null;
+        String numberOfTimesSprayingWasDoneDrums = null;
+        String numberOfTimesSprayingWasDoneBarrels = null;
+        String numberOfTimesSprayingWasDoneCoconutShells = null;
         String typesOfPesticidesUsedPonds = null;
         String typesOfPesticidesUsedCans = null;
         String typesOfPesticidesUsedDrums = null;
         String typesOfPesticidesUsedBarrels = null;
         String typesOfPesticidesUsedCoconutShells = null;
-        Double amountOfPesticideUsedPonds = null;
-        Double amountOfPesticideUsedCans = null;
-        Double amountOfPesticideUsedDrums = null;
-        Double amountOfPesticideUsedBarrels = null;
-        Double amountOfPesticideUsedCoconutShells = null;
+        String amountOfPesticideUsedPonds = null;
+        String amountOfPesticideUsedCans = null;
+        String amountOfPesticideUsedDrums = null;
+        String amountOfPesticideUsedBarrels = null;
+        String amountOfPesticideUsedCoconutShells = null;
 
         // Retrieve the last_interacted_with value from the event version
         long lastInteractedWith = event.getVersion();
@@ -956,347 +956,347 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.SELECT_AGE_GROUP.equals(field)) {
                     selectAgeGroup = obs.getValues().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_BY_AGE_GROUP_UNDER1.equals(field)) {
-                    numberOfMaleByAgeGroupUnder1 = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaleByAgeGroupUnder1 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_BY_AGE_GROUP_UNDER1.equals(field)) {
-                    numberOfFemaleByAgeGroupUnder1 = Integer.parseInt(obs.getValue().toString());
+                    numberOfFemaleByAgeGroupUnder1 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_BY_AGE_GROUP_1_4.equals(field)) {
-                    numberOfMaleByAgeGroup1_4 = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaleByAgeGroup1_4 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_BY_AGE_GROUP_1_4.equals(field)) {
-                    numberOfFemaleByAgeGroup1_4 = Integer.parseInt(obs.getValue().toString());
+                    numberOfFemaleByAgeGroup1_4 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_BY_AGE_GROUP_5_14.equals(field)) {
-                    numberOfMaleByAgeGroup5_14 = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaleByAgeGroup5_14 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_BY_AGE_GROUP_5_14.equals(field)) {
-                    numberOfFemaleByAgeGroup5_14 = Integer.parseInt(obs.getValue().toString());
+                    numberOfFemaleByAgeGroup5_14 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_BY_AGE_GROUP_15_49.equals(field)) {
-                    numberOfMaleByAgeGroup15_49 = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaleByAgeGroup15_49 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_BY_AGE_GROUP_15_49.equals(field)) {
-                    numberOfFemaleByAgeGroup15_49 = Integer.parseInt(obs.getValue().toString());
+                    numberOfFemaleByAgeGroup15_49 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_BY_AGE_GROUP_50_59.equals(field)) {
-                    numberOfMaleByAgeGroup50_59 = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaleByAgeGroup50_59 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_BY_AGE_GROUP_50_59.equals(field)) {
-                    numberOfFemaleByAgeGroup50_59 = Integer.parseInt(obs.getValue().toString());
+                    numberOfFemaleByAgeGroup50_59 = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_BY_AGE_GROUP_60_PLUS.equals(field)) {
-                    numberOfMaleByAgeGroup60Plus = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaleByAgeGroup60Plus = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_BY_AGE_GROUP_60_PLUS.equals(field)) {
-                    numberOfFemaleByAgeGroup60Plus = Integer.parseInt(obs.getValue().toString());
+                    numberOfFemaleByAgeGroup60Plus = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSE_HOLD_WITH_ROAD_ACCESS.equals(field)) {
-                    numberOfHouseHoldWithRoadAccess = Integer.parseInt(obs.getValue().toString());
+                    numberOfHouseHoldWithRoadAccess = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSE_HOLDS_WITH_AT_LEAST_ONE_LANDLINE_OR_MOBILE_PHONE.equals(field)) {
-                    numberOfHouseHoldsWithAtLeastOneLandlineOrMobilePhone = Integer.parseInt(obs.getValue().toString());
+                    numberOfHouseHoldsWithAtLeastOneLandlineOrMobilePhone = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSE_HOLD_WITH_BASIC_NUTRITION_SOURCE_VEGETABLE.equals(field)) {
-                    numberOfHouseHoldWithBasicNutritionSourceVegetable = Integer.parseInt(obs.getValue().toString());
+                    numberOfHouseHoldWithBasicNutritionSourceVegetable = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSE_HOLD_WITH_BASIC_NUTRITION_SOURCE_FRUIT_TREES.equals(field)) {
-                    numberOfHouseHoldWithBasicNutritionSourceFruitTrees = Integer.parseInt(obs.getValue().toString());
+                    numberOfHouseHoldWithBasicNutritionSourceFruitTrees = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSE_HOLD_WITH_BASIC_NUTRITION_SOURCE_DOMESTIC_ANIMAL.equals(field)) {
-                    numberOfHouseHoldWithBasicNutritionSourceDomesticAnimal = Integer.parseInt(obs.getValue().toString());
+                    numberOfHouseHoldWithBasicNutritionSourceDomesticAnimal = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.SELECT_CENTERS_CATEGORY.equals(field)) {
                     selectCentersCategory = obs.getValues().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRE_SCHOOLS_GOVERNMENT.equals(field)) {
-                    numberOfPreSchoolsGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfPreSchoolsGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRIMARY_SCHOOLS_GOVERNMENT.equals(field)) {
-                    numberOfPrimarySchoolsGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfPrimarySchoolsGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SECONDARY_SCHOOLS_GOVERNMENT.equals(field)) {
-                    numberOfSecondarySchoolsGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfSecondarySchoolsGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_UNIVERSITIES_GOVERNMENT.equals(field)) {
-                    numberOfUniversitiesGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfUniversitiesGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SPECIAL_NEEDS_SCHOOLS_GOVERNMENT.equals(field)) {
-                    numberOfSpecialNeedsSchoolsGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfSpecialNeedsSchoolsGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DISPENSARY_GOVERNMENT.equals(field)) {
-                    numberOfDispensaryGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfDispensaryGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HEALTH_CENTERS_GOVERNMENT.equals(field)) {
-                    numberOfHealthCentersGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfHealthCentersGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOSPITAL_GOVERNMENT.equals(field)) {
-                    numberOfHospitalGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfHospitalGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SPECIAL_CLINICS_GOVERNMENT.equals(field)) {
-                    numberOfSpecialClinicsGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfSpecialClinicsGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LABORATORY_GOVERNMENT.equals(field)) {
-                    numberOfLaboratoryGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfLaboratoryGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PHARMACY_GOVERNMENT.equals(field)) {
-                    numberOfPharmacyGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfPharmacyGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ADDO_GOVERNMENT.equals(field)) {
-                    numberOfADDOGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfADDOGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MATERNITY_HOME_GOVERNMENT.equals(field)) {
-                    numberOfMaternityHomeGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaternityHomeGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ORPHAN_CARE_CENTERS_GOVERNMENT.equals(field)) {
-                    numberOfOrphanCareCentersGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfOrphanCareCentersGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_CENTERS_FOR_CHILDREN_WITH_DISABILITIES_GOVERNMENT.equals(field)) {
-                    numberOfCentersForChildrenWithDisabilitiesGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfCentersForChildrenWithDisabilitiesGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_CBECDC_REHABILITATION_CENTRE_GOVERNMENT.equals(field)) {
-                    numberOfCbecdcRehabilitationCentreGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfCbecdcRehabilitationCentreGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DAY_CARE_CENTERS_GOVERNMENT.equals(field)) {
-                    numberOfDayCareCentersGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfDayCareCentersGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ELDERLY_CARE_CENTERS_GOVERNMENT.equals(field)) {
-                    numberOfElderlyCareCentersGovernment = Integer.parseInt(obs.getValue().toString());
+                    numberOfElderlyCareCentersGovernment = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRE_SCHOOLS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfPreSchoolsFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfPreSchoolsFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRIMARY_SCHOOLS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfPrimarySchoolsFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfPrimarySchoolsFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SECONDARY_SCHOOLS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfSecondarySchoolsFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfSecondarySchoolsFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_UNIVERSITIES_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfUniversitiesFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfUniversitiesFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SPECIAL_NEEDS_SCHOOLS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfSpecialNeedsSchoolsFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfSpecialNeedsSchoolsFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DISPENSARY_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfDispensaryFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfDispensaryFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HEALTH_CENTERS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfHealthCentersFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfHealthCentersFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOSPITAL_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfHospitalFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfHospitalFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SPECIAL_CLINICS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfSpecialClinicsFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfSpecialClinicsFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LABORATORY_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfLaboratoryFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfLaboratoryFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PHARMACY_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfPharmacyFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfPharmacyFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ADDO_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfADDOFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfADDOFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MATERNITY_HOME_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfMaternityHomeFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaternityHomeFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ORPHAN_CARE_CENTERS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfOrphanCareCentersFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfOrphanCareCentersFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_CENTERS_FOR_CHILDREN_WITH_DISABILITIES_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfCentersForChildrenWithDisabilitiesFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfCentersForChildrenWithDisabilitiesFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_CBECDC_REHABILITATION_CENTRE_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfCbecdcRehabilitationCentreFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfCbecdcRehabilitationCentreFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DAY_CARE_CENTERS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfDayCareCentersFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfDayCareCentersFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ELDERLY_CARE_CENTERS_FAITH_BASED_ORGANISATION.equals(field)) {
-                    numberOfElderlyCareCentersFaithBasedOrganisation = Integer.parseInt(obs.getValue().toString());
+                    numberOfElderlyCareCentersFaithBasedOrganisation = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRE_SCHOOLS_PUBLIC.equals(field)) {
-                    numberOfPreSchoolsPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfPreSchoolsPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRIMARY_SCHOOLS_PUBLIC.equals(field)) {
-                    numberOfPrimarySchoolsPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfPrimarySchoolsPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SECONDARY_SCHOOLS_PUBLIC.equals(field)) {
-                    numberOfSecondarySchoolsPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfSecondarySchoolsPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_UNIVERSITIES_PUBLIC.equals(field)) {
-                    numberOfUniversitiesPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfUniversitiesPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SPECIAL_NEEDS_SCHOOLS_PUBLIC.equals(field)) {
-                    numberOfSpecialNeedsSchoolsPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfSpecialNeedsSchoolsPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DISPENSARY_PUBLIC.equals(field)) {
-                    numberOfDispensaryPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfDispensaryPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HEALTH_CENTERS_PUBLIC.equals(field)) {
-                    numberOfHealthCentersPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfHealthCentersPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOSPITAL_PUBLIC.equals(field)) {
-                    numberOfHospitalPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfHospitalPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SPECIAL_CLINICS_PUBLIC.equals(field)) {
-                    numberOfSpecialClinicsPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfSpecialClinicsPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LABORATORY_PUBLIC.equals(field)) {
-                    numberOfLaboratoryPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfLaboratoryPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PHARMACY_PUBLIC.equals(field)) {
-                    numberOfPharmacyPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfPharmacyPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ADDO_PUBLIC.equals(field)) {
-                    numberOfADDOPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfADDOPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MATERNITY_HOME_PUBLIC.equals(field)) {
-                    numberOfMaternityHomePublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaternityHomePublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ORPHAN_CARE_CENTERS_PUBLIC.equals(field)) {
-                    numberOfOrphanCareCentersPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfOrphanCareCentersPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_CENTERS_FOR_CHILDREN_WITH_DISABILITIES_PUBLIC.equals(field)) {
-                    numberOfCentersForChildrenWithDisabilitiesPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfCentersForChildrenWithDisabilitiesPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_CBECDC_REHABILITATION_CENTRE_PUBLIC.equals(field)) {
-                    numberOfCbecdcRehabilitationCentrePublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfCbecdcRehabilitationCentrePublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DAY_CARE_CENTERS_PUBLIC.equals(field)) {
-                    numberOfDayCareCentersPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfDayCareCentersPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ELDERLY_CARE_CENTERS_PUBLIC.equals(field)) {
-                    numberOfElderlyCareCentersPublic = Integer.parseInt(obs.getValue().toString());
+                    numberOfElderlyCareCentersPublic = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRE_SCHOOLS_PRIVATE.equals(field)) {
-                    numberOfPreSchoolsPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfPreSchoolsPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRIMARY_SCHOOLS_PRIVATE.equals(field)) {
-                    numberOfPrimarySchoolsPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfPrimarySchoolsPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SECONDARY_SCHOOLS_PRIVATE.equals(field)) {
-                    numberOfSecondarySchoolsPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfSecondarySchoolsPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_UNIVERSITIES_PRIVATE.equals(field)) {
-                    numberOfUniversitiesPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfUniversitiesPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SPECIAL_NEEDS_SCHOOLS_PRIVATE.equals(field)) {
-                    numberOfSpecialNeedsSchoolsPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfSpecialNeedsSchoolsPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DISPENSARY_PRIVATE.equals(field)) {
-                    numberOfDispensaryPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfDispensaryPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HEALTH_CENTERS_PRIVATE.equals(field)) {
-                    numberOfHealthCentersPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfHealthCentersPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOSPITAL_PRIVATE.equals(field)) {
-                    numberOfHospitalPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfHospitalPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SPECIAL_CLINICS_PRIVATE.equals(field)) {
-                    numberOfSpecialClinicsPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfSpecialClinicsPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LABORATORY_PRIVATE.equals(field)) {
-                    numberOfLaboratoryPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfLaboratoryPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PHARMACY_PRIVATE.equals(field)) {
-                    numberOfPharmacyPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfPharmacyPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ADDO_PRIVATE.equals(field)) {
-                    numberOfADDOPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfADDOPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MATERNITY_HOME_PRIVATE.equals(field)) {
-                    numberOfMaternityHomePrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfMaternityHomePrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ORPHAN_CARE_CENTERS_PRIVATE.equals(field)) {
-                    numberOfOrphanCareCentersPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfOrphanCareCentersPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_CENTERS_FOR_CHILDREN_WITH_DISABILITIES_PRIVATE.equals(field)) {
-                    numberOfCentersForChildrenWithDisabilitiesPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfCentersForChildrenWithDisabilitiesPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_CBECDC_REHABILITATION_CENTRE_PRIVATE.equals(field)) {
-                    numberOfCbecdcRehabilitationCentrePrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfCbecdcRehabilitationCentrePrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DAY_CARE_CENTERS_PRIVATE.equals(field)) {
-                    numberOfDayCareCentersPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfDayCareCentersPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ELDERLY_CARE_CENTERS_PRIVATE.equals(field)) {
-                    numberOfElderlyCareCentersPrivate = Integer.parseInt(obs.getValue().toString());
+                    numberOfElderlyCareCentersPrivate = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FOOD_SHOP_VISITED.equals(field)) {
-                    numberOfFoodShopVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfFoodShopVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_RESTAURANTS_VISITED.equals(field)) {
-                    numberOfRestaurantsVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfRestaurantsVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_BUTCHERIES_VISITED.equals(field)) {
-                    numberOfButcheriesVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfButcheriesVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_BAR_AND_CLUBS_VISITED.equals(field)) {
-                    numberOfBarAndClubsVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfBarAndClubsVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_GUEST_HOUSE_VISITED.equals(field)) {
-                    numberOfGuestHouseVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfGuestHouseVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LOCA_FOOD_VENDORS_VISITED.equals(field)) {
-                    numberOfLocaFoodVendorsVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfLocaFoodVendorsVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MARKETS_VISITED.equals(field)) {
-                    numberOfMarketsVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfMarketsVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PUBLIC_TOILETS_VISITED.equals(field)) {
-                    numberOfPublicToiletsVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfPublicToiletsVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_BUS_STATIONS_VISITED.equals(field)) {
-                    numberOfBusStationsVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfBusStationsVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRIMARY_SCHOOLS_VISITED.equals(field)) {
-                    numberOfPrimarySchoolsVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfPrimarySchoolsVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SECONDARY_SCHOOLS_VISITED.equals(field)) {
-                    numberOfSecondarySchoolsVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfSecondarySchoolsVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOSPITAL_VISITED.equals(field)) {
-                    numberOfHospitalVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfHospitalVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HEALTH_CENTERS_VISITED.equals(field)) {
-                    numberOfHealthCentersVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfHealthCentersVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DISPENSARIES_VISITED.equals(field)) {
-                    numberOfDispensariesVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfDispensariesVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_OFFICES_VISITED.equals(field)) {
-                    numberOfOfficesVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfOfficesVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_UNIVERSITIES_COLLEGE_VISITED.equals(field)) {
-                    numberOfUniversitiesCollegeVisited = Integer.parseInt(obs.getValue().toString());
+                    numberOfUniversitiesCollegeVisited = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FOOD_SHOP_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfFoodShopThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfFoodShopThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_RESTAURANTS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfRestaurantsThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfRestaurantsThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_BUTCHERIES_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfButcheriesThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfButcheriesThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_BAR_AND_CLUBS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfBarAndClubsThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfBarAndClubsThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_GUEST_HOUSE_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfGuestHouseThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfGuestHouseThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LOCA_FOOD_VENDORS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfLocaFoodVendorsThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfLocaFoodVendorsThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MARKETS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfMarketsThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfMarketsThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PUBLIC_TOILETS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfPublicToiletsThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfPublicToiletsThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_BUS_STATIONS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfBusStationsThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfBusStationsThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_PRIMARY_SCHOOLS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfPrimarySchoolsThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfPrimarySchoolsThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_SECONDARY_SCHOOLS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfSecondarySchoolsThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfSecondarySchoolsThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOSPITAL_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfHospitalThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfHospitalThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HEALTH_CENTERS_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfHealthCentersThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfHealthCentersThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_DISPENSARIES_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfDispensariesThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfDispensariesThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_OFFICES_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfOfficesThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfOfficesThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_UNIVERSITIES_COLLEGE_THAT_MET_THE_STANDARDS.equals(field)) {
-                    numberOfUniversitiesCollegeThatMetTheStandards = Integer.parseInt(obs.getValue().toString());
+                    numberOfUniversitiesCollegeThatMetTheStandards = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_AGRICULTURE_AREAS.equals(field)) {
-                    numberOfInspectedAgricultureAreas = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedAgricultureAreas = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_LIVESTOCK_KEEPING_AREAS.equals(field)) {
-                    numberOfInspectedLivestockKeepingAreas = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedLivestockKeepingAreas = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_FISHING_AREAS.equals(field)) {
-                    numberOfInspectedFishingAreas = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedFishingAreas = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_INDUSTRIES_AREAS.equals(field)) {
-                    numberOfInspectedIndustriesAreas = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedIndustriesAreas = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_OFFICES_AREAS.equals(field)) {
-                    numberOfInspectedOfficesAreas = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedOfficesAreas = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_TRANSPORTATION_AREAS.equals(field)) {
-                    numberOfInspectedTransportationAreas = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedTransportationAreas = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_OTHER_INSPECTED_AREAS.equals(field)) {
-                    numberOfOtherInspectedAreas = Integer.parseInt(obs.getValue().toString());
+                    numberOfOtherInspectedAreas = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_AGRICULTURE_AREAS_INSPECTED_WITH_RISK_INDICATORS.equals(field)) {
-                    numberOfAgricultureAreasInspectedWithRiskIndicators = Integer.parseInt(obs.getValue().toString());
+                    numberOfAgricultureAreasInspectedWithRiskIndicators = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LIVESTOCK_KEEPING_AREAS_INSPECTED_WITH_RISK_INDICATORS.equals(field)) {
-                    numberOfLivestockKeepingAreasInspectedWithRiskIndicators = Integer.parseInt(obs.getValue().toString());
+                    numberOfLivestockKeepingAreasInspectedWithRiskIndicators = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FISHING_AREAS_INSPECTED_WITH_RISK_INDICATORS.equals(field)) {
-                    numberOfFishingAreasInspectedWithRiskIndicators = Integer.parseInt(obs.getValue().toString());
+                    numberOfFishingAreasInspectedWithRiskIndicators = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INDUSTRIES_AREAS_INSPECTED_WITH_RISK_INDICATORS.equals(field)) {
-                    numberOfIndustriesAreasInspectedWithRiskIndicators = Integer.parseInt(obs.getValue().toString());
+                    numberOfIndustriesAreasInspectedWithRiskIndicators = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_OFFICES_AREAS_INSPECTED_WITH_RISK_INDICATORS.equals(field)) {
-                    numberOfOfficesAreasInspectedWithRiskIndicators = Integer.parseInt(obs.getValue().toString());
+                    numberOfOfficesAreasInspectedWithRiskIndicators = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_TRANSPORTATION_AREAS_INSPECTED_WITH_RISK_INDICATORS.equals(field)) {
-                    numberOfTransportationAreasInspectedWithRiskIndicators = Integer.parseInt(obs.getValue().toString());
+                    numberOfTransportationAreasInspectedWithRiskIndicators = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_OTHER_AREAS_INSPECTED_WITH_RISK_INDICATORS.equals(field)) {
-                    numberOfOtherAreasInspectedWithRiskIndicators = Integer.parseInt(obs.getValue().toString());
+                    numberOfOtherAreasInspectedWithRiskIndicators = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_GRAINS.equals(field)) {
-                    numberOfInspectedGrains = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedGrains = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_LEGUMES.equals(field)) {
-                    numberOfInspectedLegumes = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedLegumes = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_MEAT.equals(field)) {
-                    numberOfInspectedMeat = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedMeat = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_FISHING.equals(field)) {
-                    numberOfInspectedFishing = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedFishing = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_ALCOHOLIC_BEVERAGES.equals(field)) {
-                    numberOfInspectedAlcoholicBeverages = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedAlcoholicBeverages = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_INSPECTED_NON_ALCOHOLIC_BEVERAGES.equals(field)) {
-                    numberOfInspectedNonAlcoholicBeverages = Integer.parseInt(obs.getValue().toString());
+                    numberOfInspectedNonAlcoholicBeverages = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_GRAINS_DISCARDED.equals(field)) {
-                    numberOfGrainsDiscarded = Integer.parseInt(obs.getValue().toString());
+                    numberOfGrainsDiscarded = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_LEGUMES_DISCARDED.equals(field)) {
-                    numberOfLegumesDiscarded = Integer.parseInt(obs.getValue().toString());
+                    numberOfLegumesDiscarded = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MEAT_DISCARDED.equals(field)) {
-                    numberOfMeatDiscarded = Integer.parseInt(obs.getValue().toString());
+                    numberOfMeatDiscarded = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FISHING_DISCARDED.equals(field)) {
-                    numberOfFishingDiscarded = Integer.parseInt(obs.getValue().toString());
+                    numberOfFishingDiscarded = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_ALCOHOLIC_BEVERAGE_DISCARDED.equals(field)) {
-                    numberOfAlcoholicBeverageDiscarded = Integer.parseInt(obs.getValue().toString());
+                    numberOfAlcoholicBeverageDiscarded = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_NON_ALCOHOLIC_BEVERAGE_DISCARDED.equals(field)) {
-                    numberOfNonAlcoholicBeverageDiscarded = Integer.parseInt(obs.getValue().toString());
+                    numberOfNonAlcoholicBeverageDiscarded = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.HEALTH_REPORTS_AFFECTING_PEOPLE_IN_WORKPLACES_RESPIRATORY_DISEASES.equals(field)) {
-                    healthReportsAffectingPeopleInWorkplacesRespiratoryDiseases = Integer.parseInt(obs.getValue().toString());
+                    healthReportsAffectingPeopleInWorkplacesRespiratoryDiseases = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.HEALTH_REPORTS_AFFECTING_PEOPLE_IN_WORKPLACES_TOXIC_CHEMICALS.equals(field)) {
-                    healthReportsAffectingPeopleInWorkplacesToxicChemicals = Integer.parseInt(obs.getValue().toString());
+                    healthReportsAffectingPeopleInWorkplacesToxicChemicals = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.HEALTH_REPORTS_AFFECTING_PEOPLE_IN_WORKPLACES_BURNS.equals(field)) {
-                    healthReportsAffectingPeopleInWorkplacesBurns = Integer.parseInt(obs.getValue().toString());
+                    healthReportsAffectingPeopleInWorkplacesBurns = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.HEALTH_REPORTS_AFFECTING_PEOPLE_IN_WORKPLACES_HEARING_LOSS.equals(field)) {
-                    healthReportsAffectingPeopleInWorkplacesHearingLoss = Integer.parseInt(obs.getValue().toString());
+                    healthReportsAffectingPeopleInWorkplacesHearingLoss = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.HEALTH_REPORTS_AFFECTING_PEOPLE_IN_WORKPLACES_EYE_PROBLEMS.equals(field)) {
-                    healthReportsAffectingPeopleInWorkplacesEyeProblems = Integer.parseInt(obs.getValue().toString());
+                    healthReportsAffectingPeopleInWorkplacesEyeProblems = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.HEALTH_REPORTS_AFFECTING_PEOPLE_IN_WORKPLACES_OTHER_EFFECTS.equals(field)) {
-                    healthReportsAffectingPeopleInWorkplacesOtherEffects = Integer.parseInt(obs.getValue().toString());
+                    healthReportsAffectingPeopleInWorkplacesOtherEffects = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AMOUNT_OF_SOLID_WASTE_GENERATED_ANNUALLY_TONS.equals(field)) {
-                    amountOfSolidWasteGeneratedAnnuallyTons = (Double) obs.getValue();
+                    amountOfSolidWasteGeneratedAnnuallyTons = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AMOUNT_OF_SOLID_WASTE_DISPOSED_AT_A_DESIGNATED_SITE_ANNUALLY_TONS.equals(field)) {
-                    amountOfSolidWasteDisposedAtADesignatedSiteAnnuallyTons = (Double) obs.getValue();
+                    amountOfSolidWasteDisposedAtADesignatedSiteAnnuallyTons = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_WASTE_COLLECTION_EQUIPMENT_VEHICLES.equals(field)) {
-                    numberOfWasteCollectionEquipmentVehicles = Integer.parseInt(obs.getValue().toString());
+                    numberOfWasteCollectionEquipmentVehicles = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_WASTE_COLLECTION_EQUIPMENT_TRACTORS.equals(field)) {
-                    numberOfWasteCollectionEquipmentTractors = Integer.parseInt(obs.getValue().toString());
+                    numberOfWasteCollectionEquipmentTractors = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_WASTE_COLLECTION_EQUIPMENT_CARTS.equals(field)) {
-                    numberOfWasteCollectionEquipmentCarts = Integer.parseInt(obs.getValue().toString());
+                    numberOfWasteCollectionEquipmentCarts = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_WASTE_COLLECTION_EQUIPMENT_WHEELBARROWS.equals(field)) {
-                    numberOfWasteCollectionEquipmentWheelbarrows = Integer.parseInt(obs.getValue().toString());
+                    numberOfWasteCollectionEquipmentWheelbarrows = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_WASTE_COLLECTION_EQUIPMENT_OTHERS.equals(field)) {
-                    numberOfWasteCollectionEquipmentOthers = Integer.parseInt(obs.getValue().toString());
+                    numberOfWasteCollectionEquipmentOthers = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_AREAS_SPRAYED_WITH_PESTICIDES_PONDS.equals(field)) {
-                    numberOfAreasSprayedWithPesticidesPonds = Integer.parseInt(obs.getValue().toString());
+                    numberOfAreasSprayedWithPesticidesPonds = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_AREAS_SPRAYED_WITH_PESTICIDES_CANS.equals(field)) {
-                    numberOfAreasSprayedWithPesticidesCans = Integer.parseInt(obs.getValue().toString());
+                    numberOfAreasSprayedWithPesticidesCans = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_AREAS_SPRAYED_WITH_PESTICIDES_DRUMS.equals(field)) {
-                    numberOfAreasSprayedWithPesticidesDrums = Integer.parseInt(obs.getValue().toString());
+                    numberOfAreasSprayedWithPesticidesDrums = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_AREAS_SPRAYED_WITH_PESTICIDES_BARRELS.equals(field)) {
-                    numberOfAreasSprayedWithPesticidesBarrels = Integer.parseInt(obs.getValue().toString());
+                    numberOfAreasSprayedWithPesticidesBarrels = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_AREAS_SPRAYED_WITH_PESTICIDES_COCONUT_SHELLS.equals(field)) {
-                    numberOfAreasSprayedWithPesticidesCoconutShells = Integer.parseInt(obs.getValue().toString());
+                    numberOfAreasSprayedWithPesticidesCoconutShells = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_TIMES_SPRAYING_WAS_DONE_PONDS.equals(field)) {
-                    numberOfTimesSprayingWasDonePonds = Integer.parseInt(obs.getValue().toString());
+                    numberOfTimesSprayingWasDonePonds = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_TIMES_SPRAYING_WAS_DONE_CANS.equals(field)) {
-                    numberOfTimesSprayingWasDoneCans = Integer.parseInt(obs.getValue().toString());
+                    numberOfTimesSprayingWasDoneCans = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_TIMES_SPRAYING_WAS_DONE_DRUMS.equals(field)) {
-                    numberOfTimesSprayingWasDoneDrums = Integer.parseInt(obs.getValue().toString());
+                    numberOfTimesSprayingWasDoneDrums = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_TIMES_SPRAYING_WAS_DONE_BARRELS.equals(field)) {
-                    numberOfTimesSprayingWasDoneBarrels = Integer.parseInt(obs.getValue().toString());
+                    numberOfTimesSprayingWasDoneBarrels = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_TIMES_SPRAYING_WAS_DONE_COCONUT_SHELLS.equals(field)) {
-                    numberOfTimesSprayingWasDoneCoconutShells = Integer.parseInt(obs.getValue().toString());
+                    numberOfTimesSprayingWasDoneCoconutShells = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.TYPES_OF_PESTICIDES_USED_PONDS.equals(field)) {
                     typesOfPesticidesUsedPonds = (String) obs.getValue();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.TYPES_OF_PESTICIDES_USED_CANS.equals(field)) {
@@ -1308,15 +1308,15 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.TYPES_OF_PESTICIDES_USED_COCONUT_SHELLS.equals(field)) {
                     typesOfPesticidesUsedCoconutShells = (String) obs.getValue();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AMOUNT_OF_PESTICIDE_USED_PONDS.equals(field)) {
-                    amountOfPesticideUsedPonds = (Double) obs.getValue();
+                    amountOfPesticideUsedPonds = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AMOUNT_OF_PESTICIDE_USED_CANS.equals(field)) {
-                    amountOfPesticideUsedCans = (Double) obs.getValue();
+                    amountOfPesticideUsedCans = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AMOUNT_OF_PESTICIDE_USED_DRUMS.equals(field)) {
-                    amountOfPesticideUsedDrums = (Double) obs.getValue();
+                    amountOfPesticideUsedDrums = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AMOUNT_OF_PESTICIDE_USED_BARRELS.equals(field)) {
-                    amountOfPesticideUsedBarrels = (Double) obs.getValue();
+                    amountOfPesticideUsedBarrels = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AMOUNT_OF_PESTICIDE_USED_COCONUT_SHELLS.equals(field)) {
-                    amountOfPesticideUsedCoconutShells = (Double) obs.getValue();
+                    amountOfPesticideUsedCoconutShells = obs.getValue().toString();
                 }
             }
             // Save the annual census register record using the extracted values
