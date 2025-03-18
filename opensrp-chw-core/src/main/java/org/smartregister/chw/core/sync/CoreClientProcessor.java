@@ -943,6 +943,11 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String amountOfPesticideUsedDrums = null;
         String amountOfPesticideUsedBarrels = null;
         String amountOfPesticideUsedCoconutShells = null;
+        String numberOfHouseHolds = null;
+        String numberOfMaleCapableOfEngagingInEconomicActivities = null;
+        String numberOfFemaleCapableOfEngagingInEconomicActivities = null;
+        String numberOfMaleEngagedInEconomicActivities = null;
+        String numberOfFemaleEngagedInEconomicActivities = null;
 
         // Retrieve the last_interacted_with value from the event version
         long lastInteractedWith = event.getVersion();
@@ -1317,6 +1322,16 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     amountOfPesticideUsedBarrels = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AMOUNT_OF_PESTICIDE_USED_COCONUT_SHELLS.equals(field)) {
                     amountOfPesticideUsedCoconutShells = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSE_HOLD.equals(field)) {
+                    numberOfHouseHolds = obs.getValue().toString();
+                }else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES.equals(field)) {
+                    numberOfMaleCapableOfEngagingInEconomicActivities = obs.getValue().toString();
+                }else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES.equals(field)) {
+                    numberOfFemaleCapableOfEngagingInEconomicActivities = obs.getValue().toString();
+                }else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_ENGAGED_IN_ECONOMIC_ACTIVITIES.equals(field)) {
+                    numberOfMaleEngagedInEconomicActivities = obs.getValue().toString();
+                }else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_ENGAGED_IN_ECONOMIC_ACTIVITIES.equals(field)) {
+                    numberOfFemaleEngagedInEconomicActivities = obs.getValue().toString();
                 }
             }
             // Save the annual census register record using the extracted values
@@ -1505,6 +1520,11 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     amountOfPesticideUsedDrums,
                     amountOfPesticideUsedBarrels,
                     amountOfPesticideUsedCoconutShells,
+                    numberOfHouseHolds,
+                    numberOfMaleCapableOfEngagingInEconomicActivities,
+                    numberOfFemaleCapableOfEngagingInEconomicActivities,
+                    numberOfMaleEngagedInEconomicActivities,
+                    numberOfFemaleEngagedInEconomicActivities,
                     lastInteractedWith
             );
         }
