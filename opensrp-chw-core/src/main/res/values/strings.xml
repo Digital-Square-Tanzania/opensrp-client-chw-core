@@ -849,7 +849,9 @@
 
     <!--   HPS -->
     <string name="hps_enrollment">HPS enrollment</string>
-
+    <string name="enter_your_username_to_reset_password">Enter your username to reset password:</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="back_to_login">Back to Login</string>
 
 
 </resources>
