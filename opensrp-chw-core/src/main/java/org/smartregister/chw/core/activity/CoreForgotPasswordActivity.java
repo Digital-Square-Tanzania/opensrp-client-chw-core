@@ -57,7 +57,7 @@ public class CoreForgotPasswordActivity extends AppCompatActivity {
         buttonResetPassword.setOnClickListener(v -> {
             String username = editTextUsername.getText().toString().trim();
             if (TextUtils.isEmpty(username)) {
-                editTextUsername.setError("Username cannot be empty");
+                editTextUsername.setError(getString(R.string.username_cannot_be_empty));
                 return;
             }
             hideStatus(); // Clear previous status
@@ -86,7 +86,7 @@ public class CoreForgotPasswordActivity extends AppCompatActivity {
                 // Ensure UI updates run on the main thread
                 runOnUiThread(() -> {
                     showLoading(false);
-                    showError("Network error: " + e.getMessage());
+                    showError(getString(R.string.network_error) + e.getMessage());
                 });
             }
 
@@ -108,23 +108,23 @@ public class CoreForgotPasswordActivity extends AppCompatActivity {
 
                     if (statusCode == 200) {
                         // Success
-                        runOnUiThread(() -> showSuccess("Password reset instructions sent. Please check your email."));
+                        runOnUiThread(() -> showSuccess(getString(R.string.password_reset_instructions_sent_please_check_your_email)));
                     } else if (statusCode == 404) {
                         // Username not found
-                        runOnUiThread(() -> showError("Error: Username not found."));
+                        runOnUiThread(() -> showError(getString(R.string.error_username_not_found)));
                     } else if (statusCode >= 400 && statusCode < 500) {
                         // Other client-side errors (e.g., 400 Bad Request, 401 Unauthorized, 403 Forbidden)
                         Timber.i("Client error response: " + statusCode + ", Body: " + responseBodyString);
-                        runOnUiThread(() -> showError("Error: Could not process request (Code: " + statusCode + "). Please try again."));
+                        runOnUiThread(() -> showError(getString(R.string.error_please_try_again)));
                     } else {
                         // Server errors (5xx) or unexpected codes
                         Timber.i("Server or unexpected error response: " + statusCode + ", Body: " + responseBodyString);
-                        runOnUiThread(() -> showError("An unexpected error occurred (Code: " + statusCode + "). Please try again later."));
+                        runOnUiThread(() -> showError(getString(R.string.an_unexpected_error_occurred_please_try_again_later)));
                     }
                 } catch (
                         Exception e) { // Catch potential exceptions during body reading or processing
                     Timber.e(e, "Error processing response");
-                    runOnUiThread(() -> showError("Error processing server response."));
+                    runOnUiThread(() -> showError(getString(R.string.error_processing_server_response)));
                 }
             }
         });
