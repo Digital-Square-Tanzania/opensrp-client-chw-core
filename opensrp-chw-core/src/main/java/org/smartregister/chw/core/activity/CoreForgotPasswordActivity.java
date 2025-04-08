@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.activity;
 
+import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,8 +17,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import org.smartregister.CoreLibrary;
 import org.smartregister.chw.core.R;
+import org.smartregister.chw.core.application.CoreChwApplication;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -67,6 +71,22 @@ public class CoreForgotPasswordActivity extends AppCompatActivity {
         findViewById(R.id.back_to_login).setOnClickListener(v -> {
             finish();
         });
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        getApplication();
+        super.attachBaseContext(updateLocale(newBase, CoreChwApplication.getInstance().getContext().allSharedPreferences().getPreference("locale")));
+    }
+
+    protected Context updateLocale(Context context, String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Configuration config = new Configuration(context.getResources().getConfiguration());
+        config.setLocale(locale);
+
+        return context.createConfigurationContext(config);
     }
 
     private void attemptPasswordReset(String username) {

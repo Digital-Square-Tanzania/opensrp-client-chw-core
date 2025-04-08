@@ -5,7 +5,7 @@
     <string name="powered_by">Imedhaminiwa na</string>
     <string name="username">Jina la mtumiaji</string>
     <!-- Date manipulation-->
-    <string name="password">Neno la Siri</string>
+    <string name="password">Nenosiri</string>
     <string name="nav_logo">Mfumo wa Boresha Afya</string>
     <string name="day">siku</string>
     <string name="days">siku</string>
@@ -818,7 +818,7 @@
     <string name="refer_to_addo">Unganisha kwenda Duka la Dawa</string>
 
     <string name="hps_enrollment">Usajili wa HPS</string>
-    <string name="enter_your_username_to_reset_password">Ingiza jina la mtumiaji kubadili neno la siri:</string>
+    <string name="enter_your_username_to_reset_password">Ingiza jina la mtumiaji kubadili nenosiri:</string>
     <string name="reset_password">Badili Nenosiri</string>
     <string name="back_to_login">Rudi kwenye Login</string>
     <string name="username_cannot_be_empty">Jina la mtumiaji halipaswi kuwa tupu</string>
