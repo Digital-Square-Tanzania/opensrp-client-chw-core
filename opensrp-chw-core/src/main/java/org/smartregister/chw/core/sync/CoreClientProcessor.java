@@ -948,6 +948,31 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String numberOfFemaleCapableOfEngagingInEconomicActivities = null;
         String numberOfMaleEngagedInEconomicActivities = null;
         String numberOfFemaleEngagedInEconomicActivities = null;
+        String numberOfHouseholdsMostCommonlyUseTapAsSourcesOfWater = null;
+        String numberOfHouseholdsMostCommonlyUseRiverAsSourcesOfWater = null;
+        String numberOfHouseholdsMostCommonlyUseShallowWellAsSourcesOfWater = null;
+        String numberOfHouseholdsMostCommonlyUseWaterPondAsSourcesOfWater = null;
+        String numberOfHouseholdsMostCommonlyUseSmallDamAsSourcesOfWater = null;
+        String numberOfHouseholdsMostCommonlyUseLakeAsSourcesOfWater = null;
+        String numberOfHouseholdsMostCommonlyUseSpringAsSourcesOfWater = null;
+        String numberOfHouseholdsUsingElectricityAsSourceOfEnergyForLighting = null;
+        String numberOfHouseholdsUsingSolarAsSourceOfEnergyForLighting = null;
+        String numberOfHouseholdsUsingKerosineAsSourceOfEnergyForLighting = null;
+        String numberOfHouseholdsUsingKoroboiAsSourceOfEnergyForLighting = null;
+        String numberOfHouseholdsUsingOtherSourceOfEnergyForLighting = null;
+        String numberOfHouseholdsUsingElectricityAsSourceOfCookingEnergy = null;
+        String numberOfHouseholdsUsingSolarAsSourceOfCookingEnergy = null;
+        String numberOfHouseholdsUsingKerosineAsSourceOfCookingEnergy = null;
+        String numberOfHouseholdsUsingGasAsSourceOfCookingEnergy = null;
+        String numberOfHouseholdsUsingCharcoalAsSourceOfCookingEnergy = null;
+        String numberOfHouseholdsUsingFirewoodAsSourceOfCookingEnergy = null;
+        String numberOfHealthCommitteeMembersForEffectiveCommitteeMeetings = null;
+        String numberOfCommitteeMembersAttendedFisrtQuarter = null;
+        String numberOfRegisteredAlternativeMedicineServiceProviders = null;
+        String numberOfRegisteredTraditionalMedicineServiceProviders = null;
+        String numberOfUnregisteredAlternativeMedicineServiceProviders = null;
+        String numberOfUnregisteredTraditionalMedicineServiceProviders = null;
+
 
         // Retrieve the last_interacted_with value from the event version
         long lastInteractedWith = event.getVersion();
@@ -1324,14 +1349,62 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     amountOfPesticideUsedCoconutShells = obs.getValue().toString();
                 } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSE_HOLD.equals(field)) {
                     numberOfHouseHolds = obs.getValue().toString();
-                }else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES.equals(field)) {
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES.equals(field)) {
                     numberOfMaleCapableOfEngagingInEconomicActivities = obs.getValue().toString();
-                }else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES.equals(field)) {
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_CAPABLE_OF_ENGAGING_IN_ECONOMIC_ACTIVITIES.equals(field)) {
                     numberOfFemaleCapableOfEngagingInEconomicActivities = obs.getValue().toString();
-                }else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_ENGAGED_IN_ECONOMIC_ACTIVITIES.equals(field)) {
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALE_ENGAGED_IN_ECONOMIC_ACTIVITIES.equals(field)) {
                     numberOfMaleEngagedInEconomicActivities = obs.getValue().toString();
-                }else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_ENGAGED_IN_ECONOMIC_ACTIVITIES.equals(field)) {
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALE_ENGAGED_IN_ECONOMIC_ACTIVITIES.equals(field)) {
                     numberOfFemaleEngagedInEconomicActivities = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_TAP_AS_SOURCES_OF_WATER.equals(field)) {
+                    numberOfHouseholdsMostCommonlyUseTapAsSourcesOfWater = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_RIVER_AS_SOURCES_OF_WATER.equals(field)) {
+                    numberOfHouseholdsMostCommonlyUseRiverAsSourcesOfWater = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_SHALLOW_WELL_AS_SOURCES_OF_WATER.equals(field)) {
+                    numberOfHouseholdsMostCommonlyUseShallowWellAsSourcesOfWater = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_WATER_POND_AS_SOURCES_OF_WATER.equals(field)) {
+                    numberOfHouseholdsMostCommonlyUseWaterPondAsSourcesOfWater = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_SMALL_DAM_AS_SOURCES_OF_WATER.equals(field)) {
+                    numberOfHouseholdsMostCommonlyUseSmallDamAsSourcesOfWater = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_LAKE_AS_SOURCES_OF_WATER.equals(field)) {
+                    numberOfHouseholdsMostCommonlyUseLakeAsSourcesOfWater = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_MOST_COMMONLY_USE_SPRING_AS_SOURCES_OF_WATER.equals(field)) {
+                    numberOfHouseholdsMostCommonlyUseSpringAsSourcesOfWater = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_ELECTRICITY_AS_SOURCE_OF_ENERGY_FOR_LIGHTING.equals(field)) {
+                    numberOfHouseholdsUsingElectricityAsSourceOfEnergyForLighting = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_SOLAR_AS_SOURCE_OF_ENERGY_FOR_LIGHTING.equals(field)) {
+                    numberOfHouseholdsUsingSolarAsSourceOfEnergyForLighting = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_KEROSINE_AS_SOURCE_OF_ENERGY_FOR_LIGHTING.equals(field)) {
+                    numberOfHouseholdsUsingKerosineAsSourceOfEnergyForLighting = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_KOROBOI_AS_SOURCE_OF_ENERGY_FOR_LIGHTING.equals(field)) {
+                    numberOfHouseholdsUsingKoroboiAsSourceOfEnergyForLighting = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_OTHER_SOURCE_OF_ENERGY_FOR_LIGHTING.equals(field)) {
+                    numberOfHouseholdsUsingOtherSourceOfEnergyForLighting = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_ELECTRICITY_AS_SOURCE_OF_COOKING_ENERGY.equals(field)) {
+                    numberOfHouseholdsUsingElectricityAsSourceOfCookingEnergy = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_SOLAR_AS_SOURCE_OF_COOKING_ENERGY.equals(field)) {
+                    numberOfHouseholdsUsingSolarAsSourceOfCookingEnergy = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_KEROSINE_AS_SOURCE_OF_COOKING_ENERGY.equals(field)) {
+                    numberOfHouseholdsUsingKerosineAsSourceOfCookingEnergy = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_GAS_AS_SOURCE_OF_COOKING_ENERGY.equals(field)) {
+                    numberOfHouseholdsUsingGasAsSourceOfCookingEnergy = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_CHARCOAL_AS_SOURCE_OF_COOKING_ENERGY.equals(field)) {
+                    numberOfHouseholdsUsingCharcoalAsSourceOfCookingEnergy = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HOUSEHOLDS_USING_FIREWOOD_AS_SOURCE_OF_COOKING_ENERGY.equals(field)) {
+                    numberOfHouseholdsUsingFirewoodAsSourceOfCookingEnergy = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_HEALTH_COMMITTEE_MEMBERS_FOR_EFFECTIVE_COMMITTEE_MEETINGS.equals(field)) {
+                    numberOfHealthCommitteeMembersForEffectiveCommitteeMeetings = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_COMMITTEE_MEMBERS_ATTENDED_FISRT_QUARTER.equals(field)) {
+                    numberOfCommitteeMembersAttendedFisrtQuarter = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_REGISTERED_ALTERNATIVE_MEDICINE_SERVICE_PROVIDERS.equals(field)) {
+                    numberOfRegisteredAlternativeMedicineServiceProviders = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_REGISTERED_TRADITIONAL_MEDICINE_SERVICE_PROVIDERS.equals(field)) {
+                    numberOfRegisteredTraditionalMedicineServiceProviders = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_UNREGISTERED_ALTERNATIVE_MEDICINE_SERVICE_PROVIDERS.equals(field)) {
+                    numberOfUnregisteredAlternativeMedicineServiceProviders = obs.getValue().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_UNREGISTERED_TRADITIONAL_MEDICINE_SERVICE_PROVIDERS.equals(field)) {
+                    numberOfUnregisteredTraditionalMedicineServiceProviders = obs.getValue().toString();
                 }
             }
             // Save the annual census register record using the extracted values
@@ -1525,6 +1598,30 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     numberOfFemaleCapableOfEngagingInEconomicActivities,
                     numberOfMaleEngagedInEconomicActivities,
                     numberOfFemaleEngagedInEconomicActivities,
+                    numberOfHouseholdsMostCommonlyUseTapAsSourcesOfWater,
+                    numberOfHouseholdsMostCommonlyUseRiverAsSourcesOfWater,
+                    numberOfHouseholdsMostCommonlyUseShallowWellAsSourcesOfWater,
+                    numberOfHouseholdsMostCommonlyUseWaterPondAsSourcesOfWater,
+                    numberOfHouseholdsMostCommonlyUseSmallDamAsSourcesOfWater,
+                    numberOfHouseholdsMostCommonlyUseLakeAsSourcesOfWater,
+                    numberOfHouseholdsMostCommonlyUseSpringAsSourcesOfWater,
+                    numberOfHouseholdsUsingElectricityAsSourceOfEnergyForLighting,
+                    numberOfHouseholdsUsingSolarAsSourceOfEnergyForLighting,
+                    numberOfHouseholdsUsingKerosineAsSourceOfEnergyForLighting,
+                    numberOfHouseholdsUsingKoroboiAsSourceOfEnergyForLighting,
+                    numberOfHouseholdsUsingOtherSourceOfEnergyForLighting,
+                    numberOfHouseholdsUsingElectricityAsSourceOfCookingEnergy,
+                    numberOfHouseholdsUsingSolarAsSourceOfCookingEnergy,
+                    numberOfHouseholdsUsingKerosineAsSourceOfCookingEnergy,
+                    numberOfHouseholdsUsingGasAsSourceOfCookingEnergy,
+                    numberOfHouseholdsUsingCharcoalAsSourceOfCookingEnergy,
+                    numberOfHouseholdsUsingFirewoodAsSourceOfCookingEnergy,
+                    numberOfHealthCommitteeMembersForEffectiveCommitteeMeetings,
+                    numberOfCommitteeMembersAttendedFisrtQuarter,
+                    numberOfRegisteredAlternativeMedicineServiceProviders,
+                    numberOfRegisteredTraditionalMedicineServiceProviders,
+                    numberOfUnregisteredAlternativeMedicineServiceProviders,
+                    numberOfUnregisteredTraditionalMedicineServiceProviders,
                     lastInteractedWith
             );
         }
