@@ -44,7 +44,7 @@
     <string name="menu_child_clients">Child Clients</string>
     <string name="menu_hiv">HIV</string>
     <string name="menu_hts">HTS</string>
-    <string name="menu_hps">HPS</string>
+    <string name="menu_hps">iCCHW</string>
     <string name="menu_hiv_index_contacts">Index Contacts</string>
     <string name="menu_tb">TB</string>
     <string name="menu_anc">ANC</string>
@@ -848,7 +848,7 @@
     <string name="hts_screening">HTS Screening</string>
 
     <!--   HPS -->
-    <string name="hps_enrollment">HPS enrollment</string>
+    <string name="hps_enrollment">iCCHW Services enrollment</string>
     <string name="enter_your_username_to_reset_password">Enter your username to reset password:</string>
     <string name="reset_password">Reset Password</string>
     <string name="back_to_login">Back to Login</string>
