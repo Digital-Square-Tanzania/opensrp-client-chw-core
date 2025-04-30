@@ -1367,7 +1367,7 @@ public class CoreConstants {
 
         public static final String AYSRH = "AYSRH";
 
-        public static final String HPS = "HPS";
+        public static final String HPS = "iCCHW";
 
     }
 
