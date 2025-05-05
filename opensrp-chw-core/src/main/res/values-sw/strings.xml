@@ -127,6 +127,7 @@
     <string name="edu_level_secondary">Sekondari</string>
     <string name="edu_level_post_secondary">Chuo kikuu</string>
     <string name="remove_this_person">Ondoa huyu mtu</string>
+    <string name="mark_as_deceased">Rekodi kifo cha mteja</string>
     <string name="remove_the_mother">Ondoa mama</string>
     <string name="registration_info">Taarifa za usajili</string>
     <string name="anc_registration">Usajili wa ujauzito</string>

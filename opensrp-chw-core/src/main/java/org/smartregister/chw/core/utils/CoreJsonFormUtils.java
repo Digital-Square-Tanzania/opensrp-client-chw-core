@@ -585,7 +585,13 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
                 String myKey = registrationFormParams.getRight().getJSONObject(x).getString(KEY);
 
                 if (myKey.equalsIgnoreCase(CoreConstants.FORM_CONSTANTS.REMOVE_MEMBER_FORM.DATE_MOVED) ||
-                        myKey.equalsIgnoreCase(CoreConstants.FORM_CONSTANTS.REMOVE_MEMBER_FORM.REASON)
+                        myKey.equalsIgnoreCase(CoreConstants.FORM_CONSTANTS.REMOVE_MEMBER_FORM.REASON) ||
+                        myKey.equalsIgnoreCase(CoreConstants.JsonAssets.FIRST_NAME) ||
+                        myKey.equalsIgnoreCase(CoreConstants.JsonAssets.MIDDLE_NAME) ||
+                        myKey.equalsIgnoreCase(CoreConstants.JsonAssets.LAST_NAME) ||
+                        myKey.equalsIgnoreCase(CoreConstants.JsonAssets.SEX) ||
+                        myKey.equalsIgnoreCase(CoreConstants.JsonAssets.DOB) ||
+                        myKey.equalsIgnoreCase(CoreConstants.JsonAssets.DOD)
                 ) {
                     fields.put(registrationFormParams.getRight().get(x));
                 }

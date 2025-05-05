@@ -127,6 +127,7 @@
     <string name="edu_level_secondary">Secondaire</string>
     <string name="edu_level_post_secondary">Université</string>
     <string name="remove_this_person">Enlever cette personne</string>
+    <string name="mark_as_deceased">Marquer comme décédé</string>
     <string name="registration_info">Information d\'enregistrement</string>
     <string name="anc_registration">Enregistrement CPN</string>
     <string name="malaria_registration">Confirmation pour paludisme</string>

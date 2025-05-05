@@ -139,6 +139,7 @@
     <string name="edu_level_post_secondary">Post-secondary</string>
 
     <string name="remove_this_person">Remove this person</string>
+    <string name="mark_as_deceased">Mark as deceased</string>
     <string name="remove_the_mother">Remove the mother</string>
     <string name="registration_info">Registration info</string>
     <string name="anc_registration">ANC Registration</string>

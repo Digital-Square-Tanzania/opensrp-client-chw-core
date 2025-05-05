@@ -1,6 +1,10 @@
 package org.smartregister.chw.core.model;
 
 
+import static org.smartregister.chw.core.utils.Utils.getDuration;
+
+import android.content.Context;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,11 +25,16 @@ import java.util.Locale;
 
 import timber.log.Timber;
 
-import static org.smartregister.chw.core.utils.Utils.getDuration;
-
-import android.content.Context;
-
 public abstract class CoreFamilyRemoveMemberModel extends CoreFamilyProfileMemberModel implements FamilyRemoveMemberContract.Model {
+
+    public static String getGenderTranslated(Context context, String gender) {
+        if (gender.equalsIgnoreCase(Gender.MALE.toString())) {
+            return context.getResources().getString(R.string.male);
+        } else if (gender.equalsIgnoreCase(Gender.FEMALE.toString())) {
+            return context.getResources().getString(R.string.female);
+        }
+        return "";
+    }
 
     @Override
     public JSONObject prepareJsonForm(CommonPersonObjectClient client, String formType) {
@@ -75,6 +84,14 @@ public abstract class CoreFamilyRemoveMemberModel extends CoreFamilyProfileMembe
 
                     jsonObject.put("text", details);
 
+                } else if (jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY).equalsIgnoreCase(CoreConstants.JsonAssets.FIRST_NAME)) {
+                    jsonObject.put("value", Utils.getValue(client.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true));
+                } else if (jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY).equalsIgnoreCase(CoreConstants.JsonAssets.MIDDLE_NAME)) {
+                    jsonObject.put("value", Utils.getValue(client.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));
+                } else if (jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY).equalsIgnoreCase(CoreConstants.JsonAssets.LAST_NAME)) {
+                    jsonObject.put("value", Utils.getValue(client.getColumnmaps(), DBConstants.KEY.LAST_NAME, true));
+                } else if (jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY).equalsIgnoreCase(CoreConstants.JsonAssets.SEX)) {
+                    jsonObject.put("value", Utils.getValue(client.getColumnmaps(), DBConstants.KEY.GENDER, true).toLowerCase(Locale.getDefault()));
                 }
             }
 
@@ -133,15 +150,6 @@ public abstract class CoreFamilyRemoveMemberModel extends CoreFamilyProfileMembe
         Calendar cal = Calendar.getInstance(Locale.US);
         cal.setTime(date);
         return cal;
-    }
-
-    public static String getGenderTranslated(Context context, String gender) {
-        if (gender.equalsIgnoreCase(Gender.MALE.toString())) {
-            return context.getResources().getString(R.string.male);
-        } else if (gender.equalsIgnoreCase(Gender.FEMALE.toString())) {
-            return context.getResources().getString(R.string.female);
-        }
-        return "";
     }
 
 }
