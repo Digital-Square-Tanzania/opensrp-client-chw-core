@@ -1090,6 +1090,12 @@ public class CoreConstants {
         public static final String IN_APP_REPORT_CREATED_AT = "created_at";
         public static final String IN_APP_REPORT_VALUE = "value";
 
+        public static final String FIRST_NAME = "first_name";
+        public static final String MIDDLE_NAME = "middle_name";
+        public static final String LAST_NAME = "last_name";
+        public static final String DOD = "dod";
+        public static final String DOB = "dob";
+
         public static class FAMILY_MEMBER {
             public static final String HIGHEST_EDUCATION_LEVEL = "highest_edu_level";
             public static final String EVER_SCHOOL = "ever_school";
@@ -1367,7 +1373,7 @@ public class CoreConstants {
 
         public static final String AYSRH = "AYSRH";
 
-        public static final String HPS = "HPS";
+        public static final String HPS = "iCCHW";
 
     }
 

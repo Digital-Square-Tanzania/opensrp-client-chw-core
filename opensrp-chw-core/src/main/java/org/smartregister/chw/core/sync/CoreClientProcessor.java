@@ -2214,7 +2214,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         return nfDf.parse(strDod);
     }
 
-    private void processRemoveMember(String baseEntityId, Event event) {
+    protected void processRemoveMember(String baseEntityId, Event event) {
 
         Date myEventDate = event.getEventDate().toDate();
         if (myEventDate == null) {
@@ -2253,7 +2253,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         }
     }
 
-    private void processRemoveChild(String baseEntityId, Event event) {
+    protected void processRemoveChild(String baseEntityId, Event event) {
 
         Date myEventDate = event.getEventDate().toDate();
         if (myEventDate == null) {

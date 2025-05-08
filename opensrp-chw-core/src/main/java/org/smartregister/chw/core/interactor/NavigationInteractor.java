@@ -591,8 +591,8 @@ public class NavigationInteractor implements NavigationContract.Interactor {
             case CoreConstants.TABLE_NAME.HPS_MEMBERS:
                 String sqlHps =
                         "SELECT count(*) " +
-                                "   from " + org.smartregister.chw.hps.util.Constants.TABLES.HPS_CLIENT_REGISTER + " p " +
-                                "              where p.is_closed is 0 AND does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' ";
+                                "   from " + org.smartregister.chw.hps.util.Constants.TABLES.HPS_CLIENT_REGISTER + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
+                                "              where p.is_closed is 0 AND does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' AND ec_family_member.dod is null ";
                 return NavigationDao.getQueryCount(sqlHps);
             default:
                 return NavigationDao.getTableCount(tableName);
