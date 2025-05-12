@@ -346,6 +346,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_MOBILIZATION:
                 processHpsMobilizationEvent(eventClient.getEvent());
                 break;
+            case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_ADVERTISEMENT_FEEDBACK:
+                processHpsAdverstimentFeedbackEvent(eventClient.getEvent());
+                break;
             case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_DEATH_REGISTRATION:
                 processHpsDeathRegisterEvent(eventClient.getEvent());
                 break;
@@ -711,6 +714,69 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     numberOfLeafletProvided,
                     otherIecMaterials,
                     numberOfOtherIecProvided,
+                    lastInteractedWith);
+        }
+    }
+
+    private void processHpsAdverstimentFeedbackEvent(Event event) {
+        List<Obs> hpsAdverstimentFeedbackObs = event.getObs();
+
+        String dateOfAdvertisementFeedback = null;
+        String areaWhereAdvertisementFeedbackTookPlace = null;
+        String numberOfFemalesWhoAttended = null;
+        String numberOfMalesWhoAttended = null;
+        String ownsRadioStation = null;
+        String numberOfRadioOwners = null;
+        String mobilePhoneRadioListeners = null;
+        String numberOfWhoListensRadioViaPhone = null;
+        String radioChannelListened = null;
+        String selectedHealthEducationTopics = null;
+        String healthEducationHeard = null;
+
+        // Assuming event.getVersion() returns a long representing last_interacted_with.
+        long lastInteractedWith = event.getVersion();
+
+        if (hpsAdverstimentFeedbackObs != null && !hpsAdverstimentFeedbackObs.isEmpty()) {
+            for (Obs obs : hpsAdverstimentFeedbackObs) {
+                String field = obs.getFormSubmissionField();
+                if (org.smartregister.chw.hps.util.DBConstants.KEY.DATE_OF_ADVERTISEMENT_FEEDBACK.equals(field)) {
+                    dateOfAdvertisementFeedback = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.AREA_WHERE_ADVERTISEMENT_FEEDBACK_TOOK_PLACE.equals(field)) {
+                    areaWhereAdvertisementFeedbackTookPlace = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_FEMALES_WHO_ATTENDED.equals(field)) {
+                    numberOfFemalesWhoAttended = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_MALES_WHO_ATTENDED.equals(field)) {
+                    numberOfMalesWhoAttended = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.OWNS_RADIO_STATION.equals(field)) {
+                    ownsRadioStation = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_RADIO_OWNERS.equals(field)) {
+                    numberOfRadioOwners = obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.MOBILE_PHONE_RADIO_LISTENERS.equals(field)) {
+                    mobilePhoneRadioListeners = obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.NUMBER_OF_WHO_LISTENS_RADIO_VIA_PHONE.equals(field)) {
+                    numberOfWhoListensRadioViaPhone = obs.getValues().toString();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.RADIO_CHANNEL_LISTENED.equals(field)) {
+                    radioChannelListened = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.SELECTED_HEALTH_EDUCATION_TOPICS.equals(field)) {
+                    selectedHealthEducationTopics = (String) obs.getValue();
+                } else if (org.smartregister.chw.hps.util.DBConstants.KEY.HEALTH_EDUCATION_HEARD.equals(field)) {
+                    healthEducationHeard = obs.getValues().toString();
+                }
+            }
+
+            // Call the function to save the mobilization data.
+            HpsDao.saveHpsAdvertisementFeedback(event.getBaseEntityId(),
+                    dateOfAdvertisementFeedback,
+                    areaWhereAdvertisementFeedbackTookPlace,
+                    numberOfFemalesWhoAttended,
+                    numberOfMalesWhoAttended,
+                    ownsRadioStation,
+                    numberOfRadioOwners,
+                    mobilePhoneRadioListeners,
+                    numberOfWhoListensRadioViaPhone,
+                    radioChannelListened,
+                    selectedHealthEducationTopics,
+                    healthEducationHeard,
                     lastInteractedWith);
         }
     }
