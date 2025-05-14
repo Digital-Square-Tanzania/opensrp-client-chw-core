@@ -2,6 +2,7 @@ package org.smartregister.chw.core.fragment;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,15 +18,19 @@ import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
 import org.smartregister.chw.core.provider.CoreFpProvider;
 import org.smartregister.chw.core.utils.CoreConstants;
+import org.smartregister.chw.core.utils.QueryBuilder;
 import org.smartregister.chw.core.utils.QueryGenerator;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.fp.fragment.BaseFpRegisterFragment;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
+import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
+import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import timber.log.Timber;
@@ -166,25 +171,37 @@ public abstract class CoreFpRegisterFragment extends BaseFpRegisterFragment {
 
     @Nullable
     private String defaultFilterAndSortQuery() {
-        try {
-            QueryGenerator generator = new QueryGenerator()
-                    .withMainSelect(mainSelect)
-                    .withWhereClause(presenter().getMainCondition())
-                    .withSortColumn(Sortqueries)
-                    .withLimitClause(clientAdapter.getCurrentoffset(), clientAdapter.getCurrentlimit());
+        SmartRegisterQueryBuilder sqb = new SmartRegisterQueryBuilder(mainSelect);
 
-            if (dueFilterActive)
-                generator.withWhereClause(getDueCondition());
+        String query = "";
+        StringBuilder customFilter = new StringBuilder();
+        if (StringUtils.isNotBlank(filters)) {
+            customFilter.append(MessageFormat.format(" and ( {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.FIRST_NAME, filters));
+            customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.LAST_NAME, filters));
+            customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.MIDDLE_NAME, filters));
+            customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ) ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.UNIQUE_ID, filters));
 
-            if (StringUtils.isNotBlank(filters))
-                generator.withWhereClause(getSearchFilter(filters));
-
-            return generator.generateQuery();
-        } catch (Exception e) {
-            Timber.e(e);
         }
 
-        return null;
+        try {
+            if (isValidFilterForFts(commonRepository())) {
+
+                String myquery = QueryBuilder.getQuery(joinTables, mainCondition, tablename, customFilter.toString(), clientAdapter, Sortqueries);
+                List<String> ids = commonRepository().findSearchIds(myquery);
+                query = sqb.toStringFts(ids, tablename, CommonRepository.ID_COLUMN,
+                        Sortqueries);
+                query = sqb.Endquery(query);
+            } else {
+                sqb.addCondition(customFilter.toString());
+                query = sqb.orderbyCondition(Sortqueries);
+                query = sqb.Endquery(sqb.addlimitandOffset(query, clientAdapter.getCurrentlimit(), clientAdapter.getCurrentoffset()));
+
+            }
+        } catch (Exception e) {
+           Timber.e(e);
+        }
+
+        return query;
     }
 
     private String getSearchFilter(String search) {
@@ -233,25 +250,24 @@ public abstract class CoreFpRegisterFragment extends BaseFpRegisterFragment {
         }
     }
 
-//    @Override
-//    public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
-//        if (id == LOADER_ID) {
-//            return new CursorLoader(getActivity()) {
-//                @Override
-//                public Cursor loadInBackground() {
-//                    // Count query
-//                    final String COUNT = "count_execute";
-//                    if (args != null && args.getBoolean(COUNT)) {
-//                        countExecute();
-//                    }
-//
-//                    String query = defaultFilterAndSortQuery();
-//                    return commonRepository().rawCustomQueryForAdapter(query);
-//                }
-//            };
-//        }
-//        return super.onCreateLoader(id, args);
-//    }
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
+        if (id == LOADER_ID) {
+            return new CursorLoader(getActivity()) {
+                @Override
+                public Cursor loadInBackground() {
+                    // Count query
+                    final String COUNT = "count_execute";
+                    if (args != null && args.getBoolean(COUNT)) {
+                        countExecute();
+                    }
+                    String query = defaultFilterAndSortQuery();
+                    return commonRepository().rawCustomQueryForAdapter(query);
+                }
+            };
+        }
+        return super.onCreateLoader(id, args);
+    }
 
     public String getDueCondition() {
         return FamilyPlanningConstants.TABLES.FP_REGISTER + ".base_entity_id in (select base_entity_id from schedule_service where strftime('%Y-%m-%d') BETWEEN due_date and ifnull(expiry_date,strftime('%Y-%m-%d')) and schedule_name = '" + CoreConstants.SCHEDULE_TYPES.FP_VISIT + "' and ifnull(not_done_date,'') = '' and ifnull(completion_date,'') = '' )  ";
