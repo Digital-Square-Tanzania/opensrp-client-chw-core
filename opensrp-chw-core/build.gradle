@@ -730,8 +730,8 @@ dependencies {
     // explicitly depend on RxJava's latest version for bug fixes and new features.
     api 'io.reactivex.rxjava2:rxjava:2.2.15'
     //do not update for now- compatibility issues with client-core
-    api 'com.evernote:android-job:1.2.6'
-    api 'org.greenrobot:eventbus:3.1.1'
+    api 'com.evernote:android-job:1.4.3'
+    api 'org.greenrobot:eventbus:3.3.1'
 
     api("org.smartregister:android-p2p-sync:0.3.8-aplha4-SNAPSHOT") {
         transitive = true
