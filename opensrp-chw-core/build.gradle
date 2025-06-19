@@ -485,7 +485,7 @@ dependencies {
     implementation 'com.ibm.fhir:fhir-model:4.7.0'
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-    api('org.smartregister:opensrp-client-core:1.16.12-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-core:1.16.13-ALPHA-NACP-SNAPSHOT@aar') {
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
