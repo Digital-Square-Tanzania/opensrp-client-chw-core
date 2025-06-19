@@ -30,6 +30,7 @@ import org.smartregister.repository.LocationTagRepository;
 import org.smartregister.repository.ManifestRepository;
 import org.smartregister.repository.PlanDefinitionRepository;
 import org.smartregister.repository.PlanDefinitionSearchRepository;
+import org.smartregister.repository.ProviderRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.SettingsRepository;
 import org.smartregister.repository.TaskRepository;
@@ -93,7 +94,7 @@ public class CoreChwRepository extends Repository {
         ManifestRepository.createTable(database);
         ClientFormRepository.createTable(database);
         CommunityResponderRepository.createTable(database);
-
+        ProviderRepository.createTable(database);
         onUpgrade(database, 1, databaseVersion);
 
         // initialize from yml file
