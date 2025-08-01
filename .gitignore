@@ -20,3 +20,12 @@ project.properties
 build/
 jacoco.exec
 github.properties
+wrapper/
+android/
+caches/
+daemon/
+kotlin-profile/
+native/
+android.lock
+jdks/
+.tmp/
