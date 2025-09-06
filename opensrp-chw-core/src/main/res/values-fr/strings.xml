@@ -44,6 +44,7 @@
     <string name="menu_hiv">VIH</string>
     <string name="menu_hts">Dépistage du VIH</string>
     <string name="menu_hps">Services de promotion de la santé</string>
+    <string name="menu_ayp">AYP</string>
     <string name="menu_anc">Clients CPN</string>
     <string name="menu_pnc">Clients CPoN</string>
     <string name="menu_child">CH</string>
