@@ -600,6 +600,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         " AND t.status <> '" + Task.TaskStatus.CANCELLED + "' " +
                         " AND p.chw_referral_service <> 'LTFU' COLLATE NOCASE ";
                 return NavigationDao.getQueryCount(sqlLinkage);
+
             case CoreConstants.TABLE_NAME.HPS_MEMBERS:
                 String sqlHps =
                         "SELECT count(*) " +
