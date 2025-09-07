@@ -44,6 +44,7 @@
     <string name="menu_child_clients">Child Clients</string>
     <string name="menu_hiv">HIV</string>
     <string name="menu_hts">HTS</string>
+    <string name="menu_hps">iCCHW</string>
     <string name="menu_hiv_index_contacts">Index Contacts</string>
     <string name="menu_tb">TB</string>
     <string name="menu_anc">ANC</string>
@@ -138,6 +139,7 @@
     <string name="edu_level_post_secondary">Post-secondary</string>
 
     <string name="remove_this_person">Remove this person</string>
+    <string name="mark_as_deceased">Mark as deceased</string>
     <string name="remove_the_mother">Remove the mother</string>
     <string name="registration_info">Registration info</string>
     <string name="anc_registration">ANC Registration</string>
@@ -843,6 +845,21 @@
     <!--   ASRH -->
     <string name="asrh_registration">AYSRH Enrollment</string>
 
+    <!--   HTS -->
+    <string name="hts_screening">HTS Screening</string>
+
+    <!--   HPS -->
+    <string name="hps_enrollment">iCCHW Services enrollment</string>
+    <string name="enter_your_username_to_reset_password">Enter your username to reset password:</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="username_cannot_be_empty">Username cannot be empty</string>
+    <string name="network_error">"Network error: "</string>
+    <string name="password_reset_instructions_sent_please_check_your_email">Password reset instructions sent. Please check your email.</string>
+    <string name="error_username_not_found">Error: Username not found.</string>
+    <string name="error_please_try_again">Error: Please try again.</string>
+    <string name="an_unexpected_error_occurred_please_try_again_later">An unexpected error occurred. Please try again later.</string>
+    <string name="error_processing_server_response">Error processing server response.</string>
 
 
 </resources>

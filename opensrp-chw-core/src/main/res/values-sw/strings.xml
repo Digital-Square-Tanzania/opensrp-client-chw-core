@@ -2,10 +2,10 @@
     <!--Login and app strings-->
     <color name="chw_primary">#218CC5</color>
     <color name="chw_primary_dark">#0d384e</color>
-    <string name="powered_by">Imedhaminiwa na</string>
+    <string name="powered_by">Powered by</string>
     <string name="username">Jina la mtumiaji</string>
     <!-- Date manipulation-->
-    <string name="password">Neno la Siri</string>
+    <string name="password">Nenosiri</string>
     <string name="nav_logo">Mfumo wa Boresha Afya</string>
     <string name="day">siku</string>
     <string name="days">siku</string>
@@ -42,6 +42,7 @@
     <string name="menu_child_clients">Watoto</string>
     <string name="menu_hiv">VVU/Ukimwi</string>
     <string name="menu_hts">Ushauri nasaha na Upimaji</string>
+    <string name="menu_hps">iCCHW</string>
     <string name="menu_tb">Kifua Kikuu</string>
     <string name="menu_anc">Wajawazito</string>
     <string name="menu_pnc">Baada ya kujifungua</string>
@@ -126,6 +127,7 @@
     <string name="edu_level_secondary">Sekondari</string>
     <string name="edu_level_post_secondary">Chuo kikuu</string>
     <string name="remove_this_person">Ondoa huyu mtu</string>
+    <string name="mark_as_deceased">Rekodi kifo cha mteja</string>
     <string name="remove_the_mother">Ondoa mama</string>
     <string name="registration_info">Taarifa za usajili</string>
     <string name="anc_registration">Usajili wa ujauzito</string>
@@ -815,5 +817,18 @@
 
 
     <string name="refer_to_addo">Unganisha kwenda Duka la Dawa</string>
+
+    <string name="hps_enrollment">Usajili kwenye huduma za Afya Jamii (iCCHW)</string>
+    <string name="enter_your_username_to_reset_password">Ingiza jina la mtumiaji kubadili nenosiri:</string>
+    <string name="reset_password">Badili Nenosiri</string>
+    <string name="back_to_login">Rudi kwenye Login</string>
+    <string name="username_cannot_be_empty">Jina la mtumiaji halipaswi kuwa tupu</string>
+    <string name="network_error">"Hitilafu ya Mtandao: "</string>
+    <string name="password_reset_instructions_sent_please_check_your_email">Maelekezo ya kubadilisha nenosiri yametumwa. Tafadhali angalia barua pepe yako.</string>
+    <string name="error_username_not_found">Kosa: Jina la mtumiaji halipo.</string>
+    <string name="error_please_try_again">Hitilafu: Tafadhali jaribu tena.</string>
+    <string name="an_unexpected_error_occurred_please_try_again_later">Hitilafu: Tafadhali jaribu tena baadae.</string>
+    <string name="error_processing_server_response">Hitilafu wakati wa kuchakata jibu lililorudishwa.</string>
+
 </resources>
 
