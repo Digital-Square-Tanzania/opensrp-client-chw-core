@@ -57,23 +57,23 @@ import java.util.TimerTask;
 import timber.log.Timber;
 
 public class NavigationMenu implements NavigationContract.View, SyncStatusBroadcastReceiver.SyncStatusListener, DrawerLayout.DrawerListener {
-    private static NavigationMenu instance;
-    private static WeakReference<Activity> activityWeakReference;
     protected static CoreChwApplication application;
     protected static NavigationMenu.Flavour menuFlavor;
     protected static NavigationModel.Flavor modelFlavor;
+    private static NavigationMenu instance;
+    private static WeakReference<Activity> activityWeakReference;
     private static Map<String, Class> registeredActivities;
     private static boolean showDeviceToDeviceSync = true;
-    private DrawerLayout drawer;
     protected Toolbar toolbar;
+    protected NavigationContract.Presenter mPresenter;
+    protected View parentView;
+    private DrawerLayout drawer;
     private NavigationAdapter navigationAdapter;
     private RecyclerView recyclerView;
     private TextView tvLogout;
     private View rootView = null;
     private ImageView ivSync;
     private ProgressBar syncProgressBar;
-    protected NavigationContract.Presenter mPresenter;
-    protected View parentView;
     private Timer timer;
 
     public static void setupNavigationMenu(CoreChwApplication application, NavigationMenu.Flavour menuFlavor,
@@ -107,6 +107,10 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         }
 
         return null;
+    }
+
+    public static String getChildNavigationCountString() {
+        return menuFlavor.childNavigationMenuCountString();
     }
 
     protected void init(Activity activity, View myParentView, Toolbar myToolbar) {
@@ -246,7 +250,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             View rlIconServiceReport = rootView.findViewById(R.id.rlServiceReport);
             rlIconServiceReport.setVisibility(View.VISIBLE);
             rlIconServiceReport.setOnClickListener(view -> {
-                activity.startActivity( menuFlavor.getHIA2ReportActivityIntent(activity));
+                activity.startActivity(menuFlavor.getHIA2ReportActivityIntent(activity));
             });
         }
     }
@@ -256,7 +260,7 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             View rlInAppReports = rootView.findViewById(R.id.rlInAppReports);
             rlInAppReports.setVisibility(View.VISIBLE);
             rlInAppReports.setOnClickListener(view -> {
-                activity.startActivity( menuFlavor.getInAppReportsActivityIntent(activity));
+                activity.startActivity(menuFlavor.getInAppReportsActivityIntent(activity));
             });
         }
     }
@@ -339,6 +343,10 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
         final TextView tvLang = rootView.findViewById(R.id.tvLang);
 
         final List<Pair<String, Locale>> locales = menuFlavor.getSupportedLanguages();
+
+        if (locales.size() < 2) {
+            rlIconLang.setVisibility(View.GONE);
+        }
 
         String[] languages = new String[locales.size()];
         Locale current = context.getResources().getConfiguration().locale;
@@ -463,7 +471,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             timer = null;
     }
 
-
     @Override
     public void onDrawerStateChanged(int newState) {
         Timber.v("Drawer state is changed");
@@ -490,10 +497,6 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
     public DrawerLayout getDrawer() {
         return drawer;
-    }
-
-    public static String getChildNavigationCountString(){
-       return menuFlavor.childNavigationMenuCountString();
     }
 
     public interface Flavour {

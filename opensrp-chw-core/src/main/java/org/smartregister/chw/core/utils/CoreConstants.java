@@ -1017,7 +1017,9 @@ public class CoreConstants {
         public static final String LAB = "Lab";
 
         public static final String HTS = "HTS";
+      
         public static final String HPS = "HPS";
+      
         public static final String AYP = "AYP";
     }
 
@@ -1300,7 +1302,9 @@ public class CoreConstants {
         public static final String HIV_TESTING_SERVICES_REGISTER_ACTIVITY = "HIV_TESTING_SERVICES_REGISTER_ACTIVITY";
 
         public static final String HPS_REGISTER_ACTIVITY = "HPS_REGISTER_ACTIVITY";
+
         public static final String AYP_REGISTER_ACTIVITY = "AYP_REGISTER_ACTIVITY";
+
     }
 
     public static final class BUSINESS_STATUS {
