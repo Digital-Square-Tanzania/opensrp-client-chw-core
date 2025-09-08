@@ -164,6 +164,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startAypInSchoolEnrollment() {
+
+    }
+
+    @Override
     protected void startPncRegister() {
         //TODO implement start pnc registration
     }
@@ -278,5 +283,10 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
             menu.findItem(R.id.action_pregnancy_confirmation).setVisible(true);
             menu.findItem(R.id.action_fp_initiation).setVisible(true);
         }
+    }
+
+    @Override
+    public String getString(int i) {
+        return "";
     }
 }
