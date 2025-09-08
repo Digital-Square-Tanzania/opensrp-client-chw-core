@@ -862,5 +862,8 @@
     <string name="an_unexpected_error_occurred_please_try_again_later">An unexpected error occurred. Please try again later.</string>
     <string name="error_processing_server_response">Error processing server response.</string>
 
+    <!--   AYP -->
+    <string name="ayp_in_school_enrollment">AYP In-school Enrollment</string>
+
 
 </resources>
