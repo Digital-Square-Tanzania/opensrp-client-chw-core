@@ -607,10 +607,10 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.hps.util.Constants.TABLES.HPS_CLIENT_REGISTER + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
                                 "              where p.is_closed is 0 AND does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' AND ec_family_member.dod is null ";
                 return NavigationDao.getQueryCount(sqlHps);
-            case org.smartregister.chw.ayp.util.Constants.TABLES.ayp_ENROLLMENT:
+            case org.smartregister.chw.ayp.util.Constants.TABLES.AYP_IN_SCHOOL_ENROLLMENT:
                 String sqlAyp =
                         "SELECT count(*) " +
-                                "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.ayp_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
+                                "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_IN_SCHOOL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
                                 "              where p.is_closed is 0 AND ec_family_member.dod is null ";
                 return NavigationDao.getQueryCount(sqlAyp);
             default:

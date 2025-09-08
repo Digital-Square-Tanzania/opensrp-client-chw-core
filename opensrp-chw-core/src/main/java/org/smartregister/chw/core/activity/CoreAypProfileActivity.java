@@ -7,11 +7,15 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.vijay.jsonwizard.constants.JsonFormConstants;
+import com.vijay.jsonwizard.domain.Form;
+
 import org.json.JSONObject;
+import org.smartregister.chw.ayp.util.Constants;
+import org.smartregister.chw.ayp.util.DBConstants;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.dataloader.CoreFamilyMemberDataLoader;
 import org.smartregister.chw.core.form_data.NativeFormsDataBinder;
-import org.smartregister.chw.core.model.CoreAllClientsMemberModel;
 import org.smartregister.chw.core.presenter.CoreAypProfilePresenter;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
@@ -20,15 +24,9 @@ import org.smartregister.chw.ayp.activity.BaseAypProfileActivity;
 import org.smartregister.chw.ayp.interactor.BaseAypProfileInteractor;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.AlertStatus;
-import org.smartregister.family.contract.FamilyProfileContract;
-import org.smartregister.family.domain.FamilyEventClient;
-import org.smartregister.family.interactor.FamilyProfileInteractor;
-import org.smartregister.family.model.BaseFamilyProfileModel;
-import org.smartregister.family.util.DBConstants;
+import java.util.Date;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
-
-import java.util.Date;
 
 import timber.log.Timber;
 
@@ -139,6 +137,20 @@ public abstract class CoreAypProfileActivity extends BaseAypProfileActivity {
         } catch (Exception e) {
             Timber.e(e);
         }
+    }
+
+    public void startFormActivity(JSONObject jsonForm) {
+
+        Intent intent = new Intent(this, Utils.metadata().familyMemberFormActivity);
+        intent.putExtra(Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+
+
+        Form form = new Form();
+        form.setActionBarBackground(R.color.family_actionbar);
+        form.setWizard(false);
+        intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
+
+        startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 
     public Context getContext() {

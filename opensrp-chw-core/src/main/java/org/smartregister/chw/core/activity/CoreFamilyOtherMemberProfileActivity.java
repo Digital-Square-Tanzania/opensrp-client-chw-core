@@ -217,6 +217,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
             startHtsScreening();
         } else if (i == R.id.action_hps_enrollment) {
             startHpsEnrollment();
+        } else if (i == R.id.action_ayp_in_school_enrollment) {
+            startAypInSchoolEnrollment();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -274,6 +276,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startHtsScreening();
 
     protected abstract void startHpsEnrollment();
+
+    protected abstract void startAypInSchoolEnrollment();
 
     protected abstract void setIndependentClient(boolean isIndependent);
 

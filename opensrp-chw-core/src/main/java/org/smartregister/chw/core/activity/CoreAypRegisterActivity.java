@@ -34,10 +34,8 @@ public class CoreAypRegisterActivity extends BaseAypRegisterActivity {
 
     @Override
     public void startFormActivity(JSONObject jsonForm) {
-        // Keep BaseAypRegisterActivity default launcher but ensure form config is passed if present
         if (getFormConfig() != null) {
             try {
-                // Inject form config into intent via Base class expectation
                 getIntent().putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, getFormConfig());
             } catch (Exception ignored) {
             }
