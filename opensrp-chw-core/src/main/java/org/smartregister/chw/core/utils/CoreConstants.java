@@ -1020,7 +1020,7 @@ public class CoreConstants {
       
         public static final String HPS = "HPS";
       
-        public static final String AYP = "AYP";
+        public static final String AYP_IN_SCHOOL = "AYP_IN_SCHOOL";
     }
 
     public static final class RULE_FILE {

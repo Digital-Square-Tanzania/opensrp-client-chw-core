@@ -23,7 +23,7 @@ public class CoreAypRegisterActivity extends BaseAypRegisterActivity {
         super.onResumption();
         NavigationMenu menu = NavigationMenu.getInstance(this, null, null);
         if (menu != null) {
-            menu.getNavigationAdapter().setSelectedView(CoreConstants.DrawerMenu.AYP);
+            menu.getNavigationAdapter().setSelectedView(CoreConstants.DrawerMenu.AYP_IN_SCHOOL);
         }
     }
 
