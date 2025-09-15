@@ -198,7 +198,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_agyw_screening) {
             startAgywScreening();
             return true;
-        } else if (i == R.id.action_kvp_prep_registration) {
+        } else if (i == R.id.action_diabetes_risk) {
+            startDiabetesRiskAssessment();
+            return true;
+        }  else if (i == R.id.action_kvp_prep_registration) {
             startKvpPrEPRegistration();
             return true;
         } else if (i == R.id.action_kvp_registration) {
@@ -258,6 +261,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startPrEPRegistration();
 
     protected abstract void startAgywScreening();
+
+    protected abstract void startDiabetesRiskAssessment();
 
     protected abstract void startSbcRegistration();
 
