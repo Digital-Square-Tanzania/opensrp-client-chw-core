@@ -11,7 +11,6 @@ buildscript {
         maven { url "http://cloudant.github.io/cloudant-sync-eap/repository" }
         maven{  url "https://plugins.gradle.org/m2/" }
         mavenLocal()
-        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.0'
