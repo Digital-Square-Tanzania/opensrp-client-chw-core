@@ -282,7 +282,7 @@ allprojects {
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
             }
         }
-        
+
         maven {
 
             name = "GitHubPackages"
