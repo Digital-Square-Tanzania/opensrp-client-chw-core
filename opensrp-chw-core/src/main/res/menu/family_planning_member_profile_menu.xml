@@ -45,6 +45,86 @@
         android:title="@string/family_planning_ecp_provision"
         android:orderInCategory="1000"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_kvp_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/kvp_registration"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_hiv_registration"
+        android:enabled="true"
+        android:title="@string/hiv_registration"
+        android:visible="false"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_hivst_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/hivst_registration"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_vmmc_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/vmmc_registration"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_cancer_preventive_services_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/reproductive_cancer_preventive_services_registration"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_anc_registration"
+        android:enabled="true"
+        android:title="@string/anc_registration"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_pregnancy_confirmation"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/pregnancy_confirmation"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_ld_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/ld_registration"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_pregnancy_out_come"
+        android:enabled="true"
+        android:title="@string/pnc_registration"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_pmtct_register"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/pmtct_registration"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sbc_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/sbc_registration"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_gbv_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/gbv_registration"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_hps_enrollment"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/hps_enrollment"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_hps_enrollment"
