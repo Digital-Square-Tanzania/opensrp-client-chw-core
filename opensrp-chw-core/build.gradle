@@ -491,6 +491,10 @@ dependencies {
         exclude group: 'androidx.work', module: 'work-runtime'
     }
 
+    implementation 'net.zetetic:android-database-sqlcipher:4.5.0'
+
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.work:work-runtime:2.8.1"
 
     implementation 'com.github.rey5137:material:1.2.5'
@@ -728,7 +732,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-ncd:0.0.1-SNAPSHOT-LOCAL01') {
+    api('org.smartregister:opensrp-chw-ncd:0.0.1-SNAPSHOT-USELOCAL-BUILD') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
