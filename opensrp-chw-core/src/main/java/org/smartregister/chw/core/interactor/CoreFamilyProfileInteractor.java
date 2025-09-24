@@ -6,13 +6,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.core.contract.FamilyProfileExtendedContract;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.family.contract.FamilyProfileContract;
 import org.smartregister.family.util.AppExecutors;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
+import org.smartregister.chw.ncd.util.NcdUtil;
 
 import java.util.Map;
 
-public class CoreFamilyProfileInteractor extends org.smartregister.family.interactor.FamilyProfileInteractor {
+import timber.log.Timber;
+
+public class CoreFamilyProfileInteractor extends org.smartregister.family.interactor.FamilyProfileInteractor implements FamilyProfileExtendedContract.Interactor {
     protected AppExecutors appExecutors;
 
     protected CoreFamilyProfileInteractor() {
@@ -68,4 +72,28 @@ public class CoreFamilyProfileInteractor extends org.smartregister.family.intera
             return false;
         }
     }
+
+
+    @Override
+    public void saveDiabetesHypertensionEvent(String jsonString, FamilyProfileExtendedContract.PresenterCallBack callback) {
+        appExecutors.diskIO().execute(() -> {
+            try {
+                NcdUtil.saveFormEvent(jsonString);
+                appExecutors.mainThread().execute(() -> {
+                    if (callback != null) {
+                        callback.onEventSaveComplete(true); // or create a new callback method if needed
+                    }
+                });
+            } catch (Exception e) {
+                Timber.e(e);
+                appExecutors.mainThread().execute(() -> {
+                    if (callback != null) {
+                        callback.onEventSaveComplete(false);
+                    }
+                });
+            }
+        });
+    }
+
+
 }

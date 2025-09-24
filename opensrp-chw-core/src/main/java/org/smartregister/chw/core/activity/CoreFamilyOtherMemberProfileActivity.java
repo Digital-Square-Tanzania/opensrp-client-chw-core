@@ -327,6 +327,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
                     JSONObject form = new JSONObject(jsonString);
                     if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(Utils.metadata().familyMemberRegister.updateEventType)) {
                         presenter().updateFamilyMember(this, jsonString, isIndependent);
+                    } else if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(CoreConstants.EventType.DIABETES_HYPERTENSION_SCREENING)) {
+                        presenter().saveDiabetesHypertensionScreening(this, jsonString);
                     }
                 } catch (Exception e) {
                     Timber.e(e);

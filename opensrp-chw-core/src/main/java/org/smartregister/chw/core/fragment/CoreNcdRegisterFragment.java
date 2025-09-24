@@ -13,6 +13,7 @@ import org.smartregister.chw.core.model.CoreNcdRegisterFragmentModel;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.ncd.fragment.BaseNcdRegisterFragment;
 import org.smartregister.chw.ncd.presenter.BaseNcdRegisterFragmentPresenter;
+import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import timber.log.Timber;
 
@@ -29,17 +30,33 @@ public class CoreNcdRegisterFragment extends BaseNcdRegisterFragment {
         this.toolbar.setContentInsetsRelative(0, 0);
         this.toolbar.setContentInsetStartWithNavigation(0);
 
+        View navbarContainer = view.findViewById(R.id.register_nav_bar_container);
+        navbarContainer.setFocusable(false);
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         View searchBarLayout = view.findViewById(R.id.search_bar_layout);
         searchBarLayout.setLayoutParams(params);
         searchBarLayout.setBackgroundResource(R.color.chw_primary);
         searchBarLayout.setPadding(searchBarLayout.getPaddingLeft(), searchBarLayout.getPaddingTop(), searchBarLayout.getPaddingRight(), (int) Utils.convertDpToPixel(10, getActivity()));
 
+        CustomFontTextView titleView = view.findViewById(R.id.txt_title_label);
+        if (titleView != null) {
+            titleView.setPadding(0, titleView.getTop(), titleView.getPaddingRight(), titleView.getPaddingBottom());
+        }
+
+        if (getSearchView() != null) {
+            getSearchView().setBackgroundResource(R.color.white);
+            getSearchView().setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_search, 0, 0, 0);
+            getSearchView().setTextColor(getResources().getColor(R.color.text_black));
+        }
+
         try {
             NavigationMenu.getInstance(getActivity(), null, toolbar);
+            getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
         } catch (NullPointerException e) {
             Timber.e(e);
         }
+
     }
 
     @Override

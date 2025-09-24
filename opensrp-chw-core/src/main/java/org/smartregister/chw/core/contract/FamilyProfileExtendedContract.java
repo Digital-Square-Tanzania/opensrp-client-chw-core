@@ -39,5 +39,11 @@ public interface FamilyProfileExtendedContract {
         void verifyHasPhone();
 
         void notifyHasPhone(boolean hasPhone);
+
+        void onEventSaveComplete(boolean success);
+    }
+
+    interface Interactor extends FamilyProfileContract.Interactor {
+        void saveDiabetesHypertensionEvent(String jsonString, FamilyProfileExtendedContract.PresenterCallBack callback);
     }
 }

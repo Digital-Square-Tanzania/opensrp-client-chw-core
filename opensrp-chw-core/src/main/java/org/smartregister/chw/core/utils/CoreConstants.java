@@ -209,6 +209,8 @@ public class CoreConstants {
         public static final String HIV_REGISTRATION = "HIV Registration";
         public static final String CBHS_REGISTRATION = "CBHS Registration";
         public static final String ANC_PARTNER_TESTING = "Partner Testing";
+
+        public static final String DIABETES_HYPERTENSION_SCREENING = "Diabetes and Hypertension Screening";
     }
 
     public static final class EncounterType {

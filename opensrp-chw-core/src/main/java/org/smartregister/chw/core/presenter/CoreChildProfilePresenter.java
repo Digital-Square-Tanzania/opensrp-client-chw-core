@@ -108,6 +108,11 @@ public class CoreChildProfilePresenter implements CoreChildProfileContract.Prese
         }
     }
 
+    @Override
+    public void onEventSaveComplete(boolean success) {
+
+    }
+
     public String getFamilyName() {
         return familyName;
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
+import org.json.JSONObject;
 import org.smartregister.chw.anc.util.NCUtils;
 import org.smartregister.chw.core.application.CoreChwApplication;
 import org.smartregister.chw.core.contract.FamilyOtherMemberProfileExtendedContract;
@@ -23,6 +24,7 @@ import org.smartregister.family.domain.FamilyEventClient;
 import org.smartregister.family.presenter.BaseFamilyOtherMemberProfileActivityPresenter;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
+import org.smartregister.chw.ncd.util.NcdUtil;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
@@ -38,7 +40,7 @@ import static org.smartregister.util.Utils.getName;
 
 public abstract class CoreFamilyOtherMemberActivityPresenter extends BaseFamilyOtherMemberProfileActivityPresenter implements FamilyOtherMemberProfileExtendedContract.Presenter, FamilyProfileContract.InteractorCallBack, FamilyProfileExtendedContract.PresenterCallBack {
 
-    protected FamilyProfileContract.Interactor profileInteractor;
+    protected FamilyProfileExtendedContract.Interactor profileInteractor;
     protected FamilyProfileContract.Model profileModel;
     protected CoreFamilyInteractor familyInteractor;
     private WeakReference<FamilyOtherMemberProfileExtendedContract.View> viewReference;
@@ -174,6 +176,29 @@ public abstract class CoreFamilyOtherMemberActivityPresenter extends BaseFamilyO
         }
     }
 
+    public void saveDiabetesHypertensionScreening(Context context, String jsonString) {
+        try {
+            getView().showProgressDialog(org.smartregister.family.R.string.saving_dialog_title);
+            String updatedEvent = addEntityIdToEvent(baseEntityId, jsonString);
+            profileInteractor.saveDiabetesHypertensionEvent(updatedEvent, this);
+
+        } catch (Exception e) {
+            getView().hideProgressDialog();
+            Timber.e(e);
+        }
+    }
+
+    private String addEntityIdToEvent(String baseEntityId, String jsonString) {
+        try {
+            JSONObject form = new JSONObject(jsonString);
+            form.put(CoreJsonFormUtils.ENTITY_ID, baseEntityId);
+            return form.toString();
+        } catch (Exception e) {
+            Timber.e(e);
+            return jsonString;
+        }
+    }
+
 
     @Override
     public void updateFamilyMemberServiceDue(String serviceDueStatus) {
@@ -211,6 +236,13 @@ public abstract class CoreFamilyOtherMemberActivityPresenter extends BaseFamilyO
             refreshProfileView();
 
             getView().refreshList();
+        }
+    }
+
+    @Override
+    public void onEventSaveComplete(boolean success) {
+        if (success) {
+            getView().hideProgressDialog();
         }
     }
 }
