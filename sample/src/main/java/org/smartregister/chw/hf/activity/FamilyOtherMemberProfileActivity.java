@@ -169,6 +169,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startAypOutSchoolEnrollment() {
+
+    }
+
+    @Override
     protected void startPncRegister() {
         //TODO implement start pnc registration
     }
