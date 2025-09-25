@@ -552,6 +552,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.vmmc.util.Constants.TABLES.VMMC_ENROLLMENT + " v " +
                                 "              where v.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlVmmc);
+            case org.smartregister.chw.tbleprosy.util.Constants.TABLES.TBLEPROSY_SCREENING:
+                String sqlTbLeprosy =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.tbleprosy.util.Constants.TABLES.TBLEPROSY_SCREENING + " v " +
+                                "              where v.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlTbLeprosy);
             case org.smartregister.chw.sbc.util.Constants.TABLES.SBC_REGISTER:
                 String sqlSbc =
                         "SELECT count(*) " +
