@@ -46,6 +46,8 @@
     <string name="menu_hts">HTS</string>
     <string name="menu_hps">iCCHW</string>
     <string name="menu_ayp_inschool">AYP In-School Services</string>
+    <string name="menu_ayp_parental">AYP Parental Services</string>
+    <string name="ayp_parental_enrollment">AYP Parental Enrollment</string>
     <string name="menu_hiv_index_contacts">Index Contacts</string>
     <string name="menu_tb">TB</string>
     <string name="menu_anc">ANC</string>

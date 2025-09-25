@@ -169,6 +169,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startAypParentalEnrollment() {
+        // Not implemented in sample app
+    }
+
+    @Override
     protected void startPncRegister() {
         //TODO implement start pnc registration
     }
