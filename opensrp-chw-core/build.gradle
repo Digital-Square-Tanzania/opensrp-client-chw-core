@@ -765,7 +765,7 @@ dependencies {
         exclude group: 'com.google.guava', module: 'guava'
     }
 
-    api('org.smartregister:opensrp-chw-ayp:1.0.0-ALPHA2-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-ayp:1.0.1-ALPHA1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
