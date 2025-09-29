@@ -23,6 +23,20 @@ public class CoreNcdRegisterFragmentModel extends BaseNcdRegisterFragmentModel {
         queryBuilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY + " ON  " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " = " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID);
         queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " as T1 ON  " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.PRIMARY_CAREGIVER + " = T1." + DBConstants.KEY.BASE_ENTITY_ID);
         queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " as T2 ON  " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.FAMILY_HEAD + " = T2." + DBConstants.KEY.BASE_ENTITY_ID);
+        queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.DIABETES_HYPERTENSION_FOLLOWUP + " as dhf ON  " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = dhf." + DBConstants.KEY.BASE_ENTITY_ID);
+        return queryBuilder.mainCondition(mainCondition);
+    }
+
+    @NonNull
+    @Override
+    public String countSelect(@NonNull String tableName, @NonNull String mainCondition) {
+        SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+        queryBuilder.selectInitiateMainTableCounts(tableName);
+        queryBuilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " ON  " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID + " COLLATE NOCASE ");
+        queryBuilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY + " ON  " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " = " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID);
+        queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " as T1 ON  " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.PRIMARY_CAREGIVER + " = T1." + DBConstants.KEY.BASE_ENTITY_ID);
+        queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " as T2 ON  " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.FAMILY_HEAD + " = T2." + DBConstants.KEY.BASE_ENTITY_ID);
+        queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.DIABETES_HYPERTENSION_FOLLOWUP + " as dhf ON  " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = dhf." + DBConstants.KEY.BASE_ENTITY_ID);
         return queryBuilder.mainCondition(mainCondition);
     }
 
@@ -32,6 +46,13 @@ public class CoreNcdRegisterFragmentModel extends BaseNcdRegisterFragmentModel {
         Set<String> columnList = new HashSet<>();
 
         columnList.add(tableName + "." + DBConstants.KEY.BASE_ENTITY_ID);
+        columnList.add(tableName + ".family_history_diabetes");
+        columnList.add(tableName + ".waist_circumference");
+        columnList.add(tableName + ".systolic_bp");
+        columnList.add(tableName + ".diastolic_bp");
+        columnList.add(tableName + ".risk_score");
+        columnList.add("dhf.diabetes_test_result");
+        columnList.add("dhf.hypertension_test_result");
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " as " + ChildDBConstants.KEY.RELATIONAL_ID);
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.FIRST_NAME);
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.MIDDLE_NAME);
