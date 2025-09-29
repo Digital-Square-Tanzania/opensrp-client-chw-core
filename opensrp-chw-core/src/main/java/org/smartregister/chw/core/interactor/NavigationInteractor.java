@@ -606,6 +606,15 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         " AND t.status <> '" + Task.TaskStatus.CANCELLED + "' " +
                         " AND p.chw_referral_service <> 'LTFU' COLLATE NOCASE ";
                 return NavigationDao.getQueryCount(sqlLinkage);
+            case CoreConstants.TABLE_NAME.NCD_REGISTER:
+                String sqlNcd = "Select count(*) " +
+                        "FROM " + org.smartregister.chw.ncd.util.Constants.TABLES.NCD_ENROLLMENT +
+                        " INNER JOIN ec_family_member ON  ec_ncd_register.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE " +
+                        "INNER JOIN ec_family ON ec_family_member.relational_id = ec_family.base_entity_id " +
+                        "LEFT JOIN ec_family_member as T1 ON  ec_family.primary_caregiver = T1.base_entity_id " +
+                        "LEFT JOIN ec_family_member as T2 ON  ec_family.family_head = T2.base_entity_id " +
+                        "WHERE ec_ncd_register.is_closed = 0 ";
+                return NavigationDao.getQueryCount(sqlNcd);
             default:
                 return NavigationDao.getTableCount(tableName);
         }
