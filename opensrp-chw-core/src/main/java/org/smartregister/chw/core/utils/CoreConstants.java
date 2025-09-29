@@ -937,6 +937,9 @@ public class CoreConstants {
         public static final String LABOUR_AND_DELIVERY = "ec_ld_confirmation";
         public static final String LTFU_REFERRALS = "ec_ltfu_referrals";
         public static final String ADDO_LINKAGE = "ec_addo_linkage";
+        public static final String NCD_REGISTER = "ec_ncd_register";
+        public static final String DIABETES_HYPERTENSION_FOLLOWUP = "ec_diabetes_hypertension_followup";
+        public static final String DIABETES_HYPERTENSION_CONFIRMATION = "ec_diabetes_hypertension_confirmation";
     }
 
     public static final class INTENT_KEY {
