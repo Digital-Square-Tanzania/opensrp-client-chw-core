@@ -174,7 +174,7 @@ public abstract class CoreFamilyRegisterFragment extends BaseFamilyRegisterFragm
 
     private void dueFilter(String mainConditionString) {
         this.joinTables = null;
-        super.filter(getSearchText(), "", mainConditionString, false);
+        applyFilter(getSearchText(), "", mainConditionString, false);
     }
 
     private void switchViews(View dueOnlyLayout, boolean isPress) {
