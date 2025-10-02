@@ -2,6 +2,9 @@ package org.smartregister.chw.core.fragment;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,10 +29,15 @@ import org.smartregister.family.util.Utils;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
+import org.smartregister.util.NetworkUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import timber.log.Timber;
 
@@ -38,6 +46,9 @@ public abstract class CoreFamilyRegisterFragment extends BaseFamilyRegisterFragm
     protected View dueOnlyLayout;
     protected boolean dueFilterActive = false;
     private View view;
+    private final ExecutorService filterExecutor = Executors.newSingleThreadExecutor();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    private final AtomicInteger filterSequence = new AtomicInteger(0);
 
     @Override
     protected void initializePresenter() {
@@ -77,7 +88,49 @@ public abstract class CoreFamilyRegisterFragment extends BaseFamilyRegisterFragm
     @Override
     public void filter(String filterString, String joinTableString, String mainConditionString, boolean qrCode) {
         this.joinTables = new String[]{CoreConstants.TABLE_NAME.FAMILY_MEMBER};
-        super.filter(filterString, joinTableString, mainConditionString, qrCode);
+        applyFilter(filterString, joinTableString, mainConditionString, qrCode);
+    }
+
+    private void applyFilter(String filterString, String joinTableString, String mainConditionString, boolean qrCode) {
+        View searchCancelView = getSearchCancelView();
+        if (searchCancelView != null) {
+            searchCancelView.setVisibility(TextUtils.isEmpty(filterString) ? View.INVISIBLE : View.VISIBLE);
+        }
+        if (TextUtils.isEmpty(filterString)) {
+            Utils.hideKeyboard(getActivity());
+        }
+
+        this.filters = filterString;
+        this.joinTable = joinTableString;
+        this.mainCondition = mainConditionString;
+
+        final int requestId = filterSequence.incrementAndGet();
+
+        final boolean hasFilterText = filterString != null && filterString.trim().length() > 0;
+        try {
+            filterExecutor.execute(() -> {
+                countExecute();
+                final boolean shouldSearchGlobally = qrCode && hasFilterText
+                        && clientAdapter.getTotalcount() == 0 && NetworkUtils.isNetworkAvailable();
+
+                mainHandler.post(() -> {
+                    if (filterSequence.get() != requestId) {
+                        return;
+                    }
+
+                    if (shouldSearchGlobally) {
+                        globalQrSearch = true;
+                        presenter.searchGlobally(filterString);
+                    } else {
+                        filterandSortExecute();
+                    }
+
+                    setTotalPatients();
+                });
+            });
+        } catch (RejectedExecutionException e) {
+            Timber.w(e, "Filter executor rejected task");
+        }
     }
 
     @Override
@@ -354,5 +407,11 @@ public abstract class CoreFamilyRegisterFragment extends BaseFamilyRegisterFragm
             };
         }
         return super.onCreateLoader(id, args);
+    }
+
+    @Override
+    public void onDestroy() {
+        filterExecutor.shutdownNow();
+        super.onDestroy();
     }
 }
