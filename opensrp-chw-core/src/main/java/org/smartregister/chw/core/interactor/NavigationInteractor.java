@@ -552,6 +552,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.vmmc.util.Constants.TABLES.VMMC_ENROLLMENT + " v " +
                                 "              where v.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlVmmc);
+            case org.smartregister.chw.tbleprosy.util.Constants.TABLES.TBLEPROSY_SCREENING:
+                String sqlTbLeprosy =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.tbleprosy.util.Constants.TABLES.TBLEPROSY_SCREENING + " v " +
+                                "              where v.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlTbLeprosy);
             case org.smartregister.chw.sbc.util.Constants.TABLES.SBC_REGISTER:
                 String sqlSbc =
                         "SELECT count(*) " +
@@ -613,6 +619,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_IN_SCHOOL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
                                 "              where p.is_closed is 0 AND ec_family_member.dod is null ";
                 return NavigationDao.getQueryCount(sqlAyp);
+            case org.smartregister.chw.ayp.util.Constants.TABLES.AYP_PARENTAL_ENROLLMENT:
+                String sqlAypParental =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_PARENTAL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
+                                "              where p.is_closed is 0 AND ec_family_member.dod is null ";
+                return NavigationDao.getQueryCount(sqlAypParental);
             case org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT:
                 String sqlAypOut =
                         "SELECT count(*) " +

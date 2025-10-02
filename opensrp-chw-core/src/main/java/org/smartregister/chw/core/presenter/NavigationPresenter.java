@@ -53,6 +53,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         tableMap.put(CoreConstants.DrawerMenu.MALARIA, CoreConstants.TABLE_NAME.MALARIA_CONFIRMATION);
         tableMap.put(CoreConstants.DrawerMenu.ICCM, CoreConstants.TABLE_NAME.ICCM_ENROLLMENT);
         tableMap.put(CoreConstants.DrawerMenu.VMMC, CoreConstants.TABLE_NAME.VMMC_ENROLLMENT);
+        tableMap.put(CoreConstants.DrawerMenu.TBLEPROSY, CoreConstants.TABLE_NAME.TBLEPROSY_SCREENING);
         tableMap.put(CoreConstants.DrawerMenu.FAMILY_PLANNING, FamilyPlanningConstants.TABLES.FP_REGISTER);
         tableMap.put(CoreConstants.DrawerMenu.ALL_CLIENTS, CoreConstants.TABLE_NAME.FAMILY_MEMBER);
         tableMap.put(CoreConstants.DrawerMenu.UPDATES, CoreConstants.TABLE_NAME.NOTIFICATION_UPDATE);
@@ -85,6 +86,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         tableMap.put(CoreConstants.DrawerMenu.HPS, org.smartregister.chw.hps.util.Constants.TABLES.HPS_CLIENT_REGISTER);
         tableMap.put(CoreConstants.DrawerMenu.AYP_IN_SCHOOL, org.smartregister.chw.ayp.util.Constants.TABLES.AYP_IN_SCHOOL_ENROLLMENT);
         tableMap.put(CoreConstants.DrawerMenu.AYP_OUT_SCHOOL, org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT);
+        tableMap.put(CoreConstants.DrawerMenu.AYP_PARENTAL, org.smartregister.chw.ayp.util.Constants.TABLES.AYP_PARENTAL_ENROLLMENT);
     }
 
     public HashMap<String, String> getTableMap() {

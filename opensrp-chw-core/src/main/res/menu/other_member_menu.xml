@@ -37,6 +37,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_tbleprosy_screening"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/tbleprosy_screening"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_anc_registration"
         android:enabled="true"
         android:title="@string/anc_registration"
@@ -197,6 +204,13 @@
         android:enabled="true"
         android:visible="false"
         android:title="@string/hps_enrollment"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_ayp_parental_enrollment"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/ayp_parental_enrollment"
         app:showAsAction="never" />
 
     <item

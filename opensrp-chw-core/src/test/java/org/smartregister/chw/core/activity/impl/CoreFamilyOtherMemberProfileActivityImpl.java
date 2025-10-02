@@ -63,6 +63,16 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
     }
 
     @Override
+    protected void startAypInSchoolEnrollment() {
+        // do nothing
+    }
+
+    @Override
+    protected void startAypParentalEnrollment() {
+        // do nothing
+    }
+
+    @Override
     public void setIndependentClient(boolean isIndependent) {
         // do nothing
     }
