@@ -586,7 +586,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlAsrh =
                         "SELECT count(*) " +
                                 "   from " + org.smartregister.chw.asrh.util.Constants.TABLES.ASRH_REGISTER + " p " +
-                                "   inner join ec_family_member ef on ef.base_entity_id on p.base_entity_id " +
+                                "   inner join ec_family_member ef on ef.base_entity_id = p.base_entity_id " +
                                 "   where p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlAsrh);
             case org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS:
@@ -613,7 +613,10 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         "INNER JOIN ec_family ON ec_family_member.relational_id = ec_family.base_entity_id " +
                         "LEFT JOIN ec_family_member as T1 ON  ec_family.primary_caregiver = T1.base_entity_id " +
                         "LEFT JOIN ec_family_member as T2 ON  ec_family.family_head = T2.base_entity_id " +
-                        "WHERE ec_ncd_register.is_closed = 0 ";
+                        "WHERE ec_ncd_register.is_closed = 0 AND " +
+                        "CAST(IFNULL(NULLIF(ec_ncd_register.risk_score,''),'0') AS REAL) >= 0.09175944 OR " +
+                        "CAST(IFNULL(NULLIF(ec_ncd_register.systolic_bp,''),'0') AS REAL) >= 140 OR " +
+                        "CAST(IFNULL(NULLIF(ec_ncd_register.diastolic_bp,''),'0') AS REAL) >= 90 ";
                 return NavigationDao.getQueryCount(sqlNcd);
             default:
                 return NavigationDao.getTableCount(tableName);
