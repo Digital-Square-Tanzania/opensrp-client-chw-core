@@ -844,6 +844,6 @@
     <!--   ASRH -->
     <string name="asrh_registration">AYSRH Enrollment</string>
 
-    <string name="diabetes_screening">+ Screening Test</string>
+    <string name="diabetes_screening">Diabetes and Hypertention Screening</string>
 
 </resources>
