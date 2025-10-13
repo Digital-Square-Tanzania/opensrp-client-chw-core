@@ -84,6 +84,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     private ClientClassification classification;
     private Table vaccineTable;
     private Table serviceTable;
+    private Map<String, Table> serviceTables;
 
     protected CoreClientProcessor(Context context) {
         super(context);
@@ -182,10 +183,53 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     }
 
     private Table getServiceTable() {
+        if (serviceTables == null) {
+            loadServiceTables();
+        }
+        if (serviceTable != null) {
+            return serviceTable;
+        }
+        if (serviceTables != null && !serviceTables.isEmpty()) {
+            serviceTable = serviceTables.values().iterator().next();
+        }
         if (serviceTable == null) {
             serviceTable = assetJsonToJava("ec_client_service.json", Table.class);
+            if (serviceTable != null) {
+                if (serviceTables == null) {
+                    serviceTables = new HashMap<>();
+                }
+                serviceTables.put(serviceTable.name, serviceTable);
+            }
         }
         return serviceTable;
+    }
+
+    protected Table getServiceTable(String tableName) {
+        if (StringUtils.isBlank(tableName)) {
+            return getServiceTable();
+        }
+        if (serviceTables == null) {
+            loadServiceTables();
+        }
+        if (serviceTables != null && serviceTables.containsKey(tableName)) {
+            return serviceTables.get(tableName);
+        }
+        return getServiceTable();
+    }
+
+    private void loadServiceTables() {
+        Table[] tables = assetJsonToJava("ec_client_service.json", Table[].class);
+        if (tables != null && tables.length > 0) {
+            serviceTables = new HashMap<>();
+            for (Table table : tables) {
+                if (table != null && StringUtils.isNotBlank(table.name)) {
+                    serviceTables.put(table.name, table);
+                }
+            }
+            if (!serviceTables.isEmpty()) {
+                serviceTable = serviceTables.values().iterator().next();
+            }
+        }
     }
 
     protected void processEvents(ClientClassification clientClassification, Table vaccineTable, Table serviceTable, EventClient eventClient, Event event, String eventType) throws Exception {
@@ -2074,7 +2118,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     }
 
     // possible to delegate
-    private Boolean processService(EventClient service, Table serviceTable) {
+    protected Boolean processService(EventClient service, Table serviceTable) {
 
         try {
 
