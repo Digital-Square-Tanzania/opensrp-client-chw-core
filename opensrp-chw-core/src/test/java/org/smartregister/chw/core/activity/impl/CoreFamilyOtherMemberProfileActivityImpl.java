@@ -63,6 +63,11 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
     }
 
     @Override
+    protected void startAypFacilityScreening() {
+        // do nothing
+    }
+
+    @Override
     protected void startAypInSchoolEnrollment() {
         // do nothing
     }

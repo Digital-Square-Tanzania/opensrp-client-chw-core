@@ -169,6 +169,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startAypFacilityScreening() {
+        // Not implemented in sample app
+    }
+
+    @Override
     protected void startAypInSchoolEnrollment() {
 
     }

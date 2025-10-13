@@ -214,6 +214,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_ayp_facility_screening"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/ayp_facility_screening"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_ayp_in_school_enrollment"
         android:enabled="true"
         android:visible="false"

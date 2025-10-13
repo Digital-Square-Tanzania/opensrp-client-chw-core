@@ -161,6 +161,9 @@ public class NavigationListener implements View.OnClickListener {
                 case CoreConstants.DrawerMenu.AYP_PARENTAL:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AYP_PARENTAL_REGISTER_ACTIVITY));
                     break;
+                case CoreConstants.DrawerMenu.AYP_FACILITY:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AYP_FACILITY_REGISTER_ACTIVITY));
+                    break;
                 default:
                     Utils.showShortToast(activity.getApplicationContext(), "Unspecified navigation action");
                     break;

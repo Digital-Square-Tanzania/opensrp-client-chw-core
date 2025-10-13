@@ -871,6 +871,7 @@
 
     <!--   AYP -->
     <string name="ayp_in_school_enrollment">AYP In-school Enrollment</string>
+    <string name="ayp_facility_screening">AYP Screening</string>
 
 
 </resources>
