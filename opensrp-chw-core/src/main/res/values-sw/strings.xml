@@ -720,6 +720,8 @@
     <string name="hiv_registration">Usajili wa VVU</string>
     <string name="cbhs_registration">Usajili wa CBHS</string>
     <string name="tb_registration">Usajili wa TB</string>
+    <string name="tbleprosy_screening">Uchunguzi wa awali wa TB na Ukoma</string>
+    <string name="tbleprosy_screening_info">Matokeo ya uchunguzi wa awali wa TB na Ukoma</string>
     <string name="remove_client">Ondoa mteja</string>
     <string name="call_all_clients_member">Piga simu kwa mteja au mlezi</string>
 
