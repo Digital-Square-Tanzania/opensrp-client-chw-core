@@ -44,6 +44,7 @@
     <string name="menu_hts">Ushauri nasaha na Upimaji</string>
     <string name="menu_hps">iCCHW</string>
     <string name="menu_ayp_inschool">AYP In-School Services</string>
+    <string name="menu_ayp_outschool">AYP Out-School Services</string>
     <string name="menu_ayp_parental">Huduma za AYP kwa wazazi</string>
     <string name="ayp_parental_enrollment">Usajili wa wazazi wa AYP</string>
     <string name="menu_tb">Kifua Kikuu</string>

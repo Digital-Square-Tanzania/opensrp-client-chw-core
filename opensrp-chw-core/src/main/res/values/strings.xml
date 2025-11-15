@@ -46,6 +46,7 @@
     <string name="menu_hts">HTS</string>
     <string name="menu_hps">iCCHW</string>
     <string name="menu_ayp_inschool">AYP In-School Services</string>
+    <string name="menu_ayp_outschool">AYP Out-School Services</string>
     <string name="menu_ayp_parental">AYP Parental Services</string>
     <string name="ayp_parental_enrollment">AYP Parental Enrollment</string>
     <string name="menu_hiv_index_contacts">Index Contacts</string>
@@ -872,6 +873,7 @@
     <!--   AYP -->
     <string name="ayp_in_school_enrollment">AYP In-school Enrollment</string>
     <string name="ayp_facility_screening">AYP Screening</string>
+    <string name="ayp_out_school_enrollment">AYP Out-school Screening</string>
 
 
 </resources>

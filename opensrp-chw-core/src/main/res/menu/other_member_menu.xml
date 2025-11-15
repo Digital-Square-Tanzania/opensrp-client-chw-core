@@ -228,6 +228,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_ayp_out_school_enrollment"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/ayp_out_school_enrollment"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
         android:title="@string/mark_as_deceased"

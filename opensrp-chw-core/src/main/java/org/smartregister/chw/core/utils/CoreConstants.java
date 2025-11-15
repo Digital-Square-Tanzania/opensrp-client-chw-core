@@ -1032,8 +1032,12 @@ public class CoreConstants {
         public static final String HPS = "HPS";
       
         public static final String AYP_IN_SCHOOL = "AYP_IN_SCHOOL";
+
         public static final String AYP_PARENTAL = "AYP_PARENTAL";
+
         public static final String AYP_FACILITY = "AYP_FACILITY";
+
+        public static final String AYP_OUT_SCHOOL = "AYP_OUT_SCHOOL";
     }
 
     public static final class RULE_FILE {
@@ -1321,6 +1325,8 @@ public class CoreConstants {
 
         public static final String AYP_REGISTER_ACTIVITY = "AYP_REGISTER_ACTIVITY";
         public static final String AYP_PARENTAL_REGISTER_ACTIVITY = "AYP_PARENTAL_REGISTER_ACTIVITY";
+
+        public static final String AYP_OUT_SCHOOL_REGISTER_ACTIVITY = "AYP_OUT_SCHOOL_REGISTER_ACTIVITY";
 
     }
 
