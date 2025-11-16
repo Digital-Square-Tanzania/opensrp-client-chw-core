@@ -556,7 +556,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlTbLeprosy =
                         "SELECT count(*) " +
                                 "   from " + org.smartregister.chw.tbleprosy.util.Constants.TABLES.TBLEPROSY_SCREENING + " v " +
-                                "              where v.is_closed is 0 ";
+                                "              where v.is_closed is 0 AND (v.status IS NULL OR v.status = 'client') AND  screening_status != '-' ";
                 return NavigationDao.getQueryCount(sqlTbLeprosy);
             case org.smartregister.chw.sbc.util.Constants.TABLES.SBC_REGISTER:
                 String sqlSbc =
