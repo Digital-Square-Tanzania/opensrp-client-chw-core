@@ -42,14 +42,6 @@ public abstract class CoreTbLeprosyRegisterFragment extends BaseTbLeprosyRegiste
 
     private boolean dueFilterActive = false;
 
-//    @Override
-//    public void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns) {
-//        ChwTbLeprosyRegisterProvider tbLeprosyRegisterProvider = new ChwTbLeprosyRegisterProvider(getActivity(), paginationViewHandler, registerActionHandler, visibleColumns);
-//        clientAdapter = new RecyclerViewPaginatedAdapter(null, tbLeprosyRegisterProvider, context().commonrepository(this.tablename));
-//        clientAdapter.setCurrentlimit(20);
-//        clientsView.setAdapter(clientAdapter);
-//    }
-
     @Override
     protected void initializePresenter() {
         if (getActivity() == null) {
