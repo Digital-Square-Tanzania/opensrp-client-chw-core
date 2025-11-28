@@ -937,6 +937,7 @@ public class CoreConstants {
         public static final String LABOUR_AND_DELIVERY = "ec_ld_confirmation";
         public static final String LTFU_REFERRALS = "ec_ltfu_referrals";
         public static final String ADDO_LINKAGE = "ec_addo_linkage";
+        public static final String HPS_MEMBERS = "ec_hps_client_register";
         public static final String NCD_REGISTER = "ec_ncd_register";
         public static final String DIABETES_HYPERTENSION_FOLLOWUP = "ec_diabetes_hypertension_followup";
         public static final String DIABETES_HYPERTENSION_CONFIRMATION = "ec_diabetes_hypertension_confirmation";
@@ -1020,6 +1021,9 @@ public class CoreConstants {
 
         public static final String LAB = "Lab";
 
+        public static final String HTS = "HTS";
+        public static final String HPS = "HPS";
+
         public static final String NCD = "Ncd Clients";
     }
 
@@ -1093,6 +1097,12 @@ public class CoreConstants {
         public static final String IN_APP_REPORT_DATE_SENT = "date_sent";
         public static final String IN_APP_REPORT_CREATED_AT = "created_at";
         public static final String IN_APP_REPORT_VALUE = "value";
+
+        public static final String FIRST_NAME = "first_name";
+        public static final String MIDDLE_NAME = "middle_name";
+        public static final String LAST_NAME = "last_name";
+        public static final String DOD = "dod";
+        public static final String DOB = "dob";
 
         public static class FAMILY_MEMBER {
             public static final String HIGHEST_EDUCATION_LEVEL = "highest_edu_level";
@@ -1294,6 +1304,10 @@ public class CoreConstants {
         public static final String ADDO_LINKAGE_ACTIVITY = "ADDO_LINKAGE_ACTIVITY";
 
         public static final String NCD_REGISTER_ACTIVITY = "NCD_REGISTER_ACTIVITY";
+
+        public static final String HIV_TESTING_SERVICES_REGISTER_ACTIVITY = "HIV_TESTING_SERVICES_REGISTER_ACTIVITY";
+
+        public static final String HPS_REGISTER_ACTIVITY = "HPS_REGISTER_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {
@@ -1368,6 +1382,8 @@ public class CoreConstants {
         public static final String CECAP = "Reproductive Cancers";
 
         public static final String AYSRH = "AYSRH";
+
+        public static final String HPS = "iCCHW";
 
     }
 

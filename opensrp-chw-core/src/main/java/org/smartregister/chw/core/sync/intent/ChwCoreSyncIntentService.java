@@ -21,12 +21,14 @@ import timber.log.Timber;
 
 public abstract class ChwCoreSyncIntentService extends SyncIntentService {
     public static final String SYNC_URL = "/rest/event/sync-by-base-entity-ids";
+    private List<Task> tasksWithMissingClientsEvents;
 
     public ChwCoreSyncIntentService(String name) {
         super(name);
     }
 
     public synchronized void fetchMissingEventsRetry(final int count, List<Task> tasksWithMissingClientsEvents) {
+        this.tasksWithMissingClientsEvents = tasksWithMissingClientsEvents;
         Timber.i("Tasks with missing clients and/or events = %s", new Gson().toJson(tasksWithMissingClientsEvents));
         List<List<Task>> tasksWithMissingClientsEventsBatches = Lists.partition(tasksWithMissingClientsEvents, 1000);
         for (List<Task> tasksList : tasksWithMissingClientsEventsBatches) {
