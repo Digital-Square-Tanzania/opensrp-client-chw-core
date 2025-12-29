@@ -22,6 +22,7 @@ import org.smartregister.chw.core.utils.QueryBuilder;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.tbleprosy.fragment.BaseTbLeprosyContactFragment;
 import org.smartregister.chw.tbleprosy.presenter.BaseTbLeprosyRegisterContactFragmentPresenter;
+import org.smartregister.chw.tbleprosy.util.Constants;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.view.customcontrols.CustomFontTextView;
@@ -42,21 +43,13 @@ public abstract class CoreTbLeprosyContactRegisterFragment extends BaseTbLeprosy
 
     private boolean dueFilterActive = false;
 
-//    @Override
-//    public void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns) {
-//        ChwTbLeprosyRegisterProvider tbLeprosyRegisterProvider = new ChwTbLeprosyRegisterProvider(getActivity(), paginationViewHandler, registerActionHandler, visibleColumns);
-//        clientAdapter = new RecyclerViewPaginatedAdapter(null, tbLeprosyRegisterProvider, context().commonrepository(this.tablename));
-//        clientAdapter.setCurrentlimit(20);
-//        clientsView.setAdapter(clientAdapter);
-//    }
-
-@Override
-protected void initializePresenter() {
-    if (getActivity() == null) {
-        return;
+    @Override
+    protected void initializePresenter() {
+        if (getActivity() == null) {
+            return;
+        }
+        presenter = new BaseTbLeprosyRegisterContactFragmentPresenter(this, new CoreTbLeprosyRegisterFragmentModel(), null);
     }
-    presenter = new BaseTbLeprosyRegisterContactFragmentPresenter(this, new CoreTbLeprosyRegisterFragmentModel(), null);
-}
 
     @Override
     public void setupViews(View view) {
@@ -220,9 +213,9 @@ protected void initializePresenter() {
         Cursor c = null;
         try {
 
-            String query = "select count(*) from " + presenter().getMainTable() + " inner join " + CoreConstants.TABLE_NAME.FAMILY_MEMBER +
-                    " on " + presenter().getMainTable() + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " +
-                    CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID +
+            String query = "select count(*) from " + presenter().getMainTable() +
+                    " inner join " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " on " + presenter().getMainTable() + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID +
+                    " inner join " + Constants.TABLES.TBLEPROSY_SCREENING + " on " + presenter().getMainTable() + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " + Constants.TABLES.TBLEPROSY_SCREENING + "." + DBConstants.KEY.BASE_ENTITY_ID +
                     " where " + presenter().getMainCondition();
 
             if (StringUtils.isNotBlank(filters)) {
