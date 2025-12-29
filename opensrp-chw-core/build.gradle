@@ -473,8 +473,9 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:5.1.0'
     implementation('io.ona.kujaku:library:0.9.0') {
-        exclude group: 'com.android.volley', module: 'volley'
         exclude group: 'stax', module: 'stax-api'
+        exclude group: 'io.realm', module: 'realm-android-library'
+        exclude group: 'io.realm', module: 'realm-annotations'
     }
     implementation 'org.smartregister:opensrp-plan-evaluator:0.0.19-SNAPSHOT'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
@@ -507,7 +508,7 @@ dependencies {
     implementation 'com.ibm.fhir:fhir-model:4.7.0'
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-    api('org.smartregister:opensrp-client-core:1.16.13-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-core:1.17.0-MOH-SNAPSHOT@aar') {
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -604,7 +605,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-fp:0.0.3-ALPHA-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-fp:1.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -692,7 +693,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-hivst:1.0.5-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-hivst:1.0.6-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -774,7 +775,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-hts:1.0.0-ALPHA-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-hts:1.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -802,6 +803,10 @@ dependencies {
     //do not update for now- compatibility issues with client-core
     api 'com.evernote:android-job:1.2.6'
     api 'org.greenrobot:eventbus:3.3.1'
+
+    implementation 'com.android.volley:volley:1.2.1'
+    implementation 'net.zetetic:android-database-sqlcipher:4.5.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     api("org.smartregister:android-p2p-sync:0.3.8-aplha4-SNAPSHOT") {
         transitive = true

@@ -39,6 +39,7 @@ import org.smartregister.chw.fp.util.FamilyPlanningConstants;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.hps.dao.HpsDao;
 import org.smartregister.chw.hts.dao.HtsDao;
+import org.smartregister.chw.hts.dao.HtsDao;
 import org.smartregister.chw.lab.LabLibrary;
 import org.smartregister.chw.lab.dao.LabDao;
 import org.smartregister.chw.malaria.util.Constants;

@@ -1038,9 +1038,9 @@ public class CoreConstants {
         public static final String LAB = "Lab";
 
         public static final String HTS = "HTS";
-      
+
         public static final String HPS = "HPS";
-      
+
         public static final String AYP_IN_SCHOOL = "AYP_IN_SCHOOL";
 
         public static final String AYP_PARENTAL = "AYP_PARENTAL";

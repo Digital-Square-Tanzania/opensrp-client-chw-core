@@ -52,6 +52,7 @@ allprojects {
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
+        maven { url "http://maven.wafour.com:8081/artifactory/libs-release/" }
         maven{  url "https://plugins.gradle.org/m2/" }
         jcenter()
     }
