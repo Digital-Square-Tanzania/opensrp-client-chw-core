@@ -45,7 +45,7 @@ public abstract class BaseReferralTaskViewActivity extends SecuredActivity {
     protected String baseEntityId;
     protected Task task;
     protected CustomFontTextView womanGa;
-    protected LinearLayout womanGaLayout;
+    protected View womanGaLayout;
     protected MemberObject memberObject;
     protected String familyHeadName;
     protected String familyHeadPhoneNumber;
@@ -56,8 +56,8 @@ public abstract class BaseReferralTaskViewActivity extends SecuredActivity {
     protected CustomFontTextView clientReferralProblem;
     protected CustomFontTextView referralDate;
     protected CustomFontTextView chwDetailsNames;
-    protected LinearLayout careGiverLayout;
-    protected LinearLayout childNameLayout;
+    protected View careGiverLayout;
+    protected View childNameLayout;
     protected AppBarLayout appBarLayout;
     protected String startingActivity;
     protected static CommonPersonObjectClient personObjectClient;
@@ -173,7 +173,7 @@ public abstract class BaseReferralTaskViewActivity extends SecuredActivity {
         name = Utils.getName(firstName, middleName + " " + lastName);
     }
 
-    private String getChildrenForPncWoman(String baseEntityId) {
+    protected String getChildrenForPncWoman(String baseEntityId) {
         List<ChildModel> childModels = PNCDao.childrenForPncWoman(baseEntityId);
         StringBuilder stringBuilder = new StringBuilder();
         for (ChildModel childModel : childModels) {

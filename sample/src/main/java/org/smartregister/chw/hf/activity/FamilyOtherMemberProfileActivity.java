@@ -16,6 +16,7 @@ import org.smartregister.chw.hf.R;
 import org.smartregister.chw.hf.custom_view.FamilyMemberFloatingMenu;
 import org.smartregister.chw.hf.fragment.FamilyOtherMemberProfileFragment;
 import org.smartregister.chw.hf.presenter.FamilyOtherMemberActivityPresenter;
+import org.smartregister.chw.malaria.dao.MalariaDao;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.fragment.BaseFamilyOtherMemberProfileFragment;
 import org.smartregister.family.model.BaseFamilyOtherMemberProfileActivityModel;
@@ -82,7 +83,7 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
         //TODO implement start tb register for HF
     }
 
-    @Override
+
     protected void startFpChangeMethod() {
         //TODO implement start fp change register for HF
     }
@@ -155,6 +156,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     @Override
     protected void startHtsScreening() {
         //TODO implement start register for HF
+    }
+
+    @Override
+    protected void startHpsEnrollment() {
+        //TODO implement start register for CHW
     }
 
     @Override

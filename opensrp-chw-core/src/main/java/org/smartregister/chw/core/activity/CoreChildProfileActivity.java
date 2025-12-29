@@ -640,12 +640,18 @@ public class CoreChildProfileActivity extends BaseProfileActivity implements Cor
         } else if (i == R.id.action_gbv_registration) {
             startVacRegistration();
             return true;
+        } else if (i == R.id.action_hps_enrollment) {
+            startHpsEnrollment();
         }
         return super.onOptionsItemSelected(item);
     }
 
 
     protected void startVacRegistration(){
+        //Implement where required
+    }
+
+    protected  void startHpsEnrollment(){
         //Implement where required
     }
 

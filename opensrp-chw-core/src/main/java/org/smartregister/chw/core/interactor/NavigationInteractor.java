@@ -21,6 +21,7 @@ import org.smartregister.chw.core.dao.NavigationDao;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
 import org.smartregister.chw.referral.util.Constants;
+import org.smartregister.domain.Task;
 import org.smartregister.family.util.AppExecutors;
 
 import java.util.Date;
@@ -592,7 +593,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlAsrh =
                         "SELECT count(*) " +
                                 "   from " + org.smartregister.chw.asrh.util.Constants.TABLES.ASRH_REGISTER + " p " +
-                                "   inner join ec_family_member ef on ef.base_entity_id on p.base_entity_id " +
+                                "   inner join ec_family_member ef on ef.base_entity_id = p.base_entity_id " +
                                 "   where p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlAsrh);
             case org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS:
@@ -601,6 +602,23 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.lab.util.Constants.TABLES.LAB_TEST_REQUESTS + " p " +
                                 "              where p.patient_id is not null and p.results is not null and p.date_results_provided_to_client is null and p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlLab);
+            case CoreConstants.TABLE_NAME.ADDO_LINKAGE:
+                String sqlLinkage = "select count(*) " +
+                        "from " + Constants.Tables.REFERRAL + " p " +
+                        "inner join ec_family_member m on p.entity_id = m.base_entity_id COLLATE NOCASE " +
+                        "inner join ec_family f on f.base_entity_id = m.relational_id COLLATE NOCASE " +
+                        "inner join task t on p.id = t.reason_reference COLLATE NOCASE " +
+                        "where m.date_removed is null and referral_type = 'community_to_addo_referral' " +
+                        " AND t.status <> '" + Task.TaskStatus.COMPLETED + "' " +
+                        " AND t.status <> '" + Task.TaskStatus.CANCELLED + "' " +
+                        " AND p.chw_referral_service <> 'LTFU' COLLATE NOCASE ";
+                return NavigationDao.getQueryCount(sqlLinkage);
+            case CoreConstants.TABLE_NAME.HPS_MEMBERS:
+                String sqlHps =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.hps.util.Constants.TABLES.HPS_CLIENT_REGISTER + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
+                                "              where p.is_closed is 0 AND does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' AND ec_family_member.dod is null ";
+                return NavigationDao.getQueryCount(sqlHps);
             default:
                 return NavigationDao.getTableCount(tableName);
         }

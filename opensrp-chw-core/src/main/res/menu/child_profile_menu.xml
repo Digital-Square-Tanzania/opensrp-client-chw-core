@@ -81,12 +81,6 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_remove_member"
-        android:enabled="true"
-        android:title="@string/remove_this_person"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_family_planning_initiation"
         android:enabled="true"
         android:title="@string/family_planning_initiation"
@@ -105,6 +99,20 @@
         android:enabled="true"
         android:visible="false"
         android:title="@string/vac_registration"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_hps_enrollment"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/hps_enrollment"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_remove_member"
+        android:enabled="true"
+        android:title="@string/mark_as_deceased"
         app:showAsAction="never" />
 
 

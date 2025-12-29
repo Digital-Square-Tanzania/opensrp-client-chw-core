@@ -215,6 +215,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
             startAsrhRegistration();
         } else if (i == R.id.action_hts_screening) {
             startHtsScreening();
+        } else if (i == R.id.action_hps_enrollment) {
+            startHpsEnrollment();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -270,6 +272,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startAsrhRegistration();
 
     protected abstract void startHtsScreening();
+
+    protected abstract void startHpsEnrollment();
 
     protected abstract void setIndependentClient(boolean isIndependent);
 
