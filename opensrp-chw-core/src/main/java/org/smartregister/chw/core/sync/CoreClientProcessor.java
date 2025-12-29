@@ -344,9 +344,6 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.hivst.util.Constants.EVENT_TYPE.HIVST_MOBILIZATION:
                 processMobilizationEvent(eventClient.getEvent());
                 break;
-            case org.smartregister.chw.hts.util.Constants.EVENT_TYPE.SAMPLE_TESTING:
-                processHtsSamplesEvent(eventClient.getEvent());
-                break;
             case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_MOBILIZATION:
                 processHpsMobilizationEvent(eventClient.getEvent());
                 break;
@@ -1697,34 +1694,6 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         }
     }
 
-
-    private void processHtsSamplesEvent(Event event) {
-        List<Obs> htsSamplesObs = event.getObs();
-
-        String sampleType = null;
-        String iqcType = null;
-        String pitcTestingPoint = null;
-        Long lastInteractedWith = null;
-
-        if (!htsSamplesObs.isEmpty()) {
-            for (Obs obs : htsSamplesObs) {
-                if (org.smartregister.chw.hts.util.DBConstants.KEY.SAMPLE_TYPE.equals(obs.getFormSubmissionField())) {
-                    sampleType = (String) obs.getValue();
-                } else if (org.smartregister.chw.hts.util.DBConstants.KEY.IQC_TYPE.equals(obs.getFormSubmissionField())) {
-                    iqcType = (String) obs.getValue();
-                } else if (org.smartregister.chw.hts.util.DBConstants.KEY.PITC_TESTING_POINT.equals(obs.getFormSubmissionField())) {
-                    pitcTestingPoint = (String) obs.getValue();
-                } else if (org.smartregister.chw.hts.util.DBConstants.KEY.LAST_INTERACTED_WITH.equals(obs.getFormSubmissionField())) {
-                    try {
-                        lastInteractedWith = Long.parseLong((String) obs.getValue());
-                    } catch (Exception e) {
-                        Timber.e(e);
-                    }
-                }
-            }
-            HtsDao.saveSampleRegistration(event.getBaseEntityId(), sampleType, iqcType, pitcTestingPoint, lastInteractedWith);
-        }
-    }
 
     private void processHtsSamplesEvent(Event event) {
         List<Obs> htsSamplesObs = event.getObs();
