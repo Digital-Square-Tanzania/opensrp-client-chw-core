@@ -739,6 +739,7 @@
     <string name="cbhs_registration">CBHS Registration</string>
     <string name="tb_registration">TB registration</string>
     <string name="tbleprosy_screening">TB/Leprosy screening</string>
+    <string name="harm_reduction_risk_assessment">Harm Reduction Risk Assessment</string>
     <string name="remove_client">Remove Client</string>
     <string name="call_all_clients_member">Call client or caregiver</string>
 
@@ -843,6 +844,7 @@
     <string name="tbleprosy_screening_info">TB/Leprosy Screening Info</string>
     <string name="tbleprosy_confirmation">TB/Leprosy Confirmation</string>
     <string name="menu_tbleprosy">TB/Leprosy</string>
+    <string name="menu_harm_reduction">Harm Reduction</string>
 
     <!--    GBV/VAC-->
     <string name="gbv_registration">GBV/VAC Registration</string>
