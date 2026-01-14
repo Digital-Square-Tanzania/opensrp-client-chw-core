@@ -1422,6 +1422,7 @@ public class CoreConstants {
 
         public static final String HPS = "iCCHW";
 
+        public static final String HARM_REDUCTION = "HARM REDUCTION";
     }
 
     public static final class KeyIndicatorsUtil {
