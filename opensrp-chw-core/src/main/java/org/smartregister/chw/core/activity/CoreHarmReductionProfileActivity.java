@@ -62,11 +62,6 @@ public abstract class CoreHarmReductionProfileActivity extends BaseHarmReduction
     }
 
     @Override
-    public void refreshMedicalHistory(boolean hasHistory) {
-        rlLastVisit.setVisibility(View.GONE);
-    }
-
-    @Override
     public void refreshFamilyStatus(AlertStatus status) {
         super.refreshFamilyStatus(status);
         rlFamilyServicesDue.setVisibility(View.GONE);
