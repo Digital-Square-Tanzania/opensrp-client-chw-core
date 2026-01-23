@@ -36,6 +36,7 @@ import org.smartregister.chw.core.utils.ReportUtils;
 import org.smartregister.chw.core.utils.StockUsageReportUtils;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
+import org.smartregister.chw.harmreduction.dao.HarmReductionUsedNeedlesAndSyringesCollectionDao;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.hps.dao.HpsDao;
 import org.smartregister.chw.hts.dao.HtsDao;
@@ -1789,6 +1790,47 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
             }
             TbLeprosyMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached);
+        }
+    }
+
+    private void processHarmReductionUsedNeedlesAndSyringesCollectionEvent(Event event) {
+        List<Obs> collectionObs = event.getObs();
+        String dateOfCollection = null;
+        String maskaniName = null;
+        String collectionSiteGps = null;
+        String otherCollection = null;
+        String fixedBins = null;
+        String totalSafetyBoxesCollected = null;
+        String nameOfOw = null;
+
+        if (!collectionObs.isEmpty()) {
+            for (Obs obs : collectionObs) {
+                if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.DATE_OF_COLLECTION.equals(obs.getFormSubmissionField())) {
+                    dateOfCollection = (String) obs.getValue();
+                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.MASKANI_NAME.equals(obs.getFormSubmissionField())) {
+                    maskaniName = (String) obs.getValue();
+                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.COLLECTION_SITE_GPS.equals(obs.getFormSubmissionField())) {
+                    collectionSiteGps = (String) obs.getValue();
+                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.OTHER_COLLECTION.equals(obs.getFormSubmissionField())) {
+                    otherCollection = (String) obs.getValue();
+                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.FIXED_BINS.equals(obs.getFormSubmissionField())) {
+                    fixedBins = (String) obs.getValue();
+                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.TOTAL_SAFETY_BOXES_COLLECTED.equals(obs.getFormSubmissionField())) {
+                    totalSafetyBoxesCollected = (String) obs.getValue();
+                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.NAME_OF_OW.equals(obs.getFormSubmissionField())) {
+                    nameOfOw = (String) obs.getValue();
+                }
+            }
+            HarmReductionUsedNeedlesAndSyringesCollectionDao.updateData(
+                    event.getBaseEntityId(),
+                    dateOfCollection,
+                    maskaniName,
+                    collectionSiteGps,
+                    otherCollection,
+                    fixedBins,
+                    totalSafetyBoxesCollected,
+                    nameOfOw
+            );
         }
     }
 
