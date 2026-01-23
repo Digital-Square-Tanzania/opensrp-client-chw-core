@@ -741,7 +741,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-harm-reduction:1.0.0-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-harm-reduction:1.0.0-ALPHA1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
