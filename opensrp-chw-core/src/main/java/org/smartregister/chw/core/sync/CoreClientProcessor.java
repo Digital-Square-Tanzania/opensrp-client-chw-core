@@ -1,6 +1,7 @@
 package org.smartregister.chw.core.sync;
 
 import static org.smartregister.chw.cecap.util.Constants.EVENT_TYPE.CECAP_HEALTH_EDUCATION_MOBILIZATION;
+import static org.smartregister.chw.harmreduction.util.Constants.EVENT_TYPE.HARM_REDUCTION_USED_NEEDLES_AND_SYRINGES_COLLECTION;
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_HEALTH_EDUCATION_MOBILIZATION;
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_MONTHLY_SOCIAL_MEDIA_REPORT;
 import static org.smartregister.chw.tbleprosy.util.Constants.EVENT_TYPE.TB_LEPROSY_MOBILIZATION;
@@ -387,6 +388,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 break;
             case TB_LEPROSY_MOBILIZATION:
                 processTbLeprosyMobilizationEvent(eventClient.getEvent());
+                break;
+            case HARM_REDUCTION_USED_NEEDLES_AND_SYRINGES_COLLECTION:
+                processHarmReductionUsedNeedlesAndSyringesCollectionEvent(eventClient.getEvent());
                 break;
             case SBC_MONTHLY_SOCIAL_MEDIA_REPORT:
                 processSBCMonthlySocialMediaReportEvent(eventClient.getEvent());
