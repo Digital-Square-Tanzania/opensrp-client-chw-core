@@ -3,7 +3,6 @@ package org.smartregister.chw.core.worker;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.work.WorkerParameters;
@@ -57,10 +56,7 @@ public class CloseExpiredReferralsServiceWorker extends BaseWorker {
      * @return a PendingIntent configured with the correct flags.
      */
     private PendingIntent createPendingIntent(Context context, Intent intent) {
-        int flags = PendingIntent.FLAG_ONE_SHOT;
-        if (Build.VERSION.SDK_INT >= 31) { // API level 31+
-            flags |= PendingIntent.FLAG_IMMUTABLE;
-        }
+        int flags = PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE;
         return PendingIntent.getService(context, 0, intent, flags);
     }
 }
