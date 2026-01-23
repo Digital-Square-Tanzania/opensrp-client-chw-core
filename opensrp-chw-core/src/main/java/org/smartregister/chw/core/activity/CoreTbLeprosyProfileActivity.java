@@ -88,18 +88,17 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
             startFormForEdit(R.string.registration_info,
                     CoreConstants.JSON_FORM.FAMILY_MEMBER_REGISTER);
             return true;
-        }  else if (itemId == R.id.action_tbleprosy_screening) {
+        } else if (itemId == R.id.action_tbleprosy_screening) {
             startFormForEdit(R.string.tbleprosy_screening_info, CoreConstants.JSON_FORM.getTbLeprosyScreening());
             return true;
-        }  else if (itemId == R.id.action_location_info) {
+        } else if (itemId == R.id.action_location_info) {
             JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
                     CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
                     UpdateDetailsUtil.getFamilyRegistrationDetails(getFamilyBaseEntityId(getCommonPersonObjectClient(memberObject.getBaseEntityId()))), Utils.metadata().familyRegister.updateEventType);
             if (preFilledForm != null)
                 UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
-        }
-        else if (itemId == R.id.action_remove_member) {
+        } else if (itemId == R.id.action_remove_member) {
             removeMember();
             return true;
         }
@@ -194,8 +193,7 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
         } else if (formName.equals(CoreConstants.JSON_FORM.getTbLeprosyScreening())) {
             form = CoreJsonFormUtils.getAutoJsonEditAncFormString(
                     memberObject.getBaseEntityId(), this, formName, CoreConstants.EventType.TBLEPROSY_SCREENING, getResources().getString(title_resource));
-        }
-        else if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
+        } else if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
             form = CoreJsonFormUtils.getAutoJsonEditAncFormString(
                     memberObject.getBaseEntityId(), this, formName, CoreConstants.EventType.UPDATE_ANC_REGISTRATION, getResources().getString(title_resource));
         }
@@ -233,4 +231,5 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
     public void refreshUpComingServicesStatus(String service, AlertStatus status, Date date) {
         rlUpcomingServices.setVisibility(View.GONE);
     }
+
 }
