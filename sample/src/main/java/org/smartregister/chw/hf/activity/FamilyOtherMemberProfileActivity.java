@@ -83,6 +83,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
         //TODO implement start tb register for HF
     }
 
+    @Override
+    protected void startTbLeprosyScreening() {
+        //TODO implement start tb register for HF
+    }
+
 
     protected void startFpChangeMethod() {
         //TODO implement start fp change register for HF
@@ -161,6 +166,26 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     @Override
     protected void startHpsEnrollment() {
         //TODO implement start register for CHW
+    }
+
+    @Override
+    protected void startAypFacilityScreening() {
+        // Not implemented in sample app
+    }
+
+    @Override
+    protected void startAypInSchoolEnrollment() {
+
+    }
+
+    @Override
+    protected void startAypParentalEnrollment() {
+        // Not implemented in sample app
+    }
+
+    @Override
+    protected void startAypOutSchoolEnrollment() {
+
     }
 
     @Override
@@ -278,5 +303,10 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
             menu.findItem(R.id.action_pregnancy_confirmation).setVisible(true);
             menu.findItem(R.id.action_fp_initiation).setVisible(true);
         }
+    }
+
+    @Override
+    public String getString(int i) {
+        return "";
     }
 }

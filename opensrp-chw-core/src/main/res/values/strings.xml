@@ -45,6 +45,10 @@
     <string name="menu_hiv">HIV</string>
     <string name="menu_hts">HTS</string>
     <string name="menu_hps">iCCHW</string>
+    <string name="menu_ayp_inschool">AYP In-School Services</string>
+    <string name="menu_ayp_outschool">AYP Out-School Services</string>
+    <string name="menu_ayp_parental">AYP Parental Services</string>
+    <string name="ayp_parental_enrollment">AYP Parental Enrollment</string>
     <string name="menu_hiv_index_contacts">Index Contacts</string>
     <string name="menu_tb">TB</string>
     <string name="menu_anc">ANC</string>
@@ -734,6 +738,7 @@
     <string name="hiv_registration">HIV Registration</string>
     <string name="cbhs_registration">CBHS Registration</string>
     <string name="tb_registration">TB registration</string>
+    <string name="tbleprosy_screening">TB/Leprosy screening</string>
     <string name="remove_client">Remove Client</string>
     <string name="call_all_clients_member">Call client or caregiver</string>
 
@@ -834,6 +839,10 @@
     <string name="menu_vmmc">VMMC</string>
     <string name="refer_to_addo">Linkage to Addo</string>
 
+    <!--    TB LEPROSY-->
+    <string name="tbleprosy_screening_info">TB/Leprosy Screening Info</string>
+    <string name="tbleprosy_confirmation">TB/Leprosy Confirmation</string>
+    <string name="menu_tbleprosy">TB/Leprosy</string>
 
     <!--    GBV/VAC-->
     <string name="gbv_registration">GBV/VAC Registration</string>
@@ -860,6 +869,11 @@
     <string name="error_please_try_again">Error: Please try again.</string>
     <string name="an_unexpected_error_occurred_please_try_again_later">An unexpected error occurred. Please try again later.</string>
     <string name="error_processing_server_response">Error processing server response.</string>
+
+    <!--   AYP -->
+    <string name="ayp_in_school_enrollment">AYP In-school Enrollment</string>
+    <string name="ayp_facility_screening">AYP Screening</string>
+    <string name="ayp_out_school_enrollment">AYP Out-school Screening</string>
 
 
 </resources>
