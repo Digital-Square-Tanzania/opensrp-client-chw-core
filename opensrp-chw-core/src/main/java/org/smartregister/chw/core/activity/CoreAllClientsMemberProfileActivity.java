@@ -154,7 +154,7 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
 
     @Override
     public void startFormActivity(JSONObject jsonForm) {
-        Intent intent = new Intent(this, BaseOpdFormActivity.class);
+        Intent intent = new Intent(this, org.smartregister.family.util.Utils.metadata().familyMemberFormActivity);
         intent.putExtra(OpdConstants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
         Form form = new Form();
         form.setName(getString(R.string.update_client_registration));
