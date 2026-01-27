@@ -2,13 +2,17 @@ package org.smartregister.chw.core.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
@@ -38,6 +42,7 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
     private RelativeLayout layoutFamilyHasRow;
     private CustomFontTextView familyHeadTextView;
     private CustomFontTextView careGiverTextView;
+    private Integer toolbarBaseHeight;
 
     @Override
     protected void onCreation() {
@@ -51,6 +56,21 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("");
+            if (toolbarBaseHeight == null) {
+                int resolvedHeight = toolbar.getLayoutParams() != null ? toolbar.getLayoutParams().height : 0;
+                toolbarBaseHeight = resolvedHeight > 0 ? resolvedHeight : resolveActionBarSize();
+            }
+            ViewCompat.setOnApplyWindowInsetsListener(toolbar, (view, insets) -> {
+                int topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
+                ViewGroup.LayoutParams params = view.getLayoutParams();
+                if (params != null) {
+                    params.height = toolbarBaseHeight + topInset;
+                    view.setLayoutParams(params);
+                }
+                view.setPadding(view.getPaddingLeft(), topInset, view.getPaddingRight(), view.getPaddingBottom());
+                return insets;
+            });
+            ViewCompat.requestApplyInsets(toolbar);
         }
 
         appBarLayout = findViewById(org.smartregister.family.R.id.toolbar_appbarlayout);
@@ -60,6 +80,14 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
         initializePresenter();
 
         setupViews();
+    }
+
+    private int resolveActionBarSize() {
+        TypedValue typedValue = new TypedValue();
+        if (getTheme().resolveAttribute(androidx.appcompat.R.attr.actionBarSize, typedValue, true)) {
+            return TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
+        }
+        return getResources().getDimensionPixelSize(androidx.appcompat.R.dimen.abc_action_bar_default_height_material);
     }
 
 
