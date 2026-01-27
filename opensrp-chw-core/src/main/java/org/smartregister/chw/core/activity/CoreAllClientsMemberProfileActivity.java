@@ -42,6 +42,7 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
     private RelativeLayout layoutFamilyHasRow;
     private CustomFontTextView familyHeadTextView;
     private CustomFontTextView careGiverTextView;
+    // Cache the toolbar height so we can add status bar insets without compounding.
     private Integer toolbarBaseHeight;
 
     @Override
@@ -56,10 +57,12 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("");
+            // Base toolbar height comes from layout params or the theme action bar size.
             if (toolbarBaseHeight == null) {
                 int resolvedHeight = toolbar.getLayoutParams() != null ? toolbar.getLayoutParams().height : 0;
                 toolbarBaseHeight = resolvedHeight > 0 ? resolvedHeight : resolveActionBarSize();
             }
+            // Apply status bar insets so the toolbar content doesn't overlap system bars.
             ViewCompat.setOnApplyWindowInsetsListener(toolbar, (view, insets) -> {
                 int topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
                 ViewGroup.LayoutParams params = view.getLayoutParams();
