@@ -42,6 +42,7 @@ import org.smartregister.domain.FetchStatus;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.util.LangUtils;
 import org.smartregister.util.PermissionUtils;
+import org.smartregister.view.activity.StatsActivity;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
