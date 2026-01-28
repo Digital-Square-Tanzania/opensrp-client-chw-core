@@ -334,6 +334,12 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
         tvSync.setOnClickListener(syncClicker);
         ivSync.setOnClickListener(syncClicker);
+        ivSync.setOnLongClickListener(v -> {
+            Intent intent = new Intent(parentActivity, StatsActivity.class);
+            parentActivity.startActivity(intent);
+            return true;
+        });
+
 
         refreshSyncProgressSpinner();
     }
