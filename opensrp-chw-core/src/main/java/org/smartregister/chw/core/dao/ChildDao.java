@@ -2,7 +2,7 @@ package org.smartregister.chw.core.dao;
 
 import android.database.Cursor;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
@@ -149,7 +149,7 @@ public class ChildDao extends AbstractDao {
             return null;
         }
         String[] projectionArgs = new String[]{columnName};
-        try (net.sqlcipher.Cursor cursor = database.query(CoreConstants.TABLE_NAME.CHILD, projectionArgs, selection, selectionArgs, null, null, null);) {
+        try (net.zetetic.database.sqlcipher.Cursor cursor = database.query(CoreConstants.TABLE_NAME.CHILD, projectionArgs, selection, selectionArgs, null, null, null);) {
 
             if (cursor.getCount() > 0 && cursor.moveToFirst()) {
                 return cursor.getString(cursor.getColumnIndex(columnName));

@@ -2,8 +2,8 @@ package org.smartregister.chw.core.dao;
 
 import android.os.Build;
 
-import net.sqlcipher.MatrixCursor;
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.MatrixCursor;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.junit.Assert;
 import org.junit.Before;
