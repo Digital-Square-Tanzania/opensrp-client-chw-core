@@ -149,7 +149,7 @@ public class ChildDao extends AbstractDao {
             return null;
         }
         String[] projectionArgs = new String[]{columnName};
-        try (net.zetetic.database.sqlcipher.Cursor cursor = database.query(CoreConstants.TABLE_NAME.CHILD, projectionArgs, selection, selectionArgs, null, null, null);) {
+        try (android.database.Cursor cursor = database.query(CoreConstants.TABLE_NAME.CHILD, projectionArgs, selection, selectionArgs, null, null, null);) {
 
             if (cursor.getCount() > 0 && cursor.moveToFirst()) {
                 return cursor.getString(cursor.getColumnIndex(columnName));

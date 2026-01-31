@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import net.zetetic.database.sqlcipher.DatabaseUtils;
+import net.zetetic.database.DatabaseUtils;
 import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.smartregister.chw.core.activity.CoreCommunityRespondersRegisterActivity;

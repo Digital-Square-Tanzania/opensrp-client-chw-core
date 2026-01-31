@@ -2,7 +2,7 @@ package org.smartregister.chw.core.utils;
 
 import android.content.Context;
 
-import net.zetetic.database.sqlcipher.MatrixCursor;
+import android.database.MatrixCursor;
 import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.json.JSONException;

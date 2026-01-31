@@ -1,6 +1,6 @@
 package org.smartregister.chw.core.repository;
 
-import net.zetetic.database.sqlcipher.Cursor;
+import android.database.Cursor;
 
 import org.smartregister.chw.core.utils.ChwDBConstants;
 import org.smartregister.chw.core.utils.CoreConstants;

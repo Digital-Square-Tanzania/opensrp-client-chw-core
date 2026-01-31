@@ -2,7 +2,7 @@ package org.smartregister.chw.core.repository;
 
 import android.content.ContentValues;
 
-import net.zetetic.database.sqlcipher.Cursor;
+import android.database.Cursor;
 import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
