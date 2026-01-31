@@ -809,7 +809,7 @@ dependencies {
     implementation 'net.zetetic:sqlcipher-android:4.6.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
-    api("org.smartregister:android-p2p-sync:0.3.8-aplha4-SNAPSHOT") {
+    api("org.smartregister:android-p2p-sync:1.0.0-MOH-SNAPSHOT") {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'appcompat-v7'
