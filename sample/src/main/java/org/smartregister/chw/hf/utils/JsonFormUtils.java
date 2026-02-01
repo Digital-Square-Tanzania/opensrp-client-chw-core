@@ -3,7 +3,7 @@ package org.smartregister.chw.hf.utils;
 import android.content.Context;
 import android.util.Pair;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;

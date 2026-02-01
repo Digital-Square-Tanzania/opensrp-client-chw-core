@@ -4,8 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import net.sqlcipher.DatabaseUtils;
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.DatabaseUtils;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.smartregister.chw.core.activity.CoreCommunityRespondersRegisterActivity;
 import org.smartregister.chw.core.adapter.CommunityResponderCustomAdapter;
