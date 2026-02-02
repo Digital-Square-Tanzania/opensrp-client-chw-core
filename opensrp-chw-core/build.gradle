@@ -825,7 +825,8 @@ dependencies {
     api 'org.greenrobot:eventbus:3.3.1'
 
     implementation 'com.android.volley:volley:1.2.1'
-    implementation 'net.zetetic:android-database-sqlcipher:4.5.0'
+    // SQLCipher 4.6+ includes 16 KB page size compatible binaries for Android 15+.
+    implementation 'net.zetetic:sqlcipher-android:4.6.1'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     api("org.smartregister:android-p2p-sync:0.3.8-aplha4-SNAPSHOT") {

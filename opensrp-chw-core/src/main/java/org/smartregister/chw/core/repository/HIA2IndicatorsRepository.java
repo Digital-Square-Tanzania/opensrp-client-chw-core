@@ -3,7 +3,7 @@ package org.smartregister.chw.core.repository;
 import android.database.Cursor;
 import android.util.Log;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.smartregister.chw.core.domain.Hia2Indicator;
 import org.smartregister.repository.BaseRepository;

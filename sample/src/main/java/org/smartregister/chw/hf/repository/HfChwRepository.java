@@ -2,7 +2,7 @@ package org.smartregister.chw.hf.repository;
 
 import android.content.Context;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.smartregister.AllConstants;
 import org.smartregister.chw.core.application.CoreChwApplication;

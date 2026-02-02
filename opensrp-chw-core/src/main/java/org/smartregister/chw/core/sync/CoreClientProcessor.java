@@ -9,7 +9,7 @@ import static org.smartregister.chw.tbleprosy.util.Constants.EVENT_TYPE.TB_LEPRO
 import android.content.ContentValues;
 import android.content.Context;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.anc.util.DBConstants;
@@ -389,7 +389,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case TB_LEPROSY_MOBILIZATION:
                 processTbLeprosyMobilizationEvent(eventClient.getEvent());
                 break;
-            case HARM_REDUCTION_USED_NEEDLES_AND_SYRINGES_COLLECTION:
+           case HARM_REDUCTION_USED_NEEDLES_AND_SYRINGES_COLLECTION:
                 processHarmReductionUsedNeedlesAndSyringesCollectionEvent(eventClient.getEvent());
                 break;
             case SBC_MONTHLY_SOCIAL_MEDIA_REPORT:

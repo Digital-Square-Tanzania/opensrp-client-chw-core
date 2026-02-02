@@ -2,7 +2,7 @@ package org.smartregister.chw.core.interactor;
 
 import android.content.Context;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.junit.Before;
 import org.junit.Test;

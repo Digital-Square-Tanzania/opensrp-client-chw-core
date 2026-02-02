@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.joda.time.LocalDate;
 import org.smartregister.chw.core.application.CoreChwApplication;
