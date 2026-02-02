@@ -24,9 +24,6 @@ import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.contract.CoreTbLeprosyProfileContract;
 import org.smartregister.chw.core.contract.FamilyOtherMemberProfileExtendedContract;
 import org.smartregister.chw.core.contract.FamilyProfileExtendedContract;
-import org.smartregister.chw.core.dao.AncDao;
-import org.smartregister.chw.core.dao.ChildDao;
-import org.smartregister.chw.core.dao.PNCDao;
 import org.smartregister.chw.core.interactor.CoreTbLeprosyProfileInteractor;
 import org.smartregister.chw.core.presenter.CoreFamilyOtherMemberActivityPresenter;
 import org.smartregister.chw.core.presenter.CoreTbLeprosyMemberProfilePresenter;
@@ -42,11 +39,6 @@ import org.smartregister.family.util.Utils;
 
 import java.util.Date;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileActivity implements
@@ -56,30 +48,8 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
 
     protected RelativeLayout notificationAndReferralLayout;
 
-    private OnMemberTypeLoadedListener onMemberTypeLoadedListener;
-
-    public interface OnMemberTypeLoadedListener {
-        void onMemberTypeLoaded(MemberType memberType);
-    }
-
-    public static class MemberType {
-
-        private final org.smartregister.chw.anc.domain.MemberObject memberObject;
-
-        private final String memberType;
-
-        private MemberType(org.smartregister.chw.anc.domain.MemberObject memberObject, String memberType) {
-            this.memberObject = memberObject;
-            this.memberType = memberType;
-        }
-
-        public org.smartregister.chw.anc.domain.MemberObject getMemberObject() {
-            return memberObject;
-        }
-
-        public String getMemberType() {
-            return memberType;
-        }
+    protected static CommonPersonObjectClient getClientDetailsByBaseEntityID(@NonNull String baseEntityId) {
+        return getCommonPersonObjectClient(baseEntityId);
     }
 
     @Override
@@ -118,18 +88,17 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
             startFormForEdit(R.string.registration_info,
                     CoreConstants.JSON_FORM.FAMILY_MEMBER_REGISTER);
             return true;
-        }  else if (itemId == R.id.action_tbleprosy_screening) {
+        } else if (itemId == R.id.action_tbleprosy_screening) {
             startFormForEdit(R.string.tbleprosy_screening_info, CoreConstants.JSON_FORM.getTbLeprosyScreening());
             return true;
-        }  else if (itemId == R.id.action_location_info) {
+        } else if (itemId == R.id.action_location_info) {
             JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
                     CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
                     UpdateDetailsUtil.getFamilyRegistrationDetails(getFamilyBaseEntityId(getCommonPersonObjectClient(memberObject.getBaseEntityId()))), Utils.metadata().familyRegister.updateEventType);
             if (preFilledForm != null)
                 UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
-        }
-        else if (itemId == R.id.action_remove_member) {
+        } else if (itemId == R.id.action_remove_member) {
             removeMember();
             return true;
         }
@@ -180,10 +149,6 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
         }
     }
 
-    protected static CommonPersonObjectClient getClientDetailsByBaseEntityID(@NonNull String baseEntityId) {
-        return getCommonPersonObjectClient(baseEntityId);
-    }
-
     protected abstract Class<? extends CoreFamilyProfileActivity> getFamilyProfileActivityClass();
 
     protected abstract void removeMember();
@@ -194,10 +159,6 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
 
     public CoreTbLeprosyProfileContract.Presenter getPresenter() {
         return (CoreTbLeprosyProfileContract.Presenter) profilePresenter;
-    }
-
-    public void setOnMemberTypeLoadedListener(OnMemberTypeLoadedListener onMemberTypeLoadedListener) {
-        this.onMemberTypeLoadedListener = onMemberTypeLoadedListener;
     }
 
     @Override
@@ -232,8 +193,7 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
         } else if (formName.equals(CoreConstants.JSON_FORM.getTbLeprosyScreening())) {
             form = CoreJsonFormUtils.getAutoJsonEditAncFormString(
                     memberObject.getBaseEntityId(), this, formName, CoreConstants.EventType.TBLEPROSY_SCREENING, getResources().getString(title_resource));
-        }
-        else if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
+        } else if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
             form = CoreJsonFormUtils.getAutoJsonEditAncFormString(
                     memberObject.getBaseEntityId(), this, formName, CoreConstants.EventType.UPDATE_ANC_REGISTRATION, getResources().getString(title_resource));
         }
@@ -256,60 +216,6 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
         return this;
     }
 
-    protected void executeOnLoaded(OnMemberTypeLoadedListener listener) {
-        final Disposable[] disposable = new Disposable[1];
-        getMemberType().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<MemberType>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        disposable[0] = d;
-                    }
-
-                    @Override
-                    public void onNext(MemberType memberType) {
-                        listener.onMemberTypeLoaded(memberType);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e(e);
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        disposable[0].dispose();
-                        disposable[0] = null;
-                    }
-                });
-    }
-
-    @Override
-    public void openMedicalHistory() {
-        executeOnLoaded(onMemberTypeLoadedListener);
-    }
-
-    protected Observable<MemberType> getMemberType() {
-        return Observable.create(e -> {
-            org.smartregister.chw.anc.domain.MemberObject ancMemberObject = PNCDao.getMember(memberObject.getBaseEntityId());
-            String type = null;
-
-            if (AncDao.isANCMember(ancMemberObject.getBaseEntityId())) {
-                type = CoreConstants.TABLE_NAME.ANC_MEMBER;
-            } else if (PNCDao.isPNCMember(ancMemberObject.getBaseEntityId())) {
-                type = CoreConstants.TABLE_NAME.PNC_MEMBER;
-            } else if (ChildDao.isChild(ancMemberObject.getBaseEntityId())) {
-                type = CoreConstants.TABLE_NAME.CHILD;
-            } else {
-                type = CoreConstants.TABLE_NAME.PNC_MEMBER;
-            }
-
-            MemberType memberType = new MemberType(ancMemberObject, type);
-            e.onNext(memberType);
-            e.onComplete();
-        });
-    }
-
     @Override
     public void refreshMedicalHistory(boolean hasHistory) {
         rlLastVisit.setVisibility(View.GONE);
@@ -325,4 +231,5 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
     public void refreshUpComingServicesStatus(String service, AlertStatus status, Date date) {
         rlUpcomingServices.setVisibility(View.GONE);
     }
+
 }
