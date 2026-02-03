@@ -806,7 +806,7 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.2.1'
     // SQLCipher 4.6+ includes 16 KB page size compatible binaries for Android 15+.
-    implementation 'net.zetetic:sqlcipher-android:4.6.1'
+    implementation 'net.zetetic:sqlcipher-android:4.13.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     api("org.smartregister:android-p2p-sync:1.0.0-MOH-SNAPSHOT") {
