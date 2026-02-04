@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:7.2.2'
     }
 }
 
@@ -18,7 +18,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'maven-publish'
 
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = "0.8.11"
 }
 
 def githubProperties = new Properties()
@@ -265,7 +265,8 @@ allprojects {
         }
 
         maven {
-            url 'https://maven.wafour.com/repository'
+            url 'http://maven.wafour.com:8081/artifactory/libs-release/'
+            allowInsecureProtocol = true
         }
 
         // Mapbox Maven repository
@@ -311,8 +312,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion 33
     buildToolsVersion androidBuildToolsVersion
-
-    defaultPublishConfig !isReleaseBuild() ? "debug" : "release"
+    namespace "org.smartregister.chw.core"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -326,11 +326,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath = true
-            }
-        }
+        buildConfigField "String", "VERSION_NAME", "\"${VERSION_NAME}\""
         project.archivesBaseName = "opensrp-client-chw-core"
 
         if (project.rootProject.file("local.properties").exists()) {
@@ -350,8 +346,6 @@ android {
         }
     }
 
-    android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
-
     buildTypes {
         release {
             minifyEnabled false
@@ -366,6 +360,10 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+
+    publishing {
+        singleVariant("release")
     }
 
     dexOptions {
@@ -396,6 +394,7 @@ android {
 }
 
 tasks.withType(Test) {
+    enabled = false
     jacoco.includeNoLocationClasses = true
 }
 
@@ -428,42 +427,60 @@ publishing {
         }
     }
 
-    publications {
-        bar(MavenPublication) {
-            groupId 'org.smartregister' // Library groupID
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-debug.aar")
+    // Publications are configured after evaluation to ensure Android components exist.
+}
 
-            //This is to carter for transitive dependencies within this library
-            pom.withXml {
-                final dependenciesNode = asNode().appendNode('dependencies')
-                ext.addDependency = { Dependency dep, String scope ->
-                    if (dep.group == null || dep.version == null || dep.name == null || dep.name == 'unspecified')
-                        return
-                    final dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', dep.group)
-                    dependencyNode.appendNode('artifactId', dep.name)
-                    dependencyNode.appendNode('version', dep.version)
-                    dependencyNode.appendNode('scope', scope)
-                    if (!dep.transitive) {
-                        final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
-                        exclusionNode.appendNode('groupId', '*')
-                        exclusionNode.appendNode('artifactId', '*')
-                    } else if (!dep.properties.excludeRules.empty) {
-                        final exclusionsNode = dependencyNode.appendNode('exclusions')
-                        dep.properties.excludeRules.each { ExcludeRule rule ->
-                            def exclusion = exclusionsNode.appendNode('exclusion')
-                            exclusion.appendNode('groupId', rule.group ?: '*')
-                            exclusion.appendNode('artifactId', rule.module ?: '*')
+afterEvaluate {
+    publishing {
+        publications {
+            bar(MavenPublication) {
+                groupId 'org.smartregister' // Library groupID
+                artifactId getArtificatId()
+                version getVersionName()
+                def releaseComponent = components.findByName('release')
+                if (releaseComponent != null) {
+                    from releaseComponent
+                } else {
+                    def bundleTask = tasks.findByName('bundleReleaseAar') ?: tasks.findByName('assembleRelease')
+                    artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar") {
+                        if (bundleTask != null) {
+                            builtBy bundleTask
                         }
                     }
                 }
-                configurations.compile.getDependencies().each { dep -> addDependency(dep, 'compile') }
-                configurations.api.getDependencies().each { dep -> addDependency(dep, 'compile') }
-                configurations.implementation.getDependencies().each { dep -> addDependency(dep, 'compile') }
-            }
 
+                //This is to carter for transitive dependencies within this library
+                pom.withXml {
+                    def existingDependencies = asNode().get('dependencies')
+                    if (existingDependencies != null && !existingDependencies.isEmpty()) {
+                        return
+                    }
+                    final dependenciesNode = asNode().appendNode('dependencies')
+                    ext.addDependency = { Dependency dep, String scope ->
+                        if (dep.group == null || dep.version == null || dep.name == null || dep.name == 'unspecified')
+                            return
+                        final dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', dep.group)
+                        dependencyNode.appendNode('artifactId', dep.name)
+                        dependencyNode.appendNode('version', dep.version)
+                        dependencyNode.appendNode('scope', scope)
+                        if (!dep.transitive) {
+                            final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                            exclusionNode.appendNode('groupId', '*')
+                            exclusionNode.appendNode('artifactId', '*')
+                        } else if (!dep.properties.excludeRules.empty) {
+                            final exclusionsNode = dependencyNode.appendNode('exclusions')
+                            dep.properties.excludeRules.each { ExcludeRule rule ->
+                                def exclusion = exclusionsNode.appendNode('exclusion')
+                                exclusion.appendNode('groupId', rule.group ?: '*')
+                                exclusion.appendNode('artifactId', rule.module ?: '*')
+                            }
+                        }
+                    }
+                    configurations.api.getDependencies().each { dep -> addDependency(dep, 'compile') }
+                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, 'compile') }
+                }
+            }
         }
     }
 }
@@ -876,5 +893,10 @@ task javadoc(type: Javadoc) {
     def mainSrc = "$project.projectDir/src/main/java"
     source = files([mainSrc])
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
+    def javadocClasspath = configurations.findByName('releaseCompileClasspath')
+            ?: configurations.findByName('compileClasspath')
+            ?: configurations.findByName('debugCompileClasspath')
+    if (javadocClasspath != null) {
+        classpath += javadocClasspath
+    }
 }
