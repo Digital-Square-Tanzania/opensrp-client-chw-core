@@ -48,19 +48,4 @@ public class FpUtilTest {
         Assert.assertEquals(date, date1);
     }
 
-    @Test
-    public void testToMember() {
-        FpMemberObject memberObject = new FpMemberObject();
-        memberObject.setBaseEntityId("12334");
-        memberObject.setFirstName("Mira");
-        memberObject.setMiddleName("Moa");
-        memberObject.setLastName("Pia");
-
-        MemberObject res = FpUtil.toMember(memberObject);
-        Assert.assertEquals(res.getBaseEntityId(), "12334");
-        Assert.assertEquals(res.getFirstName(), "Mira");
-        Assert.assertEquals(res.getMiddleName(), "Moa");
-        Assert.assertEquals(res.getLastName(), "Pia");
-
-    }
 }

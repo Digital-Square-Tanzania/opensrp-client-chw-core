@@ -29,7 +29,7 @@ public class MockCoreFpRegisterFragment extends CoreFpRegisterFragment {
     }
 
     @Override
-    public void openProfile(CommonPersonObjectClient client) {
-        super.openProfile(client);
+    public void openProfile(String baseEntityId) {
+        super.openProfile(baseEntityId);
     }
 }

@@ -28,12 +28,27 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
     }
 
     @Override
-    public void startFpChangeMethod() {
+    public void startMalariaRegister() {
         // do nothing
     }
 
     @Override
-    public void startMalariaRegister() {
+    public void startFpEcpScreening() {
+        // do nothing
+    }
+
+    @Override
+    protected void startVmmcRegister() {
+        // do nothing
+    }
+
+    @Override
+    protected void startTbLeprosyScreening() {
+        // do nothing
+    }
+
+    @Override
+    protected void startIntegratedCommunityCaseManagementEnrollment() {
         // do nothing
     }
 
@@ -63,6 +78,66 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
     }
 
     @Override
+    protected void startLDRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startHivstRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startKvpPrEPRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startKvpRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startPrEPRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startAgywScreening() {
+        // do nothing
+    }
+
+    @Override
+    protected void startSbcRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startGbvRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startCancerPreventiveServicesRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startAsrhRegistration() {
+        // do nothing
+    }
+
+    @Override
+    protected void startHtsScreening() {
+        // do nothing
+    }
+
+    @Override
+    protected void startHpsEnrollment() {
+        // do nothing
+    }
+
+    @Override
     protected void startAypFacilityScreening() {
         // do nothing
     }
@@ -74,6 +149,11 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
 
     @Override
     protected void startAypParentalEnrollment() {
+        // do nothing
+    }
+
+    @Override
+    protected void startAypOutSchoolEnrollment() {
         // do nothing
     }
 
