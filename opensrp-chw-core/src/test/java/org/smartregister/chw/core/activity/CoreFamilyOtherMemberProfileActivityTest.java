@@ -115,9 +115,9 @@ public class CoreFamilyOtherMemberProfileActivityTest extends BaseUnitTest {
         activity.onOptionsItemSelected(item);
         Mockito.verify(activity).startFpRegister();
 
-        Mockito.doReturn(R.id.action_fp_change).when(item).getItemId();
+        Mockito.doReturn(R.id.action_fp_ecp_provision).when(item).getItemId();
         activity.onOptionsItemSelected(item);
-        Mockito.verify(activity).startFpChangeMethod();
+        Mockito.verify(activity).startFpEcpScreening();
 
         Mockito.doReturn(R.id.action_malaria_registration).when(item).getItemId();
         activity.onOptionsItemSelected(item);

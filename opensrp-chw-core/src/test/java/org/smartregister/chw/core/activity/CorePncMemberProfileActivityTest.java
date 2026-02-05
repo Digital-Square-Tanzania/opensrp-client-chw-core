@@ -96,10 +96,6 @@ public class CorePncMemberProfileActivityTest extends BaseUnitTest {
         activity.onOptionsItemSelected(item);
         Mockito.verify(activity).startFpRegister();
 
-        Mockito.doReturn(R.id.action_fp_change).when(item).getItemId();
-        activity.onOptionsItemSelected(item);
-        Mockito.verify(activity).startFpChangeMethod();
-
         Mockito.doReturn(R.id.action__pnc_remove_member).when(item).getItemId();
         activity.onOptionsItemSelected(item);
         Mockito.verify(activity).removePncMember();

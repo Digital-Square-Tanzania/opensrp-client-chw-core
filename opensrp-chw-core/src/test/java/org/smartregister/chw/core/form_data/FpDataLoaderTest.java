@@ -13,7 +13,7 @@ public class FpDataLoaderTest {
     public void getEventTypesReturnsFamilyPlanningEventTypes() {
         List<String> eventTypeList = new FPDataLoader("").getEventTypes();
         Assert.assertEquals(2, eventTypeList.size());
-        Assert.assertEquals(FamilyPlanningConstants.EventType.FAMILY_PLANNING_REGISTRATION, eventTypeList.get(0));
-        Assert.assertEquals(FamilyPlanningConstants.EventType.UPDATE_FAMILY_PLANNING_REGISTRATION, eventTypeList.get(1));
+        Assert.assertEquals(FamilyPlanningConstants.EVENT_TYPE.FP_REGISTRATION, eventTypeList.get(0));
+        Assert.assertEquals(FamilyPlanningConstants.EVENT_TYPE.UPDATE_FP_REGISTRATION, eventTypeList.get(1));
     }
 }
