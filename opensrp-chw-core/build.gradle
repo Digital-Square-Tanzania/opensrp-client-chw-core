@@ -489,12 +489,12 @@ dependencies {
     //implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:5.1.0'
-    implementation('io.ona.kujaku:library:0.9.0') {
+    api('io.ona.kujaku:library:0.9.0') {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'io.realm', module: 'realm-android-library'
         exclude group: 'io.realm', module: 'realm-annotations'
     }
-    implementation 'org.smartregister:opensrp-plan-evaluator:0.0.19-SNAPSHOT'
+    api 'org.smartregister:opensrp-plan-evaluator:0.0.19-SNAPSHOT'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
     api('org.smartregister:opensrp-client-thinkmd:1.0.2-SNAPSHOT@aar') {
@@ -526,6 +526,7 @@ dependencies {
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
     api('org.smartregister:opensrp-client-core:1.18.0-MOH-SNAPSHOT@aar') {
+        transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -537,7 +538,7 @@ dependencies {
         exclude group: 'androidx.work', module: 'work-runtime'
     }
 
-    implementation "androidx.work:work-runtime:2.8.1"
+    api "androidx.work:work-runtime:2.8.1"
 
     implementation 'com.github.rey5137:material:1.2.5'
     implementation 'androidx.appcompat:appcompat:1.2.0'
@@ -710,7 +711,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-hivst:2.0.0-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-hivst:2.0.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
