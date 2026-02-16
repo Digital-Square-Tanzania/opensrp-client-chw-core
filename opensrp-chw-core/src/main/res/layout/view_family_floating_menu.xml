@@ -15,6 +15,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:contentDescription="TODO"
         android:tint="@android:color/white"
         app:backgroundTint="@color/text_black"
         app:fabSize="normal"
@@ -80,6 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:contentDescription="TODO"
                 app:backgroundTint="@color/white"
                 app:fabSize="mini"
                 app:srcCompat="@drawable/floating_call" />
@@ -115,6 +117,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:contentDescription="TODO"
+                app:backgroundTint="@color/white"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/floating_addmember" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/add_existing_member_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@+id/add_existing_member_fab"
+                android:background="@color/white"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:minWidth="50dp"
+                android:padding="10dp"
+                android:text="@string/add_existing_family_member"
+                android:textColor="@android:color/black" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_existing_member_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:contentDescription="TODO"
                 app:backgroundTint="@color/white"
                 app:fabSize="mini"
                 app:srcCompat="@drawable/floating_addmember" />

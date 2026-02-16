@@ -875,5 +875,7 @@
     <string name="ayp_facility_screening">AYP Screening</string>
     <string name="ayp_out_school_enrollment">AYP Out-school Screening</string>
 
+    <!-- Floating Menu Option for Add Existing Member to Household -->
+    <string name="add_existing_family_member">Add existing family member</string>
 
 </resources>
