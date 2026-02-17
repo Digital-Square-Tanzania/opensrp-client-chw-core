@@ -877,5 +877,10 @@
 
     <!-- Floating Menu Option for Add Existing Member to Household -->
     <string name="add_existing_family_member">Add existing family member</string>
+    <string name="client_search_hint">Search by name or ID</string>
+    <string name="client_no_match">No clients matched your search</string>
+    <string name="no_independent_clients_available">No independent clients available</string>
+    <string name="unable_to_add_family_member">Unable to update family for selected client</string>
+    <string name="successfull_added_family_member">Updated family for %1$s</string>
 
 </resources>

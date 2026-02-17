@@ -3,6 +3,7 @@ package org.smartregister.chw.core.listener;
 import android.app.Activity;
 
 import org.smartregister.chw.core.R;
+import org.smartregister.chw.core.fragment.AddExistingMemberFragment;
 import org.smartregister.chw.core.fragment.AddMemberFragment;
 import org.smartregister.chw.core.fragment.FamilyCallDialogFragment;
 
@@ -56,6 +57,10 @@ public class FloatingMenuListener implements OnClickFloatingMenu {
                 AddMemberFragment addmemberFragment = AddMemberFragment.newInstance();
                 addmemberFragment.setContext(context.get());
                 addmemberFragment.show(context.get().getFragmentManager(), AddMemberFragment.DIALOG_TAG);
+            } else if (viewId == R.id.add_existing_member_layout) {
+                AddExistingMemberFragment addExistingMemberFragment = AddExistingMemberFragment.newInstance(familyBaseEntityId);
+                addExistingMemberFragment.setContext(context.get());
+                addExistingMemberFragment.show(context.get().getFragmentManager(), AddExistingMemberFragment.DIALOG_TAG);
             }
         }
     }

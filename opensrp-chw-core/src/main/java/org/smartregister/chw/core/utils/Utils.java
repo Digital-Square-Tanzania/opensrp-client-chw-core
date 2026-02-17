@@ -65,6 +65,7 @@ import org.smartregister.chw.core.custom_views.CoreFamilyPlanningFloatingMenu;
 import org.smartregister.chw.core.custom_views.CoreHivFloatingMenu;
 import org.smartregister.chw.core.custom_views.CoreMalariaFloatingMenu;
 import org.smartregister.chw.core.custom_views.CoreTbFloatingMenu;
+import org.smartregister.chw.core.dao.EventDao;
 import org.smartregister.chw.core.domain.Hia2Indicator;
 import org.smartregister.chw.core.domain.MonthlyTally;
 import org.smartregister.chw.core.fragment.CopyToClipboardDialog;
@@ -79,6 +80,8 @@ import org.smartregister.family.FamilyLibrary;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.repository.AllSharedPreferences;
+import org.smartregister.repository.EventClientRepository;
+import org.smartregister.sync.helper.ECSyncHelper;
 import org.smartregister.util.JsonFormUtils;
 import org.smartregister.util.PermissionUtils;
 
@@ -969,5 +972,100 @@ public abstract class Utils extends org.smartregister.family.util.Utils {
                 packageManager.queryIntentActivities(intent,
                         PackageManager.MATCH_DEFAULT_ONLY);
         return resolveInfo.size() > 0;
+    }
+
+    public static String getClientName(String firstName, String middleName, String lastName) {
+        String trimFirstName = firstName.trim();
+        String trimMiddleName = middleName.trim();
+        String trimLastName = lastName.trim();
+//        if (CoreChwApplication.getApplicationFlavor().hasSurname()) {
+//            return getName(trimFirstName, trimMiddleName, trimLastName);
+//        } else {
+//            return Utils.getName(trimFirstName, trimMiddleName);
+//        }
+
+        return getName(trimFirstName, trimMiddleName, trimLastName);
+    }
+
+    public static boolean updateClientFamilyRelationship(String clientBaseEntityId, String newFamilyBaseEntityId) {
+        if (StringUtils.isBlank(clientBaseEntityId) || StringUtils.isBlank(newFamilyBaseEntityId)) {
+            return false;
+        }
+
+        try {
+            EventClientRepository eventClientRepository = new EventClientRepository();
+            JSONObject clientObject = eventClientRepository.getClientByBaseEntityId(clientBaseEntityId);
+            if (clientObject == null) {
+                return false;
+            }
+
+            ECSyncHelper syncHelper = CoreChwApplication.getInstance().getEcSyncHelper();
+            org.smartregister.clientandeventmodel.Client client = syncHelper.convert(clientObject, org.smartregister.clientandeventmodel.Client.class);
+            if (!updateFamilyRelationship(client, newFamilyBaseEntityId)) {
+                return false;
+            }
+
+            org.smartregister.family.util.JsonFormUtils.mergeAndSaveClient(syncHelper, client);
+            reprocessFamilyMemberRegistrationEvents(clientBaseEntityId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    static boolean updateFamilyRelationship(org.smartregister.clientandeventmodel.Client client, String familyBaseEntityId) {
+        if (client == null || StringUtils.isBlank(familyBaseEntityId)) {
+            return false;
+        }
+
+        Map<String, List<String>> relationships = client.getRelationships();
+        if (relationships == null) {
+            relationships = new HashMap<>();
+        }
+
+        List<String> familyRelationships = new ArrayList<>();
+        familyRelationships.add(familyBaseEntityId);
+        relationships.put("family", familyRelationships);
+        client.setRelationships(relationships);
+        return true;
+    }
+
+    public static void reprocessFamilyMemberRegistrationEvents(String clientBaseEntityId) {
+        if (StringUtils.isBlank(clientBaseEntityId)) {
+            return;
+        }
+
+        try {
+            List<org.smartregister.clientandeventmodel.Event> familyMemberRegistrationEvents = EventDao.getEvents(
+                    clientBaseEntityId,
+                    CoreConstants.EventType.FAMILY_MEMBER_REGISTRATION,
+                    Integer.MAX_VALUE
+            );
+            List<String> formSubmissionIds = extractFormSubmissionIds(familyMemberRegistrationEvents);
+            if (formSubmissionIds.isEmpty()) {
+                return;
+            }
+
+            ECSyncHelper syncHelper = CoreChwApplication.getInstance().getEcSyncHelper();
+            FamilyLibrary.getInstance()
+                    .getClientProcessorForJava()
+                    .processClient(syncHelper.getEvents(formSubmissionIds));
+        } catch (Exception e) {
+            // no-op
+        }
+    }
+
+    static List<String> extractFormSubmissionIds(List<org.smartregister.clientandeventmodel.Event> events) {
+        List<String> formSubmissionIds = new ArrayList<>();
+        if (events == null || events.isEmpty()) {
+            return formSubmissionIds;
+        }
+
+        for (org.smartregister.clientandeventmodel.Event event : events) {
+            if (event != null && StringUtils.isNotBlank(event.getFormSubmissionId())) {
+                formSubmissionIds.add(event.getFormSubmissionId());
+            }
+        }
+        return formSubmissionIds;
     }
 }
