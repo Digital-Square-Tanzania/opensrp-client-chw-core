@@ -68,6 +68,11 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
     }
 
     @Override
+    protected void startHarmReductionSoberHouseEnrollment() {
+        // do nothing
+    }
+
+    @Override
     public void startMalariaFollowUpVisit() {
         // do nothing
     }
