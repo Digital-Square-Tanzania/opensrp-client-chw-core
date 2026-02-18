@@ -978,12 +978,6 @@ public abstract class Utils extends org.smartregister.family.util.Utils {
         String trimFirstName = firstName.trim();
         String trimMiddleName = middleName.trim();
         String trimLastName = lastName.trim();
-//        if (CoreChwApplication.getApplicationFlavor().hasSurname()) {
-//            return getName(trimFirstName, trimMiddleName, trimLastName);
-//        } else {
-//            return Utils.getName(trimFirstName, trimMiddleName);
-//        }
-
         return getName(trimFirstName, trimMiddleName, trimLastName);
     }
 
