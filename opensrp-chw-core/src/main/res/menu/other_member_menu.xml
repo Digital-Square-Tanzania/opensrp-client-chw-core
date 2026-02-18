@@ -51,6 +51,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_harm_reduction_sober_house_enrollment"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/harm_reduction_sober_house_enrollment"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_anc_registration"
         android:enabled="true"
         android:title="@string/anc_registration"

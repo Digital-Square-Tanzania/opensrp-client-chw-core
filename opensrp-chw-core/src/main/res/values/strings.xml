@@ -740,6 +740,7 @@
     <string name="tb_registration">TB registration</string>
     <string name="tbleprosy_screening">TB/Leprosy screening</string>
     <string name="harm_reduction_risk_assessment">Harm Reduction Risk Assessment</string>
+    <string name="harm_reduction_sober_house_enrollment">Sober House Enrollment</string>
     <string name="remove_client">Remove Client</string>
     <string name="call_all_clients_member">Call client or caregiver</string>
 
