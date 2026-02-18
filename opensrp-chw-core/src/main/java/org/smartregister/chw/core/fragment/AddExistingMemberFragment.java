@@ -4,6 +4,7 @@ import static org.smartregister.chw.core.utils.Utils.getClientName;
 import static org.smartregister.chw.core.utils.Utils.updateClientFamilyRelationship;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,8 +28,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.core.R;
+import org.smartregister.chw.core.activity.CoreFamilyProfileActivity;
 import org.smartregister.chw.core.application.CoreChwApplication;
 import org.smartregister.chw.core.utils.CoreConstants;
+import org.smartregister.domain.FetchStatus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,15 +41,12 @@ import java.util.Locale;
 import timber.log.Timber;
 
 public class AddExistingMemberFragment extends DialogFragment {
-
     public static final String DIALOG_TAG = "add_existing_member_dialog";
     private static final String ENTITY_TYPE_INDEPENDENT_CLIENT = "ec_independent_client";
-
     private List<IndependentClientOption> independentClients = new ArrayList<>();
-
     private OnClientSelectedListener listener;
-
     private  String familyBaseEntityId;
+    private Context context;
     public interface OnClientSelectedListener {
         void onClientSelected(IndependentClientOption client);
     }
@@ -64,7 +64,9 @@ public class AddExistingMemberFragment extends DialogFragment {
         return fragment;
     }
 
-
+    public void setContext(Context context) {
+        this.context = context;
+    }
     private  List<IndependentClientOption> loadIndependentClients() {
         Cursor cursor = null;
 
@@ -168,7 +170,7 @@ public class AddExistingMemberFragment extends DialogFragment {
     }
     private void reassignClientFamily(IndependentClientOption client) {
         if (client == null || StringUtils.isBlank(client.getBaseEntityId()) || StringUtils.isBlank(familyBaseEntityId)) {
-            Toast.makeText(getActivity().getApplicationContext(), getString(R.string.unable_to_add_family_member), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, getString(R.string.unable_to_add_family_member), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -178,17 +180,24 @@ public class AddExistingMemberFragment extends DialogFragment {
                     familyBaseEntityId
             );
 
-            getActivity().runOnUiThread(() -> {
-                if (updated) {
-                    Toast.makeText(
-                            getActivity().getApplicationContext(),
-                            getString(R.string.successfull_added_family_member, client.getDisplayName()),
-                            Toast.LENGTH_SHORT
-                    ).show();
-                } else {
-                    Toast.makeText(getActivity().getApplicationContext(), getString(R.string.unable_to_add_family_member), Toast.LENGTH_SHORT).show();
-                }
-            });
+            if (getActivity() != null) {
+                getActivity().runOnUiThread(() -> {
+                    if (updated) {
+                        Toast.makeText(
+                                context,
+                                getString(R.string.successfull_added_family_member, client.getDisplayName()),
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        if (getActivity() != null) {
+                            ((CoreFamilyProfileActivity) context).refreshMemberList(FetchStatus.fetched);
+                        }
+                        dismiss();
+                    } else {
+                        Toast.makeText(context, getString(R.string.unable_to_add_family_member), Toast.LENGTH_SHORT).show();
+                        dismiss();
+                    }
+                });
+            }
         }).start();
     }
     @Override
@@ -209,7 +218,7 @@ public class AddExistingMemberFragment extends DialogFragment {
 
         if (independentClients == null || independentClients.isEmpty()) {
             Toast.makeText(
-                    getActivity(),
+                    context,
                     getString(R.string.no_independent_clients_available),
                     Toast.LENGTH_SHORT
             ).show();
@@ -219,7 +228,7 @@ public class AddExistingMemberFragment extends DialogFragment {
         }
 
         IndependentClientSelectionAdapter adapter = new IndependentClientSelectionAdapter(independentClients);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
         updateEmptyView(adapter, emptyView);
 
@@ -229,12 +238,6 @@ public class AddExistingMemberFragment extends DialogFragment {
             }
 
             reassignClientFamily(client);
-
-            if (getActivity() != null) {
-                getActivity().setResult(CoreConstants.ProfileActivityResults.CHANGE_COMPLETED);
-            }
-            dismiss();
-
         });
 
         searchInput.addTextChangedListener(new TextWatcher() {
@@ -312,24 +315,6 @@ public class AddExistingMemberFragment extends DialogFragment {
             } else {
                 holder.detailsView.setVisibility(View.GONE);
             }
-
-            // ✅ Highlight + Disable Assigned Clients
-//            if (client.isAssignedToHousehold()) {
-//
-//                holder.itemView.setAlpha(0.4f);
-//                holder.itemView.setEnabled(false);
-//
-//            } else {
-//
-//                holder.itemView.setAlpha(1f);
-//                holder.itemView.setEnabled(true);
-//
-//                holder.itemView.setOnClickListener(v -> {
-//                    if (onClientSelectedListener != null) {
-//                        onClientSelectedListener.onClientSelected(client);
-//                    }
-//                });
-//            }
 
             holder.itemView.setAlpha(1f);
             holder.itemView.setEnabled(true);
