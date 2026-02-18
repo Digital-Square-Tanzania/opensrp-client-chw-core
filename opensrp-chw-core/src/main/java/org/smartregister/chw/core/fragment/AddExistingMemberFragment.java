@@ -5,7 +5,6 @@ import static org.smartregister.chw.core.utils.Utils.updateClientFamilyRelations
 
 import android.app.DialogFragment;
 import android.content.Context;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -22,15 +21,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import net.zetetic.database.sqlcipher.SQLiteDatabase;
-
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.activity.CoreFamilyProfileActivity;
-import org.smartregister.chw.core.application.CoreChwApplication;
-import org.smartregister.chw.core.utils.CoreConstants;
+import org.smartregister.chw.core.domain.IndependentClientOption;
 import org.smartregister.domain.FetchStatus;
 
 import java.util.ArrayList;
@@ -42,11 +38,10 @@ import timber.log.Timber;
 
 public class AddExistingMemberFragment extends DialogFragment {
     public static final String DIALOG_TAG = "add_existing_member_dialog";
-    private static final String ENTITY_TYPE_INDEPENDENT_CLIENT = "ec_independent_client";
-    private List<IndependentClientOption> independentClients = new ArrayList<>();
     private OnClientSelectedListener listener;
     private  String familyBaseEntityId;
     private Context context;
+    private List<IndependentClientOption> independentClients = new ArrayList<>();
     public interface OnClientSelectedListener {
         void onClientSelected(IndependentClientOption client);
     }
@@ -55,10 +50,13 @@ public class AddExistingMemberFragment extends DialogFragment {
         this.listener = listener;
     }
 
-    public static AddExistingMemberFragment newInstance(String familyBaseEntityId) {
+    public static AddExistingMemberFragment newInstance(String familyBaseEntityId,
+                                                        List<IndependentClientOption> independentClients) {
 
         Bundle args = new Bundle();
         args.putString("family_id", familyBaseEntityId);
+        ArrayList<IndependentClientOption> clientsList = new ArrayList<>(independentClients);
+        args.putParcelableArrayList("independent_clients", clientsList);
         AddExistingMemberFragment fragment = new AddExistingMemberFragment();
         fragment.setArguments(args);
         return fragment;
@@ -66,61 +64,6 @@ public class AddExistingMemberFragment extends DialogFragment {
 
     public void setContext(Context context) {
         this.context = context;
-    }
-    private  List<IndependentClientOption> loadIndependentClients() {
-        Cursor cursor = null;
-
-        List<IndependentClientOption> independentClients = new ArrayList<>();
-        try {
-            SQLiteDatabase readableDatabase = CoreChwApplication.getInstance().getRepository().getReadableDatabase();
-            if (readableDatabase == null) {
-                return Collections.emptyList();
-            }
-
-            StringBuilder sqlBuilder = new StringBuilder();
-            sqlBuilder.append("SELECT m.base_entity_id, m.first_name, m.middle_name, m.last_name, m.dob, m.unique_id ");
-            sqlBuilder.append("FROM ec_family_member m ");
-            sqlBuilder.append("INNER JOIN ec_family f ON f.base_entity_id = m.relational_id ");
-            sqlBuilder.append("WHERE m.is_closed = 0 ");
-            sqlBuilder.append("AND m.date_removed IS NULL ");
-            sqlBuilder.append("AND m.dod IS NULL ");
-            sqlBuilder.append("AND f.entity_type = ? ");
-
-            List<String> args = new ArrayList<>();
-            args.add(ENTITY_TYPE_INDEPENDENT_CLIENT);
-
-            if (StringUtils.isNotBlank(familyBaseEntityId)) {
-                sqlBuilder.append("AND m.relational_id <> ? ");
-                args.add(familyBaseEntityId);
-            }
-
-            sqlBuilder.append("ORDER BY m.first_name, m.middle_name, m.last_name");
-
-            cursor = readableDatabase.rawQuery(sqlBuilder.toString(), args.toArray(new String[0]));
-            while (cursor != null && cursor.moveToNext()) {
-                String baseEntityId = cursor.getString(0);
-                if (StringUtils.isBlank(baseEntityId)) {
-                    continue;
-                }
-
-                String firstName = cursor.getString(1);
-                String middleName = cursor.getString(2);
-                String lastName = cursor.getString(3);
-                String dob = cursor.getString(4);
-                String uniqueId = cursor.getString(5);
-
-                String displayName = buildDisplayName(firstName, middleName, lastName, baseEntityId);
-                String ageDisplay = buildAgeDisplay(dob);
-                independentClients.add(new IndependentClientOption(baseEntityId, displayName, ageDisplay, uniqueId));
-            }
-        } catch (Exception e) {
-            Timber.e(e, "Unable to load independent clients for family reassignment");
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-        return independentClients;
     }
 
     private static String buildDisplayName(String firstName, String middleName, String lastName, String fallback) {
@@ -151,7 +94,6 @@ public class AddExistingMemberFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         this.familyBaseEntityId = getArguments().getString("family_id");
-        independentClients = loadIndependentClients();
 
         setStyle(DialogFragment.STYLE_NORMAL,
                 android.R.style.Theme_Holo_Light_NoActionBar);
@@ -215,17 +157,6 @@ public class AddExistingMemberFragment extends DialogFragment {
 
         searchInput.setHint(R.string.client_search_hint);
         emptyView.setText(R.string.client_no_match);
-
-        if (independentClients == null || independentClients.isEmpty()) {
-            Toast.makeText(
-                    context,
-                    getString(R.string.no_independent_clients_available),
-                    Toast.LENGTH_SHORT
-            ).show();
-
-            dismiss();
-            return rootView;
-        }
 
         IndependentClientSelectionAdapter adapter = new IndependentClientSelectionAdapter(independentClients);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
@@ -345,47 +276,6 @@ public class AddExistingMemberFragment extends DialogFragment {
 
             nameView = itemView.findViewById(R.id.contact_name);
             detailsView = itemView.findViewById(R.id.contact_details);
-        }
-    }
-    private static class IndependentClientOption {
-        private final String baseEntityId;
-        private final String displayName;
-        private final String ageDisplay;
-        private final String uniqueId;
-
-        private IndependentClientOption(String baseEntityId, String displayName, String ageDisplay, String uniqueId) {
-            this.baseEntityId = baseEntityId;
-            this.displayName = displayName;
-            this.ageDisplay = ageDisplay;
-            this.uniqueId = uniqueId;
-        }
-        private String getBaseEntityId() {
-            return baseEntityId;
-        }
-        private String getDisplayName() {
-            return displayName;
-        }
-        private String getDetails() {
-            StringBuilder detailsBuilder = new StringBuilder();
-            if (StringUtils.isNotBlank(uniqueId)) {
-                detailsBuilder.append(uniqueId);
-            }
-            if (StringUtils.isNotBlank(ageDisplay)) {
-                if (detailsBuilder.length() > 0) {
-                    detailsBuilder.append(" · ");
-                }
-                detailsBuilder.append(ageDisplay);
-            }
-            return detailsBuilder.toString();
-        }
-        private boolean matches(String query) {
-            if (StringUtils.isBlank(query)) {
-                return true;
-            }
-            String lowerQuery = query.toLowerCase(Locale.getDefault());
-            return (displayName != null && displayName.toLowerCase(Locale.getDefault()).contains(lowerQuery))
-                    || (uniqueId != null && uniqueId.toLowerCase(Locale.getDefault()).contains(lowerQuery))
-                    || (baseEntityId != null && baseEntityId.toLowerCase(Locale.getDefault()).contains(lowerQuery));
         }
     }
 }
