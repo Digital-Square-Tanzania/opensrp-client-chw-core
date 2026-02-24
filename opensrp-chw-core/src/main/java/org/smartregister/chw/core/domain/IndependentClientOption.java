@@ -28,7 +28,7 @@ public class IndependentClientOption implements Parcelable {
 
 
     public static final Creator<IndependentClientOption> CREATOR =
-            new Creator<>() {
+            new Creator<IndependentClientOption>() {
                 @Override
                 public IndependentClientOption createFromParcel(Parcel in) {
                     return new IndependentClientOption(in);
@@ -98,4 +98,3 @@ public class IndependentClientOption implements Parcelable {
         return 0;
     }
 }
-
