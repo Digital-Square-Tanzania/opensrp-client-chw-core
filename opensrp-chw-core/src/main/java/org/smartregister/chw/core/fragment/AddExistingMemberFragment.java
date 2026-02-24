@@ -94,6 +94,7 @@ public class AddExistingMemberFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         this.familyBaseEntityId = getArguments().getString("family_id");
+        this.independentClients = getArguments().getParcelableArrayList("independent_clients");
 
         setStyle(DialogFragment.STYLE_NORMAL,
                 android.R.style.Theme_Holo_Light_NoActionBar);
