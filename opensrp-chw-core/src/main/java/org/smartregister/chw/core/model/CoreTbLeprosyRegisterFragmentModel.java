@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.smartregister.chw.core.utils.ChildDBConstants;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.tbleprosy.model.BaseTbLeprosyRegisterFragmentModel;
+import org.smartregister.chw.tbleprosy.util.Constants;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.family.util.DBConstants;
 
