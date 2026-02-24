@@ -34,8 +34,11 @@ public class CoreTbLeprosyRegisterFragmentModel extends BaseTbLeprosyRegisterFra
         Set<String> columnList = new HashSet<>();
 
         columnList.add(tableName + "." + DBConstants.KEY.BASE_ENTITY_ID);
-        columnList.add(tableName + "." + org.smartregister.chw.tbleprosy.util.DBConstants.KEY.TB_CLIENT_NUMBER);
-        columnList.add(tableName + "." + org.smartregister.chw.tbleprosy.util.DBConstants.KEY.LEPROSY_CLIENT_NUMBER);
+
+        if (tableName.equals(Constants.TABLES.TBLEPROSY_SCREENING)) {
+            columnList.add(tableName + "." + org.smartregister.chw.tbleprosy.util.DBConstants.KEY.TB_CLIENT_NUMBER);
+            columnList.add(tableName + "." + org.smartregister.chw.tbleprosy.util.DBConstants.KEY.LEPROSY_CLIENT_NUMBER);
+        }
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " as " + ChildDBConstants.KEY.RELATIONAL_ID);
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.FIRST_NAME);
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.MIDDLE_NAME);
