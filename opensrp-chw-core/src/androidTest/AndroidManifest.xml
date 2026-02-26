@@ -4,7 +4,9 @@
 
     <uses-sdk tools:overrideLibrary="org.smartregister.chw.kvp" />
 
-    <application>
+    <application
+        android:theme="@style/AppTheme"
+        tools:replace="android:theme">
         <receiver
             android:name="io.ona.kujaku.receivers.KujakuNetworkChangeReceiver"
             android:exported="false"
