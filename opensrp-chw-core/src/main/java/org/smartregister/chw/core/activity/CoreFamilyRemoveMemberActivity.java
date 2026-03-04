@@ -1,5 +1,9 @@
 package org.smartregister.chw.core.activity;
 
+import static org.smartregister.chw.core.provider.CoreFamilyRemoveMemberProvider.REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT;
+import static org.smartregister.chw.core.provider.CoreFamilyRemoveMemberProvider.REMOVAL_REASON_DEATH;
+import static org.smartregister.chw.core.provider.CoreFamilyRemoveMemberProvider.REMOVAL_REASON_START_NEW_FAMILY;
+
 import android.content.Intent;
 import android.view.View;
 
@@ -32,15 +36,22 @@ public abstract class CoreFamilyRemoveMemberActivity extends SecuredActivity imp
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            try {
-                String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
-                Timber.d("JSONResult : %s", jsonString);
+        String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
+        String reasonForRemove = data.getStringExtra("reasonForRemove");
 
-                JSONObject form = new JSONObject(jsonString);
-                removeMemberFragment.confirmRemove(form);
-            } catch (Exception e) {
-                Timber.e(e);
+        if (jsonString != null && resultCode == RESULT_OK) {
+            assert reasonForRemove != null;
+            if (reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_DEATH)) {
+                try {
+                    JSONObject form = new JSONObject(jsonString);
+                    Timber.d("JSONResult : %s", jsonString);
+                    removeMemberFragment.confirmRemove(form);
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
+            } else if (reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_START_NEW_FAMILY) ||
+                    reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT)) {
+                removeMemberFragment.startNewFamily(jsonString, reasonForRemove);
             }
         }
     }

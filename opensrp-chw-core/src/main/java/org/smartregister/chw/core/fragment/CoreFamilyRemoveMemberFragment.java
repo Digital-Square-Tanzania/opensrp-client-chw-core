@@ -34,6 +34,7 @@ public abstract class CoreFamilyRemoveMemberFragment extends BaseFamilyProfileMe
     protected boolean processingFamily = false;
     protected String memberName;
     protected String familyBaseEntityId;
+    protected  String reasonForRemove;
 
     @Override
     public void initializeAdapter(Set<View> visibleColumns, String familyHead, String primaryCaregiver) {
@@ -141,6 +142,21 @@ public abstract class CoreFamilyRemoveMemberFragment extends BaseFamilyProfileMe
     }
 
     @Override
+    public void startJsonRegistrationFrom(JSONObject jsonForm, String reasonForRemove) {
+        Intent intent = new Intent(getActivity(), Utils.metadata().familyFormActivity);
+        intent.putExtra("reasonForRemove", reasonForRemove);
+        intent.putExtra("json", jsonForm.toString());
+        Form form = new Form();
+        form.setName(this.getString(R.string.add_family));
+        form.setActionBarBackground(R.color.family_actionbar);
+        form.setNavigationBackground(R.color.family_navigation);
+        form.setHomeAsUpIndicator(R.mipmap.ic_cross_white);
+        form.setPreviousLabel(this.getResources().getString(R.string.back));
+        intent.putExtra("form", form);
+        this.startActivityForResult(intent, 2244);
+    }
+
+    @Override
     public void onMemberRemoved(String removalType) {
         // display alert
         if (getActivity() != null) {
@@ -188,6 +204,10 @@ public abstract class CoreFamilyRemoveMemberFragment extends BaseFamilyProfileMe
 
     }
 
+    public boolean isClientEligibleForRemoval(CommonPersonObjectClient client, String removeReason) {
+        return getPresenter().isEligibleForRemoval(client, removeReason);
+    }
+
     public void confirmRemove(final JSONObject form) {
         if (StringUtils.isNotBlank(memberName)) {
             FamilyRemoveMemberConfirmDialog dialog;
@@ -206,6 +226,12 @@ public abstract class CoreFamilyRemoveMemberFragment extends BaseFamilyProfileMe
                 dialog.setOnRemove(() -> getPresenter().processRemoveForm(form));
             }
         }
+    }
+
+    public void startNewFamily(String jsonString, String reasonForRemove) {
+        getPresenter().saveFamilyRegistrationOnMemberRemoval(jsonString, false, reasonForRemove);
+        refreshMemberList(FetchStatus.fetched);
+        refreshListView();
     }
 
     protected abstract String getRemoveFamilyMemberDialogTag();
@@ -248,4 +274,11 @@ public abstract class CoreFamilyRemoveMemberFragment extends BaseFamilyProfileMe
         }
     }
 
+    public  String getReasonForRemove() {
+        return reasonForRemove;
+    }
+
+    public  void setReasonForRemove(String reasonForRemove) {
+        this.reasonForRemove = reasonForRemove;
+    }
 }

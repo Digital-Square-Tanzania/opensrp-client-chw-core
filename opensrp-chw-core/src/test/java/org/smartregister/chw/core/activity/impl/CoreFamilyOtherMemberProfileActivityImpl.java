@@ -158,11 +158,6 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
     }
 
     @Override
-    protected void startHouseholdGeneration() {
-        // do nothing
-    }
-
-    @Override
     public void setIndependentClient(boolean isIndependent) {
         // do nothing
     }

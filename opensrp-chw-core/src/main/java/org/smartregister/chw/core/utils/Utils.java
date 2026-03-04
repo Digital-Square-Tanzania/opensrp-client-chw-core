@@ -73,6 +73,7 @@ import org.smartregister.clientandeventmodel.Obs;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.commonregistry.CommonRepository;
+import org.smartregister.domain.Client;
 import org.smartregister.domain.Event;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.domain.tag.FormTag;
@@ -1061,5 +1062,45 @@ public abstract class Utils extends org.smartregister.family.util.Utils {
             }
         }
         return formSubmissionIds;
+    }
+
+    public static void reprocessRegistrationEvents(String familyBaseEntityId, String baseEntityId) {
+        reprocessEventType(familyBaseEntityId, CoreConstants.EventType.FAMILY_REGISTRATION);
+        reprocessEventType(familyBaseEntityId, CoreConstants.EventType.UPDATE_FAMILY_REGISTRATION);
+        reprocessEventType(baseEntityId, CoreConstants.EventType.FAMILY_MEMBER_REGISTRATION);
+        reprocessEventType(baseEntityId, CoreConstants.EventType.UPDATE_FAMILY_MEMBER_REGISTRATION);
+    }
+    private static void reprocessEventType(String baseEntityId, String eventType) {
+        try {
+            List<org.smartregister.clientandeventmodel.Event> events =
+                    EventDao.getEvents(baseEntityId, eventType, Integer.MAX_VALUE);
+
+            reprocessEvents(events, "ec_independent_client");
+
+        } catch (Exception e) {
+            Timber.e(e, "Error reprocessing event type: %s", eventType);
+        }
+    }
+
+    public static void reprocessEvents(List<org.smartregister.clientandeventmodel.Event> eventList, String entityType) {
+        if (eventList == null || eventList.isEmpty()) {
+            return;
+        }
+
+        try {
+            List<EventClient> clients = new ArrayList<>();
+            for (org.smartregister.clientandeventmodel.Event event : eventList) {
+                ECSyncHelper syncHelper = CoreChwApplication.getInstance().getEcSyncHelper();
+                JSONObject json = new JSONObject(CoreJsonFormUtils.gson.toJson(event));
+                json.put("entityType", entityType);
+                syncHelper.addEvent(event.getBaseEntityId(), json);
+                org.smartregister.domain.Event eventUpdated = CoreJsonFormUtils.gson.fromJson(
+                        json.toString(), org.smartregister.domain.Event.class);
+                clients.add(new EventClient(eventUpdated, new Client(event.getBaseEntityId())));
+            }
+            FamilyLibrary.getInstance().getClientProcessorForJava().processClient(clients);
+        } catch (Exception e) {
+            Timber.e(e, "Error processing events for entityType: %s", entityType);
+        }
     }
 }
