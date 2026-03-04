@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.presenter;
 
+import static org.smartregister.chw.core.provider.CoreFamilyRemoveMemberProvider.REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT;
+import static org.smartregister.chw.core.provider.CoreFamilyRemoveMemberProvider.REMOVAL_REASON_START_NEW_FAMILY;
 import static org.smartregister.chw.core.utils.Utils.reprocessRegistrationEvents;
 import static org.smartregister.chw.core.utils.Utils.updateClientFamilyRelationship;
 import static org.smartregister.util.Utils.getAgeFromDate;
@@ -179,9 +181,9 @@ public class CoreFamilyRemoveMemberPresenter extends BaseFamilyProfileMemberPres
         } else {
             String dob = getValue(client.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.DOB, false);
             int age = getAgeFromDate(dob);
-            if(removeReason != null && removeReason.equalsIgnoreCase("start_new_family") && age >= 15) {
+            if(removeReason != null && removeReason.equalsIgnoreCase(REMOVAL_REASON_START_NEW_FAMILY) && age >= 15) {
                 return true;
-            } else return removeReason != null && removeReason.equalsIgnoreCase("change_to_independent_client");
+            } else return removeReason != null && removeReason.equalsIgnoreCase(REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT);
         }
     }
 
@@ -215,18 +217,12 @@ public class CoreFamilyRemoveMemberPresenter extends BaseFamilyProfileMemberPres
 
     @Override
     public void onNewFamilyRegistrationSaved( String clientBaseEntityId, String familyBaseEntityId, String reasonForRemove) {
-
-        if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase("start_new_family")) {
-            // Remove
-            updateClientFamilyRelationship(
-                    clientBaseEntityId, familyBaseEntityId);
-        } else if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase("change_to_independent_client")) {
-            // Convert to Independent Client
-            updateClientFamilyRelationship(
-                    clientBaseEntityId, familyBaseEntityId);
+        if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_START_NEW_FAMILY)) {
+            updateClientFamilyRelationship(clientBaseEntityId, familyBaseEntityId);
+        } else if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT)) {
+            updateClientFamilyRelationship(clientBaseEntityId, familyBaseEntityId);
             reprocessRegistrationEvents(familyBaseEntityId, clientBaseEntityId);
         }
-
     }
 
     @Override

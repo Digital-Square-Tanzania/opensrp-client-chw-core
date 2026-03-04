@@ -29,6 +29,10 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
     private Context context;
     private View.OnClickListener footerClickListener;
     private String familyID;
+    public static final String REMOVAL_REASON_START_NEW_FAMILY = "start_new_family";
+    public static final String REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT = "change_to_independent_client";
+    public static final String REMOVAL_REASON_DEATH = "Death";
+
 
     public CoreFamilyRemoveMemberProvider(String familyID, Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener, String familyHead, String primaryCaregiver) {
         super(context, commonRepository, visibleColumns, onClickListener, paginationClickListener, familyHead, primaryCaregiver);
@@ -71,9 +75,10 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
             }
             @Override
             public void onNewFamilyRegistrationSaved(String clientBaseEntityId, String familyBaseEntityId, String reasonForRemove) {
-                if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase("start_new_family")) {
+                if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_START_NEW_FAMILY)) {
                     updateClientFamilyRelationship(clientBaseEntityId, familyBaseEntityId);
-                } else if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase("change_to_independent_client")) {
+                } else if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT)) {
+                    updateClientFamilyRelationship(clientBaseEntityId, familyBaseEntityId);
                     reprocessRegistrationEvents(familyBaseEntityId, clientBaseEntityId);
                 }
             }
