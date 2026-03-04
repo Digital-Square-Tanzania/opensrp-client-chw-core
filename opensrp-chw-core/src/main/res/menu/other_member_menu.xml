@@ -239,9 +239,4 @@
         android:enabled="true"
         android:title="@string/mark_as_deceased"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/action_generate_household"
-        android:enabled="true"
-        android:title="@string/generate_household"
-        app:showAsAction="never" />
 </menu>
