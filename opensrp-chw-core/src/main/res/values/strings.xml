@@ -883,6 +883,6 @@
     <string name="unable_to_add_family_member">Unable to update family for selected client</string>
     <string name="successfull_added_family_member">Updated family for %1$s</string>
     <string name="generate_household">Generate Household</string>
-    <string name="remove_member">Remove Member</string>
+    <string name="remove_member">Remove Household Member</string>
 
 </resources>
