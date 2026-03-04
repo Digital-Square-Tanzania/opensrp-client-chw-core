@@ -32,15 +32,22 @@ public abstract class CoreFamilyRemoveMemberActivity extends SecuredActivity imp
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            try {
-                String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
-                Timber.d("JSONResult : %s", jsonString);
+        String jsonString = data.getStringExtra(Constants.JSON_FORM_EXTRA.JSON);
+        String reasonForRemove = data.getStringExtra("reasonForRemove");
 
-                JSONObject form = new JSONObject(jsonString);
-                removeMemberFragment.confirmRemove(form);
-            } catch (Exception e) {
-                Timber.e(e);
+        if (jsonString != null && resultCode == RESULT_OK) {
+            assert reasonForRemove != null;
+            if (reasonForRemove.equalsIgnoreCase("Death")) {
+                try {
+                    JSONObject form = new JSONObject(jsonString);
+                    Timber.d("JSONResult : %s", jsonString);
+                    removeMemberFragment.confirmRemove(form);
+                } catch (Exception e) {
+                    Timber.e(e);
+                }
+            } else if (reasonForRemove.equalsIgnoreCase("start_new_family") ||
+                    reasonForRemove.equalsIgnoreCase("change_to_independent_client")) {
+                removeMemberFragment.startNewFamily(jsonString, reasonForRemove);
             }
         }
     }

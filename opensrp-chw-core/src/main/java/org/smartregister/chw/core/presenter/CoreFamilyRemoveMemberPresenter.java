@@ -1,10 +1,17 @@
 package org.smartregister.chw.core.presenter;
 
+import static org.smartregister.chw.core.utils.Utils.reprocessRegistrationEvents;
+import static org.smartregister.chw.core.utils.Utils.updateClientFamilyRelationship;
+import static org.smartregister.util.Utils.getAgeFromDate;
+import static org.smartregister.util.Utils.getValue;
+
+import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.smartregister.chw.core.contract.FamilyRemoveMemberContract;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.family.domain.FamilyEventClient;
 import org.smartregister.family.presenter.BaseFamilyProfileMemberPresenter;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.location.helper.LocationHelper;
@@ -12,11 +19,14 @@ import org.smartregister.opd.utils.OpdDbConstants;
 import org.smartregister.view.LocationPickerView;
 
 import java.lang.ref.WeakReference;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import timber.log.Timber;
 
-public class CoreFamilyRemoveMemberPresenter extends BaseFamilyProfileMemberPresenter implements FamilyRemoveMemberContract.Presenter {
+public class CoreFamilyRemoveMemberPresenter extends BaseFamilyProfileMemberPresenter implements
+        FamilyRemoveMemberContract.Presenter, FamilyRemoveMemberContract.InteractorCallback<HashMap<String, String>> {
 
     private FamilyRemoveMemberContract.Model model;
     private WeakReference<FamilyRemoveMemberContract.View> viewReference;
@@ -137,6 +147,45 @@ public class CoreFamilyRemoveMemberPresenter extends BaseFamilyProfileMemberPres
     }
 
     @Override
+    public void saveFamilyRegistrationOnMemberRemoval(String jsonString, boolean isEditMode, String reasonForRemove) {
+        try {
+            List<FamilyEventClient> familyEventClientList = model.processFamilyMemberRemoval(jsonString);
+            if (familyEventClientList == null || familyEventClientList.isEmpty()) {
+                return;
+            }
+            interactor.saveNewFamilyRegistration(familyEventClientList, jsonString, isEditMode, reasonForRemove, this);
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+    }
+
+    @Override
+    public void startForm(String formName, String entityId, String baseEntityId, String metadata,
+                          String currentLocationId, String reasonForRemove) throws Exception {
+        JSONObject form = this.model.getFormAsJson(formName, entityId, baseEntityId, currentLocationId);
+
+        if (this.viewReference != null) {
+            this.viewReference.get().startJsonRegistrationFrom(form, reasonForRemove);
+        }
+
+    }
+
+    @Override
+    public boolean isEligibleForRemoval(CommonPersonObjectClient client, String removeReason) {
+        String memberID = client.getColumnmaps().get(DBConstants.KEY.BASE_ENTITY_ID);
+
+        if (memberID != null && (memberID.equalsIgnoreCase(familyHead) || memberID.equalsIgnoreCase(primaryCaregiver))) {
+            return false;
+        } else {
+            String dob = getValue(client.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.DOB, false);
+            int age = getAgeFromDate(dob);
+            if(removeReason != null && removeReason.equalsIgnoreCase("start_new_family") && age >= 15) {
+                return true;
+            } else return removeReason != null && removeReason.equalsIgnoreCase("change_to_independent_client");
+        }
+    }
+
+    @Override
     public String getMainCondition() {
         return String.format(" %s = '%s' and %s is null and %s is null ",
                 DBConstants.KEY.OBJECT_RELATIONAL_ID, familyBaseEntityId,
@@ -153,4 +202,33 @@ public class CoreFamilyRemoveMemberPresenter extends BaseFamilyProfileMemberPres
     public void setInteractor(FamilyRemoveMemberContract.Interactor interactor) {
         this.interactor = interactor;
     }
+
+    @Override
+    public void onResult(HashMap<String, String> result) {
+
+    }
+
+    @Override
+    public void onError(Exception e) {
+
+    }
+
+    @Override
+    public void onNewFamilyRegistrationSaved( String clientBaseEntityId, String familyBaseEntityId, String reasonForRemove) {
+
+        if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase("start_new_family")) {
+            // Remove
+            updateClientFamilyRelationship(
+                    clientBaseEntityId, familyBaseEntityId);
+        } else if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase("change_to_independent_client")) {
+            // Convert to Independent Client
+            updateClientFamilyRelationship(
+                    clientBaseEntityId, familyBaseEntityId);
+            reprocessRegistrationEvents(familyBaseEntityId, clientBaseEntityId);
+        }
+
+    }
+
+    @Override
+    public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {}
 }

@@ -1,5 +1,8 @@
 package org.smartregister.chw.core.provider;
 
+import static org.smartregister.chw.core.utils.Utils.reprocessRegistrationEvents;
+import static org.smartregister.chw.core.utils.Utils.updateClientFamilyRelationship;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -8,6 +11,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.contract.FamilyRemoveMemberContract;
 import org.smartregister.chw.core.interactor.CoreFamilyRemoveMemberInteractor;
@@ -38,7 +42,7 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
         // do nothing
         CoreFamilyRemoveMemberInteractor familyRemoveMemberInteractor = getFamilyRemoveMemberInteractor();
         final RemoveFooterViewHolder footerViewHolder = (RemoveFooterViewHolder) viewHolder;
-        familyRemoveMemberInteractor.getFamilySummary(familyID, new FamilyRemoveMemberContract.InteractorCallback<HashMap<String, String>>() {
+        familyRemoveMemberInteractor.getFamilySummary(familyID, new FamilyRemoveMemberContract.InteractorCallback<>() {
             @Override
             public void onResult(HashMap<String, String> result) {
                 Integer children = Integer.valueOf(result.get(CoreConstants.TABLE_NAME.CHILD));
@@ -65,6 +69,17 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
             public void onError(Exception e) {
                 //// TODO: 15/08/19
             }
+            @Override
+            public void onNewFamilyRegistrationSaved(String clientBaseEntityId, String familyBaseEntityId, String reasonForRemove) {
+                if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase("start_new_family")) {
+                    updateClientFamilyRelationship(clientBaseEntityId, familyBaseEntityId);
+                } else if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase("change_to_independent_client")) {
+                    reprocessRegistrationEvents(familyBaseEntityId, clientBaseEntityId);
+                }
+            }
+
+            @Override
+            public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {}
         });
 
         footerViewHolder.view.setOnClickListener(footerClickListener);
