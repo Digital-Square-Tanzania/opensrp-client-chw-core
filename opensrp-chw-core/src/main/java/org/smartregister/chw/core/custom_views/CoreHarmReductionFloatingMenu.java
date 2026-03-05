@@ -42,7 +42,7 @@ public abstract class CoreHarmReductionFloatingMenu extends BaseHarmReductionFlo
 
     @Override
     public void initUi() {
-        inflate(getContext(), R.layout.view_tb_call_client_floating_menu, this);
+        inflate(getContext(), R.layout.view_harm_reduction_floating_menu, this);
 
         fabOpen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
         fabClose = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
