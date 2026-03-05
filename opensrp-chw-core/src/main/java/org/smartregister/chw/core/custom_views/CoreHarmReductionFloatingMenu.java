@@ -20,6 +20,7 @@ import org.smartregister.chw.tb.custom_views.BaseTbFloatingMenu;
 import org.smartregister.chw.tb.domain.TbMemberObject;
 import org.smartregister.chw.tb.fragment.BaseTbCallDialogFragment;
 import org.smartregister.chw.tb.util.TbUtil;
+import org.smartregister.chw.tbleprosy.fragment.BaseTbLeprosyCallDialogFragment;
 
 public abstract class CoreHarmReductionFloatingMenu extends BaseHarmReductionFloatingMenu {
     public FloatingActionButton fab;
@@ -103,6 +104,10 @@ public abstract class CoreHarmReductionFloatingMenu extends BaseHarmReductionFlo
             referLayout.setClickable(true);
             isFabMenuOpen = true;
         }
+    }
+
+    public void launchCallWidget() {
+        BaseTbLeprosyCallDialogFragment.launchDialog((Activity)this.getContext(), this.MEMBER_OBJECT);
     }
 
     public void redraw(boolean hasPhoneNumber) {
