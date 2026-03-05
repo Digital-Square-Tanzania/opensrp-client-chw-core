@@ -50,16 +50,16 @@ public abstract class CoreHarmReductionFloatingMenu extends BaseHarmReductionFlo
         rotateBack = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_back);
 
         activityMain = findViewById(R.id.activity_main);
-        menuBar = findViewById(R.id.menu_bar);
+        menuBar = findViewById(org.smartregister.chw.harmreduction.R.id.menu_bar);
 
-        fab = findViewById(R.id.tb_fab);
+        fab = findViewById(org.smartregister.chw.harmreduction.R.id.harm_reduction_fab);
         fab.setOnClickListener(this);
 
-        callLayout = findViewById(R.id.call_layout);
+        callLayout = findViewById(org.smartregister.chw.harmreduction.R.id.call_layout);
         callLayout.setOnClickListener(this);
         callLayout.setClickable(false);
 
-        referLayout = findViewById(R.id.refer_to_facility_layout);
+        referLayout = findViewById(org.smartregister.chw.harmreduction.R.id.refer_to_facility_layout);
         referLayout.setOnClickListener(this);
         referLayout.setClickable(false);
 
