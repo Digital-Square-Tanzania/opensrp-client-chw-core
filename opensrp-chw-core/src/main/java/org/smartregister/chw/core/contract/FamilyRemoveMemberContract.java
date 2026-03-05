@@ -1,10 +1,13 @@
 package org.smartregister.chw.core.contract;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.contract.FamilyProfileMemberContract;
+import org.smartregister.family.domain.FamilyEventClient;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public interface FamilyRemoveMemberContract {
@@ -22,6 +25,13 @@ public interface FamilyRemoveMemberContract {
         void processRemoveForm(JSONObject jsonObject);
 
         void memberRemoved(String removalType);
+
+        void saveFamilyRegistrationOnMemberRemoval(String jsonString, boolean isEditMode, String reasonForRemove);
+
+        void startForm(String formName, String entityId, String baseEntityId, String metadata,
+                       String currentLocationId, String reasonForRemove) throws Exception;
+
+        boolean isEligibleForRemoval(CommonPersonObjectClient client, String removeReason);
 
     }
 
@@ -42,6 +52,8 @@ public interface FamilyRemoveMemberContract {
 
         void onEveryoneRemoved();
 
+        void startJsonRegistrationFrom(JSONObject form, String reasonForRemove);
+
     }
 
     interface Interactor {
@@ -51,6 +63,10 @@ public interface FamilyRemoveMemberContract {
         void processFamilyMember(String familyID, CommonPersonObjectClient client, Presenter presenter);
 
         void getFamilySummary(String familyID, InteractorCallback<HashMap<String, String>> callback);
+        void saveNewFamilyRegistration(final List<FamilyEventClient> familyEventClientList,
+                              final String jsonString, final boolean isEditMode, final String reasonForRemove,
+                              final InteractorCallback<HashMap<String, String>> callback);
+
     }
 
     interface Model extends FamilyProfileMemberContract.Model {
@@ -61,12 +77,22 @@ public interface FamilyRemoveMemberContract {
 
         JSONObject prepareFamilyRemovalForm(String familyID, String familyName, String details);
 
+        List<FamilyEventClient> processFamilyMemberRemoval(String jsonString);
+
+        JSONObject getFormAsJson(String formName, String entityId,
+                                 String currentLocationId, String baseEntityId) throws Exception;
+        String getLocationId(String locationName);
+
     }
 
     interface InteractorCallback<T> {
         void onResult(T result);
 
         void onError(Exception e);
+
+        void onNewFamilyRegistrationSaved(String clientBaseEntityId, String familyBaseEntityId, String reasonForRemove);
+
+        void onUniqueIdFetched(Triple<String, String, String> triple, String entityId);
     }
 
 }

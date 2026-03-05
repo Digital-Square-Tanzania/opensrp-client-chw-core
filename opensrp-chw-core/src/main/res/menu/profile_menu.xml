@@ -17,7 +17,7 @@
     <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
-        android:title="@string/mark_as_deceased"
+        android:title="@string/remove_member"
         app:showAsAction="never" />
 
     <item
