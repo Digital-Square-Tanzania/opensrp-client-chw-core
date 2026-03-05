@@ -46,7 +46,7 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
         // do nothing
         CoreFamilyRemoveMemberInteractor familyRemoveMemberInteractor = getFamilyRemoveMemberInteractor();
         final RemoveFooterViewHolder footerViewHolder = (RemoveFooterViewHolder) viewHolder;
-        familyRemoveMemberInteractor.getFamilySummary(familyID, new FamilyRemoveMemberContract.InteractorCallback<>() {
+        familyRemoveMemberInteractor.getFamilySummary(familyID, new FamilyRemoveMemberContract.InteractorCallback<HashMap<String, String>>() {
             @Override
             public void onResult(HashMap<String, String> result) {
                 Integer children = Integer.valueOf(result.get(CoreConstants.TABLE_NAME.CHILD));
@@ -114,4 +114,3 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
         }
     }
 }
-
