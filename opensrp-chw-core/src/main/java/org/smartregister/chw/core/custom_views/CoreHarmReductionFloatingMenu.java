@@ -16,11 +16,7 @@ import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.listener.OnClickFloatingMenu;
 import org.smartregister.chw.harmreduction.custom_views.BaseHarmReductionFloatingMenu;
 import org.smartregister.chw.harmreduction.domain.MemberObject;
-import org.smartregister.chw.tb.custom_views.BaseTbFloatingMenu;
-import org.smartregister.chw.tb.domain.TbMemberObject;
-import org.smartregister.chw.tb.fragment.BaseTbCallDialogFragment;
-import org.smartregister.chw.tb.util.TbUtil;
-import org.smartregister.chw.tbleprosy.fragment.BaseTbLeprosyCallDialogFragment;
+import org.smartregister.chw.harmreduction.fragment.BaseHarmReductionCallDialogFragment;
 
 public abstract class CoreHarmReductionFloatingMenu extends BaseHarmReductionFloatingMenu {
     public FloatingActionButton fab;
@@ -107,7 +103,7 @@ public abstract class CoreHarmReductionFloatingMenu extends BaseHarmReductionFlo
     }
 
     public void launchCallWidget() {
-        BaseTbLeprosyCallDialogFragment.launchDialog((Activity)this.getContext(), this.MEMBER_OBJECT);
+        BaseHarmReductionCallDialogFragment.launchDialog((Activity) this.getContext(), this.MEMBER_OBJECT);
     }
 
     public void redraw(boolean hasPhoneNumber) {
