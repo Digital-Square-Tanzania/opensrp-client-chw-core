@@ -152,11 +152,12 @@ public abstract class CoreHarmReductionProfileActivity extends BaseHarmReduction
             NativeFormsDataBinder binder = new NativeFormsDataBinder(getContext(), memberObject.getBaseEntityId());
             binder.setDataLoader(new CoreFamilyMemberDataLoader(memberObject.getFamilyName(), isPrimaryCareGiver, titleString,
                     org.smartregister.chw.core.utils.Utils.metadata().familyMemberRegister.updateEventType, uniqueID));
-            JSONObject jsonObject = binder.getPrePopulatedForm(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+            form = binder.getPrePopulatedForm(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+
 
             try {
-                if (jsonObject != null) {
-                    UpdateDetailsUtil.startUpdateClientDetailsActivity(jsonObject, this);
+                if (form != null) {
+                    UpdateDetailsUtil.startUpdateClientDetailsActivity(form, this);
                 }
             } catch (Exception e) {
                 Timber.e(e);
