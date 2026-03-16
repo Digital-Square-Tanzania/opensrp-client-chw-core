@@ -6,6 +6,7 @@ import android.util.Pair;
 
 import androidx.annotation.VisibleForTesting;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
 import org.json.JSONObject;
 import org.smartregister.chw.core.application.CoreChwApplication;
@@ -20,12 +21,15 @@ import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.domain.Client;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.family.FamilyLibrary;
+import org.smartregister.family.domain.FamilyEventClient;
 import org.smartregister.family.util.AppExecutors;
 import org.smartregister.family.util.DBConstants;
+import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
 import org.smartregister.repository.AllSharedPreferences;
 import org.smartregister.repository.BaseRepository;
 import org.smartregister.repository.EventClientRepository;
+import org.smartregister.repository.UniqueIdRepository;
 import org.smartregister.sync.ClientProcessorForJava;
 import org.smartregister.sync.helper.ECSyncHelper;
 
@@ -34,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -266,4 +271,101 @@ public abstract class CoreFamilyRemoveMemberInteractor implements FamilyRemoveMe
     }
 
     protected abstract void setCoreChwApplication();
+
+    public void saveNewFamilyRegistration(final List<FamilyEventClient> familyEventClientList, final String jsonString, final boolean isEditMode, String reasonForRemove,
+                                           FamilyRemoveMemberContract.InteractorCallback<HashMap<String, String>> callBack) {
+        Runnable runnable = () -> {
+            final boolean isSaved = CoreFamilyRemoveMemberInteractor.this.saveNewFamilyRegistration(familyEventClientList, jsonString, isEditMode);
+            CoreFamilyRemoveMemberInteractor.this.appExecutors.mainThread().execute(() -> {
+                if (isSaved) {
+                    callBack.onNewFamilyRegistrationSaved(
+                            Objects.requireNonNull(familyEventClientList.get(0).getClient().getRelationships().get("family_head")).get(0)
+                            , familyEventClientList.get(0).getClient().getBaseEntityId(), reasonForRemove);
+                }
+            });
+        };
+        this.appExecutors.diskIO().execute(runnable);
+    }
+
+    private boolean saveNewFamilyRegistration(List<FamilyEventClient> familyEventClientList, String jsonString, boolean isEditMode) {
+        try {
+            List<EventClient> eventClientList = new ArrayList<>();
+
+            for(int i = 0; i < familyEventClientList.size(); ++i) {
+                FamilyEventClient familyEventClient = (FamilyEventClient)familyEventClientList.get(i);
+                org.smartregister.clientandeventmodel.Client baseClient = familyEventClient.getClient();
+                Event baseEvent = familyEventClient.getEvent();
+                JSONObject eventJson = null;
+                JSONObject clientJson = null;
+                if (baseClient != null) {
+                    clientJson = new JSONObject(JsonFormUtils.gson.toJson(baseClient));
+                    if (isEditMode) {
+                        JsonFormUtils.mergeAndSaveClient(this.getSyncHelper(), baseClient);
+                    } else {
+                        this.getSyncHelper().addClient(baseClient.getBaseEntityId(), clientJson);
+                    }
+                }
+
+                if (baseEvent != null) {
+                    eventJson = new JSONObject(JsonFormUtils.gson.toJson(baseEvent));
+                    this.getSyncHelper().addEvent(baseEvent.getBaseEntityId(), eventJson);
+                }
+
+                if (isEditMode) {
+                    if (baseClient != null) {
+                        String newOpenSRPId = baseClient.getIdentifier(Utils.metadata().uniqueIdentifierKey).replace("-", "");
+                        String currentOpenSRPId = JsonFormUtils.getString(jsonString, "current_opensrp_id").replace("-", "");
+                        if (!newOpenSRPId.equals(currentOpenSRPId)) {
+                            this.getUniqueIdRepository().open(currentOpenSRPId);
+                        }
+                    }
+                } else if (baseClient != null) {
+                    String opensrpId = baseClient.getIdentifier(Utils.metadata().uniqueIdentifierKey);
+                    if (StringUtils.isNotBlank(opensrpId) && !opensrpId.contains("_family")) {
+                        this.getUniqueIdRepository().close(opensrpId);
+                    }
+                }
+
+                if (baseClient != null || baseEvent != null) {
+                    String imageLocation = null;
+                    if (i == 0) {
+                        String familyStep = Utils.getCustomConfigs("family_form_image_step");
+                        imageLocation = StringUtils.isBlank(familyStep) ? JsonFormUtils.getFieldValue(jsonString, "photo") : JsonFormUtils.getFieldValue(jsonString, familyStep, "photo");
+                    } else if (i == 1) {
+                        String familyMemberStep = Utils.getCustomConfigs("family_member_form_image_step");
+                        imageLocation = StringUtils.isBlank(familyMemberStep) ? JsonFormUtils.getFieldValue(jsonString, "step2", "photo") : JsonFormUtils.getFieldValue(jsonString, familyMemberStep, "photo");
+                    }
+
+                    if (StringUtils.isNotBlank(imageLocation)) {
+                        JsonFormUtils.saveImage(baseEvent.getProviderId(), baseClient.getBaseEntityId(), imageLocation);
+                    }
+                }
+
+                org.smartregister.domain.Event domainEvent = (org.smartregister.domain.Event)JsonFormUtils.gson.fromJson(eventJson.toString(), org.smartregister.domain.Event.class);
+                org.smartregister.domain.Client domainClient = (org.smartregister.domain.Client)JsonFormUtils.gson.fromJson(clientJson.toString(), org.smartregister.domain.Client.class);
+                eventClientList.add(new EventClient(domainEvent, domainClient));
+            }
+
+            long lastSyncTimeStamp = this.getAllSharedPreferences().fetchLastUpdatedAtDate(0L);
+            Date lastSyncDate = new Date(lastSyncTimeStamp);
+            this.processClient(eventClientList);
+            this.getAllSharedPreferences().saveLastUpdatedAtDate(lastSyncDate.getTime());
+            return true;
+        } catch (Exception e) {
+            Timber.e(e);
+            return false;
+        }
+    }
+
+    protected void processClient(List<EventClient> eventClientList) {
+        try {
+            this.getClientProcessorForJava().processClient(eventClientList);
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+
+    }
+    public UniqueIdRepository getUniqueIdRepository() {
+        return FamilyLibrary.getInstance().getUniqueIdRepository();
+    }
 }
