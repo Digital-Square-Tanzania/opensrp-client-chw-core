@@ -845,4 +845,8 @@
     <string name="successfull_added_family_member">Imesasisha familia kwa %1$s</string>
     <string name="generate_household">Tengeneza Kaya</string>
     <string name="remove_member">Ondoa Mwanakaya</string>
+
+    <string name="notification_type_facility_to_community_linkage">Rufaa ya uunganishaji kutoka Kituo cha Afya</string>
+    <string name="facility_to_community_linkage_title">Rufaa ya uunganishwaji wa %1$s kutoka Kituo cha Afya, tarehe %2$s</string>
+    <string name="facility_to_community_linkage_reason">Sababu za rufaa ya uunganishwaji kutoka kituo cha afya: %1$s</string>
 </resources>

@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.utils;
 
+import static org.smartregister.chw.core.interactor.BaseChwNotificationDetailsInteractor.LINKAGE_FROM_FACILITY;
+
 import android.content.Context;
 import android.util.Pair;
 
@@ -45,6 +47,9 @@ public class ChwNotificationUtil {
         }
         else if (context.getString(R.string.notification_type_pregnancy_confirmation).equals(notificationType)) {
             return "ec_pregnancy_confirmation_updates";
+        }
+        else if (LINKAGE_FROM_FACILITY.equals(notificationType)) {
+            return "ec_facility_to_community_linkage";
         }
         return null;
     }
