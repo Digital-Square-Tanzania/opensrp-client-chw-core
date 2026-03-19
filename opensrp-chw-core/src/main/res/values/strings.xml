@@ -758,6 +758,11 @@
     <string name="thinkmd_identifier_type">thinkmd_id</string>
     <string name="thinkmd_assessment_saved">ThinkMD health assessment saved</string>
     <string name="no_thinkmd_care_plan_found">No thinkmd care plan found</string>
+    
+    <!-- Notification details (extended) -->
+    <string name="new_registration_notes_placeholder">Client update from facility. Review registration details and visit the household for follow‑up.</string>
+    <string name="notes_more">More</string>
+    <string name="notes_less">Less</string>
 
     <string name="hiv_register">HIV Register</string>
     <string name="routine_hiv_visit"> · Routine HIV Visit</string>
