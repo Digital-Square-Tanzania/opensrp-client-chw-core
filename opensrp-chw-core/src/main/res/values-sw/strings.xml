@@ -43,8 +43,8 @@
     <string name="menu_hiv">VVU/Ukimwi</string>
     <string name="menu_hts">Ushauri nasaha na Upimaji</string>
     <string name="menu_hps">iCCHW</string>
-    <string name="menu_ayp_inschool">AYP In-School Services</string>
-    <string name="menu_ayp_outschool">AYP Out-School Services</string>
+    <string name="menu_ayp_inschool">Huduma za Rika balehe(Ndani ya Shule)</string>
+    <string name="menu_ayp_outschool">Huduma za Rika balehe(Nje ya Shule)</string>
     <string name="menu_ayp_parental">Huduma za AYP kwa wazazi</string>
     <string name="ayp_parental_enrollment">Usajili wa wazazi wa AYP</string>
     <string name="menu_tb">Kifua Kikuu</string>
@@ -835,6 +835,11 @@
     <string name="error_please_try_again">Hitilafu: Tafadhali jaribu tena.</string>
     <string name="an_unexpected_error_occurred_please_try_again_later">Hitilafu: Tafadhali jaribu tena baadae.</string>
     <string name="error_processing_server_response">Hitilafu wakati wa kuchakata jibu lililorudishwa.</string>
+
+    <!--   AYP -->
+    <string name="ayp_in_school_enrollment">Uchunguzi wa rika balehe (Ndani ya Shule)</string>
+    <string name="ayp_facility_screening">Uchunguzi wa rika balehe</string>
+    <string name="ayp_out_school_enrollment">Uchunguzi wa rika balehe (Nje ya Shule)</string>
 
     <!-- Floating Menu Option for Add Existing Member to Household -->
     <string name="add_existing_family_member">Ongeza Mwanafamilia aliyepo</string>
