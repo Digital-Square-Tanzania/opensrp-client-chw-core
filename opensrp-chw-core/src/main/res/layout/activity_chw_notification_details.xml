@@ -29,6 +29,7 @@
             app:layout_collapseMode="pin"
             app:navigationIcon="@drawable/ic_arrow_back_24"
             app:title="@string/notification_details_title"
+            app:titleTextColor="@color/chw_notification_primary"
             app:titleTextAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
     </com.google.android.material.appbar.AppBarLayout>
 
