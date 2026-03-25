@@ -668,13 +668,23 @@
 
     <!--Navigation Menu String -->
     <string name="service_activity">Service activity</string>
-    <string name="updates">Updates</string>
+    <string name="updates">Linkages from Facility</string>
 
     <string name="facility_visit">%1$s facility visit</string>
 
     <!-- Notification details -->
     <string name="mark_as_done">Mark as done</string>
     <string name="view_profile">View Profile</string>
+    <string name="notification_details_title">Notification Details</string>
+    <string name="notification_summary_chip">Notification</string>
+    <string name="notification_patient_avatar">Patient avatar</string>
+    <string name="notification_reason_heading">Reason for linkage</string>
+    <string name="notification_reason_label">Primary detail</string>
+    <string name="notification_notes_heading">Additional notes</string>
+    <string name="notification_notes_label">Notes</string>
+    <string name="notification_preview_patient_name">Jully Milla</string>
+    <string name="notification_preview_date">Mar 18, 2026</string>
+    <string name="notification_preview_reason">New registration</string>
     <string name="back_to_updates">Back to Updates</string>
     <string name="successful_referral_notification_title">Name: %1$s, %2$s</string>
     <string name="followup_notification_title">%1$s has attended the facility on %2$s</string>
@@ -751,6 +761,7 @@
 
     <!-- Notification row -->
     <string name="notification_for">Notification for %1$s</string>
+    <string name="notification_linkage_from_facility">Linkage From Facility</string>
     <string name="full_notification_info">View full notification info</string>
     <string name="thinkmd_health_assessment">ThinkMD health assessment</string>
     <string name="thinkmd_careplan">ThinkMD care plan (%1$s)</string>
@@ -760,7 +771,7 @@
     <string name="no_thinkmd_care_plan_found">No thinkmd care plan found</string>
     
     <!-- Notification details (extended) -->
-    <string name="new_registration_notes_placeholder">Client update from facility. Review registration details and visit the household for follow‑up.</string>
+    <string name="new_registration_notes_placeholder">Client Linked from facility. Review registration details and visit the household for follow‑up.</string>
     <string name="notes_more">More</string>
     <string name="notes_less">Less</string>
 

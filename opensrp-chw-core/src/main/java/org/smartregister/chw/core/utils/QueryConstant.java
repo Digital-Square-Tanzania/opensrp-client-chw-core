@@ -595,7 +595,7 @@ public interface QueryConstant {
     String FACILITY_TO_COMMUNITY_LINKAGE_COUNT_QUERY = "SELECT COUNT(*)\n" +
             "FROM ec_facility_to_community_linkage\n" +
             "inner join ec_family_member on ec_family_member.base_entity_id = ec_facility_to_community_linkage.entity_id\n" +
-            "WHERE ec_family_member.is_closed = '0'\n" +
+            "WHERE ec_family_member.is_closed = '0' AND ec_facility_to_community_linkage.is_closed = '0' \n" +
             " AND (ec_facility_to_community_linkage.event_date IS NULL OR (julianday('now', 'localtime') - julianday(ec_facility_to_community_linkage.event_date) <= 3))\n" +
             "  AND ec_family_member.date_removed is null\n" +
             "  AND ec_facility_to_community_linkage.entity_id NOT IN (\n" +
@@ -879,7 +879,7 @@ public interface QueryConstant {
                     "       'Linkage From Facility'          AS notification_type\n" +
                     "FROM ec_facility_to_community_linkage\n" +
                     "         inner join ec_family_member on ec_family_member.base_entity_id = ec_facility_to_community_linkage.entity_id\n" +
-                    "WHERE ec_family_member.is_closed = '0'\n" +
+                    "WHERE ec_family_member.is_closed = '0' AND ec_facility_to_community_linkage.is_closed = '0'\n" +
                     " AND (ec_facility_to_community_linkage.event_date IS NULL OR (julianday('now', 'localtime') - julianday(ec_facility_to_community_linkage.event_date) <= 3))\n" +
                     "  AND ec_family_member.date_removed is null\n" +
                     "  AND ec_facility_to_community_linkage.entity_id NOT IN (\n" +

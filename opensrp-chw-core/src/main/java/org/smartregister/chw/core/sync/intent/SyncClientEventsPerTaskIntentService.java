@@ -25,5 +25,6 @@ public class SyncClientEventsPerTaskIntentService extends ChwCoreSyncIntentServi
     @Override
     protected void onHandleIntent(Intent intent) {
         fetchMissingEventsRetry(0, ((ChwTaskRepository)taskRepository).getTasksWithoutClientsAndEvents());
+        fetchMissingEventsForLinkedClientsFromFacilityToCommunity(0);
     }
 }
