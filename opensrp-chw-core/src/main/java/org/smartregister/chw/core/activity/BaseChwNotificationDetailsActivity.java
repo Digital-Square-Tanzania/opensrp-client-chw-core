@@ -40,6 +40,7 @@ public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageAc
     protected TextView notesToggleView;
     protected boolean notesExpanded = false;
     protected View notesRowView;
+    protected View dateRowView;
     protected Button markAsDoneButton;
     protected Button viewProfileButton;
     protected ChwNotificationDetailsContract.Presenter presenter;
@@ -78,6 +79,7 @@ public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageAc
         notesCardView = findViewById(R.id.notes_card);
         notesToggleView = findViewById(R.id.notes_toggle);
         notesRowView = findViewById(R.id.notes_row);
+        dateRowView = findViewById(R.id.date_row);
 
         if (notesToggleView != null) {
             notesToggleView.setOnClickListener(v -> toggleNotes());
@@ -112,6 +114,9 @@ public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageAc
             if (notificationDateTextView != null) {
                 String date = extractDateFromTitle(notificationItem.getTitle());
                 notificationDateTextView.setText(date);
+                if (dateRowView != null) {
+                    dateRowView.setVisibility(TextUtils.isEmpty(date) ? View.GONE : View.VISIBLE);
+                }
             }
 
             // Reason content from details (take value after colon, if present)
@@ -130,6 +135,7 @@ public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageAc
             }
             if (patientNameTextView != null) patientNameTextView.setVisibility(View.GONE);
             if (notificationDateTextView != null) notificationDateTextView.setVisibility(View.GONE);
+            if (dateRowView != null) dateRowView.setVisibility(View.GONE);
             if (viewProfileButton != null) viewProfileButton.setVisibility(View.GONE);
         }
 

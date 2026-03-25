@@ -21,5 +21,15 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="disabled_button_background">#C6C6C6</color>
     <color name="holo_blue_light">#ff33b5e5</color>
+    <color name="chw_notification_page_background">#F3F7F7</color>
+    <color name="chw_notification_primary">#0F6462</color>
+    <color name="chw_notification_primary_dark">#0A4443</color>
+    <color name="chw_notification_primary_disabled">#7FA7A6</color>
+    <color name="chw_notification_secondary_action_background">#E7F1F0</color>
+    <color name="chw_notification_tinted_surface">#EAF4F4</color>
+    <color name="chw_notification_outline">#D4E2E2</color>
+    <color name="chw_notification_text_primary">#143332</color>
+    <color name="chw_notification_text_secondary">#66807F</color>
+    <color name="chw_notification_hero_supporting_text">#D4F1F0</color>
 
 </resources>

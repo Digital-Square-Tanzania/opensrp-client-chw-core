@@ -675,6 +675,13 @@
     <!-- Notification details -->
     <string name="mark_as_done">Mark as done</string>
     <string name="view_profile">View Profile</string>
+    <string name="notification_details_title">Notification Details</string>
+    <string name="notification_summary_chip">Notification</string>
+    <string name="notification_patient_avatar">Patient avatar</string>
+    <string name="notification_reason_heading">Reason for update</string>
+    <string name="notification_reason_label">Primary detail</string>
+    <string name="notification_notes_heading">Additional notes</string>
+    <string name="notification_notes_label">Notes</string>
     <string name="back_to_updates">Back to Updates</string>
     <string name="successful_referral_notification_title">Name: %1$s, %2$s</string>
     <string name="followup_notification_title">%1$s has attended the facility on %2$s</string>
