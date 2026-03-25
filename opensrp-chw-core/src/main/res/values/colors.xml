@@ -21,15 +21,15 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="disabled_button_background">#C6C6C6</color>
     <color name="holo_blue_light">#ff33b5e5</color>
-    <color name="chw_notification_page_background">#FFFFFF</color>
+    <color name="chw_notification_page_background">#FAFAFA</color>
     <color name="chw_notification_primary">#218CC5</color>
     <color name="chw_notification_primary_dark">#0D384E</color>
-    <color name="chw_notification_primary_disabled">#8CBFD8</color>
-    <color name="chw_notification_secondary_action_background">#EAF4FB</color>
-    <color name="chw_notification_tinted_surface">#F3F9FD</color>
-    <color name="chw_notification_outline">#D9E7F2</color>
-    <color name="chw_notification_text_primary">#494949</color>
+    <color name="chw_notification_primary_disabled">#A6D1E7</color>
+    <color name="chw_notification_secondary_action_background">#C7E7FE</color>
+    <color name="chw_notification_tinted_surface">#A6D1E7</color>
+    <color name="chw_notification_outline">#A6D1E7</color>
+    <color name="chw_notification_text_primary">#212121</color>
     <color name="chw_notification_text_secondary">#575757</color>
-    <color name="chw_notification_hero_supporting_text">#E3F2FB</color>
+    <color name="chw_notification_hero_supporting_text">#C7E7FE</color>
 
 </resources>
