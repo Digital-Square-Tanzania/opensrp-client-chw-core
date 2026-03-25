@@ -232,7 +232,7 @@
 
     <!--Referral-->
     <string name="referred_by">Rufaa imetolewa na mja %1s</string>
-    <string name="hours_ago">%d masaa iliyopita</string>
+    <string name="hours_ago">Masaa %d yaliyopita</string>
     <string name="yesterday">Jana</string>
 
     <string name="change_member_alert">Tafadhali maliza kujaza kabla ya kuwasilisha</string>
@@ -654,14 +654,24 @@
 
     <!--Navigation Menu String -->
     <string name="service_activity">Muhutasari wa Mwezi</string>
-    <string name="updates">Mrejesho</string>
+    <string name="updates">Rufaa kutoka kituo cha afya</string>
 
     <string name="facility_visit">%1$s Hudhurio</string>
 
     <!-- Notification details -->
     <string name="mark_as_done">Kamilisha</string>
-    <string name="view_profile">Angalia taarifa</string>
-    <string name="back_to_updates">Rudi kwenye mrejesho</string>
+    <string name="view_profile">Angalia Wasifu</string>
+    <string name="notification_details_title">Maelezo ya rufaa</string>
+    <string name="notification_summary_chip">Ujumbe</string>
+    <string name="notification_patient_avatar">Picha ya mteja</string>
+    <string name="notification_reason_heading">Sababu ya rufaa kutoka kituo cha afya</string>
+    <string name="notification_reason_label">Maelezo makuu</string>
+    <string name="notification_notes_heading">Maelezo ya ziada</string>
+    <string name="notification_notes_label">Maelezo</string>
+    <string name="notification_preview_patient_name">Jully Milla</string>
+    <string name="notification_preview_date">18 Machi 2026</string>
+    <string name="notification_preview_reason">Usajili mpya</string>
+    <string name="back_to_updates">Rudi kwenye rufaa zote</string>
     <string name="successful_referral_notification_title">Jina: %1$s, %2$s</string>
     <string name="followup_notification_title">%1$s amehudhuria kwenye kituo cha kutolea huduma za afya tarehe%2$s</string>
     <string name="notification_care_giver">Mlezi: %1$s</string>
@@ -734,14 +744,18 @@
     <string name="add_responder_max_message">Umefikia idadi ya mwisho ya wasafirishaji wanaoruhusiwa</string>
 
     <!-- Notification row -->
-    <string name="notification_for">Taarifa kwa %1$s</string>
-    <string name="full_notification_info">Angalia taarifa kwa ujumla</string>
+    <string name="notification_for">Taarifa ya %1$s</string>
+    <string name="notification_linkage_from_facility">Rufaa ya uunganishaji kutoka kituo cha afya</string>
+    <string name="full_notification_info">Angalia taarifa</string>
     <string name="thinkmd_health_assessment">Tathimini ya afya ya ThinkMD</string>
     <string name="thinkmd_careplan">Mpango wa utunzaji wa ThinkMD (%1$s)</string>
     <string name="care_plan">Mpango huduma</string>
     <string name="thinkmd_identifier_type">thinkmd_id</string>
     <string name="thinkmd_assessment_saved">ThinkMD tathmini ya afya imehifadhiwa</string>
     <string name="no_thinkmd_care_plan_found">Hakuna mpango huduma wa thinkmd ulioonekana</string>
+    <string name="new_registration_notes_placeholder">Mteja ameunganishwa kutoka kituoni. Pitia taarifa za usajili na tembelea kaya kwa ufuatiliaji.</string>
+    <string name="notes_more">Zaidi</string>
+    <string name="notes_less">Punguza</string>
 
     <!-- LMH Last Visit Row-->
     <string name="view_vaccine_histroy">Angalia historia ya chanjo</string>
@@ -850,4 +864,8 @@
     <string name="successfull_added_family_member">Imesasisha familia kwa %1$s</string>
     <string name="generate_household">Tengeneza Kaya</string>
     <string name="remove_member">Ondoa Mwanakaya</string>
+
+    <string name="notification_type_facility_to_community_linkage">Rufaa ya uunganishaji kutoka Kituo cha Afya</string>
+    <string name="facility_to_community_linkage_title">Rufaa ya uunganishwaji wa %1$s kutoka Kituo cha Afya, tarehe %2$s</string>
+    <string name="facility_to_community_linkage_reason">Sababu za rufaa ya uunganishwaji kutoka kituo cha afya: %1$s</string>
 </resources>

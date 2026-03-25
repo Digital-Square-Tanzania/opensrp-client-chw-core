@@ -6,6 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
@@ -31,11 +35,27 @@ import org.smartregister.family.util.Utils;
 import timber.log.Timber;
 
 public abstract class CoreAypProfileActivity extends BaseAypProfileActivity {
+    protected RecyclerView notificationAndReferralRecyclerView;
+    protected RelativeLayout notificationAndReferralLayout;
 
     public static void startProfileActivity(android.app.Activity activity, String baseEntityId) {
         android.content.Intent intent = new android.content.Intent(activity, CoreAypProfileActivity.class);
         intent.putExtra(org.smartregister.chw.ayp.util.Constants.ACTIVITY_PAYLOAD.BASE_ENTITY_ID, baseEntityId);
         activity.startActivity(intent);
+    }
+
+    @Override
+    protected void onCreation() {
+        super.onCreation();
+        initializeNotificationReferralRecyclerView();
+    }
+
+    protected void initializeNotificationReferralRecyclerView() {
+        notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
+        notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
+        if (notificationAndReferralRecyclerView != null) {
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
     @Override

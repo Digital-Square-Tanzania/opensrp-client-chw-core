@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smartregister.CoreLibrary;
+import org.smartregister.chw.core.dao.ChwNotificationDao;
 import org.smartregister.domain.FetchStatus;
 import org.smartregister.domain.Response;
 import org.smartregister.domain.Task;
@@ -28,14 +29,65 @@ public abstract class ChwCoreSyncIntentService extends SyncIntentService {
     }
 
     public synchronized void fetchMissingEventsRetry(final int count, List<Task> tasksWithMissingClientsEvents) {
-        this.tasksWithMissingClientsEvents = tasksWithMissingClientsEvents;
-        Timber.i("Tasks with missing clients and/or events = %s", new Gson().toJson(tasksWithMissingClientsEvents));
-        List<List<Task>> tasksWithMissingClientsEventsBatches = Lists.partition(tasksWithMissingClientsEvents, 1000);
-        for (List<Task> tasksList : tasksWithMissingClientsEventsBatches) {
-            JSONArray baseEntityIdsArray = new JSONArray();
-            for (Task task : tasksList) {
-                baseEntityIdsArray.put(task.getForEntity());
+        try {
+            this.tasksWithMissingClientsEvents = tasksWithMissingClientsEvents;
+            Timber.i("Tasks with missing clients and/or events = %s", new Gson().toJson(tasksWithMissingClientsEvents));
+            List<List<Task>> tasksWithMissingClientsEventsBatches = Lists.partition(tasksWithMissingClientsEvents, 1000);
+            for (List<Task> tasksList : tasksWithMissingClientsEventsBatches) {
+                JSONArray baseEntityIdsArray = new JSONArray();
+                for (Task task : tasksList) {
+                    baseEntityIdsArray.put(task.getForEntity());
+                }
+                try {
+                    if (getHttpAgent() == null) {
+                        complete(FetchStatus.fetchedFailed);
+                        return;
+                    }
+
+                    Response resp = fetchClientEventsByBaseEntityIds(baseEntityIdsArray);
+                    if (resp.isTimeoutError() || resp.isUrlError()) {
+                        FetchStatus.fetchedFailed.setDisplayValue(resp.status().displayValue());
+                        complete(FetchStatus.fetchedFailed);
+                        return;
+                    } else if (resp.isFailure()) {
+                        fetchMissingEventsFailed(count, tasksWithMissingClientsEvents);
+                        return;
+                    }
+
+                    JSONObject jsonObject = new JSONObject((String) resp.payload());
+                    int eCount = fetchNumberOfEvents(jsonObject);
+                    if (eCount < 0) {
+                        fetchMissingEventsFailed(count, tasksWithMissingClientsEvents);
+                        return;
+                    } else {
+                        processClientEvent(jsonObject); //Process the client and his/her events
+                    }
+                } catch (Exception e) {
+                    Timber.e(e, "Fetch Retry Exception:  %s", e.getMessage());
+                    fetchMissingEventsFailed(count, tasksWithMissingClientsEvents);
+                }
             }
+        } catch (Exception e) {
+            Timber.e(e);
+        }
+
+    }
+
+    public synchronized void fetchMissingEventsForLinkedClientsFromFacilityToCommunity(Integer count) {
+        try {
+            if (count > 3) {
+                return;
+            }
+            List<String> baseEntityIds = ChwNotificationDao.getBaseEntityIdsForLinkedClientsFromFacilityToCommunityWithMissingClientDetails();
+            if (baseEntityIds.isEmpty()) {
+                return;
+            }
+
+            JSONArray baseEntityIdsArray = new JSONArray();
+            for (String baseEntityId : baseEntityIds) {
+                baseEntityIdsArray.put(baseEntityId);
+            }
+
             try {
                 if (getHttpAgent() == null) {
                     complete(FetchStatus.fetchedFailed);
@@ -48,24 +100,25 @@ public abstract class ChwCoreSyncIntentService extends SyncIntentService {
                     complete(FetchStatus.fetchedFailed);
                     return;
                 } else if (resp.isFailure()) {
-                    fetchMissingEventsFailed(count, tasksWithMissingClientsEvents);
+                    fetchMissingEventsForLinkedClientsFromFacilityToCommunity(count++);
                     return;
                 }
 
                 JSONObject jsonObject = new JSONObject((String) resp.payload());
                 int eCount = fetchNumberOfEvents(jsonObject);
                 if (eCount < 0) {
-                    fetchMissingEventsFailed(count, tasksWithMissingClientsEvents);
+                    fetchMissingEventsForLinkedClientsFromFacilityToCommunity(count++);
                     return;
                 } else {
                     processClientEvent(jsonObject); //Process the client and his/her events
                 }
             } catch (Exception e) {
                 Timber.e(e, "Fetch Retry Exception:  %s", e.getMessage());
-                fetchMissingEventsFailed(count, tasksWithMissingClientsEvents);
+                fetchMissingEventsForLinkedClientsFromFacilityToCommunity(count++);
             }
+        } catch (Exception e) {
+            Timber.e(e);
         }
-
     }
 
     public Response fetchClientEventsByBaseEntityIds(JSONArray baseEntityIds) throws Exception {

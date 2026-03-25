@@ -35,10 +35,18 @@ public class CoreAsrhMemberProfileActivity extends BaseAsrhProfileActivity {
         activity.startActivityForResult(intent, Constants.REQUEST_CODE_GET_JSON);
     }
 
+    @Override
+    protected void onCreation() {
+        super.onCreation();
+        initializeNotificationReferralRecyclerView();
+    }
+
     protected void initializeNotificationReferralRecyclerView() {
         notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
         notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
-        notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (notificationAndReferralRecyclerView != null) {
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
 
