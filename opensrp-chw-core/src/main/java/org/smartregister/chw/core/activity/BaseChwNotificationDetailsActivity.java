@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
- 
+
 
 import com.google.android.material.appbar.AppBarLayout;
 import androidx.appcompat.widget.Toolbar;
@@ -100,7 +100,7 @@ public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageAc
         // Header content
         if (isFacilityLinkageType()) {
             // Subject as static per new UI
-            notificationTitle.setText("Linkage from Health Facility");
+            notificationTitle.setText(R.string.notification_type_facility_to_community_linkage);
             // Patient name from client
             if (patientNameTextView != null && getCommonPersonObjectClient() != null) {
                 String first = Utils.getValue(getCommonPersonObjectClient().getColumnmaps(), DBConstants.KEY.FIRST_NAME, true);

@@ -232,7 +232,7 @@
 
     <!--Referral-->
     <string name="referred_by">Rufaa imetolewa na mja %1s</string>
-    <string name="hours_ago">%d masaa iliyopita</string>
+    <string name="hours_ago">Masaa %d yaliyopita</string>
     <string name="yesterday">Jana</string>
 
     <string name="change_member_alert">Tafadhali maliza kujaza kabla ya kuwasilisha</string>
@@ -660,9 +660,9 @@
 
     <!-- Notification details -->
     <string name="mark_as_done">Kamilisha</string>
-    <string name="view_profile">Angalia taarifa</string>
+    <string name="view_profile">Angalia Wasifu</string>
     <string name="notification_details_title">Maelezo ya rufaa</string>
-    <string name="notification_summary_chip">Rufaa</string>
+    <string name="notification_summary_chip">Ujumbe</string>
     <string name="notification_patient_avatar">Picha ya mteja</string>
     <string name="notification_reason_heading">Sababu ya rufaa kutoka kituo cha afya</string>
     <string name="notification_reason_label">Maelezo makuu</string>
@@ -744,9 +744,9 @@
     <string name="add_responder_max_message">Umefikia idadi ya mwisho ya wasafirishaji wanaoruhusiwa</string>
 
     <!-- Notification row -->
-    <string name="notification_for">Taarifa kwa %1$s</string>
+    <string name="notification_for">Taarifa ya %1$s</string>
     <string name="notification_linkage_from_facility">Rufaa ya uunganishaji kutoka kituo cha afya</string>
-    <string name="full_notification_info">Angalia taarifa kwa ujumla</string>
+    <string name="full_notification_info">Angalia taarifa</string>
     <string name="thinkmd_health_assessment">Tathimini ya afya ya ThinkMD</string>
     <string name="thinkmd_careplan">Mpango wa utunzaji wa ThinkMD (%1$s)</string>
     <string name="care_plan">Mpango huduma</string>
