@@ -682,6 +682,9 @@
     <string name="notification_reason_label">Primary detail</string>
     <string name="notification_notes_heading">Additional notes</string>
     <string name="notification_notes_label">Notes</string>
+    <string name="notification_preview_patient_name">Jully Milla</string>
+    <string name="notification_preview_date">Mar 18, 2026</string>
+    <string name="notification_preview_reason">New registration</string>
     <string name="back_to_updates">Back to Updates</string>
     <string name="successful_referral_notification_title">Name: %1$s, %2$s</string>
     <string name="followup_notification_title">%1$s has attended the facility on %2$s</string>
