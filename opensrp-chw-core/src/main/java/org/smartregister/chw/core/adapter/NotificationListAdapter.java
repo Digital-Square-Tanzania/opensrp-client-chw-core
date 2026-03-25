@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NotificationListAdapter extends RecyclerView.Adapter<NotificationListAdapter.NotificationRowViewHolder> {
+    private static final String LINKAGE_FROM_FACILITY = "Linkage From Facility";
     private List<Pair<String, String>> notificationRecords = new ArrayList<>();
     private View.OnClickListener onClickListener;
     public boolean canOpen = false;
@@ -60,7 +61,16 @@ public class NotificationListAdapter extends RecyclerView.Adapter<NotificationLi
         }
 
         private void setNotificationForText(String notificationFor) {
-            notificationForTextView.setText(itemView.getContext().getString(R.string.notification_for, notificationFor));
+            notificationForTextView.setText(itemView.getContext().getString(
+                    R.string.notification_for,
+                    getTranslatedNotificationFor(notificationFor)));
+        }
+
+        private String getTranslatedNotificationFor(String notificationFor) {
+            if (LINKAGE_FROM_FACILITY.equalsIgnoreCase(notificationFor)) {
+                return itemView.getContext().getString(R.string.notification_linkage_from_facility);
+            }
+            return notificationFor;
         }
 
         public String getNotificationId() {

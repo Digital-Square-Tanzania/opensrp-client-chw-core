@@ -745,6 +745,7 @@
 
     <!-- Notification row -->
     <string name="notification_for">Taarifa kwa %1$s</string>
+    <string name="notification_linkage_from_facility">Rufaa ya uunganishaji kutoka kituo cha afya</string>
     <string name="full_notification_info">Angalia taarifa kwa ujumla</string>
     <string name="thinkmd_health_assessment">Tathimini ya afya ya ThinkMD</string>
     <string name="thinkmd_careplan">Mpango wa utunzaji wa ThinkMD (%1$s)</string>
