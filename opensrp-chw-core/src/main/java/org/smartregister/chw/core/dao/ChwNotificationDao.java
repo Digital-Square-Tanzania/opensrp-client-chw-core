@@ -488,7 +488,10 @@ public class ChwNotificationDao extends AbstractDao {
                         "UNION ALL\n" +
                         "SELECT id as notification_id, 'Family Planning' as notification_type\n" +
                         "FROM ec_family_planning_update\n" +
-                        "WHERE base_entity_id = '%s'  COLLATE NOCASE\n" +
+                        "UNION ALL\n" +
+                        "SELECT id as notification_id, 'Linkage From Facility' as notification_type\n" +
+                        "FROM ec_facility_to_community_linkage\n" +
+                        "WHERE entity_id = '%s' AND is_closed = 0  COLLATE NOCASE\n" +
                         "UNION ALL\n" +
                         "SELECT id as notification_id, 'Referral not completed yet' as notification_type\n" +
                         "FROM ec_not_yet_done_referral\n" +
