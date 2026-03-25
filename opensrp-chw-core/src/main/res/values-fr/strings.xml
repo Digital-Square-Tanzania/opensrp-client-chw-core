@@ -386,6 +386,7 @@
     <string name="phone_not_provided">Aucun numéro de téléphone fourni</string>
     <string name="anc_danger_sign_prefix">Signes de danger de la CPN; Symptômes:%s</string>
     <string name="client_name_age_suffix">%s, %s</string>
+    <string name="new_registration_notes_placeholder">Client orienté depuis l\'établissement de santé. Vérifiez les détails de l\'enregistrement et rendez visite au ménage pour le suivi.</string>
 
     <!--PNC -->
     <string name="pnc_visit_day_due">JOUR %s VISITE DUE</string>

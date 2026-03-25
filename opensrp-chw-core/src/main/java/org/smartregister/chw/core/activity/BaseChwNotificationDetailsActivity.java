@@ -1,5 +1,6 @@
 package org.smartregister.chw.core.activity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -30,6 +31,10 @@ import static org.smartregister.chw.core.utils.CoreConstants.DB_CONSTANTS.NOTIFI
 
 public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageActivity
         implements ChwNotificationDetailsContract.View, View.OnClickListener {
+
+    private static final String ROBOTO_REGULAR = "sans-serif";
+    private static final String ROBOTO_MEDIUM = "sans-serif-medium";
+    private static final String ROBOTO_BLACK = "sans-serif-black";
 
     protected TextView notificationTitle;
     protected TextView notificationDateTextView;
@@ -63,6 +68,7 @@ public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageAc
         Toolbar toolbar = findViewById(R.id.back_to_updates_toolbar);
         // Title and navigation icon are defined in XML; just wire up back action
         toolbar.setNavigationOnClickListener(v -> finish());
+        applyToolbarRoboto(toolbar);
         AppBarLayout appBarLayout = findViewById(R.id.app_bar);
         // Keep flat app bar appearance
         if (appBarLayout != null) {
@@ -80,6 +86,7 @@ public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageAc
         notesToggleView = findViewById(R.id.notes_toggle);
         notesRowView = findViewById(R.id.notes_row);
         dateRowView = findViewById(R.id.date_row);
+        applyRobotoTypography();
 
         if (notesToggleView != null) {
             notesToggleView.setOnClickListener(v -> toggleNotes());
@@ -156,6 +163,35 @@ public abstract class BaseChwNotificationDetailsActivity extends MultiLanguageAc
                 configureNotesToggle();
             } else {
                 notesCardView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void applyRobotoTypography() {
+        applyRobotoFont(notificationTitle, ROBOTO_MEDIUM, Typeface.NORMAL);
+        applyRobotoFont(notificationDateTextView, ROBOTO_MEDIUM, Typeface.NORMAL);
+        applyRobotoFont(patientNameTextView, ROBOTO_BLACK, Typeface.NORMAL);
+        applyRobotoFont(reasonTextView, ROBOTO_MEDIUM, Typeface.ITALIC);
+        applyRobotoFont(notesTextView, ROBOTO_REGULAR, Typeface.NORMAL);
+        applyRobotoFont(notesToggleView, ROBOTO_MEDIUM, Typeface.NORMAL);
+        applyRobotoFont(markAsDoneButton, ROBOTO_MEDIUM, Typeface.NORMAL);
+        applyRobotoFont(viewProfileButton, ROBOTO_MEDIUM, Typeface.NORMAL);
+    }
+
+    private void applyRobotoFont(TextView textView, String familyName, int style) {
+        if (textView == null) return;
+        textView.setTypeface(Typeface.create(familyName, style));
+    }
+
+    private void applyToolbarRoboto(Toolbar toolbar) {
+        if (toolbar == null) return;
+        for (int i = 0; i < toolbar.getChildCount(); i++) {
+            View child = toolbar.getChildAt(i);
+            if (child instanceof TextView) {
+                TextView textView = (TextView) child;
+                if (TextUtils.equals(textView.getText(), toolbar.getTitle())) {
+                    textView.setTypeface(Typeface.create(ROBOTO_MEDIUM, Typeface.NORMAL));
+                }
             }
         }
     }
