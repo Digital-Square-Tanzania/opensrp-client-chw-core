@@ -506,4 +506,20 @@ public class ChwNotificationDao extends AbstractDao {
                 getCursorValue(cursor, "notification_id"),
                 getCursorValue(cursor, "notification_type"));
     }
+
+
+
+    public static List<String> getBaseEntityIdsForLinkedClientsFromFacilityToCommunityWithMissingClientDetails() {
+        String sql = "SELECT  DISTINCT baseEntityId as base_entity_ids FROM event e \n" +
+                "LEFT JOIN ec_family_member ef ON e.baseEntityId = ef.base_entity_id\n" +
+                "WHERE ef.base_entity_id IS NULL AND eventType = 'Community Linkage'";
+        DataMap<String> dataMap = cursor -> getCursorValue(cursor, "base_entity_ids");
+        List<String> res = readData(sql, dataMap);
+
+        if (res == null || res.isEmpty())
+            return new ArrayList<>();
+
+        return res;
+    }
+
 }
