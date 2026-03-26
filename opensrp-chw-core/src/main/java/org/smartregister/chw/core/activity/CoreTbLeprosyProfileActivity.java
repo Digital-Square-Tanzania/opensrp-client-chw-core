@@ -56,18 +56,15 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         updateToolbarTitle(this, R.id.toolbar_title, memberObject.getFamilyName());
-    }
-
-    @Override
-    protected void setupViews() {
-        super.setupViews();
         initializeNotificationReferralRecyclerView();
     }
 
     protected void initializeNotificationReferralRecyclerView() {
         notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
         notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
-        notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (notificationAndReferralRecyclerView != null) {
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
     @Override

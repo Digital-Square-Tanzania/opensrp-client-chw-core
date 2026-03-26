@@ -20,6 +20,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -64,6 +66,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected CommonPersonObjectClient commonPersonObject;
     protected OnClickFloatingMenu onClickFloatingMenu;
     protected boolean isIndependent;
+    protected RecyclerView notificationAndReferralRecyclerView;
+    protected RelativeLayout notificationAndReferralLayout;
     private TextView textViewFamilyHas;
     private RelativeLayout layoutFamilyHasRow;
     private Integer toolbarBaseHeight;
@@ -122,6 +126,7 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     @Override
     protected void setupViews() {
         super.setupViews();
+        initializeNotificationReferralRecyclerView();
 
         TextView toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
@@ -143,6 +148,14 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         layoutFamilyHasRow = findViewById(R.id.family_has_row);
 
         layoutFamilyHasRow.setOnClickListener(this);
+    }
+
+    protected void initializeNotificationReferralRecyclerView() {
+        notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
+        notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
+        if (notificationAndReferralRecyclerView != null) {
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
     @Override
