@@ -956,6 +956,7 @@ public class CoreConstants {
         public static final String LTFU_REFERRALS = "ec_ltfu_referrals";
         public static final String ADDO_LINKAGE = "ec_addo_linkage";
         public static final String HPS_MEMBERS = "ec_hps_client_register";
+        public static final String HPS_HOUSEHOLD = "ec_hps_household_register";
     }
 
     public static final class INTENT_KEY {
