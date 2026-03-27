@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONObject;
 import org.smartregister.chw.core.R;
@@ -38,6 +42,22 @@ import timber.log.Timber;
  */
 public abstract class CoreKvpProfileActivity extends BaseKvpProfileActivity {
     //TODO: implement startFormActivity, to load followup forms
+    protected RecyclerView notificationAndReferralRecyclerView;
+    protected RelativeLayout notificationAndReferralLayout;
+
+    @Override
+    protected void onCreation() {
+        super.onCreation();
+        initializeNotificationReferralRecyclerView();
+    }
+
+    protected void initializeNotificationReferralRecyclerView() {
+        notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
+        notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
+        if (notificationAndReferralRecyclerView != null) {
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
+    }
 
     @Override
     public void refreshMedicalHistory(boolean hasHistory) {

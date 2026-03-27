@@ -4,9 +4,14 @@ import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulate
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONObject;
 import org.smartregister.chw.core.R;
@@ -37,6 +42,8 @@ import timber.log.Timber;
  * Created by ilakozejumanne@gmail.com on 13/02/2025.
  */
 public abstract class CoreHpsProfileActivity extends BaseHpsProfileActivity {
+    protected RecyclerView notificationAndReferralRecyclerView;
+    protected RelativeLayout notificationAndReferralLayout;
 
     @Override
     public void refreshMedicalHistory(boolean hasHistory) {
@@ -175,4 +182,16 @@ public abstract class CoreHpsProfileActivity extends BaseHpsProfileActivity {
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initializeNotificationReferralRecyclerView();
+    }
+
+    protected void initializeNotificationReferralRecyclerView() {
+        notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
+        notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
+        if (notificationAndReferralRecyclerView != null)
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 }

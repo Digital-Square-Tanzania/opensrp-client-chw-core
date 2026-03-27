@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.holders;
 
+import static org.smartregister.chw.core.interactor.BaseChwNotificationDetailsInteractor.LINKAGE_FROM_FACILITY;
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,9 +28,13 @@ public class ChwNotificationViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setNotificationTypeTextView(String notificationType) {
-        String formattedReferralType = notificationTypeTextView.getContext()
-                .getString(R.string.facility_visit, notificationType);
-        this.notificationTypeTextView.setText(formattedReferralType);
+        if (notificationType.equals(LINKAGE_FROM_FACILITY)) {
+            this.notificationTypeTextView.setText(notificationTypeTextView.getContext().getString(R.string.notification_type_facility_to_community_linkage));
+        } else {
+            String formattedReferralType = notificationTypeTextView.getContext()
+                    .getString(R.string.facility_visit, notificationType);
+            this.notificationTypeTextView.setText(formattedReferralType);
+        }
     }
 
     public void setNotificationDate(String notificationDate) {

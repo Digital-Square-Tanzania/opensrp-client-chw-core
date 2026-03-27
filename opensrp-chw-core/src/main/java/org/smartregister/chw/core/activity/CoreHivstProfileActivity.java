@@ -61,7 +61,9 @@ public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity 
     protected void initializeNotificationReferralRecyclerView() {
         notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
         notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
-        notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        if (notificationAndReferralRecyclerView != null) {
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
     public static class MemberType {
