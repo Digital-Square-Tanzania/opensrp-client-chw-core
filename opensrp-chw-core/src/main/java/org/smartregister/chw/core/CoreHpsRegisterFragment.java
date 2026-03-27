@@ -150,15 +150,30 @@ public class CoreHpsRegisterFragment extends BaseHpsRegisterFragment {
     public void countExecute() {
         Cursor c = null;
         try {
+            String query = "";
+            if (presenter().getMainTable() != null) {
+                if (presenter().getMainTable().equalsIgnoreCase(CoreConstants.TABLE_NAME.HPS_MEMBERS)) {
+                    query = "select count(*) from " + presenter().getMainTable() + " inner join " + CoreConstants.TABLE_NAME.FAMILY_MEMBER +
+                            " on " + presenter().getMainTable() + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " +
+                            CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID +
+                            " where " + presenter().getMainCondition();
 
-            String query = "select count(*) from " + presenter().getMainTable() + " inner join " + CoreConstants.TABLE_NAME.FAMILY_MEMBER +
-                    " on " + presenter().getMainTable() + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " +
-                    CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID +
-                    " where " + presenter().getMainCondition();
+                    if (StringUtils.isNotBlank(filters)) {
+                        query = query + " and ( " + filters + " ) ";
+                    }
+                } else if (presenter().getMainTable().equalsIgnoreCase(CoreConstants.TABLE_NAME.HPS_HOUSEHOLD)) {
+                    query = "select count(*) from " + presenter().getMainTable() + " inner join " + CoreConstants.TABLE_NAME.FAMILY +
+                            " on " + presenter().getMainTable() + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " +
+                            CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID +
+                            " where " + presenter().getMainCondition();
 
-            if (StringUtils.isNotBlank(filters)) {
-                query = query + " and ( " + filters + " ) ";
+                    if (StringUtils.isNotBlank(filters)) {
+                        query = query + " and ( " + filters + " ) ";
+                    }
+                }
             }
+
+
 
 
             c = commonRepository().rawCustomQueryForAdapter(query);
