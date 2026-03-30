@@ -500,7 +500,22 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
             case ChwDBConstants.EVENT_DATE:
                 jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), ChwDBConstants.EVENT_DATE, false));
                 break;
-
+            case CoreConstants.JsonAssets.CHAIRPERSON_FIRST_NAME:
+                String chairperson_first_name = Utils.getValue(client.getColumnmaps(), CoreConstants.JsonAssets.CHAIRPERSON_FIRST_NAME, false);
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, chairperson_first_name);
+                break;
+            case CoreConstants.JsonAssets.CHAIRPERSON_MIDDLE_NAME:
+                String chairperson_middle_name = Utils.getValue(client.getColumnmaps(), CoreConstants.JsonAssets.CHAIRPERSON_MIDDLE_NAME, false);
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, chairperson_middle_name);
+                break;
+            case CoreConstants.JsonAssets.CHAIRPERSON_LAST_NAME:
+                String chairperson_last_name = Utils.getValue(client.getColumnmaps(), CoreConstants.JsonAssets.CHAIRPERSON_LAST_NAME, false);
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, chairperson_last_name);
+                break;
+            case CoreConstants.JsonAssets.CHAIRPERSON_PHONE:
+                String chairperson_phone = Utils.getValue(client.getColumnmaps(), CoreConstants.JsonAssets.CHAIRPERSON_PHONE, false);
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, chairperson_phone);
+                break;
             default:
                 Timber.e("ERROR:: Unprocessed Form Object Key %s", jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY));
                 break;
