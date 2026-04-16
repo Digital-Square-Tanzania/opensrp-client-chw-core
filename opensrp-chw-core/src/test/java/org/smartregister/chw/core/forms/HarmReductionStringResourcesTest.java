@@ -15,8 +15,8 @@ public class HarmReductionStringResourcesTest {
     public void testSwahiliEnrollmentStringUsesKupunguza() throws Exception {
         String stringsXml = readText("src/main/res/values-sw/strings.xml");
 
-        Assert.assertTrue(stringsXml.contains("<string name=\"harm_reduction_risk_assessment\">Usajili wa huduma za kupunguza madhara ya madawa ya kulevya</string>"));
-        Assert.assertFalse(stringsXml.contains("Usajili wa huduma za kunguza madhara ya madawa ya kulevya"));
+        Assert.assertTrue(stringsXml.contains("<string name=\"harm_reduction_risk_assessment\">Usajili wa huduma za kupunguza madhara ya dawa za kulevya</string>"));
+        Assert.assertFalse(stringsXml.contains("Usajili wa huduma za kunguza madhara ya dawa za kulevya"));
     }
 
     private static String readText(String relativePath) throws IOException {
