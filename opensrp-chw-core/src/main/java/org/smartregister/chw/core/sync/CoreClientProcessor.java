@@ -1802,10 +1802,11 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String dateOfCollection = null;
         String maskaniName = null;
         String collectionSiteGps = null;
+        String numberOfUsedNeedlesAndSyringesCollected = null;
+        String issuesChallengesRelatedToCollectionOfUsedNeedlesAndSyringes = null;
         String otherCollection = null;
         String fixedBins = null;
         String totalSafetyBoxesCollected = null;
-        String nameOfOw = null;
 
         if (!collectionObs.isEmpty()) {
             for (Obs obs : collectionObs) {
@@ -1815,14 +1816,16 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     maskaniName = (String) obs.getValue();
                 } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.COLLECTION_SITE_GPS.equals(obs.getFormSubmissionField())) {
                     collectionSiteGps = (String) obs.getValue();
+                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.NUMBER_OF_USED_NEEDLES_AND_SYRINGES_COLLECTED.equals(obs.getFormSubmissionField())) {
+                    numberOfUsedNeedlesAndSyringesCollected = (String) obs.getValue();
+                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.ISSUES_CHALLENGES_RELATED_TO_COLLECTION_OF_USED_NEEDLES_AND_SYRINGES.equals(obs.getFormSubmissionField())) {
+                    issuesChallengesRelatedToCollectionOfUsedNeedlesAndSyringes = (String) obs.getValue();
                 } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.OTHER_COLLECTION.equals(obs.getFormSubmissionField())) {
                     otherCollection = (String) obs.getValue();
                 } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.FIXED_BINS.equals(obs.getFormSubmissionField())) {
                     fixedBins = (String) obs.getValue();
                 } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.TOTAL_SAFETY_BOXES_COLLECTED.equals(obs.getFormSubmissionField())) {
                     totalSafetyBoxesCollected = (String) obs.getValue();
-                } else if (org.smartregister.chw.harmreduction.util.DBConstants.KEY.NAME_OF_OW.equals(obs.getFormSubmissionField())) {
-                    nameOfOw = (String) obs.getValue();
                 }
             }
             HarmReductionUsedNeedlesAndSyringesCollectionDao.updateData(
@@ -1830,12 +1833,46 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     dateOfCollection,
                     maskaniName,
                     collectionSiteGps,
-                    otherCollection,
-                    fixedBins,
-                    totalSafetyBoxesCollected,
-                    nameOfOw
+                    resolveUsedNeedlesAndSyringesCollected(
+                            numberOfUsedNeedlesAndSyringesCollected,
+                            totalSafetyBoxesCollected,
+                            otherCollection,
+                            fixedBins
+                    ),
+                    issuesChallengesRelatedToCollectionOfUsedNeedlesAndSyringes
             );
         }
+    }
+
+    static String resolveUsedNeedlesAndSyringesCollected(String currentCount,
+                                                         String legacyTotalSafetyBoxesCollected,
+                                                         String otherCollection,
+                                                         String fixedBins) {
+        if (hasValue(currentCount)) {
+            return currentCount;
+        }
+
+        if (hasValue(legacyTotalSafetyBoxesCollected)) {
+            return legacyTotalSafetyBoxesCollected;
+        }
+
+        return computeLegacyCollectionTotal(otherCollection, fixedBins);
+    }
+
+    private static String computeLegacyCollectionTotal(String otherCollection, String fixedBins) {
+        try {
+            return String.valueOf(Integer.parseInt(defaultZero(otherCollection)) + Integer.parseInt(defaultZero(fixedBins)));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private static boolean hasValue(String value) {
+        return value != null && !value.trim().isEmpty();
+    }
+
+    private static String defaultZero(String value) {
+        return value == null || value.isEmpty() ? "0" : value;
     }
 
     private void processCecapMobilizationEvent(Event event) {
