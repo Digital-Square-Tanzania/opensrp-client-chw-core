@@ -1130,6 +1130,10 @@ public class CoreConstants {
         public static final String LAST_NAME = "last_name";
         public static final String DOD = "dod";
         public static final String DOB = "dob";
+        public static final String CHAIRPERSON_FIRST_NAME =  "chairperson_first_name";
+        public static final String CHAIRPERSON_MIDDLE_NAME = "chairperson_middle_name";
+        public static final String CHAIRPERSON_LAST_NAME = "chairperson_last_name";
+        public static final String CHAIRPERSON_PHONE = "chairperson_phone";
 
         public static class FAMILY_MEMBER {
             public static final String HIGHEST_EDUCATION_LEVEL = "highest_edu_level";
