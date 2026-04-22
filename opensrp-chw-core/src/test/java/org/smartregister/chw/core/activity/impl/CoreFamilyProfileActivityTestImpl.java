@@ -86,6 +86,11 @@ public class CoreFamilyProfileActivityTestImpl extends CoreFamilyProfileActivity
     }
 
     @Override
+    protected void startHpsHouseholdEnrollment(String baseEntityId) {
+        // do nothing
+    }
+
+    @Override
     protected boolean isAncMember(String baseEntityId) {
         return false;
     }

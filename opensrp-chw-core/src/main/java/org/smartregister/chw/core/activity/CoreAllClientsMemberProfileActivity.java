@@ -2,13 +2,17 @@ package org.smartregister.chw.core.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
@@ -38,6 +42,8 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
     private RelativeLayout layoutFamilyHasRow;
     private CustomFontTextView familyHeadTextView;
     private CustomFontTextView careGiverTextView;
+    // Cache the toolbar height so we can add status bar insets without compounding.
+    private Integer toolbarBaseHeight;
 
     @Override
     protected void onCreation() {
@@ -51,6 +57,23 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("");
+            // Base toolbar height comes from layout params or the theme action bar size.
+            if (toolbarBaseHeight == null) {
+                int resolvedHeight = toolbar.getLayoutParams() != null ? toolbar.getLayoutParams().height : 0;
+                toolbarBaseHeight = resolvedHeight > 0 ? resolvedHeight : resolveActionBarSize();
+            }
+            // Apply status bar insets so the toolbar content doesn't overlap system bars.
+            ViewCompat.setOnApplyWindowInsetsListener(toolbar, (view, insets) -> {
+                int topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
+                ViewGroup.LayoutParams params = view.getLayoutParams();
+                if (params != null) {
+                    params.height = toolbarBaseHeight + topInset;
+                    view.setLayoutParams(params);
+                }
+                view.setPadding(view.getPaddingLeft(), topInset, view.getPaddingRight(), view.getPaddingBottom());
+                return insets;
+            });
+            ViewCompat.requestApplyInsets(toolbar);
         }
 
         appBarLayout = findViewById(org.smartregister.family.R.id.toolbar_appbarlayout);
@@ -60,6 +83,14 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
         initializePresenter();
 
         setupViews();
+    }
+
+    private int resolveActionBarSize() {
+        TypedValue typedValue = new TypedValue();
+        if (getTheme().resolveAttribute(androidx.appcompat.R.attr.actionBarSize, typedValue, true)) {
+            return TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
+        }
+        return getResources().getDimensionPixelSize(androidx.appcompat.R.dimen.abc_action_bar_default_height_material);
     }
 
 
@@ -123,7 +154,7 @@ public abstract class CoreAllClientsMemberProfileActivity extends CoreFamilyOthe
 
     @Override
     public void startFormActivity(JSONObject jsonForm) {
-        Intent intent = new Intent(this, BaseOpdFormActivity.class);
+        Intent intent = new Intent(this, org.smartregister.family.util.Utils.metadata().familyMemberFormActivity);
         intent.putExtra(OpdConstants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
         Form form = new Form();
         form.setName(getString(R.string.update_client_registration));

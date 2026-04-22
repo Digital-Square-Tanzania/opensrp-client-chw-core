@@ -3,11 +3,12 @@ package org.smartregister.chw.core.sync;
 import static org.smartregister.chw.cecap.util.Constants.EVENT_TYPE.CECAP_HEALTH_EDUCATION_MOBILIZATION;
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_HEALTH_EDUCATION_MOBILIZATION;
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_MONTHLY_SOCIAL_MEDIA_REPORT;
+import static org.smartregister.chw.tbleprosy.util.Constants.EVENT_TYPE.TB_LEPROSY_MOBILIZATION;
 
 import android.content.ContentValues;
 import android.content.Context;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.anc.util.DBConstants;
@@ -38,11 +39,13 @@ import org.smartregister.chw.fp.util.FamilyPlanningConstants;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.hps.dao.HpsDao;
 import org.smartregister.chw.hts.dao.HtsDao;
+import org.smartregister.chw.hts.dao.HtsDao;
 import org.smartregister.chw.lab.LabLibrary;
 import org.smartregister.chw.lab.dao.LabDao;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.MalariaUtil;
 import org.smartregister.chw.sbc.dao.SbcDao;
+import org.smartregister.chw.tbleprosy.dao.TbLeprosyMobilizationDao;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -82,6 +85,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     private ClientClassification classification;
     private Table vaccineTable;
     private Table serviceTable;
+    private Map<String, Table> serviceTables;
 
     protected CoreClientProcessor(Context context) {
         super(context);
@@ -180,10 +184,53 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     }
 
     private Table getServiceTable() {
+        if (serviceTables == null) {
+            loadServiceTables();
+        }
+        if (serviceTable != null) {
+            return serviceTable;
+        }
+        if (serviceTables != null && !serviceTables.isEmpty()) {
+            serviceTable = serviceTables.values().iterator().next();
+        }
         if (serviceTable == null) {
             serviceTable = assetJsonToJava("ec_client_service.json", Table.class);
+            if (serviceTable != null) {
+                if (serviceTables == null) {
+                    serviceTables = new HashMap<>();
+                }
+                serviceTables.put(serviceTable.name, serviceTable);
+            }
         }
         return serviceTable;
+    }
+
+    protected Table getServiceTable(String tableName) {
+        if (StringUtils.isBlank(tableName)) {
+            return getServiceTable();
+        }
+        if (serviceTables == null) {
+            loadServiceTables();
+        }
+        if (serviceTables != null && serviceTables.containsKey(tableName)) {
+            return serviceTables.get(tableName);
+        }
+        return getServiceTable();
+    }
+
+    private void loadServiceTables() {
+        Table[] tables = assetJsonToJava("ec_client_service.json", Table[].class);
+        if (tables != null && tables.length > 0) {
+            serviceTables = new HashMap<>();
+            for (Table table : tables) {
+                if (table != null && StringUtils.isNotBlank(table.name)) {
+                    serviceTables.put(table.name, table);
+                }
+            }
+            if (!serviceTables.isEmpty()) {
+                serviceTable = serviceTables.values().iterator().next();
+            }
+        }
     }
 
     protected void processEvents(ClientClassification clientClassification, Table vaccineTable, Table serviceTable, EventClient eventClient, Event event, String eventType) throws Exception {
@@ -336,6 +383,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 break;
             case CECAP_HEALTH_EDUCATION_MOBILIZATION:
                 processCecapMobilizationEvent(eventClient.getEvent());
+                break;
+            case TB_LEPROSY_MOBILIZATION:
+                processTbLeprosyMobilizationEvent(eventClient.getEvent());
                 break;
             case SBC_MONTHLY_SOCIAL_MEDIA_REPORT:
                 processSBCMonthlySocialMediaReportEvent(eventClient.getEvent());
@@ -1722,6 +1772,26 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         }
     }
 
+    private void processTbLeprosyMobilizationEvent(Event event) {
+        List<Obs> mobilizationObs = event.getObs();
+        String mobilizationDate = null;
+        String femaleClientsReached = null;
+        String maleClientsReached = null;
+
+        if (!mobilizationObs.isEmpty()) {
+            for (Obs obs : mobilizationObs) {
+                if (org.smartregister.chw.tbleprosy.util.DBConstants.KEY.MOBILIZATION_DATE.equals(obs.getFormSubmissionField())) {
+                    mobilizationDate = (String) obs.getValue();
+                } else if (org.smartregister.chw.tbleprosy.util.DBConstants.KEY.FEMALE_CLIENTS_REACHED.equals(obs.getFormSubmissionField())) {
+                    femaleClientsReached = (String) obs.getValue();
+                } else if (org.smartregister.chw.tbleprosy.util.DBConstants.KEY.MALE_CLIENTS_REACHED.equals(obs.getFormSubmissionField())) {
+                    maleClientsReached = (String) obs.getValue();
+                }
+            }
+            TbLeprosyMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached);
+        }
+    }
+
     private void processCecapMobilizationEvent(Event event) {
         List<Obs> mobilizationObs = event.getObs();
         String mobilizationDate = null;
@@ -2049,7 +2119,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     }
 
     // possible to delegate
-    private Boolean processService(EventClient service, Table serviceTable) {
+    protected Boolean processService(EventClient service, Table serviceTable) {
 
         try {
 

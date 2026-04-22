@@ -32,6 +32,7 @@ import static org.smartregister.util.Utils.getAllSharedPreferences;
 
 public class BaseChwNotificationDetailsInteractor implements ChwNotificationDetailsContract.Interactor {
 
+    public static final String LINKAGE_FROM_FACILITY = "Linkage From Facility";
     private ChwNotificationDetailsContract.Presenter presenter;
     private Context context;
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -81,6 +82,8 @@ public class BaseChwNotificationDetailsInteractor implements ChwNotificationDeta
             notificationItem = getHivIndexContactFollowupReferralDetails(notificationId, notificationType);
         else if (notificationType.equalsIgnoreCase(context.getString(R.string.notification_type_pregnancy_confirmation)))
             notificationItem = getPregnancyConfirmationReferralDetails(notificationId, notificationType);
+        else if (notificationType.equalsIgnoreCase(LINKAGE_FROM_FACILITY))
+            notificationItem = getLinkageFromHealthFacilityDetails(notificationId, notificationType);
 
         presenter.onNotificationDetailsFetched(notificationItem);
     }
@@ -221,6 +224,16 @@ public class BaseChwNotificationDetailsInteractor implements ChwNotificationDeta
             details.add(context.getString(R.string.notification_action_taken, "Enrolled To ANC"));
         }
         details.add(context.getString(R.string.notification_village, notificationRecord.getVillage()));
+        return new NotificationItem(title, details);
+    }
+
+    @NotNull
+    private NotificationItem getLinkageFromHealthFacilityDetails(String notificationId, String notificationType) {
+        NotificationRecord notificationRecord;
+        notificationRecord = ChwNotificationDao.getFacilityLinkageRecord(notificationId, ChwNotificationUtil.getNotificationDetailsTable(context, notificationType));
+        String title = context.getString(R.string.facility_to_community_linkage_title, notificationRecord.getClientName(), notificationRecord.getVisitDate());
+        List<String> details = new ArrayList<>();
+        details.add(context.getString(R.string.facility_to_community_linkage_reason, notificationRecord.getResults()));
         return new NotificationItem(title, details);
     }
 

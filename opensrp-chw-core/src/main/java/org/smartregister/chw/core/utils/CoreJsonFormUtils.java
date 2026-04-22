@@ -1,6 +1,7 @@
 package org.smartregister.chw.core.utils;
 
 import static org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_OUTLET_REGISTRATION;
+import static org.smartregister.chw.tbleprosy.util.Constants.EVENT_TYPE.TB_LEPROSY_SCREENING;
 import static org.smartregister.chw.vmmc.util.Constants.EVENT_TYPE.VMMC_ENROLLMENT;
 
 import android.app.Activity;
@@ -499,7 +500,22 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
             case ChwDBConstants.EVENT_DATE:
                 jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, Utils.getValue(client.getColumnmaps(), ChwDBConstants.EVENT_DATE, false));
                 break;
-
+            case CoreConstants.JsonAssets.CHAIRPERSON_FIRST_NAME:
+                String chairperson_first_name = Utils.getValue(client.getColumnmaps(), CoreConstants.JsonAssets.CHAIRPERSON_FIRST_NAME, false);
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, chairperson_first_name);
+                break;
+            case CoreConstants.JsonAssets.CHAIRPERSON_MIDDLE_NAME:
+                String chairperson_middle_name = Utils.getValue(client.getColumnmaps(), CoreConstants.JsonAssets.CHAIRPERSON_MIDDLE_NAME, false);
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, chairperson_middle_name);
+                break;
+            case CoreConstants.JsonAssets.CHAIRPERSON_LAST_NAME:
+                String chairperson_last_name = Utils.getValue(client.getColumnmaps(), CoreConstants.JsonAssets.CHAIRPERSON_LAST_NAME, false);
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, chairperson_last_name);
+                break;
+            case CoreConstants.JsonAssets.CHAIRPERSON_PHONE:
+                String chairperson_phone = Utils.getValue(client.getColumnmaps(), CoreConstants.JsonAssets.CHAIRPERSON_PHONE, false);
+                jsonObject.put(org.smartregister.family.util.JsonFormUtils.VALUE, chairperson_phone);
+                break;
             default:
                 Timber.e("ERROR:: Unprocessed Form Object Key %s", jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY));
                 break;
@@ -930,6 +946,8 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
                 event = getEditOutletRegistration(baseEntityID);
             } else if (formName.equalsIgnoreCase(org.smartregister.chw.vmmc.util.Constants.FORMS.VMMC_REGISTRATION)) {
                 event = getEditVmmcRegistration(baseEntityID);
+            } else if (formName.equalsIgnoreCase(org.smartregister.chw.tbleprosy.util.Constants.FORMS.TB_LEPROSY_SCREENING)) {
+                event = getEditTbLeprosyScreening(baseEntityID);
             } else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_PREGNANCY_CONFIRMATION) || formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_TRANSFER_IN_REGISTRATION)) {
                 event = getEditEvent(baseEntityID, eventType);
             } else {
@@ -1025,6 +1043,25 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
 
         String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s') order by updatedAt desc limit 1;",
                 baseEntityID, VMMC_ENROLLMENT);
+
+        try (Cursor cursor = CoreChwApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                ecEvent = AssetHandler.jsonStringToJava(cursor.getString(0), Event.class);
+                cursor.moveToNext();
+            }
+        } catch (Exception e) {
+            Timber.e(e, e.toString());
+        }
+        return ecEvent;
+    }
+
+    private static Event getEditTbLeprosyScreening(String baseEntityID) {
+        Event ecEvent = null;
+
+        String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s') order by updatedAt desc limit 1;",
+                baseEntityID, TB_LEPROSY_SCREENING);
 
         try (Cursor cursor = CoreChwApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
             cursor.moveToFirst();

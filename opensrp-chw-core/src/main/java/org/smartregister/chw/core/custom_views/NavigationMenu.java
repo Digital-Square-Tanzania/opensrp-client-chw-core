@@ -42,6 +42,7 @@ import org.smartregister.domain.FetchStatus;
 import org.smartregister.receiver.SyncStatusBroadcastReceiver;
 import org.smartregister.util.LangUtils;
 import org.smartregister.util.PermissionUtils;
+import org.smartregister.view.activity.StatsActivity;
 
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
@@ -333,6 +334,12 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
         tvSync.setOnClickListener(syncClicker);
         ivSync.setOnClickListener(syncClicker);
+        ivSync.setOnLongClickListener(v -> {
+            Intent intent = new Intent(parentActivity, StatsActivity.class);
+            parentActivity.startActivity(intent);
+            return true;
+        });
+
 
         refreshSyncProgressSpinner();
     }

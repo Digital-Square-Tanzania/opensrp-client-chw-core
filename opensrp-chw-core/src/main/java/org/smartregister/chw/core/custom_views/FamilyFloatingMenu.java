@@ -25,6 +25,7 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
 
     private View callLayout;
     private View addNewMember;
+    private View addExistingMember;
 
     public FamilyFloatingMenu(Context context) {
         super(context);
@@ -60,8 +61,12 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
         addNewMember = findViewById(R.id.add_new_member_layout);
         addNewMember.setOnClickListener(this);
 
+        addExistingMember = findViewById(R.id.add_existing_member_layout);
+        addExistingMember.setOnClickListener(this);
+
         callLayout.setClickable(false);
         addNewMember.setClickable(false);
+        addExistingMember.setClickable(false);
 
         menuBar.setVisibility(GONE);
 
@@ -80,9 +85,11 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
 
             callLayout.startAnimation(fabClose);
             addNewMember.startAnimation(fabClose);
+            addExistingMember.startAnimation(fabClose);
 
             callLayout.setClickable(false);
             addNewMember.setClickable(false);
+            addExistingMember.setClickable(false);
             isFabMenuOpen = false;
 
         } else {
@@ -93,9 +100,11 @@ public class FamilyFloatingMenu extends LinearLayout implements View.OnClickList
 
             callLayout.startAnimation(fabOpen);
             addNewMember.startAnimation(fabOpen);
+            addExistingMember.startAnimation(fabOpen);
 
             callLayout.setClickable(true);
             addNewMember.setClickable(true);
+            addExistingMember.setClickable(true);
 
             isFabMenuOpen = true;
         }

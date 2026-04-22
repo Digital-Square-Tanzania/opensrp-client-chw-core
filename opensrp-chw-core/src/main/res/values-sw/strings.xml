@@ -43,6 +43,10 @@
     <string name="menu_hiv">VVU/Ukimwi</string>
     <string name="menu_hts">Ushauri nasaha na Upimaji</string>
     <string name="menu_hps">iCCHW</string>
+    <string name="menu_ayp_inschool">Huduma za Rika balehe(Ndani ya Shule)</string>
+    <string name="menu_ayp_outschool">Huduma za Rika balehe(Nje ya Shule)</string>
+    <string name="menu_ayp_parental">Huduma za AYP kwa wazazi</string>
+    <string name="ayp_parental_enrollment">Usajili wa wazazi wa AYP</string>
     <string name="menu_tb">Kifua Kikuu</string>
     <string name="menu_anc">Wajawazito</string>
     <string name="menu_pnc">Baada ya kujifungua</string>
@@ -228,7 +232,7 @@
 
     <!--Referral-->
     <string name="referred_by">Rufaa imetolewa na mja %1s</string>
-    <string name="hours_ago">%d masaa iliyopita</string>
+    <string name="hours_ago">Masaa %d yaliyopita</string>
     <string name="yesterday">Jana</string>
 
     <string name="change_member_alert">Tafadhali maliza kujaza kabla ya kuwasilisha</string>
@@ -650,14 +654,24 @@
 
     <!--Navigation Menu String -->
     <string name="service_activity">Muhutasari wa Mwezi</string>
-    <string name="updates">Mrejesho</string>
+    <string name="updates">Rufaa kutoka kituo cha afya</string>
 
     <string name="facility_visit">%1$s Hudhurio</string>
 
     <!-- Notification details -->
     <string name="mark_as_done">Kamilisha</string>
-    <string name="view_profile">Angalia taarifa</string>
-    <string name="back_to_updates">Rudi kwenye mrejesho</string>
+    <string name="view_profile">Angalia Wasifu</string>
+    <string name="notification_details_title">Maelezo ya rufaa</string>
+    <string name="notification_summary_chip">Ujumbe</string>
+    <string name="notification_patient_avatar">Picha ya mteja</string>
+    <string name="notification_reason_heading">Sababu ya rufaa kutoka kituo cha afya</string>
+    <string name="notification_reason_label">Maelezo makuu</string>
+    <string name="notification_notes_heading">Maelezo ya ziada</string>
+    <string name="notification_notes_label">Maelezo</string>
+    <string name="notification_preview_patient_name">Jully Milla</string>
+    <string name="notification_preview_date">18 Machi 2026</string>
+    <string name="notification_preview_reason">Usajili mpya</string>
+    <string name="back_to_updates">Rudi kwenye rufaa zote</string>
     <string name="successful_referral_notification_title">Jina: %1$s, %2$s</string>
     <string name="followup_notification_title">%1$s amehudhuria kwenye kituo cha kutolea huduma za afya tarehe%2$s</string>
     <string name="notification_care_giver">Mlezi: %1$s</string>
@@ -717,6 +731,8 @@
     <string name="hiv_registration">Usajili wa VVU</string>
     <string name="cbhs_registration">Usajili wa CBHS</string>
     <string name="tb_registration">Usajili wa TB</string>
+    <string name="tbleprosy_screening">Uchunguzi wa awali wa TB na Ukoma</string>
+    <string name="tbleprosy_screening_info">Matokeo ya uchunguzi wa awali wa TB na Ukoma</string>
     <string name="remove_client">Ondoa mteja</string>
     <string name="call_all_clients_member">Piga simu kwa mteja au mlezi</string>
 
@@ -728,14 +744,18 @@
     <string name="add_responder_max_message">Umefikia idadi ya mwisho ya wasafirishaji wanaoruhusiwa</string>
 
     <!-- Notification row -->
-    <string name="notification_for">Taarifa kwa %1$s</string>
-    <string name="full_notification_info">Angalia taarifa kwa ujumla</string>
+    <string name="notification_for">Taarifa ya %1$s</string>
+    <string name="notification_linkage_from_facility">Rufaa ya uunganishaji kutoka kituo cha afya</string>
+    <string name="full_notification_info">Angalia taarifa</string>
     <string name="thinkmd_health_assessment">Tathimini ya afya ya ThinkMD</string>
     <string name="thinkmd_careplan">Mpango wa utunzaji wa ThinkMD (%1$s)</string>
     <string name="care_plan">Mpango huduma</string>
     <string name="thinkmd_identifier_type">thinkmd_id</string>
     <string name="thinkmd_assessment_saved">ThinkMD tathmini ya afya imehifadhiwa</string>
     <string name="no_thinkmd_care_plan_found">Hakuna mpango huduma wa thinkmd ulioonekana</string>
+    <string name="new_registration_notes_placeholder">Mteja ameunganishwa kutoka kituoni. Pitia taarifa za usajili na tembelea kaya kwa ufuatiliaji.</string>
+    <string name="notes_more">Zaidi</string>
+    <string name="notes_less">Punguza</string>
 
     <!-- LMH Last Visit Row-->
     <string name="view_vaccine_histroy">Angalia historia ya chanjo</string>
@@ -773,7 +793,7 @@
     <string name="str_page_info">Ukurasa {0} ya {1}</string>
     <string name="opd_str_page_info">Ukurasa {0} ya {1}</string>
     <string name="scan_qr">Ng\'amua QR</string>
-    <string name="json_form_error_msg">Kosa/Makosa %d yamefanyika. Tafadhali sahihisha kabla ya kutuma.</string>
+    <string name="json_form_error_msg">Kuna taarifa %d zinazokosekana.Tafadhali kamilisha sehemu zilizoachwa wazi ili kuendelea.</string>
     <string name="confirm_form_close">Thibitisha kufungwa kwa fomu hii</string>
     <string name="errors_found">Kuna tatizo limetokea</string>
     <string name="errors_found_explanation">Tafadhali jaza taarifa au namba sahihi kama ilivyoelekezwa.</string>
@@ -831,5 +851,22 @@
     <string name="an_unexpected_error_occurred_please_try_again_later">Hitilafu: Tafadhali jaribu tena baadae.</string>
     <string name="error_processing_server_response">Hitilafu wakati wa kuchakata jibu lililorudishwa.</string>
 
-</resources>
+    <!--   AYP -->
+    <string name="ayp_in_school_enrollment">Uchunguzi wa rika balehe (Ndani ya Shule)</string>
+    <string name="ayp_facility_screening">Uchunguzi wa rika balehe</string>
+    <string name="ayp_out_school_enrollment">Uchunguzi wa rika balehe (Nje ya Shule)</string>
 
+    <!-- Floating Menu Option for Add Existing Member to Household -->
+    <string name="add_existing_family_member">Ongeza Mwanafamilia aliyepo</string>
+    <string name="client_search_hint">Tafuta kwa Jina au Kitambulisho</string>
+    <string name="client_no_match">Hakuna wateja waliolingana na utafutaji wako</string>
+    <string name="no_independent_clients_available">Hakuna wateja wa kujitegemea wanaopatikana</string>
+    <string name="unable_to_add_family_member">Imeshindwa kusasisha familia kwa mteja aliyechaguliwa</string>
+    <string name="successfull_added_family_member">Imesasisha familia kwa %1$s</string>
+    <string name="generate_household">Tengeneza Kaya</string>
+    <string name="remove_member">Ondoa Mwanakaya</string>
+
+    <string name="notification_type_facility_to_community_linkage">Rufaa ya uunganishaji kutoka Kituo cha Afya</string>
+    <string name="facility_to_community_linkage_title">Rufaa ya uunganishwaji wa %1$s kutoka Kituo cha Afya, tarehe %2$s</string>
+    <string name="facility_to_community_linkage_reason">Sababu za rufaa ya uunganishwaji kutoka kituo cha afya: %1$s</string>
+</resources>

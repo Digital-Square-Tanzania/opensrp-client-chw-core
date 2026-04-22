@@ -52,11 +52,6 @@ public class CorePncMemberProfileActivityImpl extends CorePncMemberProfileActivi
     }
 
     @Override
-    public void startFpChangeMethod() {
-        // do nothing
-    }
-
-    @Override
     public void startMalariaFollowUpVisit() {
         // do nothing
     }

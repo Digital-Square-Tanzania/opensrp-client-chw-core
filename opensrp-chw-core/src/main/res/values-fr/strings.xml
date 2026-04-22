@@ -44,6 +44,8 @@
     <string name="menu_hiv">VIH</string>
     <string name="menu_hts">Dépistage du VIH</string>
     <string name="menu_hps">Services de promotion de la santé</string>
+    <string name="menu_ayp_inschool">AYP In-School Services</string>
+    <string name="menu_ayp_outschool">AYP Out-School Services</string>
     <string name="menu_anc">Clients CPN</string>
     <string name="menu_pnc">Clients CPoN</string>
     <string name="menu_child">CH</string>
@@ -384,6 +386,25 @@
     <string name="phone_not_provided">Aucun numéro de téléphone fourni</string>
     <string name="anc_danger_sign_prefix">Signes de danger de la CPN; Symptômes:%s</string>
     <string name="client_name_age_suffix">%s, %s</string>
+    <string name="new_registration_notes_placeholder">Client orienté depuis l\'établissement de santé. Vérifiez les détails de l\'enregistrement et rendez visite au ménage pour le suivi.</string>
+
+    <!-- Notification details -->
+    <string name="mark_as_done">Marquer comme terminé</string>
+    <string name="view_profile">Voir le profil</string>
+    <string name="notification_details_title">Détails de la notification</string>
+    <string name="notification_summary_chip">Notification</string>
+    <string name="notification_patient_avatar">Avatar du patient</string>
+    <string name="notification_reason_heading">Motif de l\'orientation</string>
+    <string name="notification_reason_label">Détail principal</string>
+    <string name="notification_notes_heading">Notes supplémentaires</string>
+    <string name="notification_notes_label">Notes</string>
+    <string name="notes_more">Plus</string>
+    <string name="notification_preview_patient_name">Jully Milla</string>
+    <string name="notification_preview_date">18 mars 2026</string>
+    <string name="notification_preview_reason">Nouvelle inscription</string>
+    <string name="notification_type_facility_to_community_linkage">Orientation depuis l\'établissement de santé</string>
+    <string name="facility_to_community_linkage_title">Orientation depuis l\'établissement de santé pour %1$s le %2$s</string>
+    <string name="facility_to_community_linkage_reason">Motifs de l\'orientation depuis l\'établissement de santé : %1$s</string>
 
     <!--PNC -->
     <string name="pnc_visit_day_due">JOUR %s VISITE DUE</string>

@@ -7,6 +7,8 @@ import org.smartregister.chw.core.utils.CoreReferralUtils;
 
 import static org.smartregister.chw.core.utils.QueryConstant.ANC_DANGER_SIGNS_OUTCOME_COUNT_QUERY;
 import static org.smartregister.chw.core.utils.QueryConstant.ANC_DANGER_SIGNS_OUTCOME_MAIN_SELECT;
+import static org.smartregister.chw.core.utils.QueryConstant.FACILITY_TO_COMMUNITY_LINKAGE_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.FACILITY_TO_COMMUNITY_LINKAGE_MAIN_SELECT;
 import static org.smartregister.chw.core.utils.QueryConstant.FAMILY_PLANNING_UPDATE_COUNT_QUERY;
 import static org.smartregister.chw.core.utils.QueryConstant.FAMILY_PLANNING_UPDATE_MAIN_SELECT;
 import static org.smartregister.chw.core.utils.QueryConstant.HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_MAIN_SELECT;
@@ -58,7 +60,8 @@ public class BaseChwNotificationQueryProvider {
                 TB_OUTCOME_COUNT_QUERY,
                 HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_REFERRAL_COUNT_QUERY,
                 NOT_YET_DONE_REFERRAL_COUNT_QUERY,
-                PREGNANCY_CONFIRMATION_UPDATES_COUNT_QUERY
+                PREGNANCY_CONFIRMATION_UPDATES_COUNT_QUERY,
+                FACILITY_TO_COMMUNITY_LINKAGE_COUNT_QUERY
         };
     }
 
@@ -71,9 +74,9 @@ public class BaseChwNotificationQueryProvider {
      */
     @NonNull
     public String mainSelectWhereIDsIn() {
-        return String.format("%s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s",
+        return String.format("%s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s UNION ALL %s",
                 SICK_CHILD_FOLLOW_UP_MAIN_SELECT, ANC_DANGER_SIGNS_OUTCOME_MAIN_SELECT,
                 PNC_DANGER_SIGNS_OUTCOME_MAIN_SELECT, FAMILY_PLANNING_UPDATE_MAIN_SELECT,
-                MALARIA_FOLLOW_UP_MAIN_SELECT, HIV_OUTCOME_MAIN_SELECT, TB_OUTCOME_MAIN_SELECT,HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_MAIN_SELECT,PREGNANCY_CONFIRMATION_UPDATES_MAIN_SELECT, NOT_YET_DONE_REFERRAL_MAIN_SELECT);
+                MALARIA_FOLLOW_UP_MAIN_SELECT, HIV_OUTCOME_MAIN_SELECT, TB_OUTCOME_MAIN_SELECT,HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_MAIN_SELECT,PREGNANCY_CONFIRMATION_UPDATES_MAIN_SELECT,FACILITY_TO_COMMUNITY_LINKAGE_MAIN_SELECT,NOT_YET_DONE_REFERRAL_MAIN_SELECT);
     }
 }

@@ -2,6 +2,7 @@ package org.smartregister.chw.core.interactor;
 
 import static org.smartregister.chw.core.utils.CoreConstants.TABLE_NAME.MOTHER_CHAMPION;
 import static org.smartregister.chw.core.utils.QueryConstant.ANC_DANGER_SIGNS_OUTCOME_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.FACILITY_TO_COMMUNITY_LINKAGE_COUNT_QUERY;
 import static org.smartregister.chw.core.utils.QueryConstant.FAMILY_PLANNING_UPDATE_COUNT_QUERY;
 import static org.smartregister.chw.core.utils.QueryConstant.HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_REFERRAL_COUNT_QUERY;
 import static org.smartregister.chw.core.utils.QueryConstant.HIV_OUTCOME_COUNT_QUERY;
@@ -386,11 +387,11 @@ public class NavigationInteractor implements NavigationContract.Interactor {
 
             case CoreConstants.TABLE_NAME.NOTIFICATION_UPDATE:
                 String referralNotificationQuery =
-                        String.format("SELECT SUM(c) FROM (\n %s \nUNION ALL\n %s \nUNION ALL\n %s \nUNION ALL\n %s \nUNION ALL\n %s \nUNION ALL %s \nUNION ALL %s \nUNION ALL %s \nUNION ALL %s \nUNION ALL %s)",
+                        String.format("SELECT SUM(c) FROM (\n %s \nUNION ALL\n %s \nUNION ALL\n %s \nUNION ALL\n %s \nUNION ALL\n %s \nUNION ALL %s \nUNION ALL %s \nUNION ALL %s \nUNION ALL %s \nUNION ALL %s \nUNION ALL %s)",
                                 SICK_CHILD_FOLLOW_UP_COUNT_QUERY, ANC_DANGER_SIGNS_OUTCOME_COUNT_QUERY,
                                 PNC_DANGER_SIGNS_OUTCOME_COUNT_QUERY, FAMILY_PLANNING_UPDATE_COUNT_QUERY,
                                 MALARIA_HF_FOLLOW_UP_COUNT_QUERY, HIV_OUTCOME_COUNT_QUERY,
-                                TB_OUTCOME_COUNT_QUERY, HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_REFERRAL_COUNT_QUERY, PREGNANCY_CONFIRMATION_UPDATES_COUNT_QUERY, NOT_YET_DONE_REFERRAL_COUNT_QUERY);
+                                TB_OUTCOME_COUNT_QUERY, HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_REFERRAL_COUNT_QUERY, PREGNANCY_CONFIRMATION_UPDATES_COUNT_QUERY, NOT_YET_DONE_REFERRAL_COUNT_QUERY,FACILITY_TO_COMMUNITY_LINKAGE_COUNT_QUERY);
                 return NavigationDao.getQueryCount(referralNotificationQuery);
 
             case org.smartregister.chw.hiv.util.Constants.Tables.HIV:
@@ -552,6 +553,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.vmmc.util.Constants.TABLES.VMMC_ENROLLMENT + " v " +
                                 "              where v.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlVmmc);
+            case org.smartregister.chw.tbleprosy.util.Constants.TABLES.TBLEPROSY_SCREENING:
+                String sqlTbLeprosy =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.tbleprosy.util.Constants.TABLES.TBLEPROSY_SCREENING + " v " +
+                                "              where v.is_closed is 0 AND (v.status IS NULL OR v.status = 'client') AND  screening_status != '-' ";
+                return NavigationDao.getQueryCount(sqlTbLeprosy);
             case org.smartregister.chw.sbc.util.Constants.TABLES.SBC_REGISTER:
                 String sqlSbc =
                         "SELECT count(*) " +
@@ -618,6 +625,24 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.hps.util.Constants.TABLES.HPS_CLIENT_REGISTER + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
                                 "              where p.is_closed is 0 AND does_the_client_consent_to_be_enrolled_in_hps_services = 'yes' AND ec_family_member.dod is null ";
                 return NavigationDao.getQueryCount(sqlHps);
+            case org.smartregister.chw.ayp.util.Constants.TABLES.AYP_IN_SCHOOL_ENROLLMENT:
+                String sqlAyp =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_IN_SCHOOL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
+                                "              where p.is_closed is 0 AND ec_family_member.dod is null ";
+                return NavigationDao.getQueryCount(sqlAyp);
+            case org.smartregister.chw.ayp.util.Constants.TABLES.AYP_PARENTAL_ENROLLMENT:
+                String sqlAypParental =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_PARENTAL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
+                                "              where p.is_closed is 0 AND ec_family_member.dod is null ";
+                return NavigationDao.getQueryCount(sqlAypParental);
+            case org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT:
+                String sqlAypOut =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
+                                "              where p.is_closed is 0 AND ec_family_member.dod is null AND should_enroll = 'yes'";
+                return NavigationDao.getQueryCount(sqlAypOut);
             default:
                 return NavigationDao.getTableCount(tableName);
         }

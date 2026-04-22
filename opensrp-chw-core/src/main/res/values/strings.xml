@@ -45,6 +45,10 @@
     <string name="menu_hiv">HIV</string>
     <string name="menu_hts">HTS</string>
     <string name="menu_hps">iCCHW</string>
+    <string name="menu_ayp_inschool">AYP In-School Services</string>
+    <string name="menu_ayp_outschool">AYP Out-School Services</string>
+    <string name="menu_ayp_parental">AYP Parental Services</string>
+    <string name="ayp_parental_enrollment">AYP Parental Enrollment</string>
     <string name="menu_hiv_index_contacts">Index Contacts</string>
     <string name="menu_tb">TB</string>
     <string name="menu_anc">ANC</string>
@@ -664,13 +668,23 @@
 
     <!--Navigation Menu String -->
     <string name="service_activity">Service activity</string>
-    <string name="updates">Updates</string>
+    <string name="updates">Linkages from Facility</string>
 
     <string name="facility_visit">%1$s facility visit</string>
 
     <!-- Notification details -->
     <string name="mark_as_done">Mark as done</string>
     <string name="view_profile">View Profile</string>
+    <string name="notification_details_title">Notification Details</string>
+    <string name="notification_summary_chip">Notification</string>
+    <string name="notification_patient_avatar">Patient avatar</string>
+    <string name="notification_reason_heading">Reason for linkage</string>
+    <string name="notification_reason_label">Primary detail</string>
+    <string name="notification_notes_heading">Additional notes</string>
+    <string name="notification_notes_label">Notes</string>
+    <string name="notification_preview_patient_name">Jully Milla</string>
+    <string name="notification_preview_date">Mar 18, 2026</string>
+    <string name="notification_preview_reason">New registration</string>
     <string name="back_to_updates">Back to Updates</string>
     <string name="successful_referral_notification_title">Name: %1$s, %2$s</string>
     <string name="followup_notification_title">%1$s has attended the facility on %2$s</string>
@@ -734,6 +748,7 @@
     <string name="hiv_registration">HIV Registration</string>
     <string name="cbhs_registration">CBHS Registration</string>
     <string name="tb_registration">TB registration</string>
+    <string name="tbleprosy_screening">TB/Leprosy screening</string>
     <string name="remove_client">Remove Client</string>
     <string name="call_all_clients_member">Call client or caregiver</string>
 
@@ -746,6 +761,7 @@
 
     <!-- Notification row -->
     <string name="notification_for">Notification for %1$s</string>
+    <string name="notification_linkage_from_facility">Linkage From Facility</string>
     <string name="full_notification_info">View full notification info</string>
     <string name="thinkmd_health_assessment">ThinkMD health assessment</string>
     <string name="thinkmd_careplan">ThinkMD care plan (%1$s)</string>
@@ -753,6 +769,10 @@
     <string name="thinkmd_identifier_type">thinkmd_id</string>
     <string name="thinkmd_assessment_saved">ThinkMD health assessment saved</string>
     <string name="no_thinkmd_care_plan_found">No thinkmd care plan found</string>
+    <!-- Notification details (extended) -->
+    <string name="new_registration_notes_placeholder">Client Linked from facility. Review registration details and visit the household for follow‑up.</string>
+    <string name="notes_more">More</string>
+    <string name="notes_less">Less</string>
 
     <string name="hiv_register">HIV Register</string>
     <string name="routine_hiv_visit"> · Routine HIV Visit</string>
@@ -781,9 +801,12 @@
     <string name="successful_index_contact_registration_toast">The  Index Contact has been successfully saved</string>
     <string name="notification_type_hiv_index">HIV Index Contact Community Followup Referral</string>
     <string name="notification_type_pregnancy_confirmation">Pregnancy Confirmation</string>
+    <string name="notification_type_facility_to_community_linkage">Linkage from Health Facility</string>
     <string name="hiv_index_community_followup_notification_title">%1$s has been referred for Community followup on %2$s</string>
     <string name="pregnancy_confirmation_referral_title">%1$s has been confirmed Pregnant on %2$s</string>
     <string name="pregnancy_unconfirmation_referral_title">%1$s has not been confirmed Pregnant on %2$s</string>
+    <string name="facility_to_community_linkage_title">Linkage from Health Facility for %1$s on %2$s</string>
+    <string name="facility_to_community_linkage_reason">Reasons for Linkage from Health Facility: %1$s</string>
 
     <!--Referral Titles-->
     <string name="hiv_referral">Clinic of Treatment and Care</string>
@@ -835,6 +858,10 @@
     <string name="menu_vmmc">VMMC</string>
     <string name="refer_to_addo">Linkage to Addo</string>
 
+    <!--    TB LEPROSY-->
+    <string name="tbleprosy_screening_info">TB/Leprosy Screening Info</string>
+    <string name="tbleprosy_confirmation">TB/Leprosy Confirmation</string>
+    <string name="menu_tbleprosy">TB/Leprosy</string>
 
     <!--    GBV/VAC-->
     <string name="gbv_registration">GBV/VAC Registration</string>
@@ -846,6 +873,7 @@
     <!--   ASRH -->
     <string name="asrh_registration">AYSRH Enrollment</string>
 
+    <string name="diabetes_screening">Diabetes and Hypertention Screening</string>
     <!--   HTS -->
     <string name="hts_screening">HTS Screening</string>
 
@@ -861,6 +889,23 @@
     <string name="error_please_try_again">Error: Please try again.</string>
     <string name="an_unexpected_error_occurred_please_try_again_later">An unexpected error occurred. Please try again later.</string>
     <string name="error_processing_server_response">Error processing server response.</string>
+
+    <!--   AYP -->
+    <string name="ayp_in_school_enrollment">AYP In-school Enrollment</string>
+    <string name="ayp_facility_screening">AYP Screening</string>
+    <string name="ayp_out_school_enrollment">AYP Out-school Screening</string>
+
+    <!-- Floating Menu Option for Add Existing Member to Household -->
+    <string name="add_existing_family_member">Add existing family member</string>
+    <string name="client_search_hint">Search by name or ID</string>
+    <string name="client_no_match">No clients matched your search</string>
+    <string name="no_independent_clients_available">No independent clients available</string>
+    <string name="unable_to_add_family_member">Unable to update family for selected client</string>
+    <string name="successfull_added_family_member">Updated family for %1$s</string>
+    <string name="generate_household">Generate Household</string>
+    <string name="remove_member">Remove Household Member</string>
+
+    <string name="json_form_error_msg">There are %d missing details. Please complete the information to continue.</string>
 
     <string name="diabetes_screening">Diabetes and Hypertention Screening</string>
 

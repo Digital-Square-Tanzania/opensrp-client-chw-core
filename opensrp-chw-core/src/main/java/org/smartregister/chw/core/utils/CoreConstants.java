@@ -107,7 +107,6 @@ public class CoreConstants {
         public static final String ANC_REGISTER = "anc_register";
         public static final String MALARIA_REGISTER = "anc_malaria_confirmation";
         public static final String VMMC_REGISTER = "anc_vmmc_confirmation";
-
     }
 
     public static final class EventType {
@@ -130,6 +129,7 @@ public class CoreConstants {
         public static final String PNC_REFERRAL = "PNC Referral";
         public static final String MALARIA_REFERRAL = "Malaria Referral";
         public static final String VMMC_ENROLLMENT = "Vmmc Enrollment";
+        public static final String TBLEPROSY_SCREENING = "TBLeprosy Screening";
         public static final String FAMILY_PLANNING_REFERRAL = "Family Planning Referral";
         public static final String CHILD_VACCINE_CARD_RECEIVED = "Child vaccine card received";
         public static final String VACCINE_CARD_RECEIVED = "Vaccine Card Received";
@@ -201,6 +201,7 @@ public class CoreConstants {
         public static final String HIV_INDEX_CONTACT_REGISTRATION = "Hiv Index Contact Registration";
         public static final String HIV_INDEX_CONTACT_TESTING_FOLLOWUP = "HIV Index Contact Testing Followup";
         public static final String PREGNANCY_CONFIRMATION_DISMISSAL = "Pregnancy Confirmation Dismissal";
+        public static final String LINKAGE_FROM_FACILITY_DISMISSAL = "Linkage From Facility Dismissal";
         public static final String ANC_PARTNER_COMMUNITY_FOLLOWUP_REFERRAL = "ANC Partner Community Followup Referral";
         public static final String ANC_PARTNER_COMMUNITY_FOLLOWUP_FEEDBACK = "ANC Partner Community Followup Feedback";
         public static final String PMTCT_COMMUNITY_FOLLOWUP = "PMTCT Community Followup";
@@ -238,6 +239,7 @@ public class CoreConstants {
         private static final String PREGNANCY_OUTCOME = "anc_pregnancy_outcome";
         private static final String MALARIA_CONFIRMATION = "malaria_confirmation";
         public static final String VMMC_ENROLLMENT = "vmmc_enrollment";
+        public static final String TBLEPROSY_SCREENING = "tbleprosy_screening";
         private static final String ICCM_ENROLLMENT = "iccm_enrollment";
         private static final String MALARIA_FOLLOW_UP_VISIT_FORM = "malaria_follow_up_visit";
         private static final String WASH_CHECK = "wash_check";
@@ -259,9 +261,12 @@ public class CoreConstants {
         private static final String HTS_REFERRAL_FORM = "referrals/hts_referral_form";
         private static final String VMMC_REFERRAL= "referrals/vmmc_referral_form";
         private static final String TB_REFERRAL_FORM = "referrals/tb_referral_form";
+        private static final String TBLEPROSY_REFERRAL_FORM = "referrals/tbleprosy_referral_form";
         private static final String GBV_REFERRAL_FORM = "referrals/gbv_referral_form";
         private static final String MALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/male_kvp_referral_form";
         private static final String FEMALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/female_kvp_referral_form";
+        private static final String MALE_AYP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/male_ayp_referral_form";
+        private static final String FEMALE_AYP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/female_ayp_referral_form";
         public static String PREGNANCY_CONFIRMATION_REFERRAL_FORM = "referrals/pregnancy_confirmation_referral_form";
         public static final String ANC_PREGNANCY_CONFIRMATION = "anc_pregnancy_confirmation";
         public static final String ANC_TRANSFER_IN_REGISTRATION = "anc_member_transfer_in_registration";
@@ -474,6 +479,10 @@ public class CoreConstants {
             return Utils.getLocalForm(VMMC_ENROLLMENT, locale, assetManager);
         }
 
+        public static String getTbLeprosyScreening() {
+            return Utils.getLocalForm(TBLEPROSY_SCREENING, locale, assetManager);
+        }
+
         public static String getFpRegistrationForm(String gender) {
             String formName = gender.equalsIgnoreCase(Gender.MALE.toString()) ? MALE_FAMILY_PLANNING_REGISTRATION_FORM : FEMALE_FAMILY_PLANNING_REGISTRATION_FORM;
             return Utils.getLocalForm(formName, locale, assetManager);
@@ -521,6 +530,9 @@ public class CoreConstants {
             return VMMC_REFERRAL;
         }
 
+        public static String getTbLeprosyReferralForm() {
+            return TBLEPROSY_REFERRAL_FORM;
+        }
 
         public static String getTbReferralForm() {
             return TB_REFERRAL_FORM;
@@ -536,6 +548,14 @@ public class CoreConstants {
 
         public static String getFemaleKvpFriendlyServicesReferralForm(){
             return FEMALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM;
+        }
+
+        public static String getMaleAypFriendlyServicesReferralForm(){
+            return MALE_AYP_FRIENDLY_SERVICES_REFERRAL_FORM;
+        }
+
+        public static String getFemaleAypFriendlyServicesReferralForm(){
+            return FEMALE_AYP_FRIENDLY_SERVICES_REFERRAL_FORM;
         }
 
         public static String getChildGbvReferralForm() {
@@ -898,6 +918,7 @@ public class CoreConstants {
         public static final String FP_MEMBER = "ec_family_planning";
         public static final String MALARIA_CONFIRMATION = "ec_malaria_confirmation";
         public static final String VMMC_ENROLLMENT = "ec_vmmc_enrollment";
+        public static final String TBLEPROSY_SCREENING = "ec_tbleprosy_screening";
         public static final String ICCM_ENROLLMENT = "ec_iccm_enrollment";
         public static final String ANC_PREGNANCY_OUTCOME = "ec_pregnancy_outcome";
         public static final String TASK = "task";
@@ -937,7 +958,11 @@ public class CoreConstants {
         public static final String LABOUR_AND_DELIVERY = "ec_ld_confirmation";
         public static final String LTFU_REFERRALS = "ec_ltfu_referrals";
         public static final String ADDO_LINKAGE = "ec_addo_linkage";
+        public static final String NCD_REGISTER = "ec_ncd_register";
+        public static final String DIABETES_HYPERTENSION_FOLLOWUP = "ec_diabetes_hypertension_followup";
+        public static final String DIABETES_HYPERTENSION_CONFIRMATION = "ec_diabetes_hypertension_confirmation";
         public static final String HPS_MEMBERS = "ec_hps_client_register";
+        public static final String HPS_HOUSEHOLD = "ec_hps_household_register";
         public static final String NCD_REGISTER = "ec_ncd_register";
         public static final String DIABETES_HYPERTENSION_FOLLOWUP = "ec_diabetes_hypertension_followup";
         public static final String DIABETES_HYPERTENSION_CONFIRMATION = "ec_diabetes_hypertension_confirmation";
@@ -995,6 +1020,7 @@ public class CoreConstants {
         public static final String UPDATES = "Updates";
         public static final String PMTCT = "PMTCT";
         public static final String VMMC = "VMMC";
+        public static final String TBLEPROSY = "TB/Leprosy";
         public static final String PMTCT_FOLLOWUP = "PMTCT Followup";
         public static final String MOTHER_CHAMPION = "Mother Champion";
         public static final String CBHS_CLIENTS = "CBHS Clients";
@@ -1021,10 +1047,20 @@ public class CoreConstants {
 
         public static final String LAB = "Lab";
 
+        public static final String NCD = "Ncd Clients";
         public static final String HTS = "HTS";
+
         public static final String HPS = "HPS";
 
         public static final String NCD = "Ncd Clients";
+
+        public static final String AYP_IN_SCHOOL = "AYP_IN_SCHOOL";
+
+        public static final String AYP_PARENTAL = "AYP_PARENTAL";
+
+        public static final String AYP_FACILITY = "AYP_FACILITY";
+
+        public static final String AYP_OUT_SCHOOL = "AYP_OUT_SCHOOL";
     }
 
     public static final class RULE_FILE {
@@ -1103,6 +1139,10 @@ public class CoreConstants {
         public static final String LAST_NAME = "last_name";
         public static final String DOD = "dod";
         public static final String DOB = "dob";
+        public static final String CHAIRPERSON_FIRST_NAME =  "chairperson_first_name";
+        public static final String CHAIRPERSON_MIDDLE_NAME = "chairperson_middle_name";
+        public static final String CHAIRPERSON_LAST_NAME = "chairperson_last_name";
+        public static final String CHAIRPERSON_PHONE = "chairperson_phone";
 
         public static class FAMILY_MEMBER {
             public static final String HIGHEST_EDUCATION_LEVEL = "highest_edu_level";
@@ -1276,6 +1316,7 @@ public class CoreConstants {
         public static final String TB_REGISTER_ACTIVITY = "TB_REGISTER_ACTIVITY";
         public static final String PMTCT_REGISTER_ACTIVITY = "PMTCT_REGISTER_ACTIVITY";
         public static final String VMMC_REGISTER_ACTIVITY = "VMMC_REGISTER_ACTIVITY";
+        public static final String TBLEPROSY_REGISTER_ACTIVITY = "TBLEPROSY_REGISTER_ACTIVITY";
         public static final String PMTCT_FOLLOWUP_REGISTER_ACTIVITY = "PMTCT_FOLLOWUP_REGISTER_ACTIVITY";
         public static final String HEI = "HEI_REGISTER_ACTIVITY";
         public static final String MOTHER_CHAMPION_ACTIVITY = "MOTHER_CHAMPION_ACTIVITY";
@@ -1288,6 +1329,8 @@ public class CoreConstants {
         public static final String KVP_REGISTER_ACTIVITY = "KVP_REGISTER_ACTIVITY";
         public static final String PrEP_REGISTER_ACTIVITY = "PrEP_REGISTER_ACTIVITY";
         public static final String AGYW_REGISTER_ACTIVITY = "AGYW_REGISTER_ACTIVITY";
+
+        public static final String AYP_FACILITY_REGISTER_ACTIVITY = "AYP_FACILITY_REGISTER_ACTIVITY";
 
         public static final String SBC_REGISTER_ACTIVITY = "SBC_REGISTER_ACTIVITY";
 
@@ -1308,6 +1351,12 @@ public class CoreConstants {
         public static final String HIV_TESTING_SERVICES_REGISTER_ACTIVITY = "HIV_TESTING_SERVICES_REGISTER_ACTIVITY";
 
         public static final String HPS_REGISTER_ACTIVITY = "HPS_REGISTER_ACTIVITY";
+
+        public static final String AYP_REGISTER_ACTIVITY = "AYP_REGISTER_ACTIVITY";
+        public static final String AYP_PARENTAL_REGISTER_ACTIVITY = "AYP_PARENTAL_REGISTER_ACTIVITY";
+
+        public static final String AYP_OUT_SCHOOL_REGISTER_ACTIVITY = "AYP_OUT_SCHOOL_REGISTER_ACTIVITY";
+
     }
 
     public static final class BUSINESS_STATUS {
@@ -1339,6 +1388,8 @@ public class CoreConstants {
         public static final String STI_REFERRAL = "STI Services";
 
         public static final String VMMC = "VMMC";
+
+        public static final String TBLEPROSY = "TB/Leprosy";
 
         public static final String ICCM_REFERRAL = "ICCM Services";
 
@@ -1372,10 +1423,13 @@ public class CoreConstants {
         public static final String AGYW = "AGYW";
         public static final String KVP = "KVP";
         public static final String KVP_PrEP = "KVP/PrEP";
+        public static final String AYP_OUT_SCHOOL = "AYP out of school";
 
         public static final String SBC = "SBC";
 
         public static final String VMMC = "VMMC";
+
+        public static final String TBLEPROSY = "TB/Leprosy";
 
         public static final String GBV = "GBV/VAC";
 

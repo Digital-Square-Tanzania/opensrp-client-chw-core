@@ -112,7 +112,7 @@ public abstract class CoreFamilyProfileActivity extends BaseFamilyProfileActivit
         if (i == R.id.action_family_details) {
             startFormForEdit();
         } else if (i == R.id.action_hps_enrollment) {
-            startHpsHouseholdEnrollment(familyHead);
+            startHpsHouseholdEnrollment(familyBaseEntityId);
         } else if (i == R.id.action_remove_member) {
             Intent frm_intent = new Intent(this, getFamilyRemoveMemberClass());
             frm_intent.putExtra(Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID, getFamilyBaseEntityId());

@@ -8,12 +8,12 @@ buildscript {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url 'https://jitpack.io' }
         maven { url "https://repo.maven.apache.org/maven2" }
-        maven { url "http://cloudant.github.io/cloudant-sync-eap/repository" }
+        maven { url "https://cloudant.github.io/cloudant-sync-eap/repository" }
         maven{  url "https://plugins.gradle.org/m2/" }
         mavenLocal()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.0'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath 'gradle.plugin.org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.10.2'
         classpath "io.codearte.gradle.nexus:gradle-nexus-staging-plugin:0.11.0"
         classpath 'org.smartregister:gradle-jarjar-plugin:1.0.0-SNAPSHOT'
@@ -27,13 +27,13 @@ apply plugin: 'jacoco'
 apply plugin: 'io.codearte.nexus-staging'
 
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = "0.8.11"
 }
 
 allprojects {
 
     tasks.whenTaskAdded { task ->
-        if (task.name == "lint") {
+        if (task.name.toLowerCase().startsWith("lint")) {
             task.enabled = false
         }
     }
@@ -51,9 +51,18 @@ allprojects {
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
         maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
-        maven { url "http://maven.wafour.com:8081/artifactory/libs-release/" }
+        maven {
+            url "http://maven.wafour.com:8081/artifactory/libs-release/"
+            allowInsecureProtocol = true
+        }
         maven{  url "https://plugins.gradle.org/m2/" }
         jcenter()
+    }
+
+    plugins.withId("jacoco") {
+        jacoco {
+            toolVersion = "0.8.11"
+        }
     }
 }
 
@@ -79,8 +88,8 @@ subprojects {
 
     group = 'org.smartregister'
 
-    ext.androidToolsBuildGradle     = '4.0.0'
-    ext.androidBuildToolsVersion    = '29.0.3'
+    ext.androidToolsBuildGradle     = '7.2.2'
+    ext.androidBuildToolsVersion    = '33.0.2'
     ext.androidMinSdkVersion        = 18
     ext.androidCompileSdkVersion    = 28
     ext.androidTargetSdkVersion     = 28
@@ -91,10 +100,11 @@ subprojects {
     // Improve build server performance by allowing disabling of pre-dexing
     // (see http://tools.android.com/tech-docs/new-build-system/tips#TOC-Improving-Build-Server-performance.)
     project.plugins.whenPluginAdded { plugin ->
-        if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
-        } else if ("com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
-            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        if ("com.android.build.gradle.AppPlugin".equals(plugin.class.name)
+                || "com.android.build.gradle.LibraryPlugin".equals(plugin.class.name)) {
+            if (project.android.hasProperty('dexOptions')) {
+                project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+            }
         }
     }
 }
@@ -121,30 +131,24 @@ task jacocoTestReport(type: JacocoReport) {
 
         csv.enabled = false
     }
+    onlyIf {
+        executionData.files.any { it.exists() }
+    }
+}
 
-    // Work-around to allow us to build list of executionData files in doFirst
-    onlyIf = {
-        true
+gradle.projectsEvaluated {
+    def javaSubprojects = subprojects.findAll { subproject ->
+        subproject.pluginManager.hasPlugin('java')
     }
 
-    /*
-     * Builds list of source dirs, class dirs, and executionData files
-     * when task is run, not at script evaluation time
-     */
-    doFirst {
-        subprojects.findAll { subproject ->
-            subproject.pluginManager.hasPlugin('java')
-        }.each { subproject ->
-            additionalSourceDirs files((Set<File>) subproject.sourceSets.main.allJava.srcDirs)
-            additionalClassDirs((FileCollection) subproject.sourceSets.main.output)
+    tasks.named('jacocoTestReport', JacocoReport).configure { reportTask ->
+        javaSubprojects.each { subproject ->
+            reportTask.additionalSourceDirs.from(subproject.sourceSets.main.allJava.srcDirs)
+            reportTask.additionalClassDirs.from(subproject.sourceSets.main.output)
             if (subproject.pluginManager.hasPlugin('jacoco')) {
-                executionData subproject.tasks.jacocoTestReport.executionData
+                reportTask.executionData.from(subproject.tasks.jacocoTestReport.executionData)
             }
         }
-
-        executionData.setFrom(files(executionData.findAll {
-            it.exists()
-        }))
     }
 }
 
