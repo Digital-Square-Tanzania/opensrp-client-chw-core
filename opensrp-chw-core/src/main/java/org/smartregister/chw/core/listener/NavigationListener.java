@@ -131,6 +131,9 @@ public class NavigationListener implements View.OnClickListener {
                 case CoreConstants.DrawerMenu.VMMC:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.VMMC_REGISTER_ACTIVITY));
                     break;
+                case CoreConstants.DrawerMenu.TBLEPROSY:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.TBLEPROSY_REGISTER_ACTIVITY));
+                    break;
                 case CoreConstants.DrawerMenu.SBC:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.SBC_REGISTER_ACTIVITY));
                     break;
@@ -148,6 +151,24 @@ public class NavigationListener implements View.OnClickListener {
                     break;
                 case CoreConstants.DrawerMenu.AYSRH:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.ASRH_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.HTS:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.HIV_TESTING_SERVICES_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.HPS:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.HPS_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.AYP_IN_SCHOOL:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AYP_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.AYP_PARENTAL:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AYP_PARENTAL_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.AYP_OUT_SCHOOL:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AYP_OUT_SCHOOL_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.AYP_FACILITY:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AYP_FACILITY_REGISTER_ACTIVITY));
                     break;
                 default:
                     Utils.showShortToast(activity.getApplicationContext(), "Unspecified navigation action");

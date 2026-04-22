@@ -62,7 +62,7 @@ public abstract class CoreFamilyProfileActivity extends BaseFamilyProfileActivit
     protected String familyHead;
     protected String primaryCaregiver;
     protected String familyName;
-    private FamilyFloatingMenu familyFloatingMenu;
+    protected FamilyFloatingMenu familyFloatingMenu;
 
     @Override
     protected void setupViews() {
@@ -111,6 +111,8 @@ public abstract class CoreFamilyProfileActivity extends BaseFamilyProfileActivit
         int i = item.getItemId();
         if (i == R.id.action_family_details) {
             startFormForEdit();
+        } else if (i == R.id.action_hps_enrollment) {
+            startHpsHouseholdEnrollment(familyBaseEntityId);
         } else if (i == R.id.action_remove_member) {
             Intent frm_intent = new Intent(this, getFamilyRemoveMemberClass());
             frm_intent.putExtra(Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID, getFamilyBaseEntityId());
@@ -431,6 +433,8 @@ public abstract class CoreFamilyProfileActivity extends BaseFamilyProfileActivit
     protected abstract void goToTbProfile(String baseEntityId, Activity activity);
 
     protected abstract boolean isAncMember(String baseEntityId);
+
+    protected abstract void startHpsHouseholdEnrollment(String baseEntityId);
 
     protected abstract HashMap<String, String> getAncFamilyHeadNameAndPhone(String baseEntityId);
 

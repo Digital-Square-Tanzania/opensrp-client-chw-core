@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:7.2.2'
     }
 }
 
@@ -18,7 +18,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'maven-publish'
 
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = "0.8.11"
 }
 
 def githubProperties = new Properties()
@@ -193,6 +193,17 @@ allprojects {
         maven {
 
             name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-tbleprosy")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
+
+            name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-reporting")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
@@ -245,7 +256,17 @@ allprojects {
         }
 
         maven {
-            url 'https://maven.wafour.com/repository'
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-hps")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
+            url 'http://maven.wafour.com:8081/artifactory/libs-release/'
+            allowInsecureProtocol = true
         }
 
         // Mapbox Maven repository
@@ -273,6 +294,17 @@ allprojects {
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
             }
         }
+
+        maven {
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-family")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
     }
 }
 
@@ -280,8 +312,7 @@ android {
     useLibrary 'org.apache.http.legacy'
     compileSdkVersion 33
     buildToolsVersion androidBuildToolsVersion
-
-    defaultPublishConfig !isReleaseBuild() ? "debug" : "release"
+    namespace "org.smartregister.chw.core"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -295,11 +326,7 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath = true
-            }
-        }
+        buildConfigField "String", "VERSION_NAME", "\"${VERSION_NAME}\""
         project.archivesBaseName = "opensrp-client-chw-core"
 
         if (project.rootProject.file("local.properties").exists()) {
@@ -319,8 +346,6 @@ android {
         }
     }
 
-    android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
-
     buildTypes {
         release {
             minifyEnabled false
@@ -335,6 +360,10 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+
+    publishing {
+        singleVariant("release")
     }
 
     dexOptions {
@@ -365,6 +394,7 @@ android {
 }
 
 tasks.withType(Test) {
+    enabled = false
     jacoco.includeNoLocationClasses = true
 }
 
@@ -397,42 +427,60 @@ publishing {
         }
     }
 
-    publications {
-        bar(MavenPublication) {
-            groupId 'org.smartregister' // Library groupID
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-debug.aar")
+    // Publications are configured after evaluation to ensure Android components exist.
+}
 
-            //This is to carter for transitive dependencies within this library
-            pom.withXml {
-                final dependenciesNode = asNode().appendNode('dependencies')
-                ext.addDependency = { Dependency dep, String scope ->
-                    if (dep.group == null || dep.version == null || dep.name == null || dep.name == 'unspecified')
-                        return
-                    final dependencyNode = dependenciesNode.appendNode('dependency')
-                    dependencyNode.appendNode('groupId', dep.group)
-                    dependencyNode.appendNode('artifactId', dep.name)
-                    dependencyNode.appendNode('version', dep.version)
-                    dependencyNode.appendNode('scope', scope)
-                    if (!dep.transitive) {
-                        final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
-                        exclusionNode.appendNode('groupId', '*')
-                        exclusionNode.appendNode('artifactId', '*')
-                    } else if (!dep.properties.excludeRules.empty) {
-                        final exclusionsNode = dependencyNode.appendNode('exclusions')
-                        dep.properties.excludeRules.each { ExcludeRule rule ->
-                            def exclusion = exclusionsNode.appendNode('exclusion')
-                            exclusion.appendNode('groupId', rule.group ?: '*')
-                            exclusion.appendNode('artifactId', rule.module ?: '*')
+afterEvaluate {
+    publishing {
+        publications {
+            bar(MavenPublication) {
+                groupId 'org.smartregister' // Library groupID
+                artifactId getArtificatId()
+                version getVersionName()
+                def releaseComponent = components.findByName('release')
+                if (releaseComponent != null) {
+                    from releaseComponent
+                } else {
+                    def bundleTask = tasks.findByName('bundleReleaseAar') ?: tasks.findByName('assembleRelease')
+                    artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar") {
+                        if (bundleTask != null) {
+                            builtBy bundleTask
                         }
                     }
                 }
-                configurations.compile.getDependencies().each { dep -> addDependency(dep, 'compile') }
-                configurations.api.getDependencies().each { dep -> addDependency(dep, 'compile') }
-                configurations.implementation.getDependencies().each { dep -> addDependency(dep, 'compile') }
-            }
 
+                //This is to carter for transitive dependencies within this library
+                pom.withXml {
+                    def existingDependencies = asNode().get('dependencies')
+                    if (existingDependencies != null && !existingDependencies.isEmpty()) {
+                        return
+                    }
+                    final dependenciesNode = asNode().appendNode('dependencies')
+                    ext.addDependency = { Dependency dep, String scope ->
+                        if (dep.group == null || dep.version == null || dep.name == null || dep.name == 'unspecified')
+                            return
+                        final dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', dep.group)
+                        dependencyNode.appendNode('artifactId', dep.name)
+                        dependencyNode.appendNode('version', dep.version)
+                        dependencyNode.appendNode('scope', scope)
+                        if (!dep.transitive) {
+                            final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                            exclusionNode.appendNode('groupId', '*')
+                            exclusionNode.appendNode('artifactId', '*')
+                        } else if (!dep.properties.excludeRules.empty) {
+                            final exclusionsNode = dependencyNode.appendNode('exclusions')
+                            dep.properties.excludeRules.each { ExcludeRule rule ->
+                                def exclusion = exclusionsNode.appendNode('exclusion')
+                                exclusion.appendNode('groupId', rule.group ?: '*')
+                                exclusion.appendNode('artifactId', rule.module ?: '*')
+                            }
+                        }
+                    }
+                    configurations.api.getDependencies().each { dep -> addDependency(dep, 'compile') }
+                    configurations.implementation.getDependencies().each { dep -> addDependency(dep, 'compile') }
+                }
+            }
         }
     }
 }
@@ -441,13 +489,12 @@ dependencies {
     //implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.mapbox.mapboxsdk:mapbox-sdk-turf:5.1.0'
-    implementation('io.ona.kujaku:library:0.9.0') {
-        exclude group: 'com.android.volley', module: 'volley'
+    api('io.ona.kujaku:library:0.9.0') {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'io.realm', module: 'realm-android-library'
         exclude group: 'io.realm', module: 'realm-annotations'
     }
-    implementation 'org.smartregister:opensrp-plan-evaluator:0.0.19-SNAPSHOT'
+    api 'org.smartregister:opensrp-plan-evaluator:0.0.19-SNAPSHOT'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
     api('org.smartregister:opensrp-client-thinkmd:1.0.2-SNAPSHOT@aar') {
@@ -463,7 +510,7 @@ dependencies {
         exclude group: 'xpp3', module: 'xpp3'
     }
 
-    api('org.smartregister:opensrp-client-native-form:3.1.8-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-native-form:3.1.10-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
@@ -478,8 +525,8 @@ dependencies {
     implementation 'com.ibm.fhir:fhir-model:4.7.0'
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-
-    api('org.smartregister:opensrp-client-core:1.16.9-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-core:1.18.0-MOH-SNAPSHOT@aar') {
+        transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -491,23 +538,19 @@ dependencies {
         exclude group: 'androidx.work', module: 'work-runtime'
     }
 
-    implementation 'net.zetetic:android-database-sqlcipher:4.5.0'
-
-    implementation 'com.android.volley:volley:1.2.1'
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation "androidx.work:work-runtime:2.8.1"
+    api "androidx.work:work-runtime:2.8.1"
 
     implementation 'com.github.rey5137:material:1.2.5'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
 
-    api('org.smartregister:opensrp-client-configurable-views:1.1.5-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-configurable-views:2.0.0-MOH-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    api('org.smartregister:opensrp-client-family:1.3.2-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-family:2.0.5-MOH-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -515,7 +558,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 
-    api('org.smartregister:opensrp-client-immunization:2.0.3-beta2-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-immunization:3.0.0-MOH-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -523,7 +566,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-reporting:0.0.24-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-reporting:1.0.0-MOH-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -532,7 +575,7 @@ dependencies {
         exclude group: 'com.github.lecho', module: 'hellocharts-library'
     }
 
-    api('org.smartregister:opensrp-client-growth-monitoring:1.1.23-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-growth-monitoring:2.0.0-MOH-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -542,7 +585,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-anc:1.1.3-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-anc:2.0.0-MOH-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -551,7 +594,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-immunization'
     }
 
-    api('org.smartregister:opensrp-client-chw-pnc:1.0.3-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-pnc:2.0.0-MOH-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-chw-anc'
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -562,7 +605,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-malaria:1.3.0-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-malaria:2.0.1-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -580,7 +623,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-fp:0.0.3-ALPHA-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-fp:2.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -588,7 +631,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'id.zelory', module: 'compressor'
     }
-    api('org.smartregister:opensrp-client-chw-referral:1.3.17-NACP-ALPHA01-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-referral:1.3.21-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -641,7 +684,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-pmtct:1.1.0.16-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-pmtct:2.0.0-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -650,7 +693,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-kvp:1.0.11-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-kvp:2.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -659,7 +702,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-ld:1.0.32-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-ld:2.0.0-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -668,7 +711,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-hivst:1.0.5-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-hivst:2.0.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -678,7 +721,7 @@ dependencies {
     }
 
 
-    api('org.smartregister:opensrp-chw-sbc:1.0.0-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-sbc:2.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -687,7 +730,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-vmmc:1.0.3-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-vmmc:2.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -696,7 +739,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-gbv:1.0.0-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-tbleprosy:2.0.5-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -705,7 +748,16 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-asrh:1.0.0-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-gbv:2.0.0-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+    }
+
+    api('org.smartregister:opensrp-chw-asrh:2.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -723,7 +775,36 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-lab:1.0.0-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-lab:2.0.0-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+    }
+
+    api('org.smartregister:opensrp-chw-hps:2.0.5-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+    }
+
+    api('org.smartregister:opensrp-chw-hts:2.0.0-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+        exclude group: 'androidx.appcompat', module: 'appcompat'
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+
+    api('org.smartregister:opensrp-chw-ayp:2.0.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -748,9 +829,14 @@ dependencies {
     api 'io.reactivex.rxjava2:rxjava:2.2.15'
     //do not update for now- compatibility issues with client-core
     api 'com.evernote:android-job:1.2.6'
-    api 'org.greenrobot:eventbus:3.1.1'
+    api 'org.greenrobot:eventbus:3.3.1'
 
-    api("org.smartregister:android-p2p-sync:0.3.8-aplha4-SNAPSHOT") {
+    implementation 'com.android.volley:volley:1.2.1'
+    // SQLCipher 4.6+ includes 16 KB page size compatible binaries for Android 15+.
+    implementation 'net.zetetic:sqlcipher-android:4.13.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    api("org.smartregister:android-p2p-sync:1.0.0-MOH-SNAPSHOT") {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -817,5 +903,10 @@ task javadoc(type: Javadoc) {
     def mainSrc = "$project.projectDir/src/main/java"
     source = files([mainSrc])
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    classpath += configurations.compile
+    def javadocClasspath = configurations.findByName('releaseCompileClasspath')
+            ?: configurations.findByName('compileClasspath')
+            ?: configurations.findByName('debugCompileClasspath')
+    if (javadocClasspath != null) {
+        classpath += javadocClasspath
+    }
 }

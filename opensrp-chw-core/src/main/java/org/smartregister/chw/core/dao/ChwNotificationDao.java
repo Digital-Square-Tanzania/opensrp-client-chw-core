@@ -149,6 +149,24 @@ public class ChwNotificationDao extends AbstractDao {
         return AbstractDao.readSingleValue(sql, mapPregnancyConfirmationReferralColumnValuesToModel());
     }
 
+    public static NotificationRecord getFacilityLinkageRecord(String notificationId, String table) {
+        String sql = String.format(
+                "/* Get details for Facility to community Linkage */\n" +
+                        "SELECT ec_family_member.first_name || ' ' || ifnull(ec_family_member.last_name, ec_family_member.middle_name) as full_name,\n" +
+                        "ec_family.village_town        AS      village,\n" +
+                        table + ".event_date,\n" +
+                        table + ".reason as reason\n" +
+                        "FROM " + table + "\n" +
+                        "         inner join ec_family_member on ec_family_member.base_entity_id = " + table + ".entity_id\n" +
+                        "         inner join ec_family on ec_family.base_entity_id = ec_family_member.relational_id\n" +
+                        "\n" +
+                        "WHERE ec_family_member.is_closed = '0'\n" +
+                        "  AND ec_family_member.date_removed is null\n" +
+                        "  AND " + table + ".id = '%s'\n", notificationId);
+
+        return AbstractDao.readSingleValue(sql, mapFacilityLinkageColumnValuesToModel());
+    }
+
 
     public static NotificationRecord getMalariaFollowUpRecord(String notificationId) {
         String sql = String.format(
@@ -295,6 +313,22 @@ public class ChwNotificationDao extends AbstractDao {
         };
     }
 
+    private static DataMap<NotificationRecord> mapFacilityLinkageColumnValuesToModel() {
+        return row -> {
+            NotificationRecord record = new NotificationRecord(getCursorValue(row, "base_entity_id"));
+            record.setVillage(getCursorValue(row, "village"));
+            record.setClientName(getCursorValue(row, "full_name"));
+            record.setVisitDate(formatVisitDate(getCursorValue(row, "event_date", "")));
+
+            String reason = getCursorValue(row, "reason");
+
+            if (reason != null) {
+                record.setResults(reason);
+            }
+            return record;
+        };
+    }
+
     /**
      * This method is used to check whether a Notification has been marked as done or not
      *
@@ -352,14 +386,33 @@ public class ChwNotificationDao extends AbstractDao {
     }
 
     private static String formatVisitDate(String visitDate) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());//12-08-2018 14:05:10
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        try {
-            Date date = sdf.parse(visitDate);
-            return outputFormat.format(date);
-        } catch (ParseException e) {
-            Timber.e(e);
+        if (visitDate == null || visitDate.trim().isEmpty()) {
+            return "";
         }
+
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+        // Supported input formats
+        String[] formats = new String[]{
+                "yyyy-MM-dd HH:mm:ss",           // existing format
+                "yyyy-MM-dd'T'HH:mm:ss.SSSXXX",  // new ISO format with timezone
+                "yyyy-MM-dd'T'HH:mm:ssXXX",      // ISO without milliseconds (safety)
+                "yyyy-MM-dd'T'HH:mm:ss.SSSZ"     // fallback timezone format
+        };
+
+        for (String format : formats) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.getDefault());
+                Date date = sdf.parse(visitDate);
+                if (date != null) {
+                    return outputFormat.format(date);
+                }
+            } catch (ParseException ignored) {
+                // Try next format
+            }
+        }
+
+        Timber.e("Failed to parse date: %s", visitDate);
         return "";
     }
 
@@ -435,7 +488,10 @@ public class ChwNotificationDao extends AbstractDao {
                         "UNION ALL\n" +
                         "SELECT id as notification_id, 'Family Planning' as notification_type\n" +
                         "FROM ec_family_planning_update\n" +
-                        "WHERE base_entity_id = '%s'  COLLATE NOCASE\n" +
+                        "UNION ALL\n" +
+                        "SELECT id as notification_id, 'Linkage From Facility' as notification_type\n" +
+                        "FROM ec_facility_to_community_linkage\n" +
+                        "WHERE entity_id = '%s' AND is_closed = 0  COLLATE NOCASE\n" +
                         "UNION ALL\n" +
                         "SELECT id as notification_id, 'Referral not completed yet' as notification_type\n" +
                         "FROM ec_not_yet_done_referral\n" +
@@ -453,4 +509,20 @@ public class ChwNotificationDao extends AbstractDao {
                 getCursorValue(cursor, "notification_id"),
                 getCursorValue(cursor, "notification_type"));
     }
+
+
+
+    public static List<String> getBaseEntityIdsForLinkedClientsFromFacilityToCommunityWithMissingClientDetails() {
+        String sql = "SELECT  DISTINCT baseEntityId as base_entity_ids FROM event e \n" +
+                "LEFT JOIN ec_family_member ef ON e.baseEntityId = ef.base_entity_id\n" +
+                "WHERE ef.base_entity_id IS NULL AND eventType = 'Community Linkage'";
+        DataMap<String> dataMap = cursor -> getCursorValue(cursor, "base_entity_ids");
+        List<String> res = readData(sql, dataMap);
+
+        if (res == null || res.isEmpty())
+            return new ArrayList<>();
+
+        return res;
+    }
+
 }

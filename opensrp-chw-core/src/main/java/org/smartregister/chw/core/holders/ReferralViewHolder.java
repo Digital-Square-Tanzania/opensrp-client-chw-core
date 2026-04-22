@@ -23,6 +23,9 @@ public class ReferralViewHolder extends RecyclerView.ViewHolder {
         executionStartTextView = itemView.findViewById(R.id.notification_date);
     }
 
+    public TextView getReferredByTextView() {
+        return referredByTextView;
+    }
 
     public void setName(String name) {
         nameTextView.setText(name);

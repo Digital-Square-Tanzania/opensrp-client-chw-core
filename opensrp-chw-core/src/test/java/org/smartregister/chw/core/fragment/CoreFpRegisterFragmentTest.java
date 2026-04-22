@@ -170,7 +170,7 @@ public class CoreFpRegisterFragmentTest extends BaseUnitTest {
         client.setColumnmaps(new HashMap<String, String>());
         when(view.getTag()).thenReturn(client);
         coreFpRegisterFragment.onViewClicked(view);
-        verify(coreFpRegisterFragment).openProfile(client);
+        verify(coreFpRegisterFragment).openProfile("12");
     }
 
     @Test

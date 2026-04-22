@@ -16,6 +16,7 @@ import org.smartregister.chw.hf.R;
 import org.smartregister.chw.hf.custom_view.FamilyMemberFloatingMenu;
 import org.smartregister.chw.hf.fragment.FamilyOtherMemberProfileFragment;
 import org.smartregister.chw.hf.presenter.FamilyOtherMemberActivityPresenter;
+import org.smartregister.chw.malaria.dao.MalariaDao;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.fragment.BaseFamilyOtherMemberProfileFragment;
 import org.smartregister.family.model.BaseFamilyOtherMemberProfileActivityModel;
@@ -83,6 +84,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startTbLeprosyScreening() {
+        //TODO implement start tb register for HF
+    }
+
+
     protected void startFpChangeMethod() {
         //TODO implement start fp change register for HF
     }
@@ -144,12 +150,42 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
 
     @Override
     protected void startCancerPreventiveServicesRegistration() {
-        //TODO implement start anc register for HF
+        //TODO implement start register for HF
     }
 
     @Override
     protected void startAsrhRegistration() {
-        //TODO implement start anc register for HF
+        //TODO implement start register for HF
+    }
+
+    @Override
+    protected void startHtsScreening() {
+        //TODO implement start register for HF
+    }
+
+    @Override
+    protected void startHpsEnrollment() {
+        //TODO implement start register for CHW
+    }
+
+    @Override
+    protected void startAypFacilityScreening() {
+        // Not implemented in sample app
+    }
+
+    @Override
+    protected void startAypInSchoolEnrollment() {
+
+    }
+
+    @Override
+    protected void startAypParentalEnrollment() {
+        // Not implemented in sample app
+    }
+
+    @Override
+    protected void startAypOutSchoolEnrollment() {
+
     }
 
     @Override
@@ -210,6 +246,16 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    public void showProgressDialog(int saveMessageStringIdentifier) {
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
+    }
+
+    @Override
     public void updateHasPhone(boolean hasPhone) {
         super.updateHasPhone(hasPhone);
         if (!hasPhone) {
@@ -257,5 +303,10 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
             menu.findItem(R.id.action_pregnancy_confirmation).setVisible(true);
             menu.findItem(R.id.action_fp_initiation).setVisible(true);
         }
+    }
+
+    @Override
+    public String getString(int i) {
+        return "";
     }
 }

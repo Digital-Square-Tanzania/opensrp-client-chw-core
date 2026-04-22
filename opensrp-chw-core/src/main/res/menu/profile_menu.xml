@@ -9,9 +9,15 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_hps_enrollment"
+        android:enabled="true"
+        android:title="@string/hps_enrollment"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
-        android:title="@string/remove_existing_family_member"
+        android:title="@string/remove_member"
         app:showAsAction="never" />
 
     <item

@@ -5,17 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -60,8 +66,11 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected CommonPersonObjectClient commonPersonObject;
     protected OnClickFloatingMenu onClickFloatingMenu;
     protected boolean isIndependent;
+    protected RecyclerView notificationAndReferralRecyclerView;
+    protected RelativeLayout notificationAndReferralLayout;
     private TextView textViewFamilyHas;
     private RelativeLayout layoutFamilyHasRow;
+    private Integer toolbarBaseHeight;
 
     @Override
     protected void onCreation() {
@@ -74,7 +83,23 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setTitle("");
+            if (toolbarBaseHeight == null) {
+                int resolvedHeight = toolbar.getLayoutParams() != null ? toolbar.getLayoutParams().height : 0;
+                toolbarBaseHeight = resolvedHeight > 0 ? resolvedHeight : resolveActionBarSize();
+            }
+            ViewCompat.setOnApplyWindowInsetsListener(toolbar, (view, insets) -> {
+                int topInset = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top;
+                ViewGroup.LayoutParams params = view.getLayoutParams();
+                if (params != null) {
+                    params.height = toolbarBaseHeight + topInset;
+                    view.setLayoutParams(params);
+                }
+                view.setPadding(view.getPaddingLeft(), topInset, view.getPaddingRight(), view.getPaddingBottom());
+                return insets;
+            });
+            ViewCompat.requestApplyInsets(toolbar);
         }
+
 
         appBarLayout = findViewById(org.smartregister.family.R.id.toolbar_appbarlayout);
 
@@ -85,6 +110,14 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         setupViews();
     }
 
+    private int resolveActionBarSize() {
+        TypedValue typedValue = new TypedValue();
+        if (getTheme().resolveAttribute(androidx.appcompat.R.attr.actionBarSize, typedValue, true)) {
+            return TypedValue.complexToDimensionPixelSize(typedValue.data, getResources().getDisplayMetrics());
+        }
+        return getResources().getDimensionPixelSize(androidx.appcompat.R.dimen.abc_action_bar_default_height_material);
+    }
+
     @Override
     public void setProfileDetailOne(String gender) {
         super.setProfileDetailOne(org.smartregister.chw.core.utils.Utils.getGenderLanguageSpecific(this, gender));
@@ -93,6 +126,7 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     @Override
     protected void setupViews() {
         super.setupViews();
+        initializeNotificationReferralRecyclerView();
 
         TextView toolbarTitle = findViewById(R.id.toolbar_title);
         toolbarTitle.setText(String.format(getString(R.string.return_to_family_name), presenter().getFamilyName()));
@@ -114,6 +148,14 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         layoutFamilyHasRow = findViewById(R.id.family_has_row);
 
         layoutFamilyHasRow.setOnClickListener(this);
+    }
+
+    protected void initializeNotificationReferralRecyclerView() {
+        notificationAndReferralLayout = findViewById(R.id.notification_and_referral_row);
+        notificationAndReferralRecyclerView = findViewById(R.id.notification_and_referral_recycler_view);
+        if (notificationAndReferralRecyclerView != null) {
+            notificationAndReferralRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        }
     }
 
     @Override
@@ -183,6 +225,9 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
             return true;
         } else if (i == R.id.action_tb_registration) {
             startTbRegister();
+        }  else if (i == R.id.action_tbleprosy_screening) {
+            startTbLeprosyScreening();
+            return true;
         } else if (i == R.id.action_malaria_diagnosis) {
             startHfMalariaFollowupForm();
             return true;
@@ -216,6 +261,21 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
             startCancerPreventiveServicesRegistration();
         } else if (i == R.id.action_asrh_registration) {
             startAsrhRegistration();
+        } else if (i == R.id.action_hts_screening) {
+            startHtsScreening();
+        } else if (i == R.id.action_hps_enrollment) {
+            startHpsEnrollment();
+        } else if (i == R.id.action_ayp_facility_screening) {
+            startAypFacilityScreening();
+            return true;
+        } else if (i == R.id.action_ayp_in_school_enrollment) {
+            startAypInSchoolEnrollment();
+            return true;
+        } else if (i == R.id.action_ayp_parental_enrollment) {
+            startAypParentalEnrollment();
+            return true;
+        }  else if (i == R.id.action_ayp_out_school_enrollment) {
+            startAypOutSchoolEnrollment();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -237,6 +297,7 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
 
     protected abstract void startVmmcRegister();
 
+    protected abstract void startTbLeprosyScreening();
 
     protected abstract void startIntegratedCommunityCaseManagementEnrollment();
 
@@ -271,6 +332,18 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startCancerPreventiveServicesRegistration();
 
     protected abstract void startAsrhRegistration();
+
+    protected abstract void startHtsScreening();
+
+    protected abstract void startHpsEnrollment();
+
+    protected abstract void startAypFacilityScreening();
+
+    protected abstract void startAypInSchoolEnrollment();
+
+    protected abstract void startAypParentalEnrollment();
+
+    protected abstract void startAypOutSchoolEnrollment();
 
     protected abstract void setIndependentClient(boolean isIndependent);
 

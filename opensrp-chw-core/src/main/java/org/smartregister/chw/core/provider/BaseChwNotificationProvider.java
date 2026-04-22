@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.provider;
 
+import static org.smartregister.chw.core.utils.Utils.getDuration;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
@@ -30,7 +32,7 @@ import org.smartregister.view.viewholder.OnClickFormLauncher;
 import java.sql.Timestamp;
 import java.text.MessageFormat;
 
-import static org.smartregister.chw.core.utils.Utils.getDuration;
+import timber.log.Timber;
 
 public class BaseChwNotificationProvider implements RecyclerViewProvider<ChwNotificationViewHolder> {
 
@@ -65,7 +67,16 @@ public class BaseChwNotificationProvider implements RecyclerViewProvider<ChwNoti
 
         String notificationEventDate = Utils.getValue(client.getColumnmaps(), CoreConstants.DB_CONSTANTS.NOTIFICATION_DATE, false);
         if (StringUtils.isNotBlank(notificationEventDate)) {
-            DateTime duration = new DateTime(Timestamp.valueOf(notificationEventDate));
+            DateTime duration = null;
+            try {
+                duration = new DateTime(Timestamp.valueOf(notificationEventDate));
+            } catch (Exception e) {
+                try {
+                    duration = new DateTime(notificationEventDate);
+                } catch (Exception e1) {
+                    Timber.e(e1);
+                }
+            }
             viewHolder.setNotificationDate(org.smartregister.chw.core.utils.Utils.formatReferralDuration(duration, context));
         }
         attachPatientOnclickListener(viewHolder.itemView, client);

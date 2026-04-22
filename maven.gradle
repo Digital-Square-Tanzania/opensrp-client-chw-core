@@ -1,4 +1,4 @@
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 def sonatypeRepositoryURL
@@ -29,107 +29,80 @@ def getDate() {
 }
 
 afterEvaluate { project ->
-    uploadArchives {
-        repositories {
-
-            if (mavenLocalFlag) {
-
-                mavenDeployer {
-
-                    pom.artifactId = POM_SETTING_ARTIFACT_ID
-
-                    repository(url: mavenLocal().url)
-
-                    pom.project {
-                        name POM_SETTING_NAME
-                        packaging POM_SETTING_PACKAGING
-                        description POM_SETTING_DESCRIPTION
-                        url POM_SETTING_URL
-
-                        scm {
-                            url POM_SETTING_SCM_URL
-                            connection POM_SETTING_SCM_CONNECTION
-                            developerConnection POM_SETTING_SCM_DEV_CONNECTION
-                        }
-
-                        licenses {
-                            license {
-                                name POM_SETTING_LICENCE_NAME
-                                url POM_SETTING_LICENCE_URL
-                                distribution POM_SETTING_LICENCE_DIST
-                            }
-                        }
-
-                        developers {
-                            developer {
-                                id POM_SETTING_DEVELOPER_ID
-                                name POM_SETTING_DEVELOPER_NAME
-                            }
-                        }
-                    }
-                }
-            } else {
-                mavenDeployer {
-                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-                    pom.artifactId = POM_SETTING_ARTIFACT_ID
-
-                    repository(url: sonatypeRepositoryURL) {
-                        authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                    }
-
-                    pom.project {
-                        name POM_SETTING_NAME
-                        packaging POM_SETTING_PACKAGING
-                        description POM_SETTING_DESCRIPTION
-                        url POM_SETTING_URL
-
-                        scm {
-                            url POM_SETTING_SCM_URL
-                            connection POM_SETTING_SCM_CONNECTION
-                            developerConnection POM_SETTING_SCM_DEV_CONNECTION
-                        }
-
-                        licenses {
-                            license {
-                                name POM_SETTING_LICENCE_NAME
-                                url POM_SETTING_LICENCE_URL
-                                distribution POM_SETTING_LICENCE_DIST
-                            }
-                        }
-
-                        developers {
-                            developer {
-                                id POM_SETTING_DEVELOPER_ID
-                                name POM_SETTING_DEVELOPER_NAME
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-
-    signing {
-        required { isReleaseBuild() && gradle.taskGraph.hasTask("uploadArchives") }
-        sign configurations.archives
-    }
-
     task androidJavadocs(type: Javadoc) {
     }
 
     task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-        classifier = 'javadoc'
+        archiveClassifier.set('javadoc')
     }
 
     task androidSourcesJar(type: Jar) {
-        classifier = 'sources'
+        archiveClassifier.set('sources')
     }
 
-    artifacts {
-        archives androidSourcesJar
-        archives androidJavadocsJar
+    publishing {
+        repositories {
+            if (mavenLocalFlag) {
+                mavenLocal()
+            } else {
+                maven {
+                    name = 'Sonatype'
+                    url = uri(sonatypeRepositoryURL)
+                    credentials {
+                        username = getRepositoryUsername()
+                        password = getRepositoryPassword()
+                    }
+                }
+            }
+        }
+
+        publications.withType(MavenPublication).all { publication ->
+            pom {
+                name = POM_SETTING_NAME
+                packaging = POM_SETTING_PACKAGING
+                description = POM_SETTING_DESCRIPTION
+                url = POM_SETTING_URL
+
+                scm {
+                    url = POM_SETTING_SCM_URL
+                    connection = POM_SETTING_SCM_CONNECTION
+                    developerConnection = POM_SETTING_SCM_DEV_CONNECTION
+                }
+
+                licenses {
+                    license {
+                        name = POM_SETTING_LICENCE_NAME
+                        url = POM_SETTING_LICENCE_URL
+                        distribution = POM_SETTING_LICENCE_DIST
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = POM_SETTING_DEVELOPER_ID
+                        name = POM_SETTING_DEVELOPER_NAME
+                    }
+                }
+            }
+        }
+    }
+
+    publishing.publications.withType(MavenPublication).all {
+        artifact androidSourcesJar
+        artifact androidJavadocsJar
+    }
+
+    tasks.register('uploadArchives') {
+        if (mavenLocalFlag) {
+            dependsOn 'publishToMavenLocal'
+        } else {
+            dependsOn tasks.withType(PublishToMavenRepository).matching { it.repository.name == 'Sonatype' }
+        }
+    }
+
+    signing {
+        required { isReleaseBuild() && gradle.taskGraph.hasTask('uploadArchives') }
+        sign publishing.publications
     }
 
     nexusStaging {

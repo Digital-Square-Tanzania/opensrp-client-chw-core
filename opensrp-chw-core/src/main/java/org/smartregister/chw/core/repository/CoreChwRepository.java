@@ -2,7 +2,7 @@ package org.smartregister.chw.core.repository;
 
 import android.content.Context;
 
-import net.sqlcipher.database.SQLiteDatabase;
+import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.anc.repository.VisitDetailsRepository;
@@ -30,6 +30,7 @@ import org.smartregister.repository.LocationTagRepository;
 import org.smartregister.repository.ManifestRepository;
 import org.smartregister.repository.PlanDefinitionRepository;
 import org.smartregister.repository.PlanDefinitionSearchRepository;
+import org.smartregister.repository.ProviderRepository;
 import org.smartregister.repository.Repository;
 import org.smartregister.repository.SettingsRepository;
 import org.smartregister.repository.TaskRepository;
@@ -93,7 +94,7 @@ public class CoreChwRepository extends Repository {
         ManifestRepository.createTable(database);
         ClientFormRepository.createTable(database);
         CommunityResponderRepository.createTable(database);
-
+        ProviderRepository.createTable(database);
         onUpgrade(database, 1, databaseVersion);
 
         // initialize from yml file
@@ -111,51 +112,38 @@ public class CoreChwRepository extends Repository {
     }
 
     @Override
-    public SQLiteDatabase getReadableDatabase() {
+    public synchronized SQLiteDatabase getReadableDatabase() {
         String pass = CoreChwApplication.getInstance().getPassword();
-        if (StringUtils.isNotBlank(pass)) {
-            return getReadableDatabase(pass);
-        } else {
+        if (StringUtils.isBlank(pass)) {
             throw new IllegalStateException("Password is blank");
         }
-    }
-
-    @Override
-    public SQLiteDatabase getWritableDatabase() {
-        String pass = CoreChwApplication.getInstance().getPassword();
-        if (StringUtils.isNotBlank(pass)) {
-            return getWritableDatabase(pass);
-        } else {
-            throw new IllegalStateException("Password is blank");
-        }
-    }
-
-    @Override
-    public synchronized SQLiteDatabase getWritableDatabase(String password) {
-        if (writableDatabase == null || !writableDatabase.isOpen()) {
-            if (writableDatabase != null) {
-                writableDatabase.close();
-            }
-            writableDatabase = super.getWritableDatabase(password);
-        }
-        return writableDatabase;
-    }
-
-    @Override
-    public synchronized SQLiteDatabase getReadableDatabase(String password) {
         try {
             if (readableDatabase == null || !readableDatabase.isOpen()) {
                 if (readableDatabase != null) {
                     readableDatabase.close();
                 }
-                readableDatabase = super.getReadableDatabase(password);
+                readableDatabase = super.getReadableDatabase();
             }
             return readableDatabase;
         } catch (Exception e) {
             Timber.e("Database Error. %s", e.getMessage());
             return null;
         }
+    }
 
+    @Override
+    public synchronized SQLiteDatabase getWritableDatabase() {
+        String pass = CoreChwApplication.getInstance().getPassword();
+        if (StringUtils.isBlank(pass)) {
+            throw new IllegalStateException("Password is blank");
+        }
+        if (writableDatabase == null || !writableDatabase.isOpen()) {
+            if (writableDatabase != null) {
+                writableDatabase.close();
+            }
+            writableDatabase = super.getWritableDatabase();
+        }
+        return writableDatabase;
     }
 
     @Override

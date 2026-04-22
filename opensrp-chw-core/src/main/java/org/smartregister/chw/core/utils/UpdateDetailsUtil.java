@@ -30,7 +30,7 @@ public class UpdateDetailsUtil {
     }
 
     public static void startUpdateClientDetailsActivity(JSONObject jsonForm, Activity activity) {
-        Intent intent = new Intent(activity, BaseOpdFormActivity.class);
+        Intent intent = new Intent(activity, org.smartregister.family.util.Utils.metadata().familyMemberFormActivity);
         intent.putExtra(OpdConstants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
         Form form = new Form();
         form.setName(activity.getString(org.smartregister.chw.core.R.string.update_client_registration));

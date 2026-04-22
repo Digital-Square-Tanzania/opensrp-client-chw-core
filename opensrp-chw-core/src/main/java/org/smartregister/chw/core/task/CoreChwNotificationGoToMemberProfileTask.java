@@ -23,6 +23,7 @@ import org.smartregister.family.util.Utils;
 
 import java.lang.ref.WeakReference;
 
+import static org.smartregister.chw.core.interactor.BaseChwNotificationDetailsInteractor.LINKAGE_FROM_FACILITY;
 import static org.smartregister.chw.core.utils.Utils.getDuration;
 import static org.smartregister.chw.core.utils.Utils.passToolbarTitle;
 
@@ -57,6 +58,8 @@ public abstract class CoreChwNotificationGoToMemberProfileTask extends AsyncTask
             goToHivIndexContactProfile(commonPersonObjectClient.entityId(), activity.get());
         } else if (notificationType.equals(activity.get().getString(R.string.notification_type_tb_problem_outcome))) {
             goToTbProfile(commonPersonObjectClient.entityId(), activity.get());
+        } else if (notificationType.equals(LINKAGE_FROM_FACILITY)) {
+            goToOtherMemberProfile(commonPersonObjectClient.entityId(),commonPersonObjectClient, activity.get());
         }
         return null;
     }
@@ -125,6 +128,8 @@ public abstract class CoreChwNotificationGoToMemberProfileTask extends AsyncTask
     protected abstract void goToHivIndexContactProfile(String baseEntityId, Activity activity);
 
     protected abstract void goToTbProfile(String baseEntityId, Activity activity);
+
+    protected abstract void goToOtherMemberProfile(String baseEntityId,CommonPersonObjectClient commonPersonObjectClient, Activity activity);
 
     protected abstract Class<? extends CoreAboveFiveChildProfileActivity> getAboveFiveChildProfileActivityClass();
 

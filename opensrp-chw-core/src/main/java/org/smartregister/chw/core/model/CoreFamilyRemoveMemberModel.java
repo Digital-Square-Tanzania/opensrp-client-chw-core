@@ -1,6 +1,12 @@
 package org.smartregister.chw.core.model;
 
 
+import static org.smartregister.chw.core.utils.Utils.getDuration;
+import static org.smartregister.family.util.JsonFormUtils.processFamilyHeadRegistrationForm;
+import static org.smartregister.family.util.JsonFormUtils.processFamilyUpdateForm;
+
+import android.content.Context;
+
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -9,23 +15,35 @@ import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.contract.FamilyRemoveMemberContract;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
+import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.family.domain.FamilyEventClient;
+import org.smartregister.family.util.Constants;
 import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.Utils;
+import org.smartregister.location.helper.LocationHelper;
 import org.smartregister.util.FormUtils;
 import org.smartregister.util.JsonFormUtils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import timber.log.Timber;
 
-import static org.smartregister.chw.core.utils.Utils.getDuration;
-
-import android.content.Context;
-
 public abstract class CoreFamilyRemoveMemberModel extends CoreFamilyProfileMemberModel implements FamilyRemoveMemberContract.Model {
+    private FormUtils formUtils;
+
+    public static String getGenderTranslated(Context context, String gender) {
+        if (gender.equalsIgnoreCase(Gender.MALE.toString())) {
+            return context.getResources().getString(R.string.male);
+        } else if (gender.equalsIgnoreCase(Gender.FEMALE.toString())) {
+            return context.getResources().getString(R.string.female);
+        }
+        return "";
+    }
 
     @Override
     public JSONObject prepareJsonForm(CommonPersonObjectClient client, String formType) {
@@ -75,6 +93,14 @@ public abstract class CoreFamilyRemoveMemberModel extends CoreFamilyProfileMembe
 
                     jsonObject.put("text", details);
 
+                } else if (jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY).equalsIgnoreCase(CoreConstants.JsonAssets.FIRST_NAME)) {
+                    jsonObject.put("value", Utils.getValue(client.getColumnmaps(), DBConstants.KEY.FIRST_NAME, true));
+                } else if (jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY).equalsIgnoreCase(CoreConstants.JsonAssets.MIDDLE_NAME)) {
+                    jsonObject.put("value", Utils.getValue(client.getColumnmaps(), DBConstants.KEY.MIDDLE_NAME, true));
+                } else if (jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY).equalsIgnoreCase(CoreConstants.JsonAssets.LAST_NAME)) {
+                    jsonObject.put("value", Utils.getValue(client.getColumnmaps(), DBConstants.KEY.LAST_NAME, true));
+                } else if (jsonObject.getString(org.smartregister.family.util.JsonFormUtils.KEY).equalsIgnoreCase(CoreConstants.JsonAssets.SEX)) {
+                    jsonObject.put("value", Utils.getValue(client.getColumnmaps(), DBConstants.KEY.GENDER, true).toLowerCase(Locale.getDefault()));
                 }
             }
 
@@ -135,14 +161,58 @@ public abstract class CoreFamilyRemoveMemberModel extends CoreFamilyProfileMembe
         return cal;
     }
 
-    public static String getGenderTranslated(Context context, String gender) {
-        if (gender.equalsIgnoreCase(Gender.MALE.toString())) {
-            return context.getResources().getString(R.string.male);
-        } else if (gender.equalsIgnoreCase(Gender.FEMALE.toString())) {
-            return context.getResources().getString(R.string.female);
+    @Override
+    public List<FamilyEventClient> processFamilyMemberRemoval(String jsonString) {
+        List<FamilyEventClient> familyEventClientList = new ArrayList<>();
+        FamilyEventClient familyEventClient = processFamilyUpdateForm(Utils.context().allSharedPreferences(), jsonString);
+        if (familyEventClient == null) {
+            return familyEventClientList;
         }
-        return "";
+
+        FamilyEventClient headEventClient = processFamilyHeadRegistrationForm(Utils.context().allSharedPreferences(), jsonString, familyEventClient.getClient().getBaseEntityId());
+        if (headEventClient == null) {
+            return familyEventClientList;
+        }
+
+        if (headEventClient.getClient() != null && familyEventClient.getClient() != null) {
+            String headUniqueId = headEventClient.getClient().getIdentifier(Utils.metadata().uniqueIdentifierKey);
+            if (StringUtils.isNotBlank(headUniqueId)) {
+                String familyUniqueId = headUniqueId + Constants.IDENTIFIER.FAMILY_SUFFIX;
+                familyEventClient.getClient().addIdentifier(Utils.metadata().uniqueIdentifierKey, familyUniqueId);
+            }
+        }
+
+        // Update the family head and primary caregiver
+        Client familyClient = familyEventClient.getClient();
+        familyClient.addRelationship(Utils.metadata().familyRegister.familyHeadRelationKey, headEventClient.getClient().getBaseEntityId());
+        familyClient.addRelationship(Utils.metadata().familyRegister.familyCareGiverRelationKey, headEventClient.getClient().getBaseEntityId());
+
+        familyEventClientList.add(familyEventClient);
+        familyEventClientList.add(headEventClient);
+        return familyEventClientList;
     }
 
+    @Override
+    public JSONObject getFormAsJson(String formName, String entityId, String baseEntityId, String currentLocationId) throws Exception {
+        JSONObject form = this.getFormUtils().getFormJson(formName);
+        return form == null ? null : org.smartregister.family.util.JsonFormUtils.getFormAsJson(form, formName, entityId, currentLocationId);
+    }
+
+    @Override
+    public String getLocationId(String locationName) {
+        return LocationHelper.getInstance().getOpenMrsLocationId(locationName);
+    }
+
+    protected FormUtils getFormUtils() {
+        if (this.formUtils == null) {
+            try {
+                this.formUtils = FormUtils.getInstance(Utils.context().applicationContext());
+            } catch (Exception e) {
+                Timber.e(e);
+            }
+        }
+
+        return this.formUtils;
+    }
 }
 

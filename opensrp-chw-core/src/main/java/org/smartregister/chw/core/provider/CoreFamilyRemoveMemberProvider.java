@@ -1,5 +1,8 @@
 package org.smartregister.chw.core.provider;
 
+import static org.smartregister.chw.core.utils.Utils.reprocessRegistrationEvents;
+import static org.smartregister.chw.core.utils.Utils.updateClientFamilyRelationship;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -8,6 +11,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.commons.lang3.tuple.Triple;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.contract.FamilyRemoveMemberContract;
 import org.smartregister.chw.core.interactor.CoreFamilyRemoveMemberInteractor;
@@ -25,6 +29,10 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
     private Context context;
     private View.OnClickListener footerClickListener;
     private String familyID;
+    public static final String REMOVAL_REASON_START_NEW_FAMILY = "start_new_family";
+    public static final String REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT = "change_to_independent_client";
+    public static final String REMOVAL_REASON_DEATH = "Death";
+
 
     public CoreFamilyRemoveMemberProvider(String familyID, Context context, CommonRepository commonRepository, Set visibleColumns, View.OnClickListener onClickListener, View.OnClickListener paginationClickListener, String familyHead, String primaryCaregiver) {
         super(context, commonRepository, visibleColumns, onClickListener, paginationClickListener, familyHead, primaryCaregiver);
@@ -65,6 +73,18 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
             public void onError(Exception e) {
                 //// TODO: 15/08/19
             }
+            @Override
+            public void onNewFamilyRegistrationSaved(String clientBaseEntityId, String familyBaseEntityId, String reasonForRemove) {
+                if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_START_NEW_FAMILY)) {
+                    updateClientFamilyRelationship(clientBaseEntityId, familyBaseEntityId);
+                } else if (reasonForRemove != null && reasonForRemove.equalsIgnoreCase(REMOVAL_REASON_CHANGE_TO_INDEPENDENT_CLIENT)) {
+                    updateClientFamilyRelationship(clientBaseEntityId, familyBaseEntityId);
+                    reprocessRegistrationEvents(familyBaseEntityId, clientBaseEntityId);
+                }
+            }
+
+            @Override
+            public void onUniqueIdFetched(Triple<String, String, String> triple, String entityId) {}
         });
 
         footerViewHolder.view.setOnClickListener(footerClickListener);
@@ -94,4 +114,3 @@ public abstract class CoreFamilyRemoveMemberProvider extends FamilyMemberRegiste
         }
     }
 }
-
