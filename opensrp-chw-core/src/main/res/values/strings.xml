@@ -907,6 +907,4 @@
 
     <string name="json_form_error_msg">There are %d missing details. Please complete the information to continue.</string>
 
-    <string name="diabetes_screening">Diabetes and Hypertention Screening</string>
-
 </resources>

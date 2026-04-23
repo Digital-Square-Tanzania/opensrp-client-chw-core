@@ -265,6 +265,15 @@ allprojects {
         }
 
         maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-ncd")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
             url 'http://maven.wafour.com:8081/artifactory/libs-release/'
             allowInsecureProtocol = true
         }
@@ -784,7 +793,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-ncd:0.0.1-SNAPSHOT-USELOCAL-BUILD') {
+    api('org.smartregister:opensrp-chw-ncd:0.0.1-SNAPSHOT-LOCAL-FIX') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'

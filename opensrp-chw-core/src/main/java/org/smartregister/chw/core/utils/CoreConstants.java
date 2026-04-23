@@ -963,9 +963,6 @@ public class CoreConstants {
         public static final String DIABETES_HYPERTENSION_CONFIRMATION = "ec_diabetes_hypertension_confirmation";
         public static final String HPS_MEMBERS = "ec_hps_client_register";
         public static final String HPS_HOUSEHOLD = "ec_hps_household_register";
-        public static final String NCD_REGISTER = "ec_ncd_register";
-        public static final String DIABETES_HYPERTENSION_FOLLOWUP = "ec_diabetes_hypertension_followup";
-        public static final String DIABETES_HYPERTENSION_CONFIRMATION = "ec_diabetes_hypertension_confirmation";
     }
 
     public static final class INTENT_KEY {
@@ -1051,8 +1048,6 @@ public class CoreConstants {
         public static final String HTS = "HTS";
 
         public static final String HPS = "HPS";
-
-        public static final String NCD = "Ncd Clients";
 
         public static final String AYP_IN_SCHOOL = "AYP_IN_SCHOOL";
 
