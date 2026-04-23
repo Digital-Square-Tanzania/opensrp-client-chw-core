@@ -50,6 +50,9 @@ public class CoreNcdRegisterFragment extends BaseNcdRegisterFragment {
             getSearchView().setTextColor(getResources().getColor(R.color.text_black));
         }
 
+        View sortFilterBar = view.findViewById(org.smartregister.R.id.register_sort_filter_bar_layout);
+        if (sortFilterBar != null) sortFilterBar.setVisibility(View.GONE);
+
         try {
             NavigationMenu.getInstance(getActivity(), null, toolbar);
             getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -72,5 +75,10 @@ public class CoreNcdRegisterFragment extends BaseNcdRegisterFragment {
     @Override
     protected void initializePresenter() {
         presenter = new BaseNcdRegisterFragmentPresenter(this, new CoreNcdRegisterFragmentModel(), null);
+    }
+
+    @Override
+    public void setTotalPatients() {
+        // Do nothing, total patients is not required for NCD register
     }
 }
