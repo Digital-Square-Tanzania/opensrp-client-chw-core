@@ -121,16 +121,16 @@ task jacocoTestReport(type: JacocoReport) {
 
     reports {
         html {
-            html.enabled = true
-            destination file("${buildDir}/reports/jacoco/jacocoRootReport/jacocoFullReport")
+            required.set(true)
+            outputLocation.set(file("${buildDir}/reports/jacoco/jacocoRootReport/jacocoFullReport"))
         }
 
         xml {
-            xml.enabled = true
-            destination file("${buildDir}/reports/jacoco/jacocoRootReport/jacocoFullReport.xml")
+            required.set(true)
+            outputLocation.set(file("${buildDir}/reports/jacoco/jacocoRootReport/jacocoFullReport.xml"))
         }
 
-        csv.enabled = false
+        csv.required.set(false)
     }
     onlyIf {
         executionData.files.any { it.exists() }
