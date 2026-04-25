@@ -2,6 +2,9 @@ package org.smartregister.chw.core.job;
 
 import androidx.annotation.NonNull;
 
+import org.smartregister.chw.core.application.CoreChwApplication;
+import org.smartregister.chw.core.worker.ReportIndicatorGeneratingWorker;
+import org.smartregister.job.BaseWorker;
 import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
 
 /**
@@ -14,6 +17,22 @@ import org.smartregister.reporting.job.RecurringIndicatorGeneratingJob;
  */
 @Deprecated
 public class ChwIndicatorGeneratingJob extends RecurringIndicatorGeneratingJob {
+    public static void scheduleJob(String jobTag, Long start, Long flex) {
+        BaseWorker.scheduleJob(
+                CoreChwApplication.getInstance().getApplicationContext(),
+                jobTag,
+                start,
+                flex,
+                ReportIndicatorGeneratingWorker.class);
+    }
+
+    public static void scheduleJobImmediately(String jobTag) {
+        BaseWorker.scheduleJobImmediately(
+                CoreChwApplication.getInstance().getApplicationContext(),
+                jobTag,
+                ReportIndicatorGeneratingWorker.class);
+    }
+
     @NonNull
     protected Result onRunJob(@NonNull Params params) {
         return super.onRunJob(params);
