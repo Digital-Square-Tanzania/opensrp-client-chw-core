@@ -1,15 +1,21 @@
 package org.smartregister.chw.core.worker;
 
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.work.WorkerParameters;
 
 import org.smartregister.AllConstants;
 import org.smartregister.job.BaseWorker;
-import org.smartregister.reporting.service.IndicatorGeneratorIntentService;
+import org.smartregister.reporting.ReportingLibrary;
+import org.smartregister.reporting.dao.ReportIndicatorDaoImpl;
+import org.smartregister.reporting.domain.TallyStatus;
+import org.smartregister.reporting.event.EventBusHelper;
+import org.smartregister.reporting.event.IndicatorTallyEvent;
+import org.smartregister.reporting.repository.DailyIndicatorCountRepository;
+import org.smartregister.reporting.repository.IndicatorQueryRepository;
+import org.smartregister.reporting.repository.IndicatorRepository;
+import org.smartregister.repository.AllSharedPreferences;
 
 import timber.log.Timber;
 
@@ -27,19 +33,7 @@ public class ReportIndicatorGeneratingWorker extends BaseWorker {
 
     @Override
     protected JobResult onRunJob(@NonNull Params params) {
-        // Create an intent to start the IndicatorGeneratorIntentService
-        Intent intent = new Intent(getApplicationContext(), IndicatorGeneratorIntentService.class);
-
-        // Create a PendingIntent with appropriate flags
-        PendingIntent pendingIntent = createPendingIntent(getApplicationContext(), intent);
-
-        // Execute the pending intent using the BaseWorker helper method
-        boolean executed = executePendingIntent(pendingIntent);
-        if (executed) {
-            Timber.d("IndicatorGeneratorIntentService started successfully via PendingIntent.");
-        } else {
-            Timber.e("Failed to execute PendingIntent for IndicatorGeneratorIntentService.");
-        }
+        generateIndicatorTallies();
 
         // Determine if the job should be rescheduled based on the extras.
         boolean toReschedule = params.getExtras().getBoolean(AllConstants.INTENT_KEY.TO_RESCHEDULE, false);
@@ -47,15 +41,37 @@ public class ReportIndicatorGeneratingWorker extends BaseWorker {
         return toReschedule ? JobResult.RESCHEDULE : JobResult.SUCCESS;
     }
 
-    /**
-     * Helper method to create a PendingIntent for starting a service.
-     *
-     * @param context the application context.
-     * @param intent  the Intent used to start the service.
-     * @return a PendingIntent configured with the correct flags.
-     */
-    private PendingIntent createPendingIntent(Context context, Intent intent) {
-        int flags = PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE;
-        return PendingIntent.getService(context, 0, intent, flags);
+    private void generateIndicatorTallies() {
+        Timber.i("ReportIndicatorGeneratingWorker running");
+
+        ReportingLibrary reportingLibrary = ReportingLibrary.getInstance();
+        AllSharedPreferences allSharedPreferences = reportingLibrary.getContext().allSharedPreferences();
+        String lastProcessedDate = allSharedPreferences.getPreference(ReportIndicatorDaoImpl.REPORT_LAST_PROCESSED_DATE);
+        Timber.d("LastProcessedDate %s", lastProcessedDate);
+
+        EventBusHelper.postEvent(new IndicatorTallyEvent(TallyStatus.STARTED));
+
+        IndicatorTallyEvent inProgressTallyEvent = new IndicatorTallyEvent(TallyStatus.INPROGRESS);
+        EventBusHelper.postStickyEvent(inProgressTallyEvent);
+
+        boolean generated = false;
+        try {
+            IndicatorQueryRepository indicatorQueryRepository = reportingLibrary.indicatorQueryRepository();
+            DailyIndicatorCountRepository dailyIndicatorCountRepository = reportingLibrary.dailyIndicatorCountRepository();
+            IndicatorRepository indicatorRepository = reportingLibrary.indicatorRepository();
+            ReportIndicatorDaoImpl reportIndicatorDao = new ReportIndicatorDaoImpl(
+                    indicatorQueryRepository,
+                    dailyIndicatorCountRepository,
+                    indicatorRepository);
+
+            reportIndicatorDao.generateDailyIndicatorTallies(lastProcessedDate);
+            generated = true;
+        } finally {
+            EventBusHelper.removeStickyEvent(inProgressTallyEvent);
+        }
+
+        if (generated) {
+            EventBusHelper.postEvent(new IndicatorTallyEvent(TallyStatus.COMPLETE));
+        }
     }
 }
