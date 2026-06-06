@@ -633,7 +633,6 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlAypOut = buildAypOutSchoolCountQuery();
                 return NavigationDao.getQueryCount(sqlAypOut);
             case org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_ENROLLMENT:
-            case org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_SCREENING:
                 String sqlMotherMentor = buildMotherMentorCountQuery();
                 return NavigationDao.getQueryCount(sqlMotherMentor);
             case org.smartregister.chw.harmreduction.util.Constants.TABLES.HARM_REDUCTION_SOBER_HOUSE_ENROLLMENT:
@@ -665,10 +664,9 @@ public class NavigationInteractor implements NavigationContract.Interactor {
     @VisibleForTesting
     static String buildMotherMentorCountQuery() {
         return "SELECT count(*) " +
-                "from " + org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_SCREENING + " p " +
+                "from " + org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_ENROLLMENT + " p " +
                 "INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE " +
-                "where p.is_closed is 0 AND ec_family_member.dod is null " +
-                "AND (p.status IS NULL OR p.status = 'client') AND p.screening_status != '-'";
+                "where p.is_closed is 0 AND ec_family_member.dod is null ";
     }
 
     private Long getLastCheckTimeStamp() {

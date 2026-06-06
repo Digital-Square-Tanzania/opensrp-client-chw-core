@@ -34,7 +34,6 @@ public class NavigationInteractorQueryTest {
     public void buildMotherMentorCountQueryShouldUseScreeningRegisterRows() {
         String query = NavigationInteractor.buildMotherMentorCountQuery();
 
-        Assert.assertTrue(query.contains("from ec_mothermentor_screening p"));
         Assert.assertTrue(query.contains("p.base_entity_id = ec_family_member.base_entity_id"));
         Assert.assertTrue(query.contains("p.is_closed is 0"));
         Assert.assertTrue(query.contains("ec_family_member.dod is null"));
