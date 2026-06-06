@@ -630,15 +630,11 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "              where p.is_closed is 0 AND ec_family_member.dod is null ";
                 return NavigationDao.getQueryCount(sqlAypParental);
             case org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT:
-                String sqlAypOut =
-                        "SELECT count(*) " +
-                                "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
-                                "              where p.is_closed is 0 AND ec_family_member.dod is null AND should_enroll = 'yes'";
+                String sqlAypOut = buildAypOutSchoolCountQuery();
+                return NavigationDao.getQueryCount(sqlAypOut);
             case org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_ENROLLMENT:
-                String sqlMotherMentor =
-                        "SELECT count(*) " +
-                                "   from " + org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
-                                "              where p.is_closed is 0 AND ec_family_member.dod is null";
+            case org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_SCREENING:
+                String sqlMotherMentor = buildMotherMentorCountQuery();
                 return NavigationDao.getQueryCount(sqlMotherMentor);
             case org.smartregister.chw.harmreduction.util.Constants.TABLES.HARM_REDUCTION_SOBER_HOUSE_ENROLLMENT:
                 return NavigationDao.getQueryCount(buildHarmReductionSoberHouseCountQuery());
@@ -656,6 +652,23 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 "AND ifnull((SELECT s.follow_up_status FROM " + SOBER_HOUSE_SERVICES_TABLE + " s " +
                 "WHERE s.entity_id = p.base_entity_id AND s.is_closed = 0 " +
                 "ORDER BY s.last_interacted_with DESC LIMIT 1), '" + CONTINUING_SERVICE_VALUE + "') = '" + CONTINUING_SERVICE_VALUE + "'";
+    }
+
+    @VisibleForTesting
+    static String buildAypOutSchoolCountQuery() {
+        return "SELECT count(*) " +
+                "from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT + " p " +
+                "INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE " +
+                "where p.is_closed is 0 AND ec_family_member.dod is null AND should_enroll = 'yes'";
+    }
+
+    @VisibleForTesting
+    static String buildMotherMentorCountQuery() {
+        return "SELECT count(*) " +
+                "from " + org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_SCREENING + " p " +
+                "INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE " +
+                "where p.is_closed is 0 AND ec_family_member.dod is null " +
+                "AND (p.status IS NULL OR p.status = 'client') AND p.screening_status != '-'";
     }
 
     private Long getLastCheckTimeStamp() {

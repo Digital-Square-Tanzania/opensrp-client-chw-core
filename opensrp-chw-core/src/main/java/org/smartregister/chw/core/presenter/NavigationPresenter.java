@@ -89,7 +89,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         tableMap.put(CoreConstants.DrawerMenu.AYP_OUT_SCHOOL, org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT);
         tableMap.put(CoreConstants.DrawerMenu.AYP_PARENTAL, org.smartregister.chw.ayp.util.Constants.TABLES.AYP_PARENTAL_ENROLLMENT);
         tableMap.put(CoreConstants.DrawerMenu.AYP_FACILITY, org.smartregister.chw.ayp.util.Constants.TABLES.AYP_FACILITY_SCREENING);
-        tableMap.put(CoreConstants.DrawerMenu.MOTHER_MENTOR, org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_ENROLLMENT);
+        tableMap.put(CoreConstants.DrawerMenu.MOTHER_MENTOR, org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_SCREENING);
 
     }
 

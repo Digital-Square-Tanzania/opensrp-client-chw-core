@@ -18,4 +18,27 @@ public class NavigationInteractorQueryTest {
         Assert.assertTrue(query.contains("ORDER BY s.last_interacted_with DESC LIMIT 1"));
         Assert.assertTrue(query.contains("'continuing_service') = 'continuing_service'"));
     }
+
+    @Test
+    public void buildAypOutSchoolCountQueryShouldCountEligibleLivingClients() {
+        String query = NavigationInteractor.buildAypOutSchoolCountQuery();
+
+        Assert.assertTrue(query.contains("from ec_ayp_out_school_enrollment p"));
+        Assert.assertTrue(query.contains("p.base_entity_id = ec_family_member.base_entity_id"));
+        Assert.assertTrue(query.contains("p.is_closed is 0"));
+        Assert.assertTrue(query.contains("ec_family_member.dod is null"));
+        Assert.assertTrue(query.contains("should_enroll = 'yes'"));
+    }
+
+    @Test
+    public void buildMotherMentorCountQueryShouldUseScreeningRegisterRows() {
+        String query = NavigationInteractor.buildMotherMentorCountQuery();
+
+        Assert.assertTrue(query.contains("from ec_mothermentor_screening p"));
+        Assert.assertTrue(query.contains("p.base_entity_id = ec_family_member.base_entity_id"));
+        Assert.assertTrue(query.contains("p.is_closed is 0"));
+        Assert.assertTrue(query.contains("ec_family_member.dod is null"));
+        Assert.assertTrue(query.contains("(p.status IS NULL OR p.status = 'client')"));
+        Assert.assertTrue(query.contains("p.screening_status != '-'"));
+    }
 }
