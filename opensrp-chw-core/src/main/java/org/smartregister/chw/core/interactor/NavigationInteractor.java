@@ -634,7 +634,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         "SELECT count(*) " +
                                 "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
                                 "              where p.is_closed is 0 AND ec_family_member.dod is null AND should_enroll = 'yes'";
-                return NavigationDao.getQueryCount(sqlAypOut);
+            case org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_ENROLLMENT:
+                String sqlMotherMentor =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.mothermentor.util.Constants.TABLES.MOTHERMENTOR_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
+                                "              where p.is_closed is 0 AND ec_family_member.dod is null";
+                return NavigationDao.getQueryCount(sqlMotherMentor);
             case org.smartregister.chw.harmreduction.util.Constants.TABLES.HARM_REDUCTION_SOBER_HOUSE_ENROLLMENT:
                 return NavigationDao.getQueryCount(buildHarmReductionSoberHouseCountQuery());
             default:

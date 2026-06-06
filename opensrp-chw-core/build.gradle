@@ -183,6 +183,17 @@ allprojects {
 
             name = "GitHubPackages"
 
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-mother-mentor")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
+
+            name = "GitHubPackages"
+
             url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-vmmc")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
@@ -742,6 +753,15 @@ dependencies {
     }
 
     api('org.smartregister:opensrp-chw-vmmc:2.0.0-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+    }
+
+    api('org.smartregister:opensrp-chw-mother-mentor:0.0.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'

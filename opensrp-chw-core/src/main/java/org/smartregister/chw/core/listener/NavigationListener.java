@@ -170,6 +170,9 @@ public class NavigationListener implements View.OnClickListener {
                 case CoreConstants.DrawerMenu.AYP_OUT_SCHOOL:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AYP_OUT_SCHOOL_REGISTER_ACTIVITY));
                     break;
+                case CoreConstants.DrawerMenu.MOTHER_MENTOR:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.MOTHER_MENTOR_REGISTER_ACTIVITY));
+                    break;
                 case CoreConstants.DrawerMenu.AYP_FACILITY:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AYP_FACILITY_REGISTER_ACTIVITY));
                     break;

@@ -896,6 +896,9 @@
     <string name="ayp_facility_screening">AYP Screening</string>
     <string name="ayp_out_school_enrollment">AYP Out-school Screening</string>
 
+    <string name="mother_mentor_enrollment">Mother Mentor Enrollment</string>
+
+
     <!-- Floating Menu Option for Add Existing Member to Household -->
     <string name="add_existing_family_member">Add existing family member</string>
     <string name="client_search_hint">Search by name or ID</string>
