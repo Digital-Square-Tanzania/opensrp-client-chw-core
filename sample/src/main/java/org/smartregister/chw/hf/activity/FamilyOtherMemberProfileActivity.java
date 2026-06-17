@@ -88,6 +88,16 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
         //TODO implement start tb register for HF
     }
 
+    @Override
+    protected void startHarmReductionAssessment() {
+        //TODO implement start harm reduction assessment for HF
+    }
+
+    @Override
+    protected void startHarmReductionSoberHouseEnrollment() {
+        //TODO implement start sober house enrollment for HF
+    }
+
 
     protected void startFpChangeMethod() {
         //TODO implement start fp change register for HF

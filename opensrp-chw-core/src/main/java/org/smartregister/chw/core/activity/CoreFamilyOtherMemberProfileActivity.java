@@ -225,8 +225,14 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
             return true;
         } else if (i == R.id.action_tb_registration) {
             startTbRegister();
-        }  else if (i == R.id.action_tbleprosy_screening) {
+        } else if (i == R.id.action_tbleprosy_screening) {
             startTbLeprosyScreening();
+            return true;
+        } else if (i == R.id.action_harm_reduction_assessment) {
+            startHarmReductionAssessment();
+            return true;
+        } else if (i == R.id.action_harm_reduction_sober_house_enrollment) {
+            startHarmReductionSoberHouseEnrollment();
             return true;
         } else if (i == R.id.action_malaria_diagnosis) {
             startHfMalariaFollowupForm();
@@ -298,6 +304,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startVmmcRegister();
 
     protected abstract void startTbLeprosyScreening();
+
+    protected abstract void startHarmReductionAssessment();
+
+    protected abstract void startHarmReductionSoberHouseEnrollment();
 
     protected abstract void startIntegratedCommunityCaseManagementEnrollment();
 
