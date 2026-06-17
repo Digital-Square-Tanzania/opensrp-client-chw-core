@@ -168,6 +168,21 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
     }
 
     @Override
+    protected void startMotherMentorEnrollIit() {
+        // do nothing
+    }
+
+    @Override
+    protected void startMotherMentorEnrollPartner() {
+        // do nothing
+    }
+
+    @Override
+    protected void startMotherMentorEnrollChildEid() {
+        // do nothing
+    }
+
+    @Override
     public void setIndependentClient(boolean isIndependent) {
         // do nothing
     }

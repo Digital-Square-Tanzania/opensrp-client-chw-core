@@ -897,6 +897,9 @@
     <string name="ayp_out_school_enrollment">AYP Out-school Screening</string>
 
     <string name="mother_mentor_enrollment">Mother Mentor Enrollment</string>
+    <string name="mother_mentor_enroll_iit">Mother Mentor Enroll IIT</string>
+    <string name="mother_mentor_enroll_partner">Mother Mentor Enroll Partner</string>
+    <string name="mother_mentor_enroll_child_eid">Mother Mentor Enroll Child EID</string>
 
 
     <!-- Floating Menu Option for Add Existing Member to Household -->

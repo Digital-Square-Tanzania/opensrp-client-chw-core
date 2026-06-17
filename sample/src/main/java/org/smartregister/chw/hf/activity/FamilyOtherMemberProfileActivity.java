@@ -204,6 +204,21 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startMotherMentorEnrollIit() {
+
+    }
+
+    @Override
+    protected void startMotherMentorEnrollPartner() {
+
+    }
+
+    @Override
+    protected void startMotherMentorEnrollChildEid() {
+
+    }
+
+    @Override
     protected void startPncRegister() {
         //TODO implement start pnc registration
     }

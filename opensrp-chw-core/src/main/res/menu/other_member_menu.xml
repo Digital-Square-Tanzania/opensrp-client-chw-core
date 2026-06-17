@@ -256,6 +256,27 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_mother_mentor_enroll_iit"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/mother_mentor_enroll_iit"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_mother_mentor_enroll_partner"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/mother_mentor_enroll_partner"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_mother_mentor_enroll_child_eid"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/mother_mentor_enroll_child_eid"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
         android:title="@string/mark_as_deceased"
