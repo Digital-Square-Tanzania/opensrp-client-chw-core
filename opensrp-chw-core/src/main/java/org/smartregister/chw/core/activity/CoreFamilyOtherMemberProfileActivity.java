@@ -333,7 +333,9 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
 
     protected abstract void startAgywScreening();
 
-    protected abstract void startDiabetesRiskAssessment();
+    protected void startDiabetesRiskAssessment() {
+        // Default no-op; NCD-enabled subclasses override to launch the diabetes risk assessment
+    }
 
     protected abstract void startSbcRegistration();
 
