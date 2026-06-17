@@ -172,6 +172,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_diabetes_risk"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/diabetes_risk_assessment"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_prep_registration"
         android:enabled="true"
         android:visible="false"

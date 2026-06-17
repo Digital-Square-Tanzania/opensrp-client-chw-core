@@ -847,6 +847,7 @@
     <string name="prep_registration">PrEP Registration</string>
     <string name="sbc_registration">SBC Registration</string>
     <string name="kvp_registration">KVP Screening</string>
+    <string name="diabetes_risk_assessment">Diabetes and Hypertension Screening</string>
     <string name="telephone">"Tel: "</string>
 
 
@@ -875,6 +876,7 @@
     <!--   ASRH -->
     <string name="asrh_registration">AYSRH Enrollment</string>
 
+    <string name="diabetes_screening">Diabetes and Hypertention Screening</string>
     <!--   HTS -->
     <string name="hts_screening">HTS Screening</string>
 
@@ -907,6 +909,5 @@
     <string name="remove_member">Remove Household Member</string>
 
     <string name="json_form_error_msg">There are %d missing details. Please complete the information to continue.</string>
-
 
 </resources>

@@ -276,6 +276,15 @@ allprojects {
         }
 
         maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-ncd")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
             url 'http://maven.wafour.com:8081/artifactory/libs-release/'
             allowInsecureProtocol = true
         }
@@ -521,7 +530,7 @@ dependencies {
         exclude group: 'xpp3', module: 'xpp3'
     }
 
-    api('org.smartregister:opensrp-client-native-form:3.1.10-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-native-form:3.1.11-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
@@ -642,7 +651,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'id.zelory', module: 'compressor'
     }
-    api('org.smartregister:opensrp-client-chw-referral:1.3.21-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-referral:1.3.22-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -804,6 +813,15 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
+    api('org.smartregister:opensrp-chw-ncd:0.0.2@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+    }
+
     api('org.smartregister:opensrp-chw-hps:2.0.5-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
@@ -825,6 +843,15 @@ dependencies {
     }
 
     api('org.smartregister:opensrp-chw-ayp:2.0.1-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+    }
+
+    api('org.smartregister:opensrp-chw-ncd:0.1.0@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
