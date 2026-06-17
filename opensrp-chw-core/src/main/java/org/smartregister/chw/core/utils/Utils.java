@@ -62,6 +62,7 @@ import org.smartregister.chw.core.contract.FamilyCallDialogContract;
 import org.smartregister.chw.core.custom_views.CoreAncFloatingMenu;
 import org.smartregister.chw.core.custom_views.CoreFamilyMemberFloatingMenu;
 import org.smartregister.chw.core.custom_views.CoreFamilyPlanningFloatingMenu;
+import org.smartregister.chw.core.custom_views.CoreHarmReductionFloatingMenu;
 import org.smartregister.chw.core.custom_views.CoreHivFloatingMenu;
 import org.smartregister.chw.core.custom_views.CoreMalariaFloatingMenu;
 import org.smartregister.chw.core.custom_views.CoreTbFloatingMenu;
@@ -510,6 +511,7 @@ public abstract class Utils extends org.smartregister.family.util.Utils {
         CoreAncFloatingMenu ancFloatingMenu;
         CoreFamilyPlanningFloatingMenu fpFloatingMenu;
         CoreTbFloatingMenu tbFloatingMenu;
+        CoreHarmReductionFloatingMenu harmReductionFloatingMenu;
         CoreHivFloatingMenu hivFloatingMenu;
         if (has_phone && menu instanceof CoreFamilyMemberFloatingMenu) {
             memberFloatingMenu = (CoreFamilyMemberFloatingMenu) menu;
@@ -535,6 +537,9 @@ public abstract class Utils extends org.smartregister.family.util.Utils {
         } else if (has_phone && menu instanceof CoreTbFloatingMenu) {
             tbFloatingMenu = (CoreTbFloatingMenu) menu;
             tbFloatingMenu.getCallLayout().setOnClickListener((View.OnClickListener) tbFloatingMenu);
+        } else if (has_phone && menu instanceof CoreHarmReductionFloatingMenu) {
+            harmReductionFloatingMenu = (CoreHarmReductionFloatingMenu) menu;
+            harmReductionFloatingMenu.getCallLayout().setOnClickListener((View.OnClickListener) harmReductionFloatingMenu);
         } else if (!has_phone && menu instanceof CoreTbFloatingMenu) {
             tbFloatingMenu = (CoreTbFloatingMenu) menu;
             tbFloatingMenu.getCallLayout().setOnClickListener(null);

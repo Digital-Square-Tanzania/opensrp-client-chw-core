@@ -134,6 +134,12 @@ public class NavigationListener implements View.OnClickListener {
                 case CoreConstants.DrawerMenu.TBLEPROSY:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.TBLEPROSY_REGISTER_ACTIVITY));
                     break;
+                case CoreConstants.DrawerMenu.HARM_REDUCTION:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.HARM_REDUCTION_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.HARM_REDUCTION_SOBER_HOUSE:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.HARM_REDUCTION_SOBER_HOUSE_REGISTER_ACTIVITY));
+                    break;
                 case CoreConstants.DrawerMenu.SBC:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.SBC_REGISTER_ACTIVITY));
                     break;

@@ -14,6 +14,8 @@ import static org.smartregister.chw.core.utils.QueryConstant.SICK_CHILD_FOLLOW_U
 import static org.smartregister.chw.core.utils.QueryConstant.TB_OUTCOME_COUNT_QUERY;
 import static org.smartregister.util.Utils.getAllSharedPreferences;
 
+import androidx.annotation.VisibleForTesting;
+
 import org.smartregister.chw.cdp.util.DBConstants;
 import org.smartregister.chw.core.contract.CoreApplication;
 import org.smartregister.chw.core.contract.NavigationContract;
@@ -30,6 +32,8 @@ import java.util.Date;
 import timber.log.Timber;
 
 public class NavigationInteractor implements NavigationContract.Interactor {
+    private static final String SOBER_HOUSE_SERVICES_TABLE = "ec_harm_reduction_sober_house_services";
+    private static final String CONTINUING_SERVICE_VALUE = "continuing_service";
 
     protected static NavigationInteractor instance;
     protected AppExecutors appExecutors = new AppExecutors();
@@ -643,9 +647,22 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.ayp.util.Constants.TABLES.AYP_OUT_SCHOOL_ENROLLMENT + " p INNER JOIN ec_family_member on p.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE" +
                                 "              where p.is_closed is 0 AND ec_family_member.dod is null AND should_enroll = 'yes'";
                 return NavigationDao.getQueryCount(sqlAypOut);
+            case org.smartregister.chw.harmreduction.util.Constants.TABLES.HARM_REDUCTION_SOBER_HOUSE_ENROLLMENT:
+                return NavigationDao.getQueryCount(buildHarmReductionSoberHouseCountQuery());
             default:
                 return NavigationDao.getTableCount(tableName);
         }
+    }
+
+    @VisibleForTesting
+    static String buildHarmReductionSoberHouseCountQuery() {
+        return "SELECT count(*) " +
+                "from " + org.smartregister.chw.harmreduction.util.Constants.TABLES.HARM_REDUCTION_SOBER_HOUSE_ENROLLMENT + " p " +
+                "inner join ec_family_member m on p.base_entity_id = m.base_entity_id COLLATE NOCASE " +
+                "where m.date_removed is null and p.is_closed = 0 AND p.detoxification_done = 'yes' " +
+                "AND ifnull((SELECT s.follow_up_status FROM " + SOBER_HOUSE_SERVICES_TABLE + " s " +
+                "WHERE s.entity_id = p.base_entity_id AND s.is_closed = 0 " +
+                "ORDER BY s.last_interacted_with DESC LIMIT 1), '" + CONTINUING_SERVICE_VALUE + "') = '" + CONTINUING_SERVICE_VALUE + "'";
     }
 
     private Long getLastCheckTimeStamp() {

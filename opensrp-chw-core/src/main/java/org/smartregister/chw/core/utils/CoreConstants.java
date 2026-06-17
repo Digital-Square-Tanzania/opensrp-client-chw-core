@@ -1018,6 +1018,8 @@ public class CoreConstants {
         public static final String PMTCT = "PMTCT";
         public static final String VMMC = "VMMC";
         public static final String TBLEPROSY = "TB/Leprosy";
+        public static final String HARM_REDUCTION = "Harm Reduction";
+        public static final String HARM_REDUCTION_SOBER_HOUSE = "Harm Reduction Sober House";
         public static final String PMTCT_FOLLOWUP = "PMTCT Followup";
         public static final String MOTHER_CHAMPION = "Mother Champion";
         public static final String CBHS_CLIENTS = "CBHS Clients";
@@ -1312,6 +1314,8 @@ public class CoreConstants {
         public static final String PMTCT_REGISTER_ACTIVITY = "PMTCT_REGISTER_ACTIVITY";
         public static final String VMMC_REGISTER_ACTIVITY = "VMMC_REGISTER_ACTIVITY";
         public static final String TBLEPROSY_REGISTER_ACTIVITY = "TBLEPROSY_REGISTER_ACTIVITY";
+        public static final String HARM_REDUCTION_REGISTER_ACTIVITY = "HARM_REDUCTION_REGISTER_ACTIVITY";
+        public static final String HARM_REDUCTION_SOBER_HOUSE_REGISTER_ACTIVITY = "HARM_REDUCTION_SOBER_HOUSE_REGISTER_ACTIVITY";
         public static final String PMTCT_FOLLOWUP_REGISTER_ACTIVITY = "PMTCT_FOLLOWUP_REGISTER_ACTIVITY";
         public static final String HEI = "HEI_REGISTER_ACTIVITY";
         public static final String MOTHER_CHAMPION_ACTIVITY = "MOTHER_CHAMPION_ACTIVITY";
@@ -1434,6 +1438,7 @@ public class CoreConstants {
 
         public static final String HPS = "iCCHW";
 
+        public static final String HARM_REDUCTION = "HARM REDUCTION";
     }
 
     public static final class KeyIndicatorsUtil {
