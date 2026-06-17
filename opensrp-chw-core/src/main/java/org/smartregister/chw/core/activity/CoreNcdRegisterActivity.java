@@ -26,7 +26,7 @@ public class CoreNcdRegisterActivity extends BaseNcdRegisterActivity {
         super.onResumption();
         NavigationMenu menu = NavigationMenu.getInstance(this, null, null);
         if (menu != null) {
-            menu.getNavigationAdapter().setSelectedView(CoreConstants.DrawerMenu.AGYW);
+            menu.getNavigationAdapter().setSelectedView(CoreConstants.DrawerMenu.NCD);
         }
     }
 
