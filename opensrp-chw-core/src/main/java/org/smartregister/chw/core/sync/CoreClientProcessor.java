@@ -401,6 +401,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_MOBILIZATION:
                 processHpsMobilizationEvent(eventClient.getEvent());
                 break;
+            case org.smartregister.chw.mothermentor.util.Constants.EVENT_TYPE.MOTHER_MENTOR_MOBILIZATION:
+                processMotherMentorMobilizationEvent(eventClient.getEvent());
+                break;
             case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_ADVERTISEMENT_FEEDBACK:
                 processHpsAdverstimentFeedbackEvent(eventClient.getEvent());
                 break;
@@ -687,6 +690,71 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
             }
             HivstMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached, maleCondomsIssued, femaleCondomsIssued);
+        }
+    }
+
+    private void processMotherMentorMobilizationEvent(Event event) {
+        List<Obs> mobilizationObs = event.getObs();
+        String shTarehe = null;
+        String shAina = null;
+        String shAinaOther = null;
+        String gps = null;
+        String shMada = null;
+        String shMadaOther = null;
+        String elimM = null;
+        String elimF = null;
+        String elimTotal = null;
+        String maoni = null;
+        long lastInteractedWith = event.getVersion();
+
+        if (!mobilizationObs.isEmpty()) {
+            for (Obs obs : mobilizationObs) {
+                String field = obs.getFormSubmissionField();
+                if ("sh_tarehe".equals(field)) {
+                    shTarehe = (String) obs.getValue();
+                } else if ("sh_aina".equals(field)) {
+                    shAina = (String) obs.getValue();
+                } else if ("sh_aina_other".equals(field)) {
+                    shAinaOther = (String) obs.getValue();
+                } else if ("gps".equals(field)) {
+                    gps = (String) obs.getValue();
+                } else if ("sh_mada".equals(field)) {
+                    shMada = obs.getValues().toString();
+                } else if ("sh_mada_other".equals(field)) {
+                    shMadaOther = (String) obs.getValue();
+                } else if ("elim_m".equals(field)) {
+                    elimM = (String) obs.getValue();
+                } else if ("elim_f".equals(field)) {
+                    elimF = (String) obs.getValue();
+                } else if ("elim_total".equals(field)) {
+                    elimTotal = (String) obs.getValue();
+                } else if ("maoni".equals(field)) {
+                    maoni = (String) obs.getValue();
+                } else if ("last_interacted_with".equals(field)) {
+                    try {
+                        lastInteractedWith = Long.parseLong((String) obs.getValue());
+                    } catch (Exception e) {
+                        Timber.e(e);
+                    }
+                }
+            }
+
+            ContentValues values = new ContentValues();
+            values.put("id", event.getBaseEntityId());
+            values.put("base_entity_id", event.getBaseEntityId());
+            values.put("sh_tarehe", shTarehe);
+            values.put("sh_aina", shAina);
+            values.put("sh_aina_other", shAinaOther);
+            values.put("gps", gps);
+            values.put("sh_mada", shMada);
+            values.put("sh_mada_other", shMadaOther);
+            values.put("elim_m", elimM);
+            values.put("elim_f", elimF);
+            values.put("elim_total", elimTotal);
+            values.put("maoni", maoni);
+            values.put("last_interacted_with", lastInteractedWith);
+
+            getWritableDatabase().insertWithOnConflict("ec_mothermentor_mobilization", null, values, SQLiteDatabase.CONFLICT_REPLACE);
         }
     }
 
