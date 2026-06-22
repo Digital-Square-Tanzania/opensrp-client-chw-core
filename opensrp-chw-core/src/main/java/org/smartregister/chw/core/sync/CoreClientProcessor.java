@@ -752,6 +752,11 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             values.put("elim_f", elimF);
             values.put("elim_total", elimTotal);
             values.put("maoni", maoni);
+            values.put("mobilization_date", shTarehe);
+            values.put("mobilization_area", shAina);
+            values.put("mobilization_topics", shMada);
+            values.put("male_clients_reached", elimM);
+            values.put("female_clients_reached", elimF);
             values.put("last_interacted_with", lastInteractedWith);
 
             getWritableDatabase().insertWithOnConflict("ec_mothermentor_mobilization", null, values, SQLiteDatabase.CONFLICT_REPLACE);
