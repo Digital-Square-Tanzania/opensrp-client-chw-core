@@ -15,6 +15,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_mother_mentor_household_enrollment"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/mother_mentor_household_enrollment"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
         android:title="@string/remove_member"
@@ -33,5 +40,4 @@
         app:showAsAction="never" />
 
 </menu>
-
 
