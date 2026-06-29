@@ -413,6 +413,15 @@ android {
     }
 }
 
+configurations.all {
+    // NCD 0.2.0 publishes Gradle metadata that upgrades these to Java 21-era artifacts.
+    resolutionStrategy.force 'org.smartregister:opensrp-plan-evaluator:0.0.19-SNAPSHOT'
+    resolutionStrategy.force 'com.fasterxml.jackson.core:jackson-core:2.10.5'
+    resolutionStrategy.force 'com.fasterxml.jackson.core:jackson-annotations:2.10.5'
+    resolutionStrategy.force 'com.fasterxml.jackson.core:jackson-databind:2.10.5.1'
+    resolutionStrategy.force 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.5'
+}
+
 tasks.withType(Test) {
     enabled = false
     jacoco.includeNoLocationClasses = true
@@ -818,6 +827,7 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'org.smartregister', module: 'opensrp-plan-evaluator'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'id.zelory', module: 'compressor'
     }
