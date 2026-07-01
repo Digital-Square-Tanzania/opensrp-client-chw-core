@@ -841,6 +841,7 @@
     <string name="refer_to_addo">Unganisha kwenda Duka la Dawa</string>
 
     <string name="hps_enrollment">Usajili kwenye huduma za Afya Jamii (iCCHW)</string>
+    <string name="mother_mentor_household_enrollment">Usajili kwenye huduma za Mama Kinara</string>
     <string name="enter_your_username_to_reset_password">Ingiza jina la mtumiaji kubadili nenosiri:</string>
     <string name="reset_password">Badili Nenosiri</string>
     <string name="back_to_login">Rudi kwenye Login</string>
