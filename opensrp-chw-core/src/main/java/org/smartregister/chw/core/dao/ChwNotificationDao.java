@@ -469,6 +469,14 @@ public class ChwNotificationDao extends AbstractDao {
      * @return a list of pair of the notification id and type
      */
     public static List<Pair<String, String>> getClientNotifications(String baseEntityId) {
+        List<Pair<String, String>> values = AbstractDao.readData(getClientNotificationsQuery(baseEntityId),
+                getNotificationPair());
+        if (values == null || values.size() == 0)
+            return new ArrayList<>();
+        return values;
+    }
+
+    static String getClientNotificationsQuery(String baseEntityId) {
         String query =
                 "SELECT id as notification_id, 'Sick Child' as notification_type\n" +
                         "FROM ec_sick_child_followup\n" +
@@ -488,6 +496,7 @@ public class ChwNotificationDao extends AbstractDao {
                         "UNION ALL\n" +
                         "SELECT id as notification_id, 'Family Planning' as notification_type\n" +
                         "FROM ec_family_planning_update\n" +
+                        "WHERE entity_id = '%s' COLLATE NOCASE AND is_closed = 0\n" +
                         "UNION ALL\n" +
                         "SELECT id as notification_id, 'Linkage From Facility' as notification_type\n" +
                         "FROM ec_facility_to_community_linkage\n" +
@@ -497,11 +506,7 @@ public class ChwNotificationDao extends AbstractDao {
                         "FROM ec_not_yet_done_referral\n" +
                         "WHERE entity_id = '%s'  COLLATE NOCASE;";
 
-        List<Pair<String, String>> values = AbstractDao.readData(query.replace("%s", baseEntityId),
-                getNotificationPair());
-        if (values == null || values.size() == 0)
-            return new ArrayList<>();
-        return values;
+        return query.replace("%s", baseEntityId);
     }
 
     private static DataMap<Pair<String, String>> getNotificationPair() {
