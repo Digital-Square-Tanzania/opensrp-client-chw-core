@@ -118,6 +118,11 @@ public class CoreFamilyOtherMemberProfileActivityImpl extends CoreFamilyOtherMem
     }
 
     @Override
+    protected void startDiabetesRiskAssessment() {
+        // do nothing
+    }
+
+    @Override
     protected void startSbcRegistration() {
         // do nothing
     }

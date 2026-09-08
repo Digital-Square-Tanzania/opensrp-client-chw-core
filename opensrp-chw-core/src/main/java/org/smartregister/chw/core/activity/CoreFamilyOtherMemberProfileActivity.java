@@ -249,7 +249,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_agyw_screening) {
             startAgywScreening();
             return true;
-        } else if (i == R.id.action_kvp_prep_registration) {
+        } else if (i == R.id.action_diabetes_risk) {
+            startDiabetesRiskAssessment();
+            return true;
+        }  else if (i == R.id.action_kvp_prep_registration) {
             startKvpPrEPRegistration();
             return true;
         } else if (i == R.id.action_kvp_registration) {
@@ -338,6 +341,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
 
     protected abstract void startAgywScreening();
 
+    protected void startDiabetesRiskAssessment() {
+        // Default no-op; NCD-enabled subclasses override to launch the diabetes risk assessment
+    }
+
     protected abstract void startSbcRegistration();
 
     protected abstract void startGbvRegistration();
@@ -421,6 +428,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
                     JSONObject form = new JSONObject(jsonString);
                     if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(Utils.metadata().familyMemberRegister.updateEventType)) {
                         presenter().updateFamilyMember(this, jsonString, isIndependent);
+                    } else if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(CoreConstants.EventType.DIABETES_HYPERTENSION_SCREENING)) {
+                        presenter().saveDiabetesHypertensionScreening(this, jsonString);
                     }
                 } catch (Exception e) {
                     Timber.e(e);

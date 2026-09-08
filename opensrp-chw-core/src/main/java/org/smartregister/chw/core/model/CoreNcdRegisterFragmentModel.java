@@ -5,14 +5,15 @@ import androidx.annotation.NonNull;
 import org.jetbrains.annotations.NotNull;
 import org.smartregister.chw.core.utils.ChildDBConstants;
 import org.smartregister.chw.core.utils.CoreConstants;
-import org.smartregister.chw.harmreduction.model.BaseHarmReductionRegisterFragmentModel;
+import org.smartregister.chw.ncd.model.BaseNcdRegisterFragmentModel;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.family.util.DBConstants;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class CoreHarmReductionRegisterFragmentModel extends BaseHarmReductionRegisterFragmentModel {
+public class CoreNcdRegisterFragmentModel extends BaseNcdRegisterFragmentModel {
+
     @NonNull
     @Override
     public String mainSelect(@NonNull String tableName, @NonNull String mainCondition) {
@@ -22,6 +23,20 @@ public class CoreHarmReductionRegisterFragmentModel extends BaseHarmReductionReg
         queryBuilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY + " ON  " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " = " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID);
         queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " as T1 ON  " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.PRIMARY_CAREGIVER + " = T1." + DBConstants.KEY.BASE_ENTITY_ID);
         queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " as T2 ON  " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.FAMILY_HEAD + " = T2." + DBConstants.KEY.BASE_ENTITY_ID);
+        queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.DIABETES_HYPERTENSION_FOLLOWUP + " as dhf ON  " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = dhf." + DBConstants.KEY.BASE_ENTITY_ID);
+        return queryBuilder.mainCondition(mainCondition);
+    }
+
+    @NonNull
+    @Override
+    public String countSelect(@NonNull String tableName, @NonNull String mainCondition) {
+        SmartRegisterQueryBuilder queryBuilder = new SmartRegisterQueryBuilder();
+        queryBuilder.selectInitiateMainTableCounts(tableName);
+        queryBuilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " ON  " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.BASE_ENTITY_ID + " COLLATE NOCASE ");
+        queryBuilder.customJoin("INNER JOIN " + CoreConstants.TABLE_NAME.FAMILY + " ON  " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " = " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.BASE_ENTITY_ID);
+        queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " as T1 ON  " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.PRIMARY_CAREGIVER + " = T1." + DBConstants.KEY.BASE_ENTITY_ID);
+        queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + " as T2 ON  " + CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.FAMILY_HEAD + " = T2." + DBConstants.KEY.BASE_ENTITY_ID);
+        queryBuilder.customJoin("LEFT JOIN " + CoreConstants.TABLE_NAME.DIABETES_HYPERTENSION_FOLLOWUP + " as dhf ON  " + tableName + "." + DBConstants.KEY.BASE_ENTITY_ID + " = dhf." + DBConstants.KEY.BASE_ENTITY_ID);
         return queryBuilder.mainCondition(mainCondition);
     }
 
@@ -31,7 +46,13 @@ public class CoreHarmReductionRegisterFragmentModel extends BaseHarmReductionReg
         Set<String> columnList = new HashSet<>();
 
         columnList.add(tableName + "." + DBConstants.KEY.BASE_ENTITY_ID);
-        columnList.add(tableName + ".nickname");
+        columnList.add(tableName + ".family_history_diabetes");
+        columnList.add(tableName + ".waist_circumference");
+        columnList.add(tableName + ".systolic_bp");
+        columnList.add(tableName + ".diastolic_bp");
+        columnList.add(tableName + ".risk_score");
+        columnList.add("dhf.diabetes_test_result");
+        columnList.add("dhf.hypertension_test_result");
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " as " + ChildDBConstants.KEY.RELATIONAL_ID);
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.FIRST_NAME);
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.MIDDLE_NAME);
@@ -46,8 +67,9 @@ public class CoreHarmReductionRegisterFragmentModel extends BaseHarmReductionReg
         columnList.add(CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.VILLAGE_TOWN);
         columnList.add("T1." + DBConstants.KEY.FIRST_NAME + " || " + "' '" + " || " + "T1." + DBConstants.KEY.MIDDLE_NAME + " || " + "' '" + " || " + "T1." + DBConstants.KEY.LAST_NAME + " AS " + DBConstants.KEY.PRIMARY_CAREGIVER);
         columnList.add("T2." + DBConstants.KEY.FIRST_NAME + " || " + "' '" + " || " + "T2." + DBConstants.KEY.MIDDLE_NAME + " || " + "' '" + " || " + "T2." + DBConstants.KEY.LAST_NAME + " AS " + DBConstants.KEY.FAMILY_HEAD);
-        columnList.add(CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.FIRST_NAME + " as " + org.smartregister.chw.anc.util.DBConstants.KEY.FAMILY_NAME);
+        columnList.add(CoreConstants.TABLE_NAME.FAMILY + "." + DBConstants.KEY.FIRST_NAME + " as " + org.smartregister.chw.agyw.util.DBConstants.KEY.FAMILY_NAME);
 
-        return columnList.toArray(new String[0]);
+        return columnList.toArray(new String[columnList.size()]);
     }
+
 }

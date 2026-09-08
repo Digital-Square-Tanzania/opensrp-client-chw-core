@@ -134,6 +134,7 @@ public class NativeFormsDataLoader implements DataLoader {
     @Override
     public void loadForm(Context context, JSONObject formJsonObject, String baseEntityID) throws JSONException {
         eventName = formJsonObject.optString(Constants.JSON_FORM_EXTRA.ENCOUNTER_TYPE);
+        Map<String, Map<String, Object>> dbData = getDbData(context, baseEntityID, eventName);
         List<JSONObject> steps = CoreJsonFormUtils.getFormSteps(formJsonObject);
         for (JSONObject step : steps) {
             JSONArray jsonArray = step.getJSONArray(org.smartregister.family.util.JsonFormUtils.FIELDS);
@@ -142,12 +143,15 @@ public class NativeFormsDataLoader implements DataLoader {
                 try {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     // get value of key
-                    String value = getValue(context, baseEntityID, jsonObject, getDbData(context, baseEntityID, eventName));
+                    String value = getValue(context, baseEntityID, jsonObject, dbData);
                     if (StringUtils.isNotBlank(value))
                         jsonObject.put(JsonFormConstants.VALUE, value);
                 } catch (Exception e) {
                     Timber.e(e);
                 }
+            }
+            if (CaregiverRelationshipFormPopulator.hasSavedRelationship(jsonArray)) {
+                CaregiverRelationshipFormPopulator.populate(jsonArray, getClient(baseEntityID));
             }
         }
     }

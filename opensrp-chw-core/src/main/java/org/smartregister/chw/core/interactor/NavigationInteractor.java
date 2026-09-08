@@ -611,6 +611,18 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         " AND t.status <> '" + Task.TaskStatus.CANCELLED + "' " +
                         " AND p.chw_referral_service <> 'LTFU' COLLATE NOCASE ";
                 return NavigationDao.getQueryCount(sqlLinkage);
+            case CoreConstants.TABLE_NAME.NCD_REGISTER:
+                String sqlNcd = "Select count(*) " +
+                        "FROM " + org.smartregister.chw.ncd.util.Constants.TABLES.NCD_ENROLLMENT +
+                        " INNER JOIN ec_family_member ON  ec_ncd_register.base_entity_id = ec_family_member.base_entity_id COLLATE NOCASE " +
+                        "INNER JOIN ec_family ON ec_family_member.relational_id = ec_family.base_entity_id " +
+                        "LEFT JOIN ec_family_member as T1 ON  ec_family.primary_caregiver = T1.base_entity_id " +
+                        "LEFT JOIN ec_family_member as T2 ON  ec_family.family_head = T2.base_entity_id " +
+                        "WHERE ec_ncd_register.is_closed = 0 AND (" +
+                        "CAST(IFNULL(NULLIF(ec_ncd_register.risk_score,''),'0') AS REAL) >= 0.09175944 OR " +
+                        "CAST(IFNULL(NULLIF(ec_ncd_register.systolic_bp,''),'0') AS REAL) >= 140 OR " +
+                        "CAST(IFNULL(NULLIF(ec_ncd_register.diastolic_bp,''),'0') AS REAL) >= 90) ";
+                return NavigationDao.getQueryCount(sqlNcd);
             case CoreConstants.TABLE_NAME.HPS_MEMBERS:
                 String sqlHps =
                         "SELECT count(*) " +
