@@ -173,6 +173,8 @@ public class CoreMalariaProfileActivitySessionTest extends BaseUnitTest {
             return null;
         }
 
+        // Robolectric 4.3 matches the existing Context API by its exact method name.
+        @SuppressWarnings("PMD.MethodNamingConventions")
         @Implementation
         public boolean IsUserLoggedOut() {
             return loggedOut;
