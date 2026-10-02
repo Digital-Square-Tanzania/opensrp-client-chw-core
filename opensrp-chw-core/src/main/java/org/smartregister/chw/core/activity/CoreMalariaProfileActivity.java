@@ -6,7 +6,6 @@ import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
@@ -74,8 +73,8 @@ public abstract class CoreMalariaProfileActivity extends BaseMalariaProfileActiv
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreation() {
+        super.onCreation();
         updateToolbarTitle(this, R.id.toolbar_title, memberObject.getFamilyName());
     }
 
