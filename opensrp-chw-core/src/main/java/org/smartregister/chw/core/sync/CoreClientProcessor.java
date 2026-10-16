@@ -759,6 +759,14 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             values.put("female_clients_reached", elimF);
             values.put("last_interacted_with", lastInteractedWith);
 
+            org.smartregister.chw.mothermentor.repository.MotherMentorReportingRepository.ensureMobilizationColumns(getWritableDatabase());
+            for (Obs obs : mobilizationObs) {
+                String field = obs.getFormSubmissionField();
+                if (org.smartregister.chw.mothermentor.repository.MotherMentorReportingRepository.REFERRAL_COLUMNS.contains(field)) {
+                    Object value = "facility_referral_services".equals(field) ? obs.getValues() : obs.getValue();
+                    values.put(field, value == null ? null : value.toString());
+                }
+            }
             getWritableDatabase().insertWithOnConflict("ec_mothermentor_mobilization", null, values, SQLiteDatabase.CONFLICT_REPLACE);
         }
     }
