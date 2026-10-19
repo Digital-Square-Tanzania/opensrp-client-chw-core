@@ -1430,6 +1430,9 @@ public class CoreConstants {
         public static final String AYP_OUT_SCHOOL = "AYP out of school";
 
         public static final String MOTHER_MENTOR = "Mother Mentor";
+        public static final String MOTHER_MENTOR_IIT = "Mother Mentor IIT";
+        public static final String MOTHER_MENTOR_PARTNER = "MOTHER MENTOR PARTNER";
+        public static final String MOTHER_MENTOR_CHILD_EID = "MOTHER MENTOR CHILD EID";
 
         public static final String SBC = "SBC";
 
