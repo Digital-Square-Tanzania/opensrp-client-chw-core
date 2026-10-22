@@ -8,7 +8,6 @@ import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -53,10 +52,19 @@ public abstract class CoreTbLeprosyProfileActivity extends BaseTbLeprosyProfileA
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onCreation() {
+        super.onCreation();
         updateToolbarTitle(this, R.id.toolbar_title, memberObject.getFamilyName());
         initializeNotificationReferralRecyclerView();
+    }
+
+    @Override
+    protected void setupViews() {
+        // The parent also posts this callback after onResume, even when creation was skipped.
+        if (memberObject == null || context().IsUserLoggedOut()) {
+            return;
+        }
+        super.setupViews();
     }
 
     protected void initializeNotificationReferralRecyclerView() {
