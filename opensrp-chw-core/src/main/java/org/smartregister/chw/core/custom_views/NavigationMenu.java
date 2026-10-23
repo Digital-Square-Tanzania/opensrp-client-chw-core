@@ -122,8 +122,8 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             toolbar = myToolbar;
             parentView = myParentView;
             mPresenter = new NavigationPresenter(application, this, modelFlavor);
-            prepareViews(activity);
             mPresenter.updateTableMap(menuFlavor.getTableMapValues());
+            prepareViews(activity);
         } catch (Exception e) {
             Timber.e(e);
         }

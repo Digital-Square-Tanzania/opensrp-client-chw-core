@@ -9,6 +9,9 @@ import static org.smartregister.chw.tbleprosy.util.Constants.EVENT_TYPE.TB_LEPRO
 import android.content.ContentValues;
 import android.content.Context;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
 import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
@@ -71,6 +74,7 @@ import org.smartregister.immunization.service.intent.RecurringIntentService;
 import org.smartregister.immunization.service.intent.VaccineIntentService;
 import org.smartregister.immunization.util.IMConstants;
 import org.smartregister.sync.ClientProcessorForJava;
+import org.smartregister.util.JsonFormUtils;
 
 import timber.log.Timber;
 
@@ -84,6 +88,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class CoreClientProcessor extends ClientProcessorForJava {
+    private static final String SERVICE_TABLE_CONFIG_FILE = "ec_client_service.json";
 
     private ClientClassification classification;
     private Table vaccineTable;
@@ -197,15 +202,6 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         if (serviceTables != null && !serviceTables.isEmpty()) {
             serviceTable = serviceTables.values().iterator().next();
         }
-        if (serviceTable == null) {
-            serviceTable = assetJsonToJava("ec_client_service.json", Table.class);
-            if (serviceTable != null) {
-                if (serviceTables == null) {
-                    serviceTables = new HashMap<>();
-                }
-                serviceTables.put(serviceTable.name, serviceTable);
-            }
-        }
         return serviceTable;
     }
 
@@ -223,9 +219,18 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     }
 
     private void loadServiceTables() {
-        Table[] tables = assetJsonToJava("ec_client_service.json", Table[].class);
-        if (tables != null && tables.length > 0) {
-            serviceTables = new HashMap<>();
+        serviceTables = new HashMap<>();
+        try {
+            JsonElement configuration =
+                    assetJsonToJava(SERVICE_TABLE_CONFIG_FILE, JsonElement.class);
+            Table[] tables;
+            if (configuration != null && configuration.isJsonObject()) {
+                tables = new Table[] {JsonFormUtils.gson.fromJson(configuration, Table.class)};
+            } else if (configuration != null && configuration.isJsonArray()) {
+                tables = JsonFormUtils.gson.fromJson(configuration, Table[].class);
+            } else {
+                throw new JsonParseException("Expected a service table object or array");
+            }
             for (Table table : tables) {
                 if (table != null && StringUtils.isNotBlank(table.name)) {
                     serviceTables.put(table.name, table);
@@ -234,6 +239,8 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             if (!serviceTables.isEmpty()) {
                 serviceTable = serviceTables.values().iterator().next();
             }
+        } catch (JsonParseException e) {
+            Timber.e(e, "Unable to parse service table configuration %s", SERVICE_TABLE_CONFIG_FILE);
         }
     }
 
