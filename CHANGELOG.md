@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-7-MOH-SNAPSHOT — 2026-10-23
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.7-SNAPSHOT`, including the merged register UI,
+  navigation icons, English/Swahili action headings, and profile referral fixes.
+- Increment the Core publication version to
+  `2.2.0-MOTHER-MENTOR-ALPHA-7-MOH-SNAPSHOT` and `VERSION_CODE` from 143 to 144.
+- Read the Android library version name and code from the release properties.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-6-MOH-SNAPSHOT — 2026-10-23
 
 ### Changed
