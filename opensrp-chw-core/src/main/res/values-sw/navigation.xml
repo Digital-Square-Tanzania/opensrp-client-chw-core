@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="navigation_other_modules">Moduli Nyingine</string>
+    <string name="navigation_other_modules_expanded">Moduli Nyingine, zimepanuliwa</string>
+    <string name="navigation_other_modules_collapsed">Moduli Nyingine, zimekunjwa</string>
+    <string name="navigation_expand_other_modules">Panua Moduli Nyingine</string>
+    <string name="navigation_collapse_other_modules">Kunja Moduli Nyingine</string>
+</resources>
