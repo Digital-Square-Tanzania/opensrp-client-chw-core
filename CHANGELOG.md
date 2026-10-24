@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Fixed
+
+- Apply flavor-specific navigation table mappings before the initial count requests.
+- Load single-object and array service configurations without an exception-driven
+  format fallback, while preserving named table lookup and caching.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-7-MOH-SNAPSHOT — 2026-10-23
 
 ### Changed
