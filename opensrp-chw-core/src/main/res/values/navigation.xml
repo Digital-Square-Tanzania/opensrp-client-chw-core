@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="navigation_module_indent">16dp</dimen>
+    <dimen name="navigation_section_text_size">20sp</dimen>
+    <string name="navigation_other_modules">Other Modules</string>
+    <string name="navigation_other_modules_expanded">Other Modules, expanded</string>
+    <string name="navigation_other_modules_collapsed">Other Modules, collapsed</string>
+    <string name="navigation_expand_other_modules">Expand Other Modules</string>
+    <string name="navigation_collapse_other_modules">Collapse Other Modules</string>
+</resources>

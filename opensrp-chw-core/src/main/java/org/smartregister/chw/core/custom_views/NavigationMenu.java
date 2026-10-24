@@ -47,6 +47,7 @@ import org.smartregister.view.activity.StatsActivity;
 import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -121,8 +122,8 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             toolbar = myToolbar;
             parentView = myParentView;
             mPresenter = new NavigationPresenter(application, this, modelFlavor);
-            prepareViews(activity);
             mPresenter.updateTableMap(menuFlavor.getTableMapValues());
+            prepareViews(activity);
         } catch (Exception e) {
             Timber.e(e);
         }
@@ -305,7 +306,11 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
 
             List<NavigationOption> navigationOptions = mPresenter.getOptions();
             if (navigationAdapter == null) {
-                navigationAdapter = new NavigationAdapter(navigationOptions, parentActivity, registeredActivities);
+                navigationAdapter = new NavigationAdapter(navigationOptions, parentActivity,
+                        registeredActivities, menuFlavor.getPrimaryNavigationItems());
+            } else {
+                // The singleton adapter may have been created by a previous Activity.
+                navigationAdapter.bindToActivity(parentActivity);
             }
 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(parentActivity);
@@ -507,6 +512,14 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
     }
 
     public interface Flavour {
+        /**
+         * Ordered primary routes. Empty preserves the existing flat drawer.
+         * Only routes already present in the current role's options are displayed.
+         */
+        default List<String> getPrimaryNavigationItems() {
+            return Collections.emptyList();
+        }
+
         List<Pair<String, Locale>> getSupportedLanguages();
 
         HashMap<String, String> getTableMapValues();
