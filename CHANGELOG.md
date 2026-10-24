@@ -5,9 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 2.2.0-MOTHER-MENTOR-ALPHA-8-MOH-SNAPSHOT — 2026-10-24
+
+### Changed
+
+- Upgrade FP and ASRH to `2.0.1-SNAPSHOT` for their household count and
+  membership query fixes.
+- Increment the Core library version code from 144 to 145.
 
 ### Fixed
+
+- Rebind the shared navigation drawer to the active Activity after register
+  transitions and language changes.
 
 - Bound linked-client sync retries and report exhausted attempts as failed without
   recursively overflowing the background service stack when requests fail.
