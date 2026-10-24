@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-10-MOH-SNAPSHOT — 2026-10-24
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.9-SNAPSHOT` to prevent saved or cancelled
+  enrollment forms reopening after language changes or activity restoration,
+  while preserving enrollment details and allowing new requests.
+- Increment the Core library version code from 146 to 147.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-9-MOH-SNAPSHOT — 2026-10-24
 
 ### Changed
