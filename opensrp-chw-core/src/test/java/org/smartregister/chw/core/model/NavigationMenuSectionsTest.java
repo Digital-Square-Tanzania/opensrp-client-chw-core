@@ -14,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class NavigationMenuSectionsTest {
     private static final List<String> PRIMARY = Arrays.asList("clients", "households", "icchw");
+    private static final List<String> FOLLOW_UP = Arrays.asList("referrals", "updates", "ltfu");
 
     @Test
     public void emptyPrimaryConfigurationPreservesFlatDrawer() {
@@ -111,6 +112,102 @@ public class NavigationMenuSectionsTest {
         assertEquals(Arrays.asList("clients", null), keys(sections));
     }
 
+    @Test
+    public void followUpRowsRemainVisibleAfterCollapsedAndExpandedModules() {
+        List<NavigationOption> options = options("ltfu", "anc", "updates", "clients", "referrals");
+        NavigationMenuSections sections = new NavigationMenuSections(options, PRIMARY, FOLLOW_UP);
+
+        assertEquals(Arrays.asList("clients", null, "follow-up-heading", "referrals", "updates", "ltfu"), keys(sections));
+        assertTrue(sections.getRows().get(2).isHeader());
+        assertTrue(sections.getRows().get(2).isFollowUpHeader());
+        assertFalse(sections.getRows().get(3).isChild());
+        sections.setExpanded(true);
+        assertEquals(Arrays.asList("clients", null, "anc", "follow-up-heading", "referrals", "updates", "ltfu"), keys(sections));
+        assertTrue(sections.getRows().get(2).isChild());
+        assertFalse(sections.getRows().get(4).isChild());
+        assertEquals(Arrays.asList("ltfu", "anc", "updates", "clients", "referrals"), optionKeys(options));
+    }
+
+    @Test
+    public void followUpSectionIncludesOnlyRoleAvailableItemsAndLiveCounts() {
+        List<NavigationOption> options = options("updates", "clients", "anc");
+        NavigationMenuSections sections = new NavigationMenuSections(options, PRIMARY, FOLLOW_UP);
+
+        assertEquals(Arrays.asList("clients", null, "follow-up-heading", "updates"), keys(sections));
+        assertSame(options.get(0), sections.getRows().get(3).getOption());
+        options.get(0).setRegisterCount(42);
+        assertEquals(42, sections.getRows().get(3).getOption().getRegisterCount());
+        assertFalse(sections.isExpanded());
+
+        options.clear();
+        options.addAll(options("clients", "anc"));
+        assertEquals(Arrays.asList("clients", null), keys(sections));
+    }
+
+    @Test
+    public void selectingFollowUpDoesNotChangeOtherModulesExpansion() {
+        NavigationMenuSections sections = new NavigationMenuSections(
+                options("clients", "anc", "referrals", "updates", "ltfu"), PRIMARY, FOLLOW_UP);
+        for (String followUp : FOLLOW_UP) {
+            sections.revealSelection(followUp);
+            assertFalse(sections.isExpanded());
+        }
+        sections.revealSelection("anc");
+        assertTrue(sections.isExpanded());
+        sections.revealSelection("updates");
+        assertTrue(sections.isExpanded());
+    }
+
+    @Test
+    public void unavailableFollowUpSectionHasNoHeading() {
+        NavigationMenuSections sections = new NavigationMenuSections(options("clients", "anc"), PRIMARY, FOLLOW_UP);
+
+        assertEquals(Arrays.asList("clients", null), keys(sections));
+        sections.setExpanded(true);
+        assertEquals(Arrays.asList("clients", null, "anc"), keys(sections));
+    }
+
+    @Test
+    public void followUpSectionDoesNotRequireOtherModules() {
+        NavigationMenuSections sections = new NavigationMenuSections(options("ltfu", "clients"), PRIMARY, FOLLOW_UP);
+
+        assertEquals(Arrays.asList("clients", "follow-up-heading", "ltfu"), keys(sections));
+        sections.setExpanded(true);
+        assertEquals(Arrays.asList("clients", "follow-up-heading", "ltfu"), keys(sections));
+    }
+
+    @Test
+    public void emptyPrimaryConfigurationKeepsFollowUpOptionsInOriginalFlatOrder() {
+        NavigationMenuSections sections = new NavigationMenuSections(
+                options("updates", "clients", "ltfu", "anc", "referrals"), Collections.emptyList(), FOLLOW_UP);
+
+        assertEquals(Arrays.asList("updates", "clients", "ltfu", "anc", "referrals"), keys(sections));
+        sections.revealSelection("anc");
+        assertFalse(sections.isExpanded());
+        for (NavigationMenuSections.Row row : sections.getRows()) {
+            assertFalse(row.isHeader());
+            assertFalse(row.isChild());
+        }
+    }
+
+    @Test
+    public void overlappingAndRepeatedConfigurationDoesNotDuplicateFollowUpRoutes() {
+        NavigationMenuSections sections = new NavigationMenuSections(options("clients", "updates", "anc"),
+                PRIMARY, Arrays.asList("clients", "updates", "updates"));
+
+        sections.setExpanded(true);
+        assertEquals(Arrays.asList("clients", null, "anc", "follow-up-heading", "updates"), keys(sections));
+    }
+
+    @Test
+    public void originalConstructorKeepsFollowUpRoutesUnderOtherModules() {
+        NavigationMenuSections sections = new NavigationMenuSections(options("clients", "updates", "anc"), PRIMARY);
+
+        assertEquals(Arrays.asList("clients", null), keys(sections));
+        sections.setExpanded(true);
+        assertEquals(Arrays.asList("clients", null, "updates", "anc"), keys(sections));
+    }
+
     private List<NavigationOption> options(String... keys) {
         List<NavigationOption> options = new ArrayList<>();
         for (String key : keys) {
@@ -122,7 +219,7 @@ public class NavigationMenuSectionsTest {
     private List<String> keys(NavigationMenuSections sections) {
         List<String> keys = new ArrayList<>();
         for (NavigationMenuSections.Row row : sections.getRows()) {
-            keys.add(row.isHeader() ? null : row.getOption().getMenuTitle());
+            keys.add(row.isFollowUpHeader() ? "follow-up-heading" : row.isHeader() ? null : row.getOption().getMenuTitle());
         }
         return keys;
     }
