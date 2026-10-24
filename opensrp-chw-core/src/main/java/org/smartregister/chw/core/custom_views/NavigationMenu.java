@@ -308,6 +308,9 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             if (navigationAdapter == null) {
                 navigationAdapter = new NavigationAdapter(navigationOptions, parentActivity,
                         registeredActivities, menuFlavor.getPrimaryNavigationItems());
+            } else {
+                // The singleton adapter may have been created by a previous Activity.
+                navigationAdapter.bindToActivity(parentActivity);
             }
 
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(parentActivity);
