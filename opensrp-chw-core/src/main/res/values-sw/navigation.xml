@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="navigation_follow_up">UFUATILIAJI</string>
     <string name="navigation_other_modules">Moduli Nyingine</string>
     <string name="navigation_other_modules_expanded">Moduli Nyingine, zimepanuliwa</string>
     <string name="navigation_other_modules_collapsed">Moduli Nyingine, zimekunjwa</string>

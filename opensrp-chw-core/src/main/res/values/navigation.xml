@@ -2,6 +2,10 @@
 <resources>
     <dimen name="navigation_module_indent">16dp</dimen>
     <dimen name="navigation_section_text_size">20sp</dimen>
+    <dimen name="navigation_follow_up_heading_text_size">14sp</dimen>
+    <color name="navigation_section_heading">#959595</color>
+    <color name="navigation_section_divider">#424242</color>
+    <string name="navigation_follow_up">FOLLOW-UP</string>
     <string name="navigation_other_modules">Other Modules</string>
     <string name="navigation_other_modules_expanded">Other Modules, expanded</string>
     <string name="navigation_other_modules_collapsed">Other Modules, collapsed</string>

@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-11-MOH-SNAPSHOT — 2026-10-25
+
+### Changed
+
+- Add an opt-in, always-visible FOLLOW-UP / UFUATILIAJI navigation section
+  below Other Modules, preserving role visibility, register counts, and the
+  flat-menu configuration.
+- Increment the Core library version code from 147 to 148.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-10-MOH-SNAPSHOT — 2026-10-24
 
 ### Changed

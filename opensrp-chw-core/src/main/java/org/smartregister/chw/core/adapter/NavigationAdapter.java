@@ -30,6 +30,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
 
     private static final int VIEW_TYPE_OPTION = 0;
     private static final int VIEW_TYPE_OTHER_MODULES = 1;
+    private static final int VIEW_TYPE_FOLLOW_UP_HEADER = 2;
     private final NavigationMenuSections sections;
     private String selectedView = CoreConstants.DrawerMenu.ALL_FAMILIES;
     private View.OnClickListener onClickListener;
@@ -42,7 +43,13 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
 
     public NavigationAdapter(List<NavigationOption> navigationOptions, Activity context,
                              Map<String, Class> registeredActivities, List<String> primaryNavigationItems) {
-        this.sections = new NavigationMenuSections(navigationOptions, primaryNavigationItems);
+        this(navigationOptions, context, registeredActivities, primaryNavigationItems, Collections.emptyList());
+    }
+
+    public NavigationAdapter(List<NavigationOption> navigationOptions, Activity context,
+                             Map<String, Class> registeredActivities, List<String> primaryNavigationItems,
+                             List<String> followUpNavigationItems) {
+        this.sections = new NavigationMenuSections(navigationOptions, primaryNavigationItems, followUpNavigationItems);
         this.registeredActivities = registeredActivities;
         bindToActivity(context);
     }
@@ -70,15 +77,20 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        int layout = viewType == VIEW_TYPE_FOLLOW_UP_HEADER ? R.layout.navigation_follow_up_header
+                : viewType == VIEW_TYPE_OTHER_MODULES ? R.layout.navigation_other_modules : R.layout.navigation_item;
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(viewType == VIEW_TYPE_OTHER_MODULES
-                        ? R.layout.navigation_other_modules : R.layout.navigation_item, parent, false);
+                .inflate(layout, parent, false);
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         NavigationMenuSections.Row row = sections.getRows().get(position);
+        if (row.isFollowUpHeader()) {
+            bindFollowUpHeader(holder);
+            return;
+        }
         if (row.isHeader()) {
             bindOtherModules(holder);
             return;
@@ -106,6 +118,17 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
             holder.tvName.setTextColor(context.getResources().getColor(R.color.navigation_item_unselected));
             holder.ivIcon.setImageResource(model.getResourceID());
         }
+    }
+
+    private void bindFollowUpHeader(@NonNull MyViewHolder holder) {
+        View view = holder.getView();
+        holder.tvName.setText(R.string.navigation_follow_up);
+        view.setTag(null);
+        view.setOnClickListener(null);
+        view.setClickable(false);
+        view.setFocusable(false);
+        view.setContentDescription(context.getString(R.string.navigation_follow_up));
+        ViewCompat.setAccessibilityHeading(view, true);
     }
 
     private void bindOtherModules(@NonNull MyViewHolder holder) {
@@ -149,8 +172,9 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.My
 
     @Override
     public int getItemViewType(int position) {
-        return sections.getRows().get(position).isHeader()
-                ? VIEW_TYPE_OTHER_MODULES : VIEW_TYPE_OPTION;
+        NavigationMenuSections.Row row = sections.getRows().get(position);
+        return row.isFollowUpHeader() ? VIEW_TYPE_FOLLOW_UP_HEADER
+                : row.isHeader() ? VIEW_TYPE_OTHER_MODULES : VIEW_TYPE_OPTION;
     }
 
     @Override
