@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
+- Bound linked-client sync retries and report exhausted attempts as failed without
+  recursively overflowing the background service stack when requests fail.
 - Apply flavor-specific navigation table mappings before the initial count requests.
 - Load single-object and array service configurations without an exception-driven
   format fallback, while preserving named table lookup and caching.
