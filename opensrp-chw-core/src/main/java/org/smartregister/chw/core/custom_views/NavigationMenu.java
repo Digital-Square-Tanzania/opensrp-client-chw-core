@@ -307,7 +307,8 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
             List<NavigationOption> navigationOptions = mPresenter.getOptions();
             if (navigationAdapter == null) {
                 navigationAdapter = new NavigationAdapter(navigationOptions, parentActivity,
-                        registeredActivities, menuFlavor.getPrimaryNavigationItems());
+                        registeredActivities, menuFlavor.getPrimaryNavigationItems(),
+                        menuFlavor.getFollowUpNavigationItems());
             } else {
                 // The singleton adapter may have been created by a previous Activity.
                 navigationAdapter.bindToActivity(parentActivity);
@@ -517,6 +518,11 @@ public class NavigationMenu implements NavigationContract.View, SyncStatusBroadc
          * Only routes already present in the current role's options are displayed.
          */
         default List<String> getPrimaryNavigationItems() {
+            return Collections.emptyList();
+        }
+
+        /** Ordered follow-up routes shown separately when primary grouping is enabled. */
+        default List<String> getFollowUpNavigationItems() {
             return Collections.emptyList();
         }
 
