@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-12-MOH-SNAPSHOT — 2026-10-25
+
+### Changed
+
+- Upgrade HPS to `2.0.7-SNAPSHOT` for the two-row iCCHW client list, colored
+  sex values, and profile opening from a client row tap.
+- Preserve the latest FOLLOW-UP / UFUATILIAJI navigation section from Alpha 11.
+- Increment the Core library version code from 148 to 149.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-11-MOH-SNAPSHOT — 2026-10-25
 
 ### Changed
