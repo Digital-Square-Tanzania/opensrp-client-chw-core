@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
 import org.smartregister.chw.mothermentor.util.Constants;
 import org.smartregister.chw.mothermentor.util.DBConstants;
@@ -102,21 +103,37 @@ public abstract class CoreMotherMentorProfileActivity extends BaseMotherMentorPr
         if (itemId == android.R.id.home) {
             onBackPressed();
             return true;
-        } else if (itemId == R.id.action_registration) {
-            if (UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId())) {
-                startFormForEdit(R.string.registration_info,
-                        CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
-            } else {
-                startFormForEdit(R.string.edit_member_form_title,
-                        CoreConstants.JSON_FORM.getFamilyMemberRegister());
+        } else if (itemId == R.id.action_registration || itemId == R.id.action_location_info) {
+            if (memberObject == null || StringUtils.isBlank(memberObject.getBaseEntityId())) {
+                return true;
             }
-            return true;
-        } else if (itemId == R.id.action_location_info) {
-            JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
-                    CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
-                    UpdateDetailsUtil.getFamilyRegistrationDetails(memberObject.getFamilyBaseEntityId()), Utils.metadata().familyRegister.updateEventType);
-            if (preFilledForm != null)
-                UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
+            try {
+                if (itemId == R.id.action_registration) {
+                    if (UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId())) {
+                        startFormForEdit(R.string.registration_info,
+                                CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+                    } else {
+                        startFormForEdit(R.string.edit_member_form_title,
+                                CoreConstants.JSON_FORM.getFamilyMemberRegister());
+                    }
+                } else {
+                    CommonPersonObjectClient client = org.smartregister.chw.core.utils.Utils
+                            .getCommonPersonObjectClient(memberObject.getBaseEntityId());
+                    String familyBaseEntityId = UpdateDetailsUtil.getFamilyBaseEntityId(client);
+                    if (StringUtils.isBlank(familyBaseEntityId)) {
+                        return true;
+                    }
+                    JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
+                            CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
+                            UpdateDetailsUtil.getFamilyRegistrationDetails(familyBaseEntityId),
+                            Utils.metadata().familyRegister.updateEventType);
+                    if (preFilledForm != null) {
+                        UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
+                    }
+                }
+            } catch (Exception e) {
+                Timber.e(e, "Unable to open Mother Mentor profile information");
+            }
             return true;
         } else if (itemId == R.id.action_hivst_registration) {
             startHivstRegistration();
@@ -141,13 +158,16 @@ public abstract class CoreMotherMentorProfileActivity extends BaseMotherMentorPr
                     memberObject.getBaseEntityId(), this, formName, CoreConstants.EventType.UPDATE_ANC_REGISTRATION, getResources().getString(title_resource));
         } else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm())) {
             String titleString = title_resource != null ? getResources().getString(title_resource) : null;
-            CommonPersonObjectClient commonPersonObjectClient = UpdateDetailsUtil.getFamilyRegistrationDetails(memberObject.getFamilyBaseEntityId());
-            String uniqueID = commonPersonObjectClient.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
-            boolean isPrimaryCareGiver = commonPersonObjectClient.getCaseId().equalsIgnoreCase(memberObject.getFamilyBaseEntityId());
+            String uniqueID = client.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
+            boolean isPrimaryCareGiver = memberObject.getBaseEntityId()
+                    .equalsIgnoreCase(memberObject.getPrimaryCareGiver());
 
             NativeFormsDataBinder binder = new NativeFormsDataBinder(getContext(), memberObject.getBaseEntityId());
-            binder.setDataLoader(new CoreFamilyMemberDataLoader(memberObject.getFamilyName(), isPrimaryCareGiver, titleString,
-                    org.smartregister.chw.core.utils.Utils.metadata().familyMemberRegister.updateEventType, uniqueID));
+            binder.setDataLoader(new CoreFamilyMemberDataLoader(
+                    StringUtils.defaultString(memberObject.getFamilyName()),
+                    isPrimaryCareGiver, titleString,
+                    org.smartregister.chw.core.utils.Utils.metadata().familyMemberRegister.updateEventType,
+                    uniqueID));
             JSONObject jsonObject = binder.getPrePopulatedForm(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
 
             try {
@@ -157,11 +177,13 @@ public abstract class CoreMotherMentorProfileActivity extends BaseMotherMentorPr
             } catch (Exception e) {
                 Timber.e(e);
             }
+            return;
         }
 
         try {
-            assert form != null;
-            startFormActivity(form);
+            if (form != null) {
+                startFormActivity(form);
+            }
         } catch (Exception e) {
             Timber.e(e);
         }

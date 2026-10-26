@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Fixed
+
+- Open Mother Mentor client and location information using persisted client
+  relationships and prepopulated registration details. Preserve the client's
+  identifier, caregiver status and update event metadata without duplicate form
+  launches or session-interrupting missing-record errors (CHW issue #1093).
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-12-MOH-SNAPSHOT — 2026-10-25
 
 ### Changed
