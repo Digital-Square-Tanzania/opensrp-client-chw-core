@@ -5,7 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## 2.2.0-MOTHER-MENTOR-ALPHA-13-MOH-SNAPSHOT — 2026-10-26
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.10-SNAPSHOT` for the merged daily-visit,
+  optional-comment, HEI identifier and infant-age fixes.
+- Increment the Core library version code from 149 to 150.
 
 ### Fixed
 
