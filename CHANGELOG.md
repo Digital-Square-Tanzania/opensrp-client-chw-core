@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-15-MOH-SNAPSHOT — 2026-10-30
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.13-SNAPSHOT` for library-owned workflow
+  resources and the Child EID returned-results question.
+- Increment the Core library version code from 151 to 152.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-13-MOH-SNAPSHOT — 2026-10-26
 
 ### Changed
