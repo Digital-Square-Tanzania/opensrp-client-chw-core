@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-22-MOH-SNAPSHOT — 2026-11-06
+
+### Changed
+
+- Export Mother Mentor `0.1.22-SNAPSHOT` for the Mama IIT tracing register,
+  return to facility, and linked card closure (CHW #1160, #1161 and #1162).
+- Set the Core library version code to 159.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-21-MOH-SNAPSHOT — 2026-11-06
 
 ### Changed
