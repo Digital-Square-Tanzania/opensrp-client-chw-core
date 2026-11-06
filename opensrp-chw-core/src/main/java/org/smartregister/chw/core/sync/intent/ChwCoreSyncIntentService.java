@@ -22,6 +22,7 @@ import timber.log.Timber;
 
 public abstract class ChwCoreSyncIntentService extends SyncIntentService {
     public static final String SYNC_URL = "/rest/event/sync-by-base-entity-ids";
+    private static final int MAX_LINKED_CLIENT_FETCH_ATTEMPTS = 4;
     private List<Task> tasksWithMissingClientsEvents;
 
     public ChwCoreSyncIntentService(String name) {
@@ -75,49 +76,45 @@ public abstract class ChwCoreSyncIntentService extends SyncIntentService {
 
     public synchronized void fetchMissingEventsForLinkedClientsFromFacilityToCommunity(Integer count) {
         try {
-            if (count > 3) {
-                return;
-            }
-            List<String> baseEntityIds = ChwNotificationDao.getBaseEntityIdsForLinkedClientsFromFacilityToCommunityWithMissingClientDetails();
-            if (baseEntityIds.isEmpty()) {
-                return;
-            }
-
-            JSONArray baseEntityIdsArray = new JSONArray();
-            for (String baseEntityId : baseEntityIds) {
-                baseEntityIdsArray.put(baseEntityId);
-            }
-
-            try {
-                if (getHttpAgent() == null) {
-                    complete(FetchStatus.fetchedFailed);
+            for (int attempt = Math.max(0, count); attempt < MAX_LINKED_CLIENT_FETCH_ATTEMPTS; attempt++) {
+                List<String> baseEntityIds = ChwNotificationDao.getBaseEntityIdsForLinkedClientsFromFacilityToCommunityWithMissingClientDetails();
+                if (baseEntityIds.isEmpty()) {
                     return;
                 }
 
-                Response resp = fetchClientEventsByBaseEntityIds(baseEntityIdsArray);
-                if (resp.isTimeoutError() || resp.isUrlError()) {
-                    FetchStatus.fetchedFailed.setDisplayValue(resp.status().displayValue());
-                    complete(FetchStatus.fetchedFailed);
-                    return;
-                } else if (resp.isFailure()) {
-                    fetchMissingEventsForLinkedClientsFromFacilityToCommunity(count++);
-                    return;
+                JSONArray baseEntityIdsArray = new JSONArray();
+                for (String baseEntityId : baseEntityIds) {
+                    baseEntityIdsArray.put(baseEntityId);
                 }
 
-                JSONObject jsonObject = new JSONObject((String) resp.payload());
-                int eCount = fetchNumberOfEvents(jsonObject);
-                if (eCount < 0) {
-                    fetchMissingEventsForLinkedClientsFromFacilityToCommunity(count++);
-                    return;
-                } else {
-                    processClientEvent(jsonObject); //Process the client and his/her events
+                try {
+                    if (getHttpAgent() == null) {
+                        complete(FetchStatus.fetchedFailed);
+                        return;
+                    }
+
+                    Response resp = fetchClientEventsByBaseEntityIds(baseEntityIdsArray);
+                    if (resp.isTimeoutError() || resp.isUrlError()) {
+                        FetchStatus.fetchedFailed.setDisplayValue(resp.status().displayValue());
+                        complete(FetchStatus.fetchedFailed);
+                        return;
+                    } else if (resp.isFailure()) {
+                        continue;
+                    }
+
+                    JSONObject jsonObject = new JSONObject((String) resp.payload());
+                    if (fetchNumberOfEvents(jsonObject) >= 0) {
+                        processClientEvent(jsonObject); //Process the client and his/her events
+                        return;
+                    }
+                } catch (Exception e) {
+                    Timber.e(e, "Fetch Retry Exception:  %s", e.getMessage());
                 }
-            } catch (Exception e) {
-                Timber.e(e, "Fetch Retry Exception:  %s", e.getMessage());
-                fetchMissingEventsForLinkedClientsFromFacilityToCommunity(count++);
             }
+            complete(FetchStatus.fetchedFailed);
         } catch (Exception e) {
             Timber.e(e);
+            complete(FetchStatus.fetchedFailed);
         }
     }
 

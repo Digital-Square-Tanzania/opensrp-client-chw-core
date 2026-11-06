@@ -113,6 +113,8 @@ public abstract class CoreFamilyProfileActivity extends BaseFamilyProfileActivit
             startFormForEdit();
         } else if (i == R.id.action_hps_enrollment) {
             startHpsHouseholdEnrollment(familyBaseEntityId);
+        } else if (i == R.id.action_mother_mentor_household_enrollment) {
+            startMotherMentorHouseholdEnrollment(familyBaseEntityId);
         } else if (i == R.id.action_remove_member) {
             Intent frm_intent = new Intent(this, getFamilyRemoveMemberClass());
             frm_intent.putExtra(Constants.INTENT_KEY.FAMILY_BASE_ENTITY_ID, getFamilyBaseEntityId());
@@ -435,6 +437,10 @@ public abstract class CoreFamilyProfileActivity extends BaseFamilyProfileActivit
     protected abstract boolean isAncMember(String baseEntityId);
 
     protected abstract void startHpsHouseholdEnrollment(String baseEntityId);
+
+    protected void startMotherMentorHouseholdEnrollment(String baseEntityId) {
+        // Optional module hook.
+    }
 
     protected abstract HashMap<String, String> getAncFamilyHeadNameAndPhone(String baseEntityId);
 
