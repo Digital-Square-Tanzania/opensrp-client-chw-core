@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Export Mother Mentor `0.1.23-SNAPSHOT` to restore the Child EID register cursor ID.
+- Export Mother Mentor `0.1.23-SNAPSHOT` to restore the Child EID register
+  cursor ID.
 - Set the Core library version code to 160.
 
 ## 2.2.0-MOTHER-MENTOR-ALPHA-22-MOH-SNAPSHOT — 2026-11-06
