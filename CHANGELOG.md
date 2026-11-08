@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-24-MOH-SNAPSHOT — 2026-11-08
+
+### Changed
+
+- Export Mother Mentor `0.1.24-SNAPSHOT` for Child EID return visits,
+  reporting, and episode closure (CHW #1155 and #1156).
+- Set the Core library version code to 161.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-23-MOH-SNAPSHOT — 2026-11-06
 
 ### Changed
