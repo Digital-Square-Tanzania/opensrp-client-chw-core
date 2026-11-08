@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-25-MOH-SNAPSHOT — 2026-11-08
+
+### Changed
+
+- Export Mother Mentor `0.1.25-SNAPSHOT` for the Kaya enrollment cutoff
+  and breastfeeding status after a completed delivery (CHW #1129 and #1137).
+- Set the Core library version code to 162.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-24-MOH-SNAPSHOT — 2026-11-08
 
 ### Changed
