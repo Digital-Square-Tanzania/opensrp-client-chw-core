@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-26-MOH-SNAPSHOT — 2026-11-11
+
+### Changed
+
+- Export Mother Mentor `0.1.26-SNAPSHOT` for the updated visit forms and date displays.
+- Set the Core library version code to 163.
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-25-MOH-SNAPSHOT — 2026-11-08
 
 ### Changed
