@@ -1058,6 +1058,9 @@ public class CoreConstants {
         public static final String AYP_FACILITY = "AYP_FACILITY";
 
         public static final String AYP_OUT_SCHOOL = "AYP_OUT_SCHOOL";
+
+        public static final String MOTHER_MENTOR = "MOTHER_MENTOR";
+
     }
 
     public static final class RULE_FILE {
@@ -1356,6 +1359,8 @@ public class CoreConstants {
 
         public static final String AYP_OUT_SCHOOL_REGISTER_ACTIVITY = "AYP_OUT_SCHOOL_REGISTER_ACTIVITY";
 
+        public static final String MOTHER_MENTOR_REGISTER_ACTIVITY = "MOTHER_MENTOR_REGISTER_ACTIVITY";
+
     }
 
     public static final class BUSINESS_STATUS {
@@ -1423,6 +1428,11 @@ public class CoreConstants {
         public static final String KVP = "KVP";
         public static final String KVP_PrEP = "KVP/PrEP";
         public static final String AYP_OUT_SCHOOL = "AYP out of school";
+
+        public static final String MOTHER_MENTOR = "Mother Mentor";
+        public static final String MOTHER_MENTOR_IIT = "Mother Mentor IIT";
+        public static final String MOTHER_MENTOR_PARTNER = "MOTHER MENTOR PARTNER";
+        public static final String MOTHER_MENTOR_CHILD_EID = "MOTHER MENTOR CHILD EID";
 
         public static final String SBC = "SBC";
 
