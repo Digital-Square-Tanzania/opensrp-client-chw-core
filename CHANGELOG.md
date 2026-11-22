@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-51-UCSW-92-LOCAL-MOH-SNAPSHOT — 2026-11-22
+
+### Changed
+
+- Export Mother Mentor `0.1.51-UCSW-92-LOCAL-SNAPSHOT` for the first-visit delivery count after breastfeeding enrollment. Set the Core library version code to 187 (UCSW-92).
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-50-MOH-SNAPSHOT — 2026-11-22
 
 ### Changed
