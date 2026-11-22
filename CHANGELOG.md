@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-49-MOH-SNAPSHOT — 2026-11-22
+
+### Changed
+
+- Export Mother Mentor `0.1.49-SNAPSHOT` through Core for the Mama Kadi follow-up questions about awaited HEI results. [CHW #1209](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1209)
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-27-MOH-SNAPSHOT — 2026-11-11
 
 ### Changed
