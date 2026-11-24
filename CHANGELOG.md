@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Mother Mentor Alpha 55 — 2026-11-24
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-55-UCSW-129-HOUSEHOLD-DEATH-STATUS-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.55-UCSW-129-HOUSEHOLD-DEATH-STATUS-SNAPSHOT` and set
+  the Core library version code to 191. [CHW #1238][m8]
+
 ## Mother Mentor Alpha 54 — 2026-11-24
 
 Core snapshot
@@ -16,6 +26,7 @@ Core snapshot
   19-month cutoff and set the Core library version code to 190. [CHW #1236][m6]
 
 [m6]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1236
+[m8]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1238
 
 ## 2.2.0-MOTHER-MENTOR-ALPHA-53-UCSW-92-ENTRY-INTEGRATION-MOH-SNAPSHOT — 2026-11-22
 
