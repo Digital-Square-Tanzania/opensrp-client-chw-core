@@ -5,11 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2.2.0-MOTHER-MENTOR-ALPHA-54-UCSW-127-19-MONTH-CUTOFF-MOH-SNAPSHOT — 2026-11-24
+## Mother Mentor Alpha 54 — 2026-11-24
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-54-UCSW-127-19-MONTH-CUTOFF-MOH-SNAPSHOT
 
 ### Changed
 
-- Export Mother Mentor `0.1.54-UCSW-127-19-MONTH-CUTOFF-SNAPSHOT` for the 19-month cutoff and set the Core library version code to 190. [CHW #1236](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1236)
+- Export Mother Mentor `0.1.54-UCSW-127-19-MONTH-CUTOFF-SNAPSHOT` for the
+  19-month cutoff and set the Core library version code to 190. [CHW #1236][m6]
+
+[m6]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1236
 
 ## 2.2.0-MOTHER-MENTOR-ALPHA-53-UCSW-92-ENTRY-INTEGRATION-MOH-SNAPSHOT — 2026-11-22
 
