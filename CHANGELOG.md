@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-MOTHER-MENTOR-ALPHA-57-UCSW-131-THIRD-EVENT-SAVE-CONFIRMATION-MOH-SNAPSHOT — 2026-11-24
+
+### Changed
+
+- Export Mother Mentor `0.1.57-UCSW-131-THIRD-EVENT-SAVE-CONFIRMATION-SNAPSHOT` and set the Core library version code to 193. [CHW #1240](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1240)
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-56-UCSW-130-HIDE-DEVELOPER-NOTES-MOH-SNAPSHOT — 2026-11-24
 
 ### Changed
