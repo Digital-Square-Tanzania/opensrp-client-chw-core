@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Mother Mentor Alpha 56 — 2026-11-24
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-56-UCSW-130-HIDE-DEVELOPER-NOTES-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.56-UCSW-130-HIDE-DEVELOPER-NOTES-SNAPSHOT` and set
+  the Core library version code to 192. [CHW #1239][m9]
+
 ## Mother Mentor Alpha 55 — 2026-11-24
 
 Core snapshot
@@ -27,6 +37,7 @@ Core snapshot
 
 [m6]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1236
 [m8]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1238
+[m9]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1239
 
 ## 2.2.0-MOTHER-MENTOR-ALPHA-53-UCSW-92-ENTRY-INTEGRATION-MOH-SNAPSHOT — 2026-11-22
 
