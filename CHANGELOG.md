@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Mother Mentor Alpha 61 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-61-UCSW-151-MWENZI-DEATH-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.61-UCSW-151-MWENZI-DEATH-SNAPSHOT` and set the
+  Core library version code to 197 for the Mwenzi death propagation repair.
+  [CHW #1238](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1238)
+
 ## Mother Mentor Alpha 57 — 2026-11-24
 
 Core snapshot
