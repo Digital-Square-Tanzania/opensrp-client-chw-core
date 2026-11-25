@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.0-KITUONI-UCSW-48-VISIT-9-SNAPSHOT — 2026-11-24
+
+### Changed
+
+- Resolve the existing JarJar Gradle plugin from a checkout-local Maven repository scoped to its exact snapshot, with upstream Apache-2.0 and MIT notices (UCSW-48).
+- Resolve the existing OpenSRP Plan Evaluator `0.0.19-SNAPSHOT` from a repository restricted to that exact coordinate, with the upstream Apache-2.0 attribution and license (UCSW-48).
+- Export KVP `2.0.2-KITUONI-UCSW-48-VISIT-9-RECOVERY1-SNAPSHOT` for the Kituoni Biomedical completion repair and set the Core version code to 190 (UCSW-48).
+
 ## 2.2.0-MOTHER-MENTOR-ALPHA-53-UCSW-92-ENTRY-INTEGRATION-MOH-SNAPSHOT — 2026-11-22
 
 ### Changed
