@@ -779,7 +779,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-chw-mother-mentor:0.1.55-UCSW-129-HOUSEHOLD-DEATH-STATUS-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-mother-mentor:0.1.56-UCSW-130-HIDE-DEVELOPER-NOTES-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
