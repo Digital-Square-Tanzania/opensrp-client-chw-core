@@ -3,6 +3,18 @@
 buildscript {
 
     repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = 'JarJarPluginSnapshot'
+                    url = rootProject.uri('local-maven')
+                }
+            }
+            filter {
+                includeVersion('org.smartregister', 'gradle-jarjar-plugin', '1.0.0-SNAPSHOT')
+            }
+        }
+
         google()
         mavenCentral()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
@@ -39,6 +51,18 @@ allprojects {
     }
 
     repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = 'PlanEvaluatorSnapshot'
+                    url = rootProject.uri('local-maven')
+                }
+            }
+            filter {
+                includeVersion('org.smartregister', 'opensrp-plan-evaluator', '0.0.19-SNAPSHOT')
+            }
+        }
+
         google()
         mavenLocal()
         mavenCentral()
