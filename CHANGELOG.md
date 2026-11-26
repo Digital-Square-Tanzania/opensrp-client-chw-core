@@ -5,6 +5,78 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Mother Mentor Batch 2 publication preparation
+
+- Read Mapbox download credentials from local Gradle properties. Remove the tracked assignment from this release lineage. [UCSW-201](https://multica.ai/ucs-workspace/issues/UCSW-201)
+
+## Mother Mentor Alpha 69 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-69-UCSW-149-HEI-BREASTFEEDING-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.69-UCSW-149-HEI-BREASTFEEDING-SNAPSHOT` with Core library version code 205. [CHW #1252](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1252)
+
+## Mother Mentor Alpha 68 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-68-UCSW-147-CONFIRMATION-RESULT-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.68-UCSW-147-CONFIRMATION-RESULT-SNAPSHOT` and set the Core library version code
+  to 204. [CHW #1248](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1248)
+
+## Mother Mentor Alpha 67 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-67-UCSW-148-CHILD-SEX-CAPTIONS-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.67-UCSW-148-CHILD-SEX-CAPTIONS-SNAPSHOT` and set the Core library version code
+  to 203. [CHW #1247](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1247)
+
+## Mother Mentor Alpha 66 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-66-UCSW-146-POST-WEANING-CUTOFF-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.66-UCSW-146-POST-WEANING-CUTOFF-SNAPSHOT` and set the Core library version code
+  to 202. [CHW #1246](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1246)
+
+## Mother Mentor Alpha 65 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-65-UCSW-140-MTOTO-EID-DUE-TEST-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.65-UCSW-140-MTOTO-EID-DUE-TEST-SNAPSHOT` and set the Core library version code
+  to 201. [CHW #1245](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1245)
+
+## Mother Mentor Alpha 64 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-64-UCSW-139-MWENZI-EXIT-ALIGNMENT-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.64-UCSW-139-MWENZI-EXIT-ALIGNMENT-SNAPSHOT` and set the Core library version code to 200. [CHW #1242](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1242)
+
+## Mother Mentor Alpha 62 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-62-UCSW-142-WEANING-DATE-RECONCILED-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.62-UCSW-142-WEANING-DATE-RECONCILED-SNAPSHOT` and set the Core library version code to
+  198 for the Mtoto EID weaning-date and History correction. [CHW #1241](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1241)
+
 ## Mother Mentor Alpha 61 — 2026-11-25
 
 Core snapshot
