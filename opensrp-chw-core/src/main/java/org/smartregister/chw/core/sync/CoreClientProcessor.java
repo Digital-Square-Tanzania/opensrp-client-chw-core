@@ -44,6 +44,7 @@ import org.smartregister.chw.harmreduction.dao.HarmReductionUsedNeedlesAndSyring
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.hps.dao.HpsDao;
 import org.smartregister.chw.hts.dao.HtsDao;
+import org.smartregister.chw.kvp.util.MarpVisitProcessing;
 import org.smartregister.chw.lab.LabLibrary;
 import org.smartregister.chw.lab.dao.LabDao;
 import org.smartregister.chw.malaria.util.Constants;
@@ -171,7 +172,11 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     continue;
                 }
 
-                processEvents(clientClassification, vaccineTable, serviceTable, eventClient, event, eventType);
+                try {
+                    processEvents(clientClassification, vaccineTable, serviceTable, eventClient, event, eventType);
+                } finally {
+                    MarpVisitProcessing.recordProjectionAttempt(event);
+                }
             }
 
         }
