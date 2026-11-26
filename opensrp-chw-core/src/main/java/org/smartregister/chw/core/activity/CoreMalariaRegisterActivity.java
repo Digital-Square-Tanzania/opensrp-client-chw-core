@@ -36,7 +36,11 @@ public abstract class CoreMalariaRegisterActivity extends BaseMalariaRegisterAct
         super.onResumption();
         NavigationMenu menu = NavigationMenu.getInstance(this, null, null);
         if (menu != null) {
-            menu.getNavigationAdapter().setSelectedView(CoreConstants.DrawerMenu.MALARIA);
+            menu.getNavigationAdapter().setSelectedView(getDrawerMenu());
         }
+    }
+
+    protected String getDrawerMenu() {
+        return CoreConstants.DrawerMenu.MALARIA;
     }
 }

@@ -282,6 +282,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
             return true;
         }  else if (i == R.id.action_ayp_out_school_enrollment) {
             startAypOutSchoolEnrollment();
+        }  else if (i == R.id.action_mother_mentor_enrollment) {
+            startMotherMentorEnrollment();
+        } else if (i == R.id.action_mother_mentor_enroll_iit) {
+            startMotherMentorEnrollIit();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -356,6 +360,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startAypParentalEnrollment();
 
     protected abstract void startAypOutSchoolEnrollment();
+
+    protected abstract void startMotherMentorEnrollment();
+
+    protected abstract void startMotherMentorEnrollIit();
 
     protected abstract void setIndependentClient(boolean isIndependent);
 

@@ -4,3 +4,356 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+
+## Mother Mentor Batch 2 publication preparation
+
+- Read Mapbox download credentials from local Gradle properties. Remove the tracked assignment from this release lineage. [UCSW-201](https://multica.ai/ucs-workspace/issues/UCSW-201)
+
+## Mother Mentor Alpha 69 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-69-UCSW-149-HEI-BREASTFEEDING-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.69-UCSW-149-HEI-BREASTFEEDING-SNAPSHOT` with Core library version code 205. [CHW #1252](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1252)
+
+## Mother Mentor Alpha 68 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-68-UCSW-147-CONFIRMATION-RESULT-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.68-UCSW-147-CONFIRMATION-RESULT-SNAPSHOT` and set the Core library version code
+  to 204. [CHW #1248](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1248)
+
+## Mother Mentor Alpha 67 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-67-UCSW-148-CHILD-SEX-CAPTIONS-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.67-UCSW-148-CHILD-SEX-CAPTIONS-SNAPSHOT` and set the Core library version code
+  to 203. [CHW #1247](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1247)
+
+## Mother Mentor Alpha 66 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-66-UCSW-146-POST-WEANING-CUTOFF-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.66-UCSW-146-POST-WEANING-CUTOFF-SNAPSHOT` and set the Core library version code
+  to 202. [CHW #1246](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1246)
+
+## Mother Mentor Alpha 65 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-65-UCSW-140-MTOTO-EID-DUE-TEST-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.65-UCSW-140-MTOTO-EID-DUE-TEST-SNAPSHOT` and set the Core library version code
+  to 201. [CHW #1245](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1245)
+
+## Mother Mentor Alpha 64 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-64-UCSW-139-MWENZI-EXIT-ALIGNMENT-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.64-UCSW-139-MWENZI-EXIT-ALIGNMENT-SNAPSHOT` and set the Core library version code to 200. [CHW #1242](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1242)
+
+## Mother Mentor Alpha 62 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-62-UCSW-142-WEANING-DATE-RECONCILED-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.62-UCSW-142-WEANING-DATE-RECONCILED-SNAPSHOT` and set the Core library version code to
+  198 for the Mtoto EID weaning-date and History correction. [CHW #1241](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1241)
+
+## Mother Mentor Alpha 61 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-61-UCSW-151-MWENZI-DEATH-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.61-UCSW-151-MWENZI-DEATH-SNAPSHOT` and set the
+  Core library version code to 197 for the Mwenzi death propagation repair.
+  [CHW #1238](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1238)
+
+## Mother Mentor Alpha 57 — 2026-11-24
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-57-UCSW-131-THIRD-EVENT-SAVE-CONFIRMATION-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.57-UCSW-131-THIRD-EVENT-SAVE-CONFIRMATION-SNAPSHOT`
+  and set the Core library version code to 193. [CHW #1240][m0]
+
+## Mother Mentor Alpha 56 — 2026-11-24
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-56-UCSW-130-HIDE-DEVELOPER-NOTES-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.56-UCSW-130-HIDE-DEVELOPER-NOTES-SNAPSHOT` and set
+  the Core library version code to 192. [CHW #1239][m9]
+
+## Mother Mentor Alpha 55 — 2026-11-24
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-55-UCSW-129-HOUSEHOLD-DEATH-STATUS-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.55-UCSW-129-HOUSEHOLD-DEATH-STATUS-SNAPSHOT` and set
+  the Core library version code to 191. [CHW #1238][m8]
+
+## Mother Mentor Alpha 54 — 2026-11-24
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-54-UCSW-127-19-MONTH-CUTOFF-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.54-UCSW-127-19-MONTH-CUTOFF-SNAPSHOT` for the
+  19-month cutoff and set the Core library version code to 190. [CHW #1236][m6]
+
+[m0]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1240
+[m6]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1236
+[m8]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1238
+[m9]: https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1239
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-53-UCSW-92-ENTRY-INTEGRATION-MOH-SNAPSHOT — 2026-11-22
+
+### Changed
+
+- Export Mother Mentor `0.1.53-UCSW-92-ENTRY-INTEGRATION-SNAPSHOT` for the visit-entry crash fix and the first-visit delivery count. Set the Core version code to 189 (UCSW-91 and UCSW-92).
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-51-UCSW-92-LOCAL-MOH-SNAPSHOT — 2026-11-22
+
+### Changed
+
+- Export Mother Mentor `0.1.51-UCSW-92-LOCAL-SNAPSHOT` for the first-visit delivery count after breastfeeding enrollment. Set the Core library version code to 187 (UCSW-92).
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-50-MOH-SNAPSHOT — 2026-11-22
+
+### Changed
+
+- Export Mother Mentor `0.1.50-SNAPSHOT` for the first-visit delivery count and set the Core library version code to 186 (UCSW-92).
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-49-MOH-SNAPSHOT — 2026-11-22
+
+### Changed
+
+- Export Mother Mentor `0.1.49-SNAPSHOT` through Core for the Mama Kadi follow-up questions about awaited HEI results. [CHW #1209](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1209)
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-27-MOH-SNAPSHOT — 2026-11-11
+
+### Changed
+
+- Export Mother Mentor `0.1.27-SNAPSHOT` with the simplified Child EID profile.
+- Set the Core library version code to 164.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-26-MOH-SNAPSHOT — 2026-11-11
+
+### Changed
+
+- Export Mother Mentor `0.1.26-SNAPSHOT` for the updated visit forms and date displays.
+- Set the Core library version code to 163.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-25-MOH-SNAPSHOT — 2026-11-08
+
+### Changed
+
+- Export Mother Mentor `0.1.25-SNAPSHOT` for the Kaya enrollment cutoff
+  and breastfeeding status after a completed delivery (CHW #1129 and #1137).
+- Set the Core library version code to 162.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-24-MOH-SNAPSHOT — 2026-11-08
+
+### Changed
+
+- Export Mother Mentor `0.1.24-SNAPSHOT` for Child EID return visits,
+  reporting, and episode closure (CHW #1155 and #1156).
+- Set the Core library version code to 161.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-23-MOH-SNAPSHOT — 2026-11-06
+
+### Changed
+
+- Export Mother Mentor `0.1.23-SNAPSHOT` to restore the Child EID register
+  cursor ID.
+- Set the Core library version code to 160.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-22-MOH-SNAPSHOT — 2026-11-06
+
+### Changed
+
+- Export Mother Mentor `0.1.22-SNAPSHOT` for the Mama IIT tracing register,
+  return to facility, and linked card closure (CHW #1160, #1161 and #1162).
+- Set the Core library version code to 159.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-21-MOH-SNAPSHOT — 2026-11-06
+
+### Changed
+
+- Export Mother Mentor `0.1.21-SNAPSHOT` for bilingual Child EID status and
+  first HEI referral (CHW #1146 and #1147).
+- Set the Core library version code to 158.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-20-MOH-SNAPSHOT — 2026-11-05
+
+### Changed
+
+- Export Mother Mentor `0.1.20-SNAPSHOT` for missed-test Child EID entry and register details (CHW #1145).
+- Set the Core library version code to 157.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-19-MOH-SNAPSHOT — 2026-11-05
+
+### Changed
+
+- Export Mother Mentor `0.1.19-SNAPSHOT` for the single routine visit schema,
+  pregnancy and child assessments, and Mother card closure.
+- Set the Core library version code to 156.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-17-MOH-SNAPSHOT — 2026-11-05
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.17-SNAPSHOT` for the updated household
+  visit purposes and localized history labels.
+- Increment the Core library version code from 153 to 154.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-16-MOH-SNAPSHOT — 2026-11-05
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.16-SNAPSHOT` so CHW can resolve the current
+  workflows through Core's published dependency.
+- Increment the Core library version code from 152 to 153.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-15-MOH-SNAPSHOT — 2026-10-30
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.13-SNAPSHOT` for library-owned workflow
+  resources and the Child EID returned-results question.
+- Increment the Core library version code from 151 to 152.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-13-MOH-SNAPSHOT — 2026-10-26
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.10-SNAPSHOT` for the merged daily-visit,
+  optional-comment, HEI identifier and infant-age fixes.
+- Increment the Core library version code from 149 to 150.
+
+### Fixed
+
+- Open Mother Mentor client and location information using persisted client
+  relationships and prepopulated registration details. Preserve the client's
+  identifier, caregiver status and update event metadata without duplicate form
+  launches or session-interrupting missing-record errors (CHW issue #1093).
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-12-MOH-SNAPSHOT — 2026-10-25
+
+### Changed
+
+- Upgrade HPS to `2.0.7-SNAPSHOT` for the two-row iCCHW client list, colored
+  sex values, and profile opening from a client row tap.
+- Preserve the latest FOLLOW-UP / UFUATILIAJI navigation section from Alpha 11.
+- Increment the Core library version code from 148 to 149.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-11-MOH-SNAPSHOT — 2026-10-25
+
+### Changed
+
+- Add an opt-in, always-visible FOLLOW-UP / UFUATILIAJI navigation section
+  below Other Modules, preserving role visibility, register counts, and the
+  flat-menu configuration.
+- Increment the Core library version code from 147 to 148.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-10-MOH-SNAPSHOT — 2026-10-24
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.9-SNAPSHOT` to prevent saved or cancelled
+  enrollment forms reopening after language changes or activity restoration,
+  while preserving enrollment details and allowing new requests.
+- Increment the Core library version code from 146 to 147.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-9-MOH-SNAPSHOT — 2026-10-24
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.8-SNAPSHOT` for previous-visit psychosocial and
+  income-generating group defaults and read-only Repeat attendance.
+- Increment the Core library version code from 145 to 146.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-8-MOH-SNAPSHOT — 2026-10-24
+
+### Changed
+
+- Upgrade FP and ASRH to `2.0.1-SNAPSHOT` for their household count and
+  membership query fixes.
+- Increment the Core library version code from 144 to 145.
+
+### Fixed
+
+- Rebind the shared navigation drawer to the active Activity after register
+  transitions and language changes.
+
+- Bound linked-client sync retries and report exhausted attempts as failed without
+  recursively overflowing the background service stack when requests fail.
+- Apply flavor-specific navigation table mappings before the initial count requests.
+- Load single-object and array service configurations without an exception-driven
+  format fallback, while preserving named table lookup and caching.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-7-MOH-SNAPSHOT — 2026-10-23
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.7-SNAPSHOT`, including the merged register UI,
+  navigation icons, English/Swahili action headings, and profile referral fixes.
+- Increment the Core publication version to
+  `2.2.0-MOTHER-MENTOR-ALPHA-7-MOH-SNAPSHOT` and `VERSION_CODE` from 143 to 144.
+- Read the Android library version name and code from the release properties.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-6-MOH-SNAPSHOT — 2026-10-23
+
+### Changed
+
+- Add opt-in collapsible Other Modules navigation with localized labels,
+  accessibility actions, and correct iCCM drawer selection.
+- Preserve Mother Mentor workflows and the `0.1.5-SNAPSHOT` library dependency.
+- Increment the Core publication version to
+  `2.2.0-MOTHER-MENTOR-ALPHA-6-MOH-SNAPSHOT` and `VERSION_CODE` from 142 to 143.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-5-MOH-SNAPSHOT — 2026-10-20
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.5-SNAPSHOT` for the Swahili partner terminology
+  corrections.
+- Increment the Core publication version to
+  `2.2.0-MOTHER-MENTOR-ALPHA-5-MOH-SNAPSHOT` and `VERSION_CODE` from 141 to 142.
+
+## 2.2.0-MOTHER-MENTOR-ALPHA-4-MOH-SNAPSHOT — 2026-10-20
+
+### Changed
+
+- Upgrade Mother Mentor to `0.1.4-SNAPSHOT`, including attendance and ART-history
+  handling and corrected English and Swahili terminology.
+- Increment the Core publication version from
+  `2.2.0-MOTHER-MENTOR-ALPHA-3-MOH-SNAPSHOT` to
+  `2.2.0-MOTHER-MENTOR-ALPHA-4-MOH-SNAPSHOT` and `VERSION_CODE` from 140 to 141.

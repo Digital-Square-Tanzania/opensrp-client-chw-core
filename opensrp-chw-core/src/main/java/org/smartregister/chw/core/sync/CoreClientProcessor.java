@@ -9,6 +9,9 @@ import static org.smartregister.chw.tbleprosy.util.Constants.EVENT_TYPE.TB_LEPRO
 import android.content.ContentValues;
 import android.content.Context;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
 import net.zetetic.database.sqlcipher.SQLiteDatabase;
 
 import org.apache.commons.lang3.StringUtils;
@@ -41,11 +44,12 @@ import org.smartregister.chw.harmreduction.dao.HarmReductionUsedNeedlesAndSyring
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.hps.dao.HpsDao;
 import org.smartregister.chw.hts.dao.HtsDao;
-import org.smartregister.chw.hts.dao.HtsDao;
 import org.smartregister.chw.lab.LabLibrary;
 import org.smartregister.chw.lab.dao.LabDao;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.MalariaUtil;
+import org.smartregister.chw.mothermentor.repository.MotherMentorReportingRepository;
+import org.smartregister.chw.mothermentor.util.DBConstants.KEY;
 import org.smartregister.chw.sbc.dao.SbcDao;
 import org.smartregister.chw.tbleprosy.dao.TbLeprosyMobilizationDao;
 import org.smartregister.clientandeventmodel.DateUtil;
@@ -70,6 +74,9 @@ import org.smartregister.immunization.service.intent.RecurringIntentService;
 import org.smartregister.immunization.service.intent.VaccineIntentService;
 import org.smartregister.immunization.util.IMConstants;
 import org.smartregister.sync.ClientProcessorForJava;
+import org.smartregister.util.JsonFormUtils;
+
+import timber.log.Timber;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -80,9 +87,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import timber.log.Timber;
-
 public class CoreClientProcessor extends ClientProcessorForJava {
+    private static final String SERVICE_TABLE_CONFIG_FILE = "ec_client_service.json";
 
     private ClientClassification classification;
     private Table vaccineTable;
@@ -173,7 +179,8 @@ public class CoreClientProcessor extends ClientProcessorForJava {
 
     private ClientClassification getClassification() {
         if (classification == null) {
-            classification = assetJsonToJava("ec_client_classification.json", ClientClassification.class);
+            classification =
+                    assetJsonToJava("ec_client_classification.json", ClientClassification.class);
         }
         return classification;
     }
@@ -195,15 +202,6 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         if (serviceTables != null && !serviceTables.isEmpty()) {
             serviceTable = serviceTables.values().iterator().next();
         }
-        if (serviceTable == null) {
-            serviceTable = assetJsonToJava("ec_client_service.json", Table.class);
-            if (serviceTable != null) {
-                if (serviceTables == null) {
-                    serviceTables = new HashMap<>();
-                }
-                serviceTables.put(serviceTable.name, serviceTable);
-            }
-        }
         return serviceTable;
     }
 
@@ -221,9 +219,18 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     }
 
     private void loadServiceTables() {
-        Table[] tables = assetJsonToJava("ec_client_service.json", Table[].class);
-        if (tables != null && tables.length > 0) {
-            serviceTables = new HashMap<>();
+        serviceTables = new HashMap<>();
+        try {
+            JsonElement configuration =
+                    assetJsonToJava(SERVICE_TABLE_CONFIG_FILE, JsonElement.class);
+            Table[] tables;
+            if (configuration != null && configuration.isJsonObject()) {
+                tables = new Table[] {JsonFormUtils.gson.fromJson(configuration, Table.class)};
+            } else if (configuration != null && configuration.isJsonArray()) {
+                tables = JsonFormUtils.gson.fromJson(configuration, Table[].class);
+            } else {
+                throw new JsonParseException("Expected a service table object or array");
+            }
             for (Table table : tables) {
                 if (table != null && StringUtils.isNotBlank(table.name)) {
                     serviceTables.put(table.name, table);
@@ -232,6 +239,8 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             if (!serviceTables.isEmpty()) {
                 serviceTable = serviceTables.values().iterator().next();
             }
+        } catch (JsonParseException e) {
+            Timber.e(e, "Unable to parse service table configuration %s", SERVICE_TABLE_CONFIG_FILE);
         }
     }
 
@@ -401,6 +410,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_MOBILIZATION:
                 processHpsMobilizationEvent(eventClient.getEvent());
                 break;
+            case org.smartregister.chw.mothermentor.util.Constants.EVENT_TYPE.MOTHER_MENTOR_MOBILIZATION:
+                processMotherMentorMobilizationEvent(eventClient.getEvent());
+                break;
             case org.smartregister.chw.hps.util.Constants.EVENT_TYPE.HPS_ADVERTISEMENT_FEEDBACK:
                 processHpsAdverstimentFeedbackEvent(eventClient.getEvent());
                 break;
@@ -558,7 +570,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
             }
             if (StringUtils.isBlank(dateMarkedAsDone)) {
-                dateMarkedAsDone = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(event.getDateCreated().toDate());
+                dateMarkedAsDone =
+                        new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                                .format(event.getDateCreated().toDate());
             }
             ChwNotificationDao.markNotificationAsDone(getContext(), notificationId, event.getEntityType(), dateMarkedAsDone);
         }
@@ -687,6 +701,93 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
             }
             HivstMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached, maleCondomsIssued, femaleCondomsIssued);
+        }
+    }
+
+    private void processMotherMentorMobilizationEvent(Event event) {
+        List<Obs> mobilizationObs = event.getObs();
+        String shTarehe = null;
+        String shAina = null;
+        String shAinaOther = null;
+        String gps = null;
+        String shMada = null;
+        String shMadaOther = null;
+        String elimM = null;
+        String elimF = null;
+        String elimTotal = null;
+        String maoni = null;
+        long lastInteractedWith = event.getVersion();
+
+        if (!mobilizationObs.isEmpty()) {
+            for (Obs obs : mobilizationObs) {
+                String field = obs.getFormSubmissionField();
+                if (KEY.SH_TAREHE.equals(field)) {
+                    shTarehe = (String) obs.getValue();
+                } else if (KEY.SH_AINA.equals(field)) {
+                    shAina = (String) obs.getValue();
+                } else if (KEY.SH_AINA_OTHER.equals(field)) {
+                    shAinaOther = (String) obs.getValue();
+                } else if (KEY.GPS.equals(field)) {
+                    gps = (String) obs.getValue();
+                } else if (KEY.SH_MADA.equals(field)) {
+                    shMada = obs.getValues().toString();
+                } else if (KEY.SH_MADA_OTHER.equals(field)) {
+                    shMadaOther = (String) obs.getValue();
+                } else if (KEY.ELIM_M.equals(field)) {
+                    elimM = (String) obs.getValue();
+                } else if (KEY.ELIM_F.equals(field)) {
+                    elimF = (String) obs.getValue();
+                } else if (KEY.ELIM_TOTAL.equals(field)) {
+                    elimTotal = (String) obs.getValue();
+                } else if (KEY.MAONI.equals(field)) {
+                    maoni = (String) obs.getValue();
+                } else if (KEY.LAST_INTERACTED_WITH.equals(field)) {
+                    try {
+                        lastInteractedWith = Long.parseLong((String) obs.getValue());
+                    } catch (Exception e) {
+                        Timber.e(e);
+                    }
+                }
+            }
+
+            ContentValues values = new ContentValues();
+            values.put(KEY.ID, event.getBaseEntityId());
+            values.put(KEY.BASE_ENTITY_ID, event.getBaseEntityId());
+            values.put(KEY.SH_TAREHE, shTarehe);
+            values.put(KEY.SH_AINA, shAina);
+            values.put(KEY.SH_AINA_OTHER, shAinaOther);
+            values.put(KEY.GPS, gps);
+            values.put(KEY.SH_MADA, shMada);
+            values.put(KEY.SH_MADA_OTHER, shMadaOther);
+            values.put(KEY.ELIM_M, elimM);
+            values.put(KEY.ELIM_F, elimF);
+            values.put(KEY.ELIM_TOTAL, elimTotal);
+            values.put(KEY.MAONI, maoni);
+            values.put(KEY.MOBILIZATION_DATE, shTarehe);
+            values.put(KEY.MOBILIZATION_AREA, shAina);
+            values.put(KEY.MOBILIZATION_TOPICS, shMada);
+            values.put(KEY.MALE_CLIENTS_REACHED, elimM);
+            values.put(KEY.FEMALE_CLIENTS_REACHED, elimF);
+            values.put(KEY.LAST_INTERACTED_WITH, lastInteractedWith);
+
+            MotherMentorReportingRepository.ensureMobilizationColumns(getWritableDatabase());
+            for (Obs obs : mobilizationObs) {
+                String field = obs.getFormSubmissionField();
+                if (MotherMentorReportingRepository.REFERRAL_COLUMNS.contains(field)) {
+                    Object value =
+                            KEY.FACILITY_REFERRAL_SERVICES.equals(field)
+                                    ? obs.getValues()
+                                    : obs.getValue();
+                    values.put(field, value == null ? null : value.toString());
+                }
+            }
+            getWritableDatabase()
+                    .insertWithOnConflict(
+                            org.smartregister.chw.mothermentor.util.Constants.TABLES
+                                    .MOTHERMENTOR_MOBILIZATION,
+                            null,
+                            values,
+                            SQLiteDatabase.CONFLICT_REPLACE);
         }
     }
 
@@ -2285,7 +2386,10 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         try {
             NCUtils.processHomeVisit(eventClient); // save locally
         } catch (Exception e) {
-            String formID = (eventClient != null && eventClient.getEvent() != null) ? eventClient.getEvent().getFormSubmissionId() : "no form id";
+            String formID =
+                    (eventClient != null && eventClient.getEvent() != null)
+                            ? eventClient.getEvent().getFormSubmissionId()
+                            : "no form id";
             Timber.e("Form id " + formID + ". " + e.toString());
         }
     }
@@ -2294,7 +2398,10 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         try {
             NCUtils.processSubHomeVisit(eventClient, parentEventName); // save locally
         } catch (Exception e) {
-            String formID = (eventClient != null && eventClient.getEvent() != null) ? eventClient.getEvent().getFormSubmissionId() : "no form id";
+            String formID =
+                    (eventClient != null && eventClient.getEvent() != null)
+                            ? eventClient.getEvent().getFormSubmissionId()
+                            : "no form id";
             Timber.e("Form id " + formID + ". " + e.toString());
         }
     }
@@ -2319,21 +2426,72 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         if (commonsRepository != null) {
 
             ContentValues values = new ContentValues();
-            values.put(DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd").format(myEventDate));
+            values.put(
+                    DBConstants.KEY.DATE_REMOVED,
+                    new SimpleDateFormat("yyyy-MM-dd").format(myEventDate));
             values.put("is_closed", 1);
 
-            CoreChwApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.FAMILY, values, DBConstants.KEY.BASE_ENTITY_ID + " = ?  ", new String[]{familyID});
+            CoreChwApplication.getInstance()
+                    .getRepository()
+                    .getWritableDatabase()
+                    .update(
+                            CoreConstants.TABLE_NAME.FAMILY,
+                            values,
+                            DBConstants.KEY.BASE_ENTITY_ID + " = ?  ",
+                            new String[] {familyID});
 
-            CoreChwApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.CHILD, values, DBConstants.KEY.RELATIONAL_ID + " = ?  ", new String[]{familyID});
+            CoreChwApplication.getInstance()
+                    .getRepository()
+                    .getWritableDatabase()
+                    .update(
+                            CoreConstants.TABLE_NAME.CHILD,
+                            values,
+                            DBConstants.KEY.RELATIONAL_ID + " = ?  ",
+                            new String[] {familyID});
 
-            CoreChwApplication.getInstance().getRepository().getWritableDatabase().update(CoreConstants.TABLE_NAME.FAMILY_MEMBER, values, DBConstants.KEY.RELATIONAL_ID + " = ?  ", new String[]{familyID});
+            CoreChwApplication.getInstance()
+                    .getRepository()
+                    .getWritableDatabase()
+                    .update(
+                            CoreConstants.TABLE_NAME.FAMILY_MEMBER,
+                            values,
+                            DBConstants.KEY.RELATIONAL_ID + " = ?  ",
+                            new String[] {familyID});
 
             // clean fts table
-            CoreChwApplication.getInstance().getRepository().getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY), values, CommonFtsObject.idColumn + " = ?  ", new String[]{familyID});
+            CoreChwApplication.getInstance()
+                    .getRepository()
+                    .getWritableDatabase()
+                    .update(
+                            CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY),
+                            values,
+                            CommonFtsObject.idColumn + " = ?  ",
+                            new String[] {familyID});
 
-            CoreChwApplication.getInstance().getRepository().getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.CHILD), values, String.format(" %s in (select base_entity_id from %s where relational_id = ? )  ", CommonFtsObject.idColumn, CoreConstants.TABLE_NAME.CHILD), new String[]{familyID});
+            CoreChwApplication.getInstance()
+                    .getRepository()
+                    .getWritableDatabase()
+                    .update(
+                            CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.CHILD),
+                            values,
+                            String.format(
+                                    " %s in (select base_entity_id from %s where relational_id = ?"
+                                        + " )  ",
+                                    CommonFtsObject.idColumn, CoreConstants.TABLE_NAME.CHILD),
+                            new String[] {familyID});
 
-            CoreChwApplication.getInstance().getRepository().getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY_MEMBER), values, String.format(" %s in (select base_entity_id from %s where relational_id = ? )  ", CommonFtsObject.idColumn, CoreConstants.TABLE_NAME.FAMILY_MEMBER), new String[]{familyID});
+            CoreChwApplication.getInstance()
+                    .getRepository()
+                    .getWritableDatabase()
+                    .update(
+                            CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY_MEMBER),
+                            values,
+                            String.format(
+                                    " %s in (select base_entity_id from %s where relational_id = ?"
+                                        + " )  ",
+                                    CommonFtsObject.idColumn,
+                                    CoreConstants.TABLE_NAME.FAMILY_MEMBER),
+                            new String[] {familyID});
 
             List<String> familyMembers = ChildDao.getFamilyMembers(familyID);
             for (String baseEntityId : familyMembers) {
@@ -2389,8 +2547,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             values.put("is_closed", 1);
 
             // clean fts table
-            getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY_MEMBER), values, " object_id  = ?  ", new String[]{baseEntityId});
-
+            getWritableDatabase()
+                    .update(
+                            CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.FAMILY_MEMBER),
+                            values,
+                            " object_id  = ?  ",
+                            new String[] {baseEntityId});
 
             try {
                 Date dod = getDate(obsMap, "date_died");
@@ -2399,7 +2561,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 Timber.e(e);
             }
 
-            getWritableDatabase().update(CoreConstants.TABLE_NAME.FAMILY_MEMBER, values, DBConstants.KEY.BASE_ENTITY_ID + " = ?  ", new String[]{baseEntityId});
+            getWritableDatabase()
+                    .update(
+                            CoreConstants.TABLE_NAME.FAMILY_MEMBER,
+                            values,
+                            DBConstants.KEY.BASE_ENTITY_ID + " = ?  ",
+                            new String[] {baseEntityId});
 
             // Utils.context().commonrepository(CoreConstants.TABLE_NAME.FAMILY_MEMBER).populateSearchValues(baseEntityId, DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd").format(eventDate), null);
             //CoreChwApplication.getInstance().getContext().alertService().deleteOfflineAlerts(baseEntityId);
@@ -2428,7 +2595,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             values.put("is_closed", 1);
 
             // clean fts table
-            getWritableDatabase().update(CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.CHILD), values, CommonFtsObject.idColumn + "  = ?  ", new String[]{baseEntityId});
+            getWritableDatabase()
+                    .update(
+                            CommonFtsObject.searchTableName(CoreConstants.TABLE_NAME.CHILD),
+                            values,
+                            CommonFtsObject.idColumn + "  = ?  ",
+                            new String[] {baseEntityId});
 
             try {
                 Date dod = getDate(obsMap, "date_died");
@@ -2437,7 +2609,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 Timber.e(e);
             }
 
-            getWritableDatabase().update(CoreConstants.TABLE_NAME.CHILD, values, DBConstants.KEY.BASE_ENTITY_ID + " = ?  ", new String[]{baseEntityId});
+            getWritableDatabase()
+                    .update(
+                            CoreConstants.TABLE_NAME.CHILD,
+                            values,
+                            DBConstants.KEY.BASE_ENTITY_ID + " = ?  ",
+                            new String[] {baseEntityId});
 
             // Utils.context().commonrepository(CoreConstants.TABLE_NAME.CHILD).populateSearchValues(baseEntityId, DBConstants.KEY.DATE_REMOVED, new SimpleDateFormat("yyyy-MM-dd").format(eventDate), null);
             //CoreChwApplication.getInstance().getContext().alertService().deleteOfflineAlerts(baseEntityId);
