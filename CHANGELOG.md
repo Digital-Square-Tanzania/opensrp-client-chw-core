@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Fixed
+
+- Record a failed local MARP projection attempt only after checking the exact service-card event against persisted service data. Requires the UCSW-200 KVP source when the dependency stack is updated. No version or dependency changes in this commit. (UCSW-200)
+
 ## 2.2.2-KITUONI-UCSW-186-VISIT-14-SNAPSHOT — 2026-11-25
 
 ### Changed
