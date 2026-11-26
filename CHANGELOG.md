@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Read Mapbox download credentials from local Gradle properties. Remove the tracked assignment from this release lineage. [UCSW-201](https://multica.ai/ucs-workspace/issues/UCSW-201)
 
+## Mother Mentor Alpha 68 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-68-UCSW-147-CONFIRMATION-RESULT-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.68-UCSW-147-CONFIRMATION-RESULT-SNAPSHOT` and set the Core library version code
+  to 204. [CHW #1248](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1248)
+
 ## Mother Mentor Alpha 67 — 2026-11-25
 
 Core snapshot
