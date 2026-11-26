@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Record a failed local MARP projection attempt only after checking the exact service-card event against persisted service data. Requires the UCSW-200 KVP source when the dependency stack is updated. No version or dependency changes in this commit. (UCSW-200)
+- Record a failed local MARP projection attempt only after checking the exact service-card event against persisted service data. Export KVP `2.0.5-KITUONI-UCSW-200-VISIT-23-SNAPSHOT` for this stack. Select Core `2.2.4-KITUONI-UCSW-200-VISIT-23-SNAPSHOT` (code 194) with the existing `-PVERSION_NAME` and `-PVERSION_CODE` build properties for the Kituoni candidate. The existing Mother Mentor alpha retains its landed release revision (UCSW-200).
 
 ## 2.2.2-KITUONI-UCSW-186-VISIT-14-SNAPSHOT — 2026-11-25
 
