@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## 2.2.1-KITUONI-UCSW-47-VISIT-10-SNAPSHOT — 2026-11-25
+
+### Changed
+
+- Export KVP `2.0.3-KITUONI-UCSW-47-VISIT-10-SNAPSHOT` for the Kituoni Cervical Cancer Screening completion rule (UCSW-47). Set the Core version code to 191.
+
 ## 2.2.0-KITUONI-UCSW-48-VISIT-9-SNAPSHOT — 2026-11-24
 
 ### Changed
