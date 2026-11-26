@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Mother Mentor Batch 2 publication preparation
+
+- Read Mapbox download credentials from local Gradle properties. Remove the tracked assignment from this release lineage. [UCSW-201](https://multica.ai/ucs-workspace/issues/UCSW-201)
+
+## Mother Mentor Alpha 62 — 2026-11-25
+
+Core snapshot
+2.2.0-MOTHER-MENTOR-ALPHA-62-UCSW-142-WEANING-DATE-RECONCILED-MOH-SNAPSHOT
+
+### Changed
+
+- Export Mother Mentor `0.1.62-UCSW-142-WEANING-DATE-RECONCILED-SNAPSHOT` and set the Core library version code to
+  198 for the Mtoto EID weaning-date and History correction. [CHW #1241](https://github.com/Digital-Square-Tanzania/opensrp-client-chw/issues/1241)
+
 ## Mother Mentor Alpha 61 — 2026-11-25
 
 Core snapshot
